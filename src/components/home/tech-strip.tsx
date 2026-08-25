@@ -24,8 +24,8 @@ const SKILL_DOMAINS = [
     description: "Logique serveur robuste, gestion des flux et automatisation",
   },
   {
-    title: "E-Commerce & CMS",
-    skills: ["PrestaShop (v1.6 ➔ v9)", "Drupal", "WordPress", "Headless"],
+    title: "E-Commerce & PrestaShop",
+    skills: ["PrestaShop (v1.6 ➔ v9)", "Modules Sur-Mesure", "Drupal", "Headless"],
     icon: ShoppingBag,
     description: "Boutiques en ligne à fort trafic, refontes & migrations critiques",
   },
