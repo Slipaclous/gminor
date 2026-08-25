@@ -1,0 +1,219 @@
+"use client";
+
+import React, { useState } from "react";
+import Link from "next/link";
+import { HeroSettings } from "@/lib/settings-service";
+import { ArrowUpRight } from "lucide-react";
+
+interface HeroProps {
+  settings?: HeroSettings;
+}
+
+export function Hero({ settings }: HeroProps) {
+  const [activeTab, setActiveTab] = useState<"arch" | "stack" | "perf">("arch");
+
+  const badge = settings?.badge || "Gauthier Minor • Ingénieur Full-Stack & UI Architect";
+  const title = settings?.title || "Ingénierie logicielle & design web d'exception.";
+  const subtitle =
+    settings?.subtitle ||
+    "Je conçois des sites vitrines pour entreprises et des applications SaaS scalables. Zéro compromis sur la vitesse, la lisibilité et l'acquisition client.";
+  const metrics = settings?.metrics || [
+    { value: "< 0.4s", label: "Temps de chargement moyen" },
+    { value: "100%", label: "Score de performance Google" },
+    { value: "5+ ans", label: "Expérience Full-Stack" },
+  ];
+
+  return (
+    <section className="relative pt-12 pb-20 md:pt-20 md:pb-28 overflow-hidden border-b border-white/[0.08]">
+      {/* Subtle background grid pattern */}
+      <div className="absolute inset-0 -z-10 bg-[radial-gradient(#1f1f23_1px,transparent_1px)] [background-size:24px_24px] opacity-35" />
+
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+          {/* Left Column: Authoritative Editorial Presentation */}
+          <div className="lg:col-span-7 space-y-8">
+            {/* Status Pill */}
+            <div className="inline-flex items-center gap-2.5 px-3 py-1.5 rounded-full bg-zinc-900 border border-white/[0.1] text-xs">
+              <span className="flex h-2 w-2 relative">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              </span>
+              <span className="text-zinc-200 font-medium font-mono text-[11px] sm:text-xs">
+                {badge}
+              </span>
+            </div>
+
+            {/* Main Marquee Headline */}
+            <div className="space-y-4">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white font-sans leading-[1.08]">
+                {title}
+              </h1>
+              <p className="text-base sm:text-lg text-zinc-300 max-w-2xl leading-relaxed font-normal">
+                {subtitle}
+              </p>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="flex flex-wrap items-center gap-4">
+              <Link
+                href="/contact"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-sm font-bold uppercase tracking-wider text-black bg-white hover:bg-zinc-200 transition-all duration-150 active:scale-95 shadow-lg"
+              >
+                <span>Démarrer un projet</span>
+                <ArrowUpRight className="w-4 h-4" />
+              </Link>
+
+              <Link
+                href="/projets"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-sm font-semibold text-zinc-200 bg-zinc-900 hover:bg-zinc-800 border border-white/[0.1] hover:border-white/[0.2] transition-all duration-150"
+              >
+                <span>Voir les réalisations</span>
+              </Link>
+            </div>
+
+            {/* Proof Points Strip */}
+            <div className="pt-4 border-t border-white/[0.08] grid grid-cols-3 gap-4">
+              {metrics.map((m, idx) => (
+                <div key={idx} className="space-y-1">
+                  <span className="text-2xl sm:text-3xl font-extrabold text-white font-mono">
+                    {m.value}
+                  </span>
+                  <span className="text-xs text-zinc-400 block">
+                    {m.label}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Right Column: Live Interactive Architecture & Code Card */}
+          <div className="lg:col-span-5">
+            <div className="rounded-2xl bg-[#0a0a0d] border border-white/[0.12] overflow-hidden shadow-2xl">
+              {/* Window Bar */}
+              <div className="flex items-center justify-between px-4 py-3 bg-[#111116] border-b border-white/[0.08]">
+                <div className="flex items-center gap-2">
+                  <span className="w-3 h-3 rounded-full bg-zinc-700 inline-block" />
+                  <span className="w-3 h-3 rounded-full bg-zinc-700 inline-block" />
+                  <span className="w-3 h-3 rounded-full bg-zinc-700 inline-block" />
+                  <span className="ml-2 text-xs font-mono text-zinc-400">
+                    gminor-architecture.ts
+                  </span>
+                </div>
+
+                {/* Tab Switcher */}
+                <div className="flex items-center gap-1 bg-black/50 p-1 rounded-lg border border-white/[0.06]">
+                  <button
+                    type="button"
+                    onClick={() => setActiveTab("arch")}
+                    className={`px-2.5 py-1 rounded-md text-[11px] font-mono transition-colors cursor-pointer ${
+                      activeTab === "arch"
+                        ? "bg-zinc-800 text-white font-semibold"
+                        : "text-zinc-400 hover:text-white"
+                    }`}
+                  >
+                    Stack
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setActiveTab("stack")}
+                    className={`px-2.5 py-1 rounded-md text-[11px] font-mono transition-colors cursor-pointer ${
+                      activeTab === "stack"
+                        ? "bg-zinc-800 text-white font-semibold"
+                        : "text-zinc-400 hover:text-white"
+                    }`}
+                  >
+                    Prisma
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setActiveTab("perf")}
+                    className={`px-2.5 py-1 rounded-md text-[11px] font-mono transition-colors cursor-pointer ${
+                      activeTab === "perf"
+                        ? "bg-zinc-800 text-white font-semibold"
+                        : "text-zinc-400 hover:text-white"
+                    }`}
+                  >
+                    Lighthouse
+                  </button>
+                </div>
+              </div>
+
+              {/* Code Snippet Content */}
+              <div className="p-5 font-mono text-xs text-zinc-300 leading-relaxed overflow-x-auto min-h-[260px] flex flex-col justify-between">
+                {activeTab === "arch" && (
+                  <pre className="text-zinc-300">
+                    <code>
+                      <span className="text-zinc-500">// Architecture Full-Stack Gauthier Minor</span>
+                      {"\n"}
+                      <span className="text-purple-400">export const</span>{" "}
+                      <span className="text-yellow-300">GauthierMinor</span> = {"{"}
+                      {"\n"}  role: <span className="text-emerald-300">&quot;Full-Stack Engineer &amp; UI Architect&quot;</span>,
+                      {"\n"}  framework: <span className="text-emerald-300">&quot;Next.js 15 (App Router &amp; RSC)&quot;</span>,
+                      {"\n"}  language: <span className="text-emerald-300">&quot;TypeScript (Strict Mode)&quot;</span>,
+                      {"\n"}  database: <span className="text-emerald-300">&quot;PostgreSQL via Neon &amp; Prisma 7&quot;</span>,
+                      {"\n"}  styling: <span className="text-emerald-300">&quot;Tailwind CSS v4 + Vanilla CSS&quot;</span>,
+                      {"\n"}  deployment: <span className="text-emerald-300">&quot;Vercel Global Edge Network&quot;</span>,
+                      {"\n"}  availability: <span className="text-emerald-400">true</span>,
+                      {"\n"}{"}"};
+                    </code>
+                  </pre>
+                )}
+
+                {activeTab === "stack" && (
+                  <pre className="text-zinc-300">
+                    <code>
+                      <span className="text-zinc-500">// Schema Prisma &amp; Neon Data Modeling</span>
+                      {"\n"}
+                      <span className="text-blue-400">model</span> <span className="text-yellow-300">Project</span> {"{"}
+                      {"\n"}  id          <span className="text-purple-400">String</span>   <span className="text-zinc-500">@id @default(cuid())</span>
+                      {"\n"}  title       <span className="text-purple-400">String</span>
+                      {"\n"}  slug        <span className="text-purple-400">String</span>   <span className="text-zinc-500">@unique</span>
+                      {"\n"}  category    <span className="text-purple-400">Category</span>
+                      {"\n"}  metrics     <span className="text-purple-400">Json</span>
+                      {"\n"}  featured    <span className="text-purple-400">Boolean</span>  <span className="text-zinc-500">@default(true)</span>
+                      {"\n"}  createdAt   <span className="text-purple-400">DateTime</span> <span className="text-zinc-500">@default(now())</span>
+                      {"\n"}{"}"}
+                    </code>
+                  </pre>
+                )}
+
+                {activeTab === "perf" && (
+                  <div className="space-y-3 py-1">
+                    <span className="text-zinc-400 block">// Audits Google Core Web Vitals :</span>
+                    <div className="grid grid-cols-2 gap-2">
+                      <div className="p-2.5 rounded-lg bg-black/60 border border-white/[0.06] flex items-center justify-between">
+                        <span className="text-zinc-300">Performance</span>
+                        <span className="text-emerald-400 font-bold">100 / 100</span>
+                      </div>
+                      <div className="p-2.5 rounded-lg bg-black/60 border border-white/[0.06] flex items-center justify-between">
+                        <span className="text-zinc-300">Accessibilité</span>
+                        <span className="text-emerald-400 font-bold">100 / 100</span>
+                      </div>
+                      <div className="p-2.5 rounded-lg bg-black/60 border border-white/[0.06] flex items-center justify-between">
+                        <span className="text-zinc-300">Best Practices</span>
+                        <span className="text-emerald-400 font-bold">100 / 100</span>
+                      </div>
+                      <div className="p-2.5 rounded-lg bg-black/60 border border-white/[0.06] flex items-center justify-between">
+                        <span className="text-zinc-300">SEO Google</span>
+                        <span className="text-emerald-400 font-bold">100 / 100</span>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Bottom Terminal Status */}
+                <div className="pt-4 border-t border-white/[0.06] flex items-center justify-between text-[11px] text-zinc-400">
+                  <span className="flex items-center gap-1.5">
+                    <span className="w-2 h-2 rounded-full bg-emerald-400" />
+                    <span>Prêt pour production</span>
+                  </span>
+                  <span className="text-zinc-500">Next.js 15.3.2</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

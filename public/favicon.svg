@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <rect width="32" height="32" rx="7" fill="#090a0f" />
+  <rect width="32" height="32" rx="7" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+  
+  <!-- Left Chevron < -->
+  <path d="M6 10L3 16L6 22" stroke="#10b981" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+  
+  <!-- GM Text -->
+  <text x="14.5" y="21" text-anchor="middle" fill="#ffffff" font-size="11" font-weight="900" font-family="system-ui, -apple-system, sans-serif" letter-spacing="0.02em">GM</text>
+  
+  <!-- Closing Slash / -->
+  <path d="M23 22L25 10" stroke="#10b981" stroke-width="1.6" stroke-linecap="round" />
+  
+  <!-- Right Chevron > -->
+  <path d="M27 10L29.5 16L27 22" stroke="#10b981" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+</svg>
