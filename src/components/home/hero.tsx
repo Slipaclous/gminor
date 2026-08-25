@@ -12,15 +12,15 @@ interface HeroProps {
 export function Hero({ settings }: HeroProps) {
   const [activeTab, setActiveTab] = useState<"arch" | "stack" | "perf">("arch");
 
-  const badge = settings?.badge || "Gauthier Minor • Ingénieur Full-Stack & UI Architect";
-  const title = settings?.title || "Ingénierie logicielle & design web d'exception.";
+  const badge = settings?.badge || "Gauthier Minor • Développeur Web Full-Stack";
+  const title = settings?.title || "Ingénierie logicielle & solutions web sur-mesure.";
   const subtitle =
     settings?.subtitle ||
-    "Je conçois des sites vitrines pour entreprises et des applications SaaS scalables. Zéro compromis sur la vitesse, la lisibilité et l'acquisition client.";
+    "Je développe des applications SaaS, des sites d'entreprises et des plateformes e-commerce à fort trafic. Solide maîtrise de l'écosystème web moderne (React/Next.js, PHP/Symfony, PrestaShop, PostgreSQL & MySQL).";
   const metrics = settings?.metrics || [
     { value: "< 0.4s", label: "Temps de chargement moyen" },
     { value: "100%", label: "Score de performance Google" },
-    { value: "5+ ans", label: "Expérience Full-Stack" },
+    { value: "5+ ans", label: "Pratique Full-Stack" },
   ];
 
   return (
@@ -96,7 +96,7 @@ export function Hero({ settings }: HeroProps) {
                   <span className="w-3 h-3 rounded-full bg-zinc-700 inline-block" />
                   <span className="w-3 h-3 rounded-full bg-zinc-700 inline-block" />
                   <span className="ml-2 text-xs font-mono text-zinc-400">
-                    gminor-architecture.ts
+                    gminor-skills.ts
                   </span>
                 </div>
 
@@ -111,7 +111,7 @@ export function Hero({ settings }: HeroProps) {
                         : "text-zinc-400 hover:text-white"
                     }`}
                   >
-                    Stack
+                    Skills
                   </button>
                   <button
                     type="button"
@@ -122,7 +122,7 @@ export function Hero({ settings }: HeroProps) {
                         : "text-zinc-400 hover:text-white"
                     }`}
                   >
-                    Prisma
+                    Backend &amp; DB
                   </button>
                   <button
                     type="button"
@@ -133,7 +133,7 @@ export function Hero({ settings }: HeroProps) {
                         : "text-zinc-400 hover:text-white"
                     }`}
                   >
-                    Lighthouse
+                    Audits
                   </button>
                 </div>
               </div>
@@ -143,16 +143,15 @@ export function Hero({ settings }: HeroProps) {
                 {activeTab === "arch" && (
                   <pre className="text-zinc-300">
                     <code>
-                      <span className="text-zinc-500">// Architecture Full-Stack Gauthier Minor</span>
+                      <span className="text-zinc-500">// Profil &amp; Polyvalence Full-Stack</span>
                       {"\n"}
                       <span className="text-purple-400">export const</span>{" "}
                       <span className="text-yellow-300">GauthierMinor</span> = {"{"}
-                      {"\n"}  role: <span className="text-emerald-300">&quot;Full-Stack Engineer &amp; UI Architect&quot;</span>,
-                      {"\n"}  framework: <span className="text-emerald-300">&quot;Next.js 15 (App Router &amp; RSC)&quot;</span>,
-                      {"\n"}  language: <span className="text-emerald-300">&quot;TypeScript (Strict Mode)&quot;</span>,
-                      {"\n"}  database: <span className="text-emerald-300">&quot;PostgreSQL via Neon &amp; Prisma 7&quot;</span>,
-                      {"\n"}  styling: <span className="text-emerald-300">&quot;Tailwind CSS v4 + Vanilla CSS&quot;</span>,
-                      {"\n"}  deployment: <span className="text-emerald-300">&quot;Vercel Global Edge Network&quot;</span>,
+                      {"\n"}  frontend: [<span className="text-emerald-300">&quot;React&quot;</span>, <span className="text-emerald-300">&quot;Next.js&quot;</span>, <span className="text-emerald-300">&quot;TypeScript&quot;</span>, <span className="text-emerald-300">&quot;Tailwind&quot;</span>],
+                      {"\n"}  backend:  [<span className="text-emerald-300">&quot;PHP 8&quot;</span>, <span className="text-emerald-300">&quot;Symfony&quot;</span>, <span className="text-emerald-300">&quot;Node.js&quot;</span>, <span className="text-emerald-300">&quot;APIs REST&quot;</span>],
+                      {"\n"}  ecommerce: [<span className="text-emerald-300">&quot;PrestaShop 9&quot;</span>, <span className="text-emerald-300">&quot;Drupal&quot;</span>, <span className="text-emerald-300">&quot;Headless&quot;</span>],
+                      {"\n"}  databases: [<span className="text-emerald-300">&quot;MySQL&quot;</span>, <span className="text-emerald-300">&quot;PostgreSQL&quot;</span>, <span className="text-emerald-300">&quot;Prisma&quot;</span>],
+                      {"\n"}  devops: [<span className="text-emerald-300">&quot;Git&quot;</span>, <span className="text-emerald-300">&quot;Docker&quot;</span>, <span className="text-emerald-300">&quot;cPanel&quot;</span>, <span className="text-emerald-300">&quot;Vercel&quot;</span>],
                       {"\n"}  availability: <span className="text-emerald-400">true</span>,
                       {"\n"}{"}"};
                     </code>
@@ -162,16 +161,17 @@ export function Hero({ settings }: HeroProps) {
                 {activeTab === "stack" && (
                   <pre className="text-zinc-300">
                     <code>
-                      <span className="text-zinc-500">// Schema Prisma &amp; Neon Data Modeling</span>
+                      <span className="text-zinc-500">// Architecture Backend &amp; Gestion des Données</span>
                       {"\n"}
-                      <span className="text-blue-400">model</span> <span className="text-yellow-300">Project</span> {"{"}
-                      {"\n"}  id          <span className="text-purple-400">String</span>   <span className="text-zinc-500">@id @default(cuid())</span>
-                      {"\n"}  title       <span className="text-purple-400">String</span>
-                      {"\n"}  slug        <span className="text-purple-400">String</span>   <span className="text-zinc-500">@unique</span>
-                      {"\n"}  category    <span className="text-purple-400">Category</span>
-                      {"\n"}  metrics     <span className="text-purple-400">Json</span>
-                      {"\n"}  featured    <span className="text-purple-400">Boolean</span>  <span className="text-zinc-500">@default(true)</span>
-                      {"\n"}  createdAt   <span className="text-purple-400">DateTime</span> <span className="text-zinc-500">@default(now())</span>
+                      <span className="text-blue-400">class</span> <span className="text-yellow-300">BackendArchitecture</span> {"{"}
+                      {"\n"}  <span className="text-zinc-500">/** Architecture scalable &amp; requêtes SQL optimisées */</span>
+                      {"\n"}  <span className="text-purple-400">public</span> <span className="text-blue-300">execute</span>() {"{"}
+                      {"\n"}    <span className="text-purple-400">return</span> [
+                      {"\n"}      <span className="text-emerald-300">&quot;Migration de bases legacy (MySQL / PostgreSQL)&quot;</span>,
+                      {"\n"}      <span className="text-emerald-300">&quot;Modules personnalisés PrestaShop &amp; Symfony&quot;</span>,
+                      {"\n"}      <span className="text-emerald-300">&quot;Intégration d&apos;APIs sécurisées &amp; Webhooks&quot;</span>
+                      {"\n"}    ];
+                      {"\n"}  {"}"}
                       {"\n"}{"}"}
                     </code>
                   </pre>
@@ -179,7 +179,7 @@ export function Hero({ settings }: HeroProps) {
 
                 {activeTab === "perf" && (
                   <div className="space-y-3 py-1">
-                    <span className="text-zinc-400 block">// Audits Google Core Web Vitals :</span>
+                    <span className="text-zinc-400 block">// Standards de livraison &amp; Performance :</span>
                     <div className="grid grid-cols-2 gap-2">
                       <div className="p-2.5 rounded-lg bg-black/60 border border-white/[0.06] flex items-center justify-between">
                         <span className="text-zinc-300">Performance</span>
@@ -205,9 +205,9 @@ export function Hero({ settings }: HeroProps) {
                 <div className="pt-4 border-t border-white/[0.06] flex items-center justify-between text-[11px] text-zinc-400">
                   <span className="flex items-center gap-1.5">
                     <span className="w-2 h-2 rounded-full bg-emerald-400" />
-                    <span>Prêt pour production</span>
+                    <span>Multi-stack &bull; Prêt pour production</span>
                   </span>
-                  <span className="text-zinc-500">Next.js 15.3.2</span>
+                  <span className="text-zinc-500">Next.js &bull; Symfony &bull; PrestaShop</span>
                 </div>
               </div>
             </div>

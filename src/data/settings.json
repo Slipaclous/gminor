@@ -1,8 +1,8 @@
 {
   "hero": {
-    "badge": "Gauthier Minor • Ingénieur Full-Stack & UI Architect",
-    "title": "Ingénierie logicielle & design web d'exception.",
-    "subtitle": "Je conçois des sites vitrines pour entreprises et des applications SaaS scalables. Zéro compromis sur la vitesse, la lisibilité et l'acquisition client.",
+    "badge": "Gauthier Minor • Développeur Web Full-Stack",
+    "title": "Ingénierie logicielle & solutions web sur-mesure.",
+    "subtitle": "Je développe des applications SaaS, des sites d'entreprises et des plateformes e-commerce à fort trafic. Solide maîtrise de l'écosystème web moderne (React/Next.js, PHP/Symfony, PrestaShop, PostgreSQL & MySQL).",
     "available": true,
     "metrics": [
       {
@@ -15,7 +15,7 @@
       },
       {
         "value": "5+ ans",
-        "label": "Expérience Full-Stack"
+        "label": "Pratique Full-Stack"
       }
     ]
   },
@@ -27,19 +27,19 @@
       "description": "Chaque milliseconde compte pour votre référencement Google et le taux de conversion de vos prospects. Optimisation complète des Core Web Vitals.",
       "points": [
         "Score Lighthouse 100/100 garanti",
-        "Architecture Next.js 15 & Server Components",
+        "Architecture moderne & requêtes optimisées",
         "Zéro perte de prospects due aux lenteurs"
       ]
     },
     {
       "id": 2,
       "title": "Architecture & Données Robustes",
-      "tagline": "Prisma ORM & PostgreSQL sans dette technique",
-      "description": "Des schémas de bases de données stricts, sécurisés et scalables pour vos applications SaaS et vos flux de données métier.",
+      "tagline": "PostgreSQL, MySQL & Frameworks éprouvés",
+      "description": "Des schémas de bases de données stricts, sécurisés et scalables pour vos applications SaaS, Symfony ou vos flux PrestaShop.",
       "points": [
-        "Typage TypeScript strict de bout en bout",
-        "Migrations de données sécurisées (Neon & Prisma)",
-        "Code prêt pour l'intégration d'équipe"
+        "Typage et validation stricts de bout en bout",
+        "Migrations de données sécurisées et sans rupture",
+        "Code maintenable et documenté"
       ]
     },
     {
@@ -69,7 +69,7 @@
     {
       "id": "entreprises",
       "badge": "Sites Vitrines & PME",
-      "title": "Site Web Haute Performance",
+      "title": "Site Web Haute Performance & CMS",
       "tagline": "Un site vitrine sur-mesure, ultra-rapide et conçu pour convertir vos visiteurs en clients.",
       "features": [
         "Design 100% sur-mesure adapté à votre marque (zéro template)",
@@ -78,41 +78,40 @@
         "Optimisation technique pour le référencement Google (SEO)",
         "Panneau d'administration épuré pour modifier vos contenus en autonomie",
         "Formulaire de devis avec notification email instantanée",
-        "Hébergement sécurisé & certificat SSL inclus"
+        "Hébergement sécurisé, nom de domaine & certificat SSL inclus"
       ],
       "idealFor": "Artisans, commerces, cabinets d'expertise, PME et marques.",
       "deliveryTime": "2 à 4 semaines"
     },
     {
       "id": "tech",
-      "badge": "Startups & SaaS",
-      "title": "Développement Application Web",
-      "tagline": "Une architecture moderne, robuste et scalable pour accélérer votre roadmap produit.",
+      "badge": "Startups, SaaS & Métier",
+      "title": "Développement Application Web & SaaS",
+      "tagline": "Une architecture moderne, robuste et scalable pour concrétiser vos projets complexes.",
       "features": [
-        "Stack de référence : Next.js 15, React 19, TypeScript, Tailwind CSS",
-        "Base de données & ORM : PostgreSQL (Neon) & Prisma 7 typé",
-        "Authentification sécurisée et gestion des rôles (RBAC)",
-        "Paiements en ligne & abonnements récurrents (Stripe)",
-        "Tableaux de bord analytiques et interfaces temps réel",
-        "Code documenté, testé et prêt pour l'onboarding d'équipe"
+        "Stacks maîtrisées : Next.js 15, React, TypeScript ou PHP 8 / Symfony",
+        "Bases de données relationnelles : PostgreSQL & MySQL (modélisation stricte)",
+        "Authentification sécurisée, rôles (RBAC) & dashboards temps réel",
+        "Intégration de paiements (Stripe), webhooks & APIs tierces",
+        "Code documenté, structuré et prêt pour l'intégration d'équipe"
       ],
-      "idealFor": "Fondateurs de SaaS, startups ou projets métier complexes.",
+      "idealFor": "Fondateurs de SaaS, plateformes métier, outils internes.",
       "deliveryTime": "3 à 8 semaines"
     },
     {
       "id": "audit",
-      "badge": "Modernisation & Vitesse",
-      "title": "Audit & Optimisation Technique",
-      "tagline": "Modernisez un site existant, boostez sa vitesse ou débloquez un problème complexe.",
+      "badge": "E-Commerce & Modernisation",
+      "title": "PrestaShop, Migration & Optimisation",
+      "tagline": "Refonte de boutique e-commerce, migration de version ou optimisation de base de données.",
       "features": [
-        "Diagnostic complet des lenteurs et des problèmes d'affichage",
-        "Plan d'action concret pour améliorer votre score Google PageSpeed",
-        "Mise à niveau de votre stack vers les versions récentes (Next.js 15)",
-        "Correction des bugs critiques et sécurisation de la base de données",
-        "Conseils personnalisés sur l'architecture logicielle"
+        "Expertise e-commerce : PrestaShop (migration v1.6 vers v9, modules personnalisés)",
+        "Diagnostic complet des lenteurs et requêtes SQL bloquantes",
+        "Plan d'action concret pour booster votre score Google PageSpeed",
+        "Sécurisation des paiements, serveurs (cPanel / Linux) et flux de commandes",
+        "Garantie de continuité de service pendant la migration"
       ],
-      "idealFor": "Sites web vieillissants, lents ou difficiles à maintenir.",
-      "deliveryTime": "3 à 7 jours ouvrés"
+      "idealFor": "Boutiques en ligne, sites vieillissants ou lents à fort trafic.",
+      "deliveryTime": "1 à 4 semaines"
     }
   ],
   "estimator": {
@@ -131,13 +130,13 @@
       },
       {
         "id": "ecommerce",
-        "name": "Boutique E-Commerce",
+        "name": "Boutique E-Commerce (PrestaShop / Custom)",
         "price": 4500,
         "days": 21
       },
       {
         "id": "refonte",
-        "name": "Refonte & Modernisation",
+        "name": "Refonte, Migration & Optimisation",
         "price": 2000,
         "days": 10
       }
@@ -175,11 +174,15 @@
       "answer": "Pas du tout. Je prends en charge l'ensemble des aspects techniques (hébergement, nom de domaine, base de données, code) et je vous explique chaque étape avec des termes simples."
     },
     {
+      "question": "Travaillez-vous aussi sur des technologies comme PHP, PrestaShop ou WordPress ?",
+      "answer": "Oui, tout à fait. J'ai une solide expérience sur l'écosystème PHP (Symfony, PrestaShop avec des migrations de v1.6 à v9, Drupal, WordPress) ainsi que sur les stacks modernes (Next.js, React, Node.js). Je m'adapte à votre existant technique."
+    },
+    {
       "question": "Puis-je modifier mes textes et photos moi-même après livraison ?",
       "answer": "Oui. Chaque projet intègre un espace d'administration épuré et sécurisé vous permettant de mettre à jour vos coordonnées, réalisations et textes en toute autonomie."
     },
     {
-      "question": "Combien coûte la création d'un projet ?",
+      "question": "Combien coûte la création ou la refonte d'un projet ?",
       "answer": "Le tarif varie selon le périmètre fonctionnel. Vous pouvez utiliser le simulateur interactif ci-dessous pour obtenir une estimation immédiate et transparente."
     },
     {
@@ -188,8 +191,8 @@
     }
   ],
   "contactInfo": {
-    "email": "gauthier.minor@gmail.com",
-    "location": "Belgique (disponible en remote partout en francophonie)",
+    "email": "contact@gauthierminor.dev",
+    "location": "Belgique (Enghien) & Remote partout",
     "githubUrl": "https://github.com",
     "linkedinUrl": "https://linkedin.com",
     "availabilityText": "Ouvert aux nouveaux projets"
