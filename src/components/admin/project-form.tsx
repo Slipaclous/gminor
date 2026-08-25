@@ -8,6 +8,7 @@ import {
 } from "@/app/actions/projects";
 import { ProjectItem } from "@/data/projects";
 import Link from "next/link";
+import { ImageUpload } from "./image-upload";
 import {
   Save,
   ArrowLeft,
@@ -224,16 +225,21 @@ export function ProjectForm({ initialData, isEdit = false }: ProjectFormProps) {
 
           <div className="space-y-2">
             <label className="block text-xs font-semibold uppercase tracking-wider text-zinc-300">
-              Image de couverture (URL)
+              Client / Contexte
             </label>
             <input
-              name="imageUrl"
+              name="client"
               type="text"
-              defaultValue={initialData?.imageUrl || "/images/projects/nexusflow.webp"}
-              placeholder="/images/projects/mon-image.webp"
-              className="w-full px-4 py-3 rounded-xl bg-zinc-950/90 border border-white/[0.12] text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:border-emerald-400 font-mono"
+              defaultValue={initialData?.client || ""}
+              placeholder="ex: Rent a Book / PME"
+              className="w-full px-4 py-3 rounded-xl bg-zinc-950/90 border border-white/[0.12] text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:border-emerald-400"
             />
           </div>
+        </div>
+
+        {/* Vercel Blob Image Upload */}
+        <div className="pt-2">
+          <ImageUpload initialValue={initialData?.imageUrl || ""} />
         </div>
 
         {/* Featured switch */}

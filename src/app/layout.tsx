@@ -17,37 +17,51 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://gminor.dev"),
   title: {
-    default: "Gauthier Minor — Développeur Full-Stack & Solutions Web",
+    default: "Gauthier Minor — Développeur Full-Stack & UI Architect",
     template: "%s | Gauthier Minor",
   },
   description:
-    "Développeur Full-Stack. Créateur d'applications SaaS robustes et de sites d'entreprises haute performance (Next.js, TypeScript, PostgreSQL, Prisma).",
+    "Développeur Full-Stack & Architecte Web. Création d'applications SaaS robustes, plateformes e-commerce PrestaShop à fort trafic et sites vitrines haute performance (Next.js, Symfony, PostgreSQL, MySQL).",
   keywords: [
     "Gauthier Minor",
     "Développeur Full-Stack",
-    "Next.js",
-    "Prisma",
-    "React",
-    "PostgreSQL",
+    "Développeur PrestaShop",
+    "Développeur Next.js",
+    "Expert Symfony PHP",
     "Création site web entreprise",
     "Développement SaaS",
-    "Freelance Tech Paris",
+    "Migration PrestaShop 9",
+    "PostgreSQL Prisma",
   ],
-  authors: [{ name: "Gauthier Minor" }],
+  authors: [{ name: "Gauthier Minor", url: "https://gminor.dev" }],
   creator: "Gauthier Minor",
   openGraph: {
     type: "website",
     locale: "fr_FR",
-    url: "https://gauthierminor.dev",
+    url: "https://gminor.dev",
     siteName: "Gauthier Minor Portfolio",
     title: "Gauthier Minor — Développeur Full-Stack & Solutions Web",
     description:
-      "Applications SaaS modernes & sites d'entreprises performants. Alliez rigueur technique et design d'impact.",
+      "Applications SaaS modernes, boutiques PrestaShop à fort trafic & sites vitrines haute performance. Rigueur d'ingénierie et design d'exception.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Gauthier Minor — Développeur Full-Stack",
+    description:
+      "Conception de plateformes SaaS, boutiques PrestaShop & sites d'entreprises haute performance.",
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
   icons: {
     icon: [
@@ -64,6 +78,33 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  name: "Gauthier Minor — Développeur Web Full-Stack",
+  image: "https://gminor.dev/opengraph-image",
+  description:
+    "Développement d'applications SaaS, boutiques e-commerce PrestaShop et sites vitrines haute performance sur-mesure.",
+  url: "https://gminor.dev",
+  telephone: "",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Enghien",
+    addressCountry: "BE",
+  },
+  priceRange: "€€",
+  openingHoursSpecification: {
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    opens: "09:00",
+    closes: "18:00",
+  },
+  sameAs: [
+    "https://github.com",
+    "https://linkedin.com",
+  ],
+};
+
 export default function RootLayout({
   children,
 }: {
@@ -74,6 +115,12 @@ export default function RootLayout({
       lang="fr"
       className={`${geistSans.variable} ${geistMono.variable} dark antialiased scroll-smooth`}
     >
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body className="min-h-screen flex flex-col bg-black text-zinc-100">
         <SiteShell footer={<Footer />}>
           {children}
