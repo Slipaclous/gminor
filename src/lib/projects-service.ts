@@ -1,7 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { PROJECTS_DATA, ProjectItem } from "@/data/projects";
 
-// In-memory runtime cache for dev when DB is not yet migrated
+// In-memory runtime cache for fallback
 let memoryProjects: ProjectItem[] = [...PROJECTS_DATA];
 
 export async function getDbProjects(): Promise<ProjectItem[]> {
@@ -10,30 +10,46 @@ export async function getDbProjects(): Promise<ProjectItem[]> {
       const dbItems = await prisma.project.findMany({
         orderBy: { order: "asc" },
       });
+
       if (dbItems && dbItems.length > 0) {
-        return dbItems.map((p) => ({
-          id: p.id,
-          slug: p.slug,
-          title: p.title,
-          tagline: p.tagline,
-          description: p.description,
-          category: p.category as ProjectItem["category"],
-          categoryLabel: getCategoryLabel(p.category),
-          client: p.client || undefined,
-          role: p.role,
-          year: p.year,
-          imageUrl: p.imageUrl,
-          gallery: p.gallery,
-          techStack: p.techStack,
-          liveUrl: p.liveUrl || undefined,
-          githubUrl: p.githubUrl || undefined,
-          featured: p.featured,
-          order: p.order,
-          challenge: p.challenge || "",
-          solution: p.solution || "",
-          results: p.results,
-          metrics: [],
-        }));
+        return dbItems.map((p) => {
+          let parsedMetrics: { label: string; value: string }[] = [];
+          if (p.metrics) {
+            if (Array.isArray(p.metrics)) {
+              parsedMetrics = p.metrics as any;
+            } else if (typeof p.metrics === "string") {
+              try {
+                parsedMetrics = JSON.parse(p.metrics);
+              } catch {
+                parsedMetrics = [];
+              }
+            }
+          }
+
+          return {
+            id: p.id,
+            slug: p.slug,
+            title: p.title,
+            tagline: p.tagline,
+            description: p.description,
+            category: p.category as ProjectItem["category"],
+            categoryLabel: getCategoryLabel(p.category),
+            client: p.client || undefined,
+            role: p.role,
+            year: p.year,
+            imageUrl: p.imageUrl,
+            gallery: p.gallery,
+            techStack: p.techStack,
+            liveUrl: p.liveUrl || undefined,
+            githubUrl: p.githubUrl || undefined,
+            featured: p.featured,
+            order: p.order,
+            challenge: p.challenge || "",
+            solution: p.solution || "",
+            results: p.results,
+            metrics: parsedMetrics.length > 0 ? parsedMetrics : (PROJECTS_DATA.find((item) => item.slug === p.slug)?.metrics || []),
+          };
+        });
       }
     }
   } catch (error) {

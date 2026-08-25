@@ -6,6 +6,8 @@ import { PrismaClient } from "../src/generated/prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { Pool } from "pg";
 import { PROJECTS_DATA } from "../src/data/projects";
+import fs from "fs";
+import path from "path";
 
 const connectionString = process.env.DATABASE_URL || "";
 const pool = new Pool({ connectionString });
@@ -13,9 +15,9 @@ const adapter = new PrismaPg(pool);
 const prisma = new PrismaClient({ adapter });
 
 async function main() {
-  console.log("🌱 Début du seed de la base de données Neon / Prisma...");
+  console.log("🌱 Début de la synchronisation complète avec Neon PostgreSQL...");
 
-  // Nettoyage préalable
+  // 1. Synchroniser tous les Projets
   await prisma.project.deleteMany();
 
   for (const p of PROJECTS_DATA) {
@@ -39,17 +41,32 @@ async function main() {
         challenge: p.challenge,
         solution: p.solution,
         results: p.results,
+        metrics: (p.metrics as any) || [],
       },
     });
-    console.log(`✅ Projet inséré : ${p.title}`);
+    console.log(`✅ Projet synchronisé en base : ${p.title}`);
   }
 
-  console.log("🎉 Seed terminé avec succès !");
+  // 2. Synchroniser les Réglages du Site (Hero, Piliers, Services, Estimator, FAQ)
+  const settingsPath = path.join(process.cwd(), "src/data/settings.json");
+  if (fs.existsSync(settingsPath)) {
+    const settingsRaw = fs.readFileSync(settingsPath, "utf-8");
+    const settingsJson = JSON.parse(settingsRaw);
+
+    await prisma.siteSetting.upsert({
+      where: { id: "default" },
+      update: { data: settingsJson },
+      create: { id: "default", data: settingsJson },
+    });
+    console.log("✅ Réglages du site (Contenu, FAQ, Services) synchronisés en base de données Neon !");
+  }
+
+  console.log("🎉 Synchronisation et Seed terminés avec succès !");
 }
 
 main()
   .catch((e) => {
-    console.error("❌ Erreur pendant le seed :", e);
+    console.error("❌ Erreur pendant la synchronisation :", e);
     process.exit(1);
   })
   .finally(async () => {

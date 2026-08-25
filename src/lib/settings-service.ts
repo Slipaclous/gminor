@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import { prisma } from "@/lib/prisma";
 
 export interface HeroMetric {
   value: string;
@@ -68,15 +69,15 @@ export interface SiteSettings {
 
 export const DEFAULT_SITE_SETTINGS: SiteSettings = {
   hero: {
-    badge: "Gauthier Minor • Ingénieur Full-Stack & UI Architect",
-    title: "Ingénierie logicielle & design web d'exception.",
+    badge: "Gauthier Minor • Développeur Web Full-Stack",
+    title: "Ingénierie logicielle & solutions web sur-mesure.",
     subtitle:
-      "Je conçois des sites vitrines pour entreprises et des applications SaaS scalables. Zéro compromis sur la vitesse, la lisibilité et l'acquisition client.",
+      "Je développe des applications SaaS, des sites d'entreprises et des plateformes e-commerce à fort trafic. Solide maîtrise de l'écosystème web moderne (React/Next.js, PHP/Symfony, PrestaShop, PostgreSQL & MySQL).",
     available: true,
     metrics: [
       { value: "< 0.4s", label: "Temps de chargement moyen" },
       { value: "100%", label: "Score de performance Google" },
-      { value: "5+ ans", label: "Expérience Full-Stack" },
+      { value: "5+ ans", label: "Pratique Full-Stack" },
     ],
   },
   pillars: [
@@ -88,20 +89,20 @@ export const DEFAULT_SITE_SETTINGS: SiteSettings = {
         "Chaque milliseconde compte pour votre référencement Google et le taux de conversion de vos prospects. Optimisation complète des Core Web Vitals.",
       points: [
         "Score Lighthouse 100/100 garanti",
-        "Architecture Next.js 15 & Server Components",
+        "Architecture moderne & requêtes optimisées",
         "Zéro perte de prospects due aux lenteurs",
       ],
     },
     {
       id: 2,
       title: "Architecture & Données Robustes",
-      tagline: "Prisma ORM & PostgreSQL sans dette technique",
+      tagline: "PostgreSQL, MySQL & Frameworks éprouvés",
       description:
-        "Des schémas de bases de données stricts, sécurisés et scalables pour vos applications SaaS et vos flux de données métier.",
+        "Des schémas de bases de données stricts, sécurisés et scalables pour vos applications SaaS, Symfony ou vos flux PrestaShop.",
       points: [
-        "Typage TypeScript strict de bout en bout",
-        "Migrations de données sécurisées (Neon & Prisma)",
-        "Code prêt pour l'intégration d'équipe",
+        "Typage et validation stricts de bout en bout",
+        "Migrations de données sécurisées et sans rupture",
+        "Code maintenable et documenté",
       ],
     },
     {
@@ -182,18 +183,58 @@ export const DEFAULT_SITE_SETTINGS: SiteSettings = {
     },
   ],
   estimator: {
-    projectTypes: [
-      { id: "vitrine", name: "Site Vitrine & Entreprise", price: 2500, days: 14 },
-      { id: "saas", name: "Application Web / SaaS", price: 6500, days: 30 },
-      { id: "ecommerce", name: "Boutique E-Commerce", price: 4500, days: 21 },
-      { id: "refonte", name: "Refonte & Modernisation", price: 2000, days: 10 },
+    "projectTypes": [
+      {
+        "id": "vitrine",
+        "name": "Site Vitrine & Entreprise",
+        "price": 2500,
+        "days": 14
+      },
+      {
+        "id": "saas",
+        "name": "Application Web / SaaS",
+        "price": 6500,
+        "days": 30
+      },
+      {
+        "id": "ecommerce",
+        "name": "Boutique E-Commerce (PrestaShop / Custom)",
+        "price": 4500,
+        "days": 21
+      },
+      {
+        "id": "refonte",
+        "name": "Refonte, Migration & Optimisation",
+        "price": 2000,
+        "days": 10
+      }
     ],
-    addons: [
-      { id: "admin", name: "Espace Admin & Back-office sur-mesure", price: 800, days: 5 },
-      { id: "seo", name: "Optimisation SEO & Vitesse Google (Score 98+)", price: 500, days: 3 },
-      { id: "stripe", name: "Paiement en ligne / Abonnements (Stripe)", price: 900, days: 4 },
-      { id: "cms", name: "Gestionnaire de contenus dynamique", price: 600, days: 3 },
-    ],
+    "addons": [
+      {
+        "id": "admin",
+        "name": "Espace Admin & Back-office sur-mesure",
+        "price": 800,
+        "days": 5
+      },
+      {
+        "id": "seo",
+        "name": "Optimisation SEO & Vitesse Google (Score 98+)",
+        "price": 500,
+        "days": 3
+      },
+      {
+        "id": "stripe",
+        "name": "Paiement en ligne / Abonnements (Stripe)",
+        "price": 900,
+        "days": 4
+      },
+      {
+        "id": "cms",
+        "name": "Gestionnaire de contenus dynamique",
+        "price": 600,
+        "days": 3
+      }
+    ]
   },
   faqs: [
     {
@@ -202,12 +243,17 @@ export const DEFAULT_SITE_SETTINGS: SiteSettings = {
         "Pas du tout. Je prends en charge l'ensemble des aspects techniques (hébergement, nom de domaine, base de données, code) et je vous explique chaque étape avec des termes simples.",
     },
     {
+      question: "Travaillez-vous aussi sur des technologies comme PHP, Symfony ou PrestaShop ?",
+      answer:
+        "Oui, tout à fait. J'ai une solide expérience sur l'écosystème PHP (Symfony, PrestaShop avec des migrations de v1.6 à v9, création de modules et intégrations MySQL) ainsi que sur les stacks modernes (Next.js, React, Node.js). Je m'adapte à votre existant technique.",
+    },
+    {
       question: "Puis-je modifier mes textes et photos moi-même après livraison ?",
       answer:
         "Oui. Chaque projet intègre un espace d'administration épuré et sécurisé vous permettant de mettre à jour vos coordonnées, réalisations et textes en toute autonomie.",
     },
     {
-      question: "Combien coûte la création d'un projet ?",
+      question: "Combien coûte la création ou la refonte d'un projet ?",
       answer:
         "Le tarif varie selon le périmètre fonctionnel. Vous pouvez utiliser le simulateur interactif ci-dessous pour obtenir une estimation immédiate et transparente.",
     },
@@ -219,7 +265,7 @@ export const DEFAULT_SITE_SETTINGS: SiteSettings = {
   ],
   contactInfo: {
     email: "contact@gauthierminor.dev",
-    location: "Paris, France (Disponible en remote partout)",
+    location: "Belgique (Enghien) & Remote partout",
     githubUrl: "https://github.com",
     linkedinUrl: "https://linkedin.com",
     availabilityText: "Ouvert aux nouveaux projets",
@@ -235,6 +281,22 @@ export async function getSiteSettings(): Promise<SiteSettings> {
     return memorySettings;
   }
 
+  // 1. Essayer depuis Neon DB en priorité
+  try {
+    if (process.env.DATABASE_URL && !process.env.DATABASE_URL.includes("localhost:5432")) {
+      const dbSetting = await prisma.siteSetting.findUnique({
+        where: { id: "default" },
+      });
+      if (dbSetting?.data) {
+        memorySettings = dbSetting.data as unknown as SiteSettings;
+        return memorySettings;
+      }
+    }
+  } catch (err) {
+    console.warn("Neon DB SiteSetting read fallback:", err);
+  }
+
+  // 2. Fallback vers settings.json local
   try {
     if (fs.existsSync(SETTINGS_FILE_PATH)) {
       const data = fs.readFileSync(SETTINGS_FILE_PATH, "utf-8");
@@ -267,6 +329,20 @@ export async function updateSiteSettings(
 
   memorySettings = merged;
 
+  // 1. Sauvegarder dans Neon PostgreSQL
+  try {
+    if (process.env.DATABASE_URL && !process.env.DATABASE_URL.includes("localhost:5432")) {
+      await prisma.siteSetting.upsert({
+        where: { id: "default" },
+        update: { data: merged as any },
+        create: { id: "default", data: merged as any },
+      });
+    }
+  } catch (err) {
+    console.error("Neon DB SiteSetting write error:", err);
+  }
+
+  // 2. Sauvegarder dans le fichier local
   try {
     const dir = path.dirname(SETTINGS_FILE_PATH);
     if (!fs.existsSync(dir)) {
