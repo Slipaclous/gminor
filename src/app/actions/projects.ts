@@ -59,6 +59,19 @@ export async function createProjectAction(
     .map((s) => s.trim())
     .filter(Boolean);
 
+  // Parse 3 key metrics
+  const metric1Label = (formData.get("metric1Label") as string)?.trim();
+  const metric1Val = (formData.get("metric1Val") as string)?.trim();
+  const metric2Label = (formData.get("metric2Label") as string)?.trim();
+  const metric2Val = (formData.get("metric2Val") as string)?.trim();
+  const metric3Label = (formData.get("metric3Label") as string)?.trim();
+  const metric3Val = (formData.get("metric3Val") as string)?.trim();
+
+  const metrics: { label: string; value: string }[] = [];
+  if (metric1Label && metric1Val) metrics.push({ label: metric1Label, value: metric1Val });
+  if (metric2Label && metric2Val) metrics.push({ label: metric2Label, value: metric2Val });
+  if (metric3Label && metric3Val) metrics.push({ label: metric3Label, value: metric3Val });
+
   if (!title || title.length < 2) {
     return { error: "Veuillez renseigner un titre valide." };
   }
@@ -72,7 +85,7 @@ export async function createProjectAction(
     const all = await getDbProjects();
     const order = all.length + 1;
 
-    // Database write if connected
+    // Database write to Neon PostgreSQL
     if (process.env.DATABASE_URL && !process.env.DATABASE_URL.includes("localhost:5432")) {
       await prisma.project.create({
         data: {
@@ -93,6 +106,7 @@ export async function createProjectAction(
           challenge,
           solution,
           results,
+          metrics: metrics as any,
         },
       });
     }
@@ -118,7 +132,7 @@ export async function createProjectAction(
       challenge,
       solution,
       results,
-      metrics: [],
+      metrics,
     };
     updateMemoryProjects([...all, newProject]);
 
@@ -171,6 +185,19 @@ export async function updateProjectAction(
     .map((s) => s.trim())
     .filter(Boolean);
 
+  // Parse 3 key metrics
+  const metric1Label = (formData.get("metric1Label") as string)?.trim();
+  const metric1Val = (formData.get("metric1Val") as string)?.trim();
+  const metric2Label = (formData.get("metric2Label") as string)?.trim();
+  const metric2Val = (formData.get("metric2Val") as string)?.trim();
+  const metric3Label = (formData.get("metric3Label") as string)?.trim();
+  const metric3Val = (formData.get("metric3Val") as string)?.trim();
+
+  const metrics: { label: string; value: string }[] = [];
+  if (metric1Label && metric1Val) metrics.push({ label: metric1Label, value: metric1Val });
+  if (metric2Label && metric2Val) metrics.push({ label: metric2Label, value: metric2Val });
+  if (metric3Label && metric3Val) metrics.push({ label: metric3Label, value: metric3Val });
+
   if (!title) {
     return { error: "Veuillez renseigner un titre." };
   }
@@ -196,6 +223,7 @@ export async function updateProjectAction(
           challenge,
           solution,
           results,
+          metrics: metrics as any,
         },
       });
     }
@@ -222,6 +250,7 @@ export async function updateProjectAction(
             challenge,
             solution,
             results,
+            metrics: metrics.length > 0 ? metrics : p.metrics,
           }
         : p
     );

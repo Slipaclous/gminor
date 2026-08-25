@@ -301,11 +301,75 @@ export function ProjectForm({ initialData, isEdit = false }: ProjectFormProps) {
         </div>
       </div>
 
-      {/* Section 3: Étude de Cas Approfondie */}
+      {/* Section 3: Métriques Chiffrées Clés */}
+      <div className="rounded-3xl bg-zinc-900/80 border border-white/[0.1] p-6 sm:p-8 space-y-6 shadow-xl">
+        <h2 className="text-lg font-bold text-white flex items-center gap-2">
+          <Sparkles className="w-5 h-5 text-emerald-400" />
+          <span>Métriques d&apos;Impact (Affichées sur les Cartes &amp; Étude de Cas)</span>
+        </h2>
+
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div className="p-4 rounded-2xl bg-black/60 border border-white/[0.08] space-y-3">
+            <span className="text-xs font-mono uppercase text-zinc-400 font-bold block">Métrique 1</span>
+            <input
+              name="metric1Val"
+              type="text"
+              defaultValue={initialData?.metrics?.[0]?.value || ""}
+              placeholder="ex: -75%"
+              className="w-full px-3 py-2 rounded-lg bg-zinc-900 border border-white/[0.1] text-sm text-white font-mono"
+            />
+            <input
+              name="metric1Label"
+              type="text"
+              defaultValue={initialData?.metrics?.[0]?.label || ""}
+              placeholder="ex: Gain de temps"
+              className="w-full px-3 py-2 rounded-lg bg-zinc-900 border border-white/[0.1] text-xs text-zinc-300"
+            />
+          </div>
+
+          <div className="p-4 rounded-2xl bg-black/60 border border-white/[0.08] space-y-3">
+            <span className="text-xs font-mono uppercase text-zinc-400 font-bold block">Métrique 2</span>
+            <input
+              name="metric2Val"
+              type="text"
+              defaultValue={initialData?.metrics?.[1]?.value || ""}
+              placeholder="ex: < 0.3s"
+              className="w-full px-3 py-2 rounded-lg bg-zinc-900 border border-white/[0.1] text-sm text-white font-mono"
+            />
+            <input
+              name="metric2Label"
+              type="text"
+              defaultValue={initialData?.metrics?.[1]?.label || ""}
+              placeholder="ex: Temps de chargement"
+              className="w-full px-3 py-2 rounded-lg bg-zinc-900 border border-white/[0.1] text-xs text-zinc-300"
+            />
+          </div>
+
+          <div className="p-4 rounded-2xl bg-black/60 border border-white/[0.08] space-y-3">
+            <span className="text-xs font-mono uppercase text-zinc-400 font-bold block">Métrique 3</span>
+            <input
+              name="metric3Val"
+              type="text"
+              defaultValue={initialData?.metrics?.[2]?.value || ""}
+              placeholder="ex: 100% digital"
+              className="w-full px-3 py-2 rounded-lg bg-zinc-900 border border-white/[0.1] text-sm text-white font-mono"
+            />
+            <input
+              name="metric3Label"
+              type="text"
+              defaultValue={initialData?.metrics?.[2]?.label || ""}
+              placeholder="ex: Processus dématérialisé"
+              className="w-full px-3 py-2 rounded-lg bg-zinc-900 border border-white/[0.1] text-xs text-zinc-300"
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Section 4: Étude de Cas Approfondie */}
       <div className="rounded-3xl bg-zinc-900/80 border border-white/[0.1] p-6 sm:p-8 space-y-6 shadow-xl">
         <h2 className="text-lg font-bold text-white flex items-center gap-2">
           <Target className="w-5 h-5 text-emerald-400" />
-          <span>Étude de Cas & Résultats</span>
+          <span>Étude de Cas &amp; Résultats</span>
         </h2>
 
         <div className="space-y-2">

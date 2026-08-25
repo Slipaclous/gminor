@@ -24,6 +24,8 @@ export async function submitContactForm(
   const budget = (formData.get("budget") as string)?.trim() || null;
   const service = (formData.get("service") as string)?.trim() || null;
   const message = (formData.get("message") as string)?.trim();
+  const contactPref = (formData.get("contactPref") as string)?.trim() || null;
+  const availabilityPref = (formData.get("availabilityPref") as string)?.trim() || null;
 
   // Basic validation
   const errors: { name?: string[]; email?: string[]; message?: string[] } = {};
@@ -49,7 +51,7 @@ export async function submitContactForm(
   }
 
   try {
-    // 1. Sauvegarde en Base de Données si Prisma / Neon est configuré
+    // 1. Sauvegarde en Base de Données Neon PostgreSQL
     if (process.env.DATABASE_URL && !process.env.DATABASE_URL.includes("localhost:5432")) {
       await prisma.contactMessage.create({
         data: {
@@ -59,12 +61,14 @@ export async function submitContactForm(
           budget,
           service,
           message,
+          contactPref,
+          availabilityPref,
           status: "UNREAD",
         },
       });
     }
 
-    // 2. Envoi de l'email via Resend
+    // 2. Envoi de l'email de notification via Resend
     await sendContactNotificationEmail({
       name,
       email,
@@ -72,6 +76,8 @@ export async function submitContactForm(
       service,
       budget,
       message,
+      contactPref: contactPref || undefined,
+      availabilityPref: availabilityPref || undefined,
     });
 
     revalidatePath("/admin/messages");
@@ -80,7 +86,7 @@ export async function submitContactForm(
     return {
       success: true,
       message:
-        "Votre demande a bien été transmise ! Je vous recontacte personnellement sous 24h avec vos préférences de contact.",
+        "Votre demande a bien été transmise ! Je vous recontacte personnellement sous 24h selon vos disponibilités.",
     };
   } catch (error) {
     console.error("Erreur enregistrement contact:", error);
