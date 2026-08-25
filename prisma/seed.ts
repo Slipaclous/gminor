@@ -1,7 +1,10 @@
+import dotenv from "dotenv";
+dotenv.config({ path: ".env.local" });
+dotenv.config();
+
 import { PrismaClient } from "../src/generated/prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { Pool } from "pg";
-import "dotenv/config";
 import { PROJECTS_DATA } from "../src/data/projects";
 
 const connectionString = process.env.DATABASE_URL || "";
@@ -12,7 +15,7 @@ const prisma = new PrismaClient({ adapter });
 async function main() {
   console.log("🌱 Début du seed de la base de données Neon / Prisma...");
 
-  // Nettoyage préalable si besoin
+  // Nettoyage préalable
   await prisma.project.deleteMany();
 
   for (const p of PROJECTS_DATA) {
