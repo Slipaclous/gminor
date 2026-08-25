@@ -34,6 +34,8 @@ export const metadata: Metadata = {
     "Développement SaaS",
     "Migration PrestaShop 9",
     "PostgreSQL Prisma",
+    "Freelance Belgique",
+    "Développeur Web Enghien",
   ],
   authors: [{ name: "Gauthier Minor", url: "https://gminor.dev" }],
   creator: "Gauthier Minor",
@@ -80,28 +82,82 @@ export const viewport: Viewport = {
 
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  name: "Gauthier Minor — Développeur Web Full-Stack",
-  image: "https://gminor.dev/opengraph-image",
-  description:
-    "Développement d'applications SaaS, boutiques e-commerce PrestaShop et sites vitrines haute performance sur-mesure.",
-  url: "https://gminor.dev",
-  telephone: "",
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: "Enghien",
-    addressCountry: "BE",
-  },
-  priceRange: "€€",
-  openingHoursSpecification: {
-    "@type": "OpeningHoursSpecification",
-    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-    opens: "09:00",
-    closes: "18:00",
-  },
-  sameAs: [
-    "https://github.com",
-    "https://linkedin.com",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://gminor.dev/#person",
+      name: "Gauthier Minor",
+      jobTitle: "Développeur Full-Stack & UI Architect",
+      url: "https://gminor.dev",
+      image: "https://gminor.dev/opengraph-image",
+      description:
+        "Développeur Full-Stack expérimenté spécialisé dans Next.js, PrestaShop (migrations v1.6 à v9), Symfony, PostgreSQL et MySQL.",
+      knowsAbout: [
+        "Next.js",
+        "React",
+        "TypeScript",
+        "PrestaShop",
+        "PrestaShop Migration",
+        "PHP",
+        "Symfony",
+        "PostgreSQL",
+        "MySQL",
+        "Prisma ORM",
+        "E-Commerce Architecture",
+        "SaaS Architecture",
+        "Web Performance Optimization",
+        "Core Web Vitals",
+      ],
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Enghien",
+        addressCountry: "BE",
+      },
+      sameAs: [
+        "https://github.com/Slipaclous",
+        "https://linkedin.com",
+      ],
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": "https://gminor.dev/#service",
+      name: "Gauthier Minor — Développement Web & Solutions Logiciel",
+      url: "https://gminor.dev",
+      image: "https://gminor.dev/opengraph-image",
+      founder: { "@id": "https://gminor.dev/#person" },
+      priceRange: "€€",
+      areaServed: ["BE", "FR", "CH", "LU", "Remote"],
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: "Services de Développement",
+        itemListElement: [
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "Site Web Haute Performance & CMS",
+              description: "Création de sites vitrines sur-mesure rapides (<0.4s), optimisés SEO et administrables.",
+            },
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "Développement Application Web & SaaS",
+              description: "Conception d'architectures applicatives complètes (Next.js, Symfony, PostgreSQL, Stripe).",
+            },
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "PrestaShop, Migration & Optimisation E-Commerce",
+              description: "Migration de PrestaShop 1.6 vers v9, modules personnalisés et optimisation des requêtes SQL.",
+            },
+          },
+        ],
+      },
+    },
   ],
 };
 
@@ -116,6 +172,7 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} dark antialiased scroll-smooth`}
     >
       <head>
+        <link rel="alternate" type="text/markdown" href="/llms.txt" title="Documentation LLM" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
