@@ -81,14 +81,14 @@ export async function Footer() {
             </span>
             <ul className="space-y-2 text-xs">
               <li>
-                <span className="text-zinc-500">Localisation :</span>{" "}
-                <span className="text-zinc-300">{info.location}</span>
+                <span className="text-zinc-400">Localisation :</span>{" "}
+                <span className="text-zinc-200">{info.location}</span>
               </li>
               <li>
-                <span className="text-zinc-500">Contact :</span>{" "}
+                <span className="text-zinc-400">Contact :</span>{" "}
                 <a
                   href={`mailto:${info.email}`}
-                  className="text-zinc-300 hover:text-white underline"
+                  className="text-zinc-200 hover:text-white underline"
                 >
                   {info.email}
                 </a>
@@ -107,12 +107,12 @@ export async function Footer() {
         </div>
 
         {/* Bottom copyright */}
-        <div className="pt-8 border-t border-white/[0.06] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-zinc-500 font-mono">
+        <div className="pt-8 border-t border-white/[0.06] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-zinc-400 font-mono">
           <div>
             © {new Date().getFullYear()} Gauthier Minor. Tous droits réservés.
           </div>
           <div>
-            Construit avec Next.js 15, Prisma 7 &amp; PostgreSQL.
+            Construit avec Next.js 16, Prisma 7 &amp; PostgreSQL.
           </div>
         </div>
       </div>
