@@ -2,8 +2,7 @@
 
 import React, { useState, useRef } from "react";
 import Image from "next/image";
-import { uploadImageAction } from "@/app/actions/upload";
-import { UploadCloud, Loader2, X, Check, Image as ImageIcon, Link as LinkIcon } from "lucide-react";
+import { UploadCloud, Loader2, X, Check } from "lucide-react";
 
 interface ImageUploadProps {
   initialValue?: string;
@@ -25,15 +24,21 @@ export function ImageUpload({ initialValue = "", name = "imageUrl" }: ImageUploa
       const formData = new FormData();
       formData.append("file", file);
 
-      const result = await uploadImageAction(formData);
+      const response = await fetch("/api/upload", {
+        method: "POST",
+        body: formData,
+      });
 
-      if (result.error) {
-        setErrorMessage(result.error);
-      } else if (result.url) {
-        setImageUrl(result.url);
+      const data = await response.json();
+
+      if (!response.ok || data.error) {
+        setErrorMessage(data.error || "Erreur lors du téléversement.");
+      } else if (data.url) {
+        setImageUrl(data.url);
       }
     } catch (err: any) {
-      setErrorMessage(err?.message || "Erreur de téléversement");
+      console.error("Erreur upload client:", err);
+      setErrorMessage(err?.message || "Erreur de connexion lors du téléversement.");
     } finally {
       setIsUploading(false);
     }
@@ -65,12 +70,12 @@ export function ImageUpload({ initialValue = "", name = "imageUrl" }: ImageUploa
 
       {imageUrl ? (
         <div className="relative rounded-2xl bg-black border border-white/[0.12] overflow-hidden group shadow-lg max-w-lg">
-          <div className="relative w-full h-56 bg-zinc-950">
+          <div className="relative w-full h-56 bg-zinc-950 flex items-center justify-center p-2">
             <Image
               src={imageUrl}
               alt="Aperçu du projet"
               fill
-              className="object-cover object-top"
+              className="object-contain p-2"
               sizes="(max-width: 768px) 100vw, 500px"
             />
           </div>
