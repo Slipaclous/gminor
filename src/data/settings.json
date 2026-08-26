@@ -9,6 +9,10 @@
       "question": "Travaillez-vous aussi sur des technologies comme PHP, Symfony ou PrestaShop ?"
     },
     {
+      "answer": "En totale transparence : dès le lancement, vous disposez d'un lien privé de prévisualisation en ligne (environnement de staging sécurisé). Vous pouvez ainsi tester en direct chaque nouvelle version, valider les fonctionnalités au fur et à mesure et me partager vos retours en continu jusqu'à la livraison finale.",
+      "question": "Comment puis-je suivre l'avancement et tester le projet pendant le développement ?"
+    },
+    {
       "answer": "Oui. Chaque projet intègre un espace d'administration épuré et sécurisé vous permettant de mettre à jour vos coordonnées, réalisations et textes en toute autonomie.",
       "question": "Puis-je modifier mes textes et photos moi-même après livraison ?"
     },

@@ -253,6 +253,11 @@ export const DEFAULT_SITE_SETTINGS: SiteSettings = {
         "Oui, tout à fait. J'ai une solide expérience sur l'écosystème PHP (Symfony, PrestaShop avec des migrations de v1.6 à v9, création de modules et intégrations MySQL) ainsi que sur les stacks modernes (Next.js, React, Node.js). Je m'adapte à votre existant technique.",
     },
     {
+      question: "Comment puis-je suivre l'avancement et tester le projet pendant le développement ?",
+      answer:
+        "En totale transparence : dès le lancement, vous disposez d'un lien privé de prévisualisation en ligne (environnement de staging sécurisé). Vous pouvez ainsi tester en direct chaque nouvelle version, valider les fonctionnalités au fur et à mesure et me partager vos retours en continu jusqu'à la livraison finale.",
+    },
+    {
       question: "Puis-je modifier mes textes et photos moi-même après livraison ?",
       answer:
         "Oui. Chaque projet intègre un espace d'administration épuré et sécurisé vous permettant de mettre à jour vos coordonnées, réalisations et textes en toute autonomie.",
