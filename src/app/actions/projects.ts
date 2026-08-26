@@ -43,6 +43,7 @@ export async function createProjectAction(
   const liveUrl = (formData.get("liveUrl") as string)?.trim() || null;
   const githubUrl = (formData.get("githubUrl") as string)?.trim() || null;
   const featured = formData.get("featured") === "on" || formData.get("featured") === "true";
+  const orderRaw = formData.get("order");
   const challenge = (formData.get("challenge") as string)?.trim() || "";
   const solution = (formData.get("solution") as string)?.trim() || "";
 
@@ -83,7 +84,7 @@ export async function createProjectAction(
   try {
     const newId = `proj_${Date.now()}`;
     const all = await getDbProjects();
-    const order = all.length + 1;
+    const order = orderRaw !== null && orderRaw !== "" ? Number(orderRaw) : all.length + 1;
 
     // Database write to Neon PostgreSQL
     if (process.env.DATABASE_URL && !process.env.DATABASE_URL.includes("localhost:5432")) {
@@ -170,6 +171,7 @@ export async function updateProjectAction(
   const liveUrl = (formData.get("liveUrl") as string)?.trim() || null;
   const githubUrl = (formData.get("githubUrl") as string)?.trim() || null;
   const featured = formData.get("featured") === "on" || formData.get("featured") === "true";
+  const orderRaw = formData.get("order");
   const challenge = (formData.get("challenge") as string)?.trim() || "";
   const solution = (formData.get("solution") as string)?.trim() || "";
 
@@ -203,6 +205,10 @@ export async function updateProjectAction(
   }
 
   try {
+    const all = await getDbProjects();
+    const current = all.find((p) => p.id === id);
+    const order = orderRaw !== null && orderRaw !== "" ? Number(orderRaw) : current?.order || 1;
+
     if (process.env.DATABASE_URL && !process.env.DATABASE_URL.includes("localhost:5432")) {
       await prisma.project.update({
         where: { id },
@@ -220,6 +226,7 @@ export async function updateProjectAction(
           liveUrl,
           githubUrl,
           featured,
+          order,
           challenge,
           solution,
           results,
@@ -228,7 +235,6 @@ export async function updateProjectAction(
       });
     }
 
-    const all = await getDbProjects();
     const updated = all.map((p) =>
       p.id === id
         ? {
@@ -247,6 +253,7 @@ export async function updateProjectAction(
             liveUrl: liveUrl || undefined,
             githubUrl: githubUrl || undefined,
             featured,
+            order,
             challenge,
             solution,
             results,
@@ -312,5 +319,59 @@ export async function toggleFeaturedAction(id: string, currentFeatured: boolean)
     revalidatePath("/admin/projets");
   } catch (error) {
     console.error("Erreur toggle featured:", error);
+  }
+}
+
+export async function reorderProjectAction(id: string, direction: "up" | "down") {
+  const isAuth = await verifyAdminSession();
+  if (!isAuth) {
+    throw new Error("Non autorisé");
+  }
+
+  try {
+    const all = await getDbProjects();
+    // Normalize order if some are missing or identical
+    const sorted = [...all].sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+    
+    // Assign clean sequential order numbers 1, 2, 3...
+    sorted.forEach((p, idx) => {
+      p.order = idx + 1;
+    });
+
+    const currentIndex = sorted.findIndex((p) => p.id === id);
+    if (currentIndex === -1) return;
+
+    const targetIndex = direction === "up" ? currentIndex - 1 : currentIndex + 1;
+    if (targetIndex < 0 || targetIndex >= sorted.length) return;
+
+    // Swap positions
+    const temp = sorted[currentIndex];
+    sorted[currentIndex] = sorted[targetIndex];
+    sorted[targetIndex] = temp;
+
+    // Re-assign 1-based order
+    sorted.forEach((p, idx) => {
+      p.order = idx + 1;
+    });
+
+    if (process.env.DATABASE_URL && !process.env.DATABASE_URL.includes("localhost:5432")) {
+      await Promise.all(
+        sorted.map((p) =>
+          prisma.project.update({
+            where: { id: p.id },
+            data: { order: p.order },
+          })
+        )
+      );
+    }
+
+    updateMemoryProjects(sorted);
+
+    revalidatePath("/");
+    revalidatePath("/projets");
+    revalidatePath("/admin/projets");
+    revalidatePath("/admin");
+  } catch (error) {
+    console.error("Erreur réordonnancement projet:", error);
   }
 }

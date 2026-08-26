@@ -8,7 +8,9 @@ import { ArrowUpRight } from "lucide-react";
 
 export async function BentoGrid() {
   const allProjects = await getDbProjects();
-  const featuredProjects = allProjects.filter((p) => p.featured);
+  const featuredProjects = allProjects
+    .filter((p) => p.featured)
+    .sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
   const displayProjects = featuredProjects.length > 0 ? featuredProjects : allProjects.slice(0, 3);
 
   return (

@@ -242,19 +242,36 @@ export function ProjectForm({ initialData, isEdit = false }: ProjectFormProps) {
           <ImageUpload initialValue={initialData?.imageUrl || ""} />
         </div>
 
-        {/* Featured switch */}
-        <div className="pt-2 flex items-center gap-3">
-          <input
-            type="checkbox"
-            id="featured"
-            name="featured"
-            checked={featured}
-            onChange={(e) => setFeatured(e.target.checked)}
-            className="w-4 h-4 rounded text-emerald-400 focus:ring-emerald-400 bg-zinc-950 border-white/[0.2] cursor-pointer"
-          />
-          <label htmlFor="featured" className="text-sm font-semibold text-white cursor-pointer">
-            Mettre ce projet en avant sur la page d&apos;accueil (Featured Bento Grid)
-          </label>
+        {/* Featured switch & Order */}
+        <div className="pt-2 grid grid-cols-1 sm:grid-cols-2 gap-4 items-center bg-black/40 p-4 rounded-2xl border border-white/[0.08]">
+          <div className="flex items-center gap-3">
+            <input
+              type="checkbox"
+              id="featured"
+              name="featured"
+              checked={featured}
+              onChange={(e) => setFeatured(e.target.checked)}
+              className="w-4 h-4 rounded text-emerald-400 focus:ring-emerald-400 bg-zinc-950 border-white/[0.2] cursor-pointer"
+            />
+            <label htmlFor="featured" className="text-sm font-semibold text-white cursor-pointer">
+              Mettre à la une sur l&apos;accueil (Featured)
+            </label>
+          </div>
+
+          <div className="flex items-center gap-3 justify-start sm:justify-end">
+            <label htmlFor="order" className="text-xs font-mono text-zinc-400">
+              Position d&apos;ordre :
+            </label>
+            <input
+              type="number"
+              id="order"
+              name="order"
+              defaultValue={initialData?.order || 1}
+              min={1}
+              max={99}
+              className="w-20 px-3 py-1.5 rounded-lg bg-zinc-950 border border-white/[0.15] text-xs font-mono text-white text-center focus:outline-none focus:border-emerald-400"
+            />
+          </div>
         </div>
       </div>
 
