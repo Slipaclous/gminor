@@ -4,6 +4,7 @@ import { getSiteSettings } from "@/lib/settings-service";
 import { ContactForm } from "@/components/contact/contact-form";
 import { Mail, MapPin, Clock, CheckCircle2, Phone, Calendar, ArrowUpRight } from "lucide-react";
 import { GithubIcon, LinkedinIcon, InstagramIcon, XIcon } from "@/components/ui/icons";
+import { CopyEmailButton } from "@/components/ui/copy-email-button";
 
 export const metadata: Metadata = {
   title: "Contact & Devis Gratuit — Gauthier Minor",
@@ -51,12 +52,15 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
                   <span className="text-[11px] text-zinc-500 block uppercase font-mono">
                     Email direct
                   </span>
-                  <a
-                    href={`mailto:${info.email}`}
-                    className="font-bold text-white hover:text-emerald-400 hover:underline text-sm transition-colors"
-                  >
-                    {info.email}
-                  </a>
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <a
+                      href={`mailto:${info.email}`}
+                      className="font-bold text-white hover:text-emerald-400 hover:underline text-sm transition-colors"
+                    >
+                      {info.email}
+                    </a>
+                    <CopyEmailButton email={info.email} label="Copier" />
+                  </div>
                 </div>
               </div>
 

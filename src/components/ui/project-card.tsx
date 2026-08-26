@@ -18,9 +18,12 @@ export function ProjectCard({
   // Featured Project Card Layout (2-Column Hero Card)
   if (featuredLayout) {
     return (
-      <div className="group relative rounded-3xl bg-[#0d0d10] border border-white/[0.08] hover:border-white/[0.22] transition-all duration-300 overflow-hidden shadow-2xl p-6 sm:p-8 lg:p-10">
+      <div className="group relative rounded-3xl bg-[#0d0d10] border border-white/[0.08] hover:border-emerald-500/40 transition-all duration-300 overflow-hidden shadow-2xl p-6 sm:p-8 lg:p-10 hover:shadow-[0_0_35px_rgba(16,185,129,0.07)]">
+        {/* Subtle top border beam highlight on hover */}
+        <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-emerald-400/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
         {/* Glow ambient background effect */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-500/[0.04] rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-500/[0.05] rounded-full blur-3xl pointer-events-none" />
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10">
           {/* Left Column: Project Info & Metrics (7 cols) */}
@@ -150,7 +153,10 @@ export function ProjectCard({
 
   // Standard Card Layout (Discrete, High Craft Design)
   return (
-    <div className="group relative rounded-3xl bg-[#0d0d10] border border-white/[0.08] hover:border-white/[0.22] transition-all duration-200 flex flex-col justify-between overflow-hidden shadow-xl p-6 sm:p-7">
+    <div className="group relative rounded-3xl bg-[#0d0d10] border border-white/[0.08] hover:border-white/[0.22] hover:border-emerald-500/30 transition-all duration-300 flex flex-col justify-between overflow-hidden shadow-xl p-6 sm:p-7 hover:shadow-[0_0_24px_rgba(16,185,129,0.04)]">
+      {/* Subtle top border beam highlight on hover */}
+      <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-emerald-400/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+
       <div className="space-y-5">
         {/* Discreet Miniature Window Bar */}
         <div className="rounded-2xl bg-black/90 border border-white/[0.08] overflow-hidden relative">

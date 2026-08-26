@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { SiteShell } from "@/components/layout/site-shell";
 import { Footer } from "@/components/layout/footer";
+import { ScrollProgress } from "@/components/ui/scroll-progress";
+import { FilmGrain } from "@/components/ui/film-grain";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -178,7 +180,9 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="min-h-screen flex flex-col bg-black text-zinc-100">
+      <body className="min-h-screen flex flex-col bg-black text-zinc-100 relative selection:bg-[#c96442] selection:text-white">
+        <ScrollProgress />
+        <FilmGrain />
         <SiteShell footer={<Footer />}>
           {children}
         </SiteShell>

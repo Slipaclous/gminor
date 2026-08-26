@@ -3,6 +3,7 @@ import Link from "next/link";
 import { getSiteSettings } from "@/lib/settings-service";
 import { Logo } from "./logo";
 import { GithubIcon, LinkedinIcon, InstagramIcon, XIcon } from "../ui/icons";
+import { CopyEmailButton } from "../ui/copy-email-button";
 
 export async function Footer() {
   const settings = await getSiteSettings();
@@ -110,7 +111,7 @@ export async function Footer() {
                 <span className="text-zinc-400">Localisation :</span>{" "}
                 <span className="text-zinc-200">{info.location}</span>
               </li>
-              <li>
+              <li className="flex items-center gap-2 flex-wrap">
                 <span className="text-zinc-400">Contact :</span>{" "}
                 <a
                   href={`mailto:${info.email}`}
@@ -118,6 +119,7 @@ export async function Footer() {
                 >
                   {info.email}
                 </a>
+                <CopyEmailButton email={info.email} label="Copier" />
               </li>
               <li className="pt-2">
                 <Link
