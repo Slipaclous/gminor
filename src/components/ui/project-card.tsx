@@ -130,19 +130,18 @@ export function ProjectCard({
               </div>
 
               {/* Discreet Image Canvas with Dark Gradient Tint */}
-              <div className="relative w-full h-64 sm:h-72 lg:h-80 bg-[#08080a] overflow-hidden">
+              <div className="relative w-full h-64 sm:h-72 lg:h-80 bg-[#08080a] overflow-hidden flex items-center justify-center p-3">
                 {project.imageUrl ? (
                   <>
                     <Image
                       src={project.imageUrl}
                       alt={project.title}
                       fill
-                      className="object-cover object-top opacity-60 group-hover:opacity-85 transition-opacity duration-500 filter contrast-105"
+                      className="object-contain p-2 opacity-80 group-hover:opacity-100 transition-opacity duration-500 filter contrast-105"
                       sizes="(max-width: 1024px) 100vw, 500px"
                     />
-                    {/* Dark gradient shield so low-res artifacts are masked seamlessly */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#090a0f] via-black/30 to-transparent pointer-events-none" />
-                    <div className="absolute inset-0 bg-black/20 pointer-events-none" />
+                    {/* Subtle bottom gradient */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#090a0f] via-transparent to-transparent pointer-events-none opacity-40" />
                   </>
                 ) : (
                   <div className="w-full h-full flex items-center justify-center text-zinc-600 font-mono text-xs">
@@ -151,7 +150,7 @@ export function ProjectCard({
                 )}
 
                 {/* Overlaid Architecture Pill Badge */}
-                <div className="absolute bottom-4 left-4 right-4 p-3 rounded-xl bg-black/80 backdrop-blur-md border border-white/[0.1] flex items-center justify-between text-xs font-mono">
+                <div className="absolute bottom-4 left-4 right-4 p-3 rounded-xl bg-black/85 backdrop-blur-md border border-white/[0.1] flex items-center justify-between text-xs font-mono">
                   <span className="text-zinc-300 flex items-center gap-1.5">
                     <Terminal className="w-3.5 h-3.5 text-emerald-400" />
                     <span>Next.js 15 &bull; Production</span>
@@ -184,17 +183,17 @@ export function ProjectCard({
           </div>
 
           {/* Discreet Image Canvas */}
-          <div className="relative w-full h-40 sm:h-44 bg-[#08080a] overflow-hidden">
+          <div className="relative w-full h-44 sm:h-48 bg-[#08080a] overflow-hidden flex items-center justify-center p-2">
             {project.imageUrl ? (
               <>
                 <Image
                   src={project.imageUrl}
                   alt={project.title}
                   fill
-                  className="object-cover object-top opacity-50 group-hover:opacity-75 transition-opacity duration-300 filter contrast-105"
+                  className="object-contain p-1.5 opacity-75 group-hover:opacity-100 transition-opacity duration-300 filter contrast-105"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0d0d10] via-black/40 to-transparent opacity-80" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0d0d10] via-transparent to-transparent opacity-40 pointer-events-none" />
               </>
             ) : (
               <div className="w-full h-full flex items-center justify-center text-zinc-600 font-mono text-xs">

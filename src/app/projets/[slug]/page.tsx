@@ -137,17 +137,17 @@ export default async function ProjectDetailPage({ params }: ProjectDetailProps) 
               </div>
             </div>
 
-            {/* Image Canvas with Subtle Vignette Overlay */}
-            <div className="relative w-full h-72 sm:h-96 md:h-[460px] bg-zinc-950 overflow-hidden">
+            {/* Image Canvas with Subtle Padding and Full Display */}
+            <div className="relative w-full h-72 sm:h-96 md:h-[480px] bg-zinc-950/90 overflow-hidden flex items-center justify-center p-4 sm:p-6">
               <Image
                 src={project.imageUrl}
                 alt={project.title}
                 fill
                 priority
-                className="object-cover object-top opacity-85 filter contrast-105"
+                className="object-contain p-2 opacity-90 filter contrast-105"
                 sizes="(max-width: 1024px) 100vw, 896px"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0d] via-transparent to-transparent opacity-60 pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0d] via-transparent to-transparent opacity-30 pointer-events-none" />
             </div>
           </div>
         )}
