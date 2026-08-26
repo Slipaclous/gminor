@@ -138,13 +138,17 @@ export default async function ProjectDetailPage({ params }: ProjectDetailProps) 
             </div>
 
             {/* Image Canvas with Subtle Padding and Full Display */}
-            <div className="relative w-full h-72 sm:h-96 md:h-[480px] bg-zinc-950/90 overflow-hidden flex items-center justify-center p-4 sm:p-6">
+            <div className="relative w-full h-72 sm:h-96 md:h-[480px] bg-zinc-950/90 overflow-hidden flex items-center justify-center p-6 sm:p-10">
               <Image
                 src={project.imageUrl}
                 alt={project.title}
                 fill
                 priority
-                className="object-contain p-2 opacity-90 filter contrast-105"
+                className={`object-contain p-4 opacity-90 ${
+                  project.imageUrl.toLowerCase().includes(".svg")
+                    ? "brightness-0 invert drop-shadow-[0_0_16px_rgba(255,255,255,0.25)]"
+                    : "filter contrast-105"
+                }`}
                 sizes="(max-width: 1024px) 100vw, 896px"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0d] via-transparent to-transparent opacity-30 pointer-events-none" />

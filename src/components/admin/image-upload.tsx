@@ -70,12 +70,16 @@ export function ImageUpload({ initialValue = "", name = "imageUrl" }: ImageUploa
 
       {imageUrl ? (
         <div className="relative rounded-2xl bg-black border border-white/[0.12] overflow-hidden group shadow-lg max-w-lg">
-          <div className="relative w-full h-56 bg-zinc-950 flex items-center justify-center p-2">
+          <div className="relative w-full h-56 bg-zinc-950 flex items-center justify-center p-3">
             <Image
               src={imageUrl}
               alt="Aperçu du projet"
               fill
-              className="object-contain p-2"
+              className={`object-contain p-2 ${
+                imageUrl.toLowerCase().includes(".svg")
+                  ? "brightness-0 invert drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]"
+                  : ""
+              }`}
               sizes="(max-width: 768px) 100vw, 500px"
             />
           </div>

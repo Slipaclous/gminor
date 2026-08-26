@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ProjectItem } from "@/data/projects";
-import { ArrowUpRight, ExternalLink, Sparkles, Terminal, Activity } from "lucide-react";
+import { ArrowUpRight, ExternalLink, Sparkles, Terminal } from "lucide-react";
 
 interface ProjectCardProps {
   project: ProjectItem;
@@ -13,30 +13,26 @@ export function ProjectCard({
   project,
   featuredLayout = false,
 }: ProjectCardProps) {
+  const isSvg = Boolean(project.imageUrl?.toLowerCase().includes(".svg"));
+
+  // Featured Project Card Layout (2-Column Hero Card)
   if (featuredLayout) {
     return (
-      <div className="group relative rounded-3xl bg-gradient-to-b from-[#111116] to-[#0a0a0d] border border-white/[0.1] hover:border-white/[0.25] transition-all duration-300 p-6 sm:p-8 md:p-10 shadow-2xl overflow-hidden">
-        {/* Subtle Ambient Background Image Glow (blurred & desaturated) */}
-        {project.imageUrl && (
-          <div className="absolute top-0 right-0 w-3/5 h-full opacity-15 group-hover:opacity-25 blur-3xl pointer-events-none transition-opacity duration-500 overflow-hidden">
-            <Image
-              src={project.imageUrl}
-              alt=""
-              fill
-              className="object-cover"
-            />
-          </div>
-        )}
+      <div className="group relative rounded-3xl bg-[#0d0d10] border border-white/[0.08] hover:border-white/[0.22] transition-all duration-300 overflow-hidden shadow-2xl p-6 sm:p-8 lg:p-10">
+        {/* Glow ambient background effect */}
+        <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-500/[0.04] rounded-full blur-3xl pointer-events-none" />
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
-          {/* Left Column: Context, Narrative & Details */}
-          <div className="lg:col-span-7 flex flex-col justify-between space-y-6">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10">
+          {/* Left Column: Project Info & Metrics (7 cols) */}
+          <div className="lg:col-span-7 space-y-6 flex flex-col justify-between">
             <div className="space-y-4">
-              <div className="flex flex-wrap items-center gap-2.5">
-                <span className="px-2.5 py-1 rounded-md text-[11px] font-mono uppercase tracking-wider font-semibold bg-white text-black">
-                  À la une
+              {/* Category Badge + Featured Indicator */}
+              <div className="flex flex-wrap items-center gap-3">
+                <span className="px-3 py-1 rounded-lg text-xs font-mono uppercase tracking-wider font-bold bg-emerald-950/80 text-emerald-400 border border-emerald-500/30 flex items-center gap-1.5 shadow-sm">
+                  <Sparkles className="w-3.5 h-3.5" />
+                  <span>Projet à la une</span>
                 </span>
-                <span className="px-2.5 py-1 rounded-md text-[11px] font-mono uppercase tracking-wider font-semibold bg-zinc-900 text-zinc-300 border border-white/[0.08]">
+                <span className="px-3 py-1 rounded-lg text-xs font-mono uppercase tracking-wider font-semibold bg-zinc-900 text-zinc-300 border border-white/[0.08]">
                   {project.categoryLabel}
                 </span>
                 <span className="text-xs font-mono text-zinc-400">
@@ -45,30 +41,34 @@ export function ProjectCard({
                 </span>
               </div>
 
+              {/* Title & Tagline */}
               <div className="space-y-2">
-                <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight">
                   <Link
                     href={`/projets/${project.slug}`}
-                    className="hover:underline flex items-center gap-2 group-hover:text-white"
+                    className="hover:underline flex items-center gap-3 group/link"
                   >
                     <span>{project.title}</span>
-                    <ArrowUpRight className="w-6 h-6 text-zinc-500 group-hover:text-emerald-400 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all shrink-0" />
+                    <ArrowUpRight className="w-6 h-6 text-zinc-500 group-hover/link:text-emerald-400 group-hover/link:translate-x-1 group-hover/link:-translate-y-1 transition-all" />
                   </Link>
                 </h3>
-                <p className="text-sm sm:text-base text-zinc-300 leading-relaxed max-w-xl font-normal">
-                  {project.description || project.tagline}
+                <p className="text-sm sm:text-base text-zinc-300 leading-relaxed max-w-xl">
+                  {project.tagline}
                 </p>
               </div>
 
-              {/* Key Metrics Strip */}
+              {/* 3 Impact Metrics Grid */}
               {project.metrics && project.metrics.length > 0 && (
-                <div className="grid grid-cols-3 gap-3 p-4 rounded-2xl bg-black/80 border border-white/[0.08] max-w-lg backdrop-blur-sm">
+                <div className="grid grid-cols-3 gap-3 pt-2">
                   {project.metrics.slice(0, 3).map((m, idx) => (
-                    <div key={idx} className="space-y-0.5">
-                      <span className="text-[10px] text-zinc-400 block uppercase font-mono">
+                    <div
+                      key={idx}
+                      className="p-3.5 rounded-2xl bg-black/60 border border-white/[0.08] space-y-1"
+                    >
+                      <span className="text-[11px] text-zinc-400 block font-mono">
                         {m.label}
                       </span>
-                      <span className="text-sm sm:text-base font-extrabold text-white font-mono">
+                      <span className="text-base sm:text-lg font-extrabold text-white font-mono tracking-tight">
                         {m.value}
                       </span>
                     </div>
@@ -76,12 +76,12 @@ export function ProjectCard({
                 </div>
               )}
 
-              {/* Tech Stack Pills */}
-              <div className="flex flex-wrap gap-1.5 pt-1">
+              {/* Tech Stack Badges */}
+              <div className="flex flex-wrap gap-2 pt-2">
                 {project.techStack.map((tech) => (
                   <span
                     key={tech}
-                    className="px-2.5 py-1 rounded-lg text-xs font-mono bg-black/60 border border-white/[0.08] text-zinc-300"
+                    className="px-2.5 py-1 rounded-md text-xs font-mono bg-zinc-900/90 text-zinc-300 border border-white/[0.08]"
                   >
                     {tech}
                   </span>
@@ -89,34 +89,22 @@ export function ProjectCard({
               </div>
             </div>
 
-            {/* Actions Bar */}
-            <div className="pt-4 border-t border-white/[0.08] flex items-center gap-4 text-xs font-semibold">
+            {/* Action link */}
+            <div className="pt-2">
               <Link
                 href={`/projets/${project.slug}`}
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white hover:bg-zinc-200 text-black font-bold uppercase tracking-wider transition-colors shadow-md"
+                className="inline-flex items-center gap-2 text-xs font-bold font-mono uppercase tracking-wider text-emerald-400 hover:text-emerald-300 transition-colors"
               >
-                <span>Étude de cas complète</span>
+                <span>Lire l&apos;étude de cas complète</span>
                 <ArrowUpRight className="w-4 h-4" />
               </Link>
-
-              {project.liveUrl && (
-                <a
-                  href={project.liveUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-zinc-900/80 hover:bg-zinc-800 border border-white/[0.1] text-zinc-300 hover:text-white transition-colors font-mono"
-                >
-                  <span>Tester en direct</span>
-                  <ExternalLink className="w-3.5 h-3.5" />
-                </a>
-              )}
             </div>
           </div>
 
-          {/* Right Column: Sleek Discreet Glass Mockup Preview */}
-          <div className="lg:col-span-5">
-            <div className="rounded-2xl bg-black/90 border border-white/[0.12] overflow-hidden shadow-2xl group-hover:border-white/[0.3] transition-all duration-300 relative">
-              {/* Window Header */}
+          {/* Right Column: Discrete Window Frame Mockup (5 cols) */}
+          <div className="lg:col-span-5 w-full">
+            <div className="rounded-2xl bg-black/90 border border-white/[0.1] overflow-hidden shadow-2xl relative">
+              {/* Browser/Window Header */}
               <div className="px-4 py-3 bg-[#13141a] border-b border-white/[0.08] flex items-center justify-between">
                 <div className="flex items-center gap-1.5">
                   <span className="w-2.5 h-2.5 rounded-full bg-zinc-700 inline-block" />
@@ -137,7 +125,11 @@ export function ProjectCard({
                       src={project.imageUrl}
                       alt={project.title}
                       fill
-                      className="object-contain p-2 opacity-80 group-hover:opacity-100 transition-opacity duration-500 filter contrast-105"
+                      className={`object-contain p-4 opacity-85 group-hover:opacity-100 transition-opacity duration-500 ${
+                        isSvg
+                          ? "brightness-0 invert drop-shadow-[0_0_12px_rgba(255,255,255,0.2)]"
+                          : "filter contrast-105"
+                      }`}
                       sizes="(max-width: 1024px) 100vw, 500px"
                     />
                     {/* Subtle bottom gradient */}
@@ -148,15 +140,6 @@ export function ProjectCard({
                     Interface sur-mesure
                   </div>
                 )}
-
-                {/* Overlaid Architecture Pill Badge */}
-                <div className="absolute bottom-4 left-4 right-4 p-3 rounded-xl bg-black/85 backdrop-blur-md border border-white/[0.1] flex items-center justify-between text-xs font-mono">
-                  <span className="text-zinc-300 flex items-center gap-1.5">
-                    <Terminal className="w-3.5 h-3.5 text-emerald-400" />
-                    <span>Next.js 15 &bull; Production</span>
-                  </span>
-                  <span className="text-emerald-400 font-bold">100% Ops</span>
-                </div>
               </div>
             </div>
           </div>
@@ -190,7 +173,11 @@ export function ProjectCard({
                   src={project.imageUrl}
                   alt={project.title}
                   fill
-                  className="object-contain p-1.5 opacity-75 group-hover:opacity-100 transition-opacity duration-300 filter contrast-105"
+                  className={`object-contain p-3 opacity-80 group-hover:opacity-100 transition-opacity duration-300 ${
+                    isSvg
+                      ? "brightness-0 invert drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]"
+                      : "filter contrast-105"
+                  }`}
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0d0d10] via-transparent to-transparent opacity-40 pointer-events-none" />
