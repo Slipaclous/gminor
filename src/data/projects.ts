@@ -211,7 +211,7 @@ export const PROJECTS_DATA: ProjectItem[] = [
       "PostgreSQL",
     ],
     liveUrl: "https://www.marionnettes.be/",
-    featured: true,
+    featured: false,
     order: 5,
     challenge:
       "Moderniser un site associatif obsolète pour fusionner deux activités distinctes (spectacles de marionnettes tout au long de l'année et festival du village Saintes en Fête) avec un outil de publication accessible aux bénévoles.",
@@ -252,7 +252,7 @@ export const PROJECTS_DATA: ProjectItem[] = [
       "PostgreSQL",
     ],
     liveUrl: "https://jac26.be/",
-    featured: true,
+    featured: false,
     order: 6,
     challenge:
       "Créer une plateforme événementielle accueillante, hautement accessible pour un public non initié aux outils numériques et capable de répertorier exhaustivement les confréries participantes.",
