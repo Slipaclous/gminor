@@ -68,9 +68,9 @@ export const PROJECTS_DATA: ProjectItem[] = [
     slug: "rent-a-book",
     title: "Rent a Book / Scolaris",
     tagline:
-      "Migration critique PrestaShop 1.6 vers v9 & optimisation SQL pour 10 000+ commandes",
+      "Migration critique PrestaShop 1.6 vers v9 & optimisation SQL pour 90 000+ commandes / an",
     description:
-      "Pilotage de la refonte et de la migration e-commerce de la plateforme de location de livres scolaires Rent a Book. Modernisation du socle technique PrestaShop 1.6 vers PrestaShop 9 avec modules personnalisés pour flux saisonniers massifs.",
+      "Pilotage de la refonte et de la migration e-commerce de la plateforme de location de livres scolaires Rent a Book. Modernisation du socle technique PrestaShop 1.6 vers PrestaShop 9 avec modules personnalisés pour absorber un flux saisonnier massif de plus de 90 000 commandes annuelles.",
     category: "ECOMMERCE",
     categoryLabel: "E-Commerce",
     client: "Rent a Book SA",
@@ -90,17 +90,17 @@ export const PROJECTS_DATA: ProjectItem[] = [
     featured: true,
     order: 2,
     challenge:
-      "Gérer la transition d'un socle PrestaShop 1.6 très personnalisé sans aucune perte de données historiques (commandes, stocks, utilisateurs) tout en garantissant une tenue de charge sans faille durant le pic de rentrée scolaire (10 000+ commandes en quelques semaines).",
+      "Gérer la transition d'un socle PrestaShop 1.6 très personnalisé sans aucune perte de données historiques (commandes, stocks, utilisateurs) tout en garantissant une tenue de charge sans faille durant le pic de rentrée scolaire (plus de 90 000 commandes traitées par an).",
     solution:
       "Développement de scripts d'indexation et d'export de données sur-mesure, réécriture complète des modules personnalisés en PHP 8 / Symfony et optimisation des index SQL pour réduire le temps de réponse serveur.",
     results: [
       "Zéro perte de données sur l'historique de plus de 10 ans",
       "Division par 3 du temps de validation des paniers",
-      "Capacité de charge validée pour plus de 10 000 commandes saisonnières",
+      "Capacité de charge validée pour plus de 90 000 commandes annuelles avec pic saisonnier intensif",
     ],
     metrics: [
+      { label: "Volume annuel", value: "90k+ cmdes" },
       { label: "Gain de vitesse", value: "-65%" },
-      { label: "Volume saisonnier", value: "10k+ cmdes" },
       { label: "Fiabilité flux", value: "99.99%" },
     ],
   },
