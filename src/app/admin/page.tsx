@@ -4,6 +4,7 @@ import { verifyAdminSession } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { getDbProjects } from "@/lib/projects-service";
 import { prisma } from "@/lib/prisma";
+import { DeleteMessageButton } from "@/components/admin/delete-message-button";
 import {
   FolderGit2,
   Sparkles,
@@ -446,12 +447,15 @@ export default async function AdminDashboardPage() {
                       )}
                     </td>
                     <td className="py-4 text-right">
-                      <a
-                        href={`mailto:${m.email}?subject=Suite à votre demande sur G-Minor`}
-                        className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-xs font-semibold text-white transition-colors"
-                      >
-                        <span>Répondre</span>
-                      </a>
+                      <div className="inline-flex items-center justify-end gap-2">
+                        <a
+                          href={`mailto:${m.email}?subject=${encodeURIComponent(`Suite à votre demande sur G-Minor (${m.service || "Projet"})`)}`}
+                          className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-xs font-semibold text-white transition-colors"
+                        >
+                          <span>Répondre</span>
+                        </a>
+                        <DeleteMessageButton messageId={m.id} senderName={m.name} />
+                      </div>
                     </td>
                   </tr>
                 ))}

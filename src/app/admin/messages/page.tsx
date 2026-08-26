@@ -2,6 +2,7 @@ import React from "react";
 import { verifyAdminSession } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
+import { DeleteMessageButton } from "@/components/admin/delete-message-button";
 import { Mail, Clock, Building2, User, MessageSquare, DollarSign, Send, ArrowUpRight } from "lucide-react";
 
 export default async function AdminMessagesPage() {
@@ -120,10 +121,12 @@ export default async function AdminMessagesPage() {
                 {msg.message}
               </div>
 
-              {/* Reply Button */}
-              <div className="pt-2 flex justify-end">
+              {/* Actions: Reply & Delete */}
+              <div className="pt-2 flex items-center justify-between gap-3 border-t border-white/[0.06]">
+                <DeleteMessageButton messageId={msg.id} senderName={msg.name} />
+
                 <a
-                  href={`mailto:${msg.email}?subject=${encodeURIComponent(`Re: Votre projet ${msg.service || ""} - Gauthier Minor`)}`}
+                  href={`mailto:${msg.email}?subject=${encodeURIComponent(`Re: Votre projet ${msg.service || ""} - G-Minor`)}`}
                   className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider text-black bg-white hover:bg-zinc-200 transition-colors shadow-sm"
                 >
                   <Send className="w-3.5 h-3.5" />

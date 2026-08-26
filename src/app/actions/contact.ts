@@ -111,3 +111,53 @@ export async function submitContactForm(
     };
   }
 }
+
+export async function deleteContactMessage(messageId: string): Promise<{ success: boolean; error?: string }> {
+  try {
+    const { verifyAdminSession } = await import("@/lib/auth");
+    const isAuth = await verifyAdminSession();
+    if (!isAuth) {
+      return { success: false, error: "Non autorisé" };
+    }
+
+    if (process.env.DATABASE_URL && !process.env.DATABASE_URL.includes("localhost:5432")) {
+      await prisma.contactMessage.delete({
+        where: { id: messageId },
+      });
+    }
+
+    revalidatePath("/admin/messages");
+    revalidatePath("/admin");
+    return { success: true };
+  } catch (err) {
+    console.error("Erreur suppression message:", err);
+    return { success: false, error: "Erreur lors de la suppression." };
+  }
+}
+
+export async function toggleMessageStatus(
+  messageId: string,
+  newStatus: "UNREAD" | "READ" | "ARCHIVED"
+): Promise<{ success: boolean; error?: string }> {
+  try {
+    const { verifyAdminSession } = await import("@/lib/auth");
+    const isAuth = await verifyAdminSession();
+    if (!isAuth) {
+      return { success: false, error: "Non autorisé" };
+    }
+
+    if (process.env.DATABASE_URL && !process.env.DATABASE_URL.includes("localhost:5432")) {
+      await prisma.contactMessage.update({
+        where: { id: messageId },
+        data: { status: newStatus },
+      });
+    }
+
+    revalidatePath("/admin/messages");
+    revalidatePath("/admin");
+    return { success: true };
+  } catch (err) {
+    console.error("Erreur mise à jour statut message:", err);
+    return { success: false, error: "Erreur lors de la mise à jour." };
+  }
+}
