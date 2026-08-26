@@ -94,48 +94,51 @@ export function Hero({ settings }: HeroProps) {
 
           {/* Right Column: Live Interactive Architecture & Code Card */}
           <div className="lg:col-span-5">
-            <div className="rounded-2xl bg-[#0a0a0d] border border-white/[0.12] overflow-hidden shadow-2xl">
-              {/* Window Bar */}
-              <div className="flex items-center justify-between px-4 py-3 bg-[#111116] border-b border-white/[0.08]">
-                <div className="flex items-center gap-2">
-                  <span className="w-3 h-3 rounded-full bg-zinc-700 inline-block" />
-                  <span className="w-3 h-3 rounded-full bg-zinc-700 inline-block" />
-                  <span className="w-3 h-3 rounded-full bg-zinc-700 inline-block" />
-                  <span className="ml-2 text-xs font-mono text-zinc-400">
-                    gminor-skills.ts
+            <div className="group relative rounded-2xl sm:rounded-3xl bg-[#0a0a0d] border border-white/[0.12] hover:border-emerald-500/30 overflow-hidden shadow-2xl transition-all duration-300">
+              {/* Subtle top border beam */}
+              <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-emerald-400/40 to-transparent pointer-events-none" />
+
+              {/* Window Bar Header */}
+              <div className="flex items-center justify-between px-3.5 sm:px-4 py-2.5 sm:py-3 bg-[#111116] border-b border-white/[0.08]">
+                <div className="flex items-center gap-1.5">
+                  <span className="w-2.5 h-2.5 rounded-full bg-zinc-700 inline-block" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-zinc-700 inline-block" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-zinc-700 inline-block" />
+                  <span className="ml-1.5 text-[11px] font-mono text-zinc-400 truncate max-w-[110px] sm:max-w-none">
+                    gminor-stack.ts
                   </span>
                 </div>
 
                 {/* Tab Switcher */}
-                <div className="flex items-center gap-1 bg-black/50 p-1 rounded-lg border border-white/[0.06]">
+                <div className="flex items-center gap-1 bg-black/60 p-0.5 sm:p-1 rounded-lg border border-white/[0.06]">
                   <button
                     type="button"
                     onClick={() => setActiveTab("arch")}
-                    className={`px-2.5 py-1 rounded-md text-[11px] font-mono transition-colors cursor-pointer ${
+                    className={`px-2 sm:px-2.5 py-1 rounded-md text-[10px] sm:text-[11px] font-mono transition-colors cursor-pointer ${
                       activeTab === "arch"
-                        ? "bg-zinc-800 text-white font-semibold"
+                        ? "bg-zinc-800 text-white font-semibold shadow-sm"
                         : "text-zinc-400 hover:text-white"
                     }`}
                   >
-                    Skills
+                    Stack
                   </button>
                   <button
                     type="button"
                     onClick={() => setActiveTab("stack")}
-                    className={`px-2.5 py-1 rounded-md text-[11px] font-mono transition-colors cursor-pointer ${
+                    className={`px-2 sm:px-2.5 py-1 rounded-md text-[10px] sm:text-[11px] font-mono transition-colors cursor-pointer ${
                       activeTab === "stack"
-                        ? "bg-zinc-800 text-white font-semibold"
+                        ? "bg-zinc-800 text-white font-semibold shadow-sm"
                         : "text-zinc-400 hover:text-white"
                     }`}
                   >
-                    Backend &amp; DB
+                    Backend
                   </button>
                   <button
                     type="button"
                     onClick={() => setActiveTab("perf")}
-                    className={`px-2.5 py-1 rounded-md text-[11px] font-mono transition-colors cursor-pointer ${
+                    className={`px-2 sm:px-2.5 py-1 rounded-md text-[10px] sm:text-[11px] font-mono transition-colors cursor-pointer ${
                       activeTab === "perf"
-                        ? "bg-zinc-800 text-white font-semibold"
+                        ? "bg-zinc-800 text-white font-semibold shadow-sm"
                         : "text-zinc-400 hover:text-white"
                     }`}
                   >
@@ -144,76 +147,89 @@ export function Hero({ settings }: HeroProps) {
                 </div>
               </div>
 
-              {/* Code Snippet Content */}
-              <div className="p-5 font-mono text-xs text-zinc-300 leading-relaxed overflow-x-auto min-h-[260px] flex flex-col justify-between">
+              {/* Card Content (Mobile-Friendly Visual Presentation + Desktop Code Highlighting) */}
+              <div className="p-4 sm:p-5 font-mono text-xs text-zinc-300 leading-relaxed min-h-[260px] flex flex-col justify-between">
                 {activeTab === "arch" && (
-                  <pre className="text-zinc-300">
-                    <code>
-                      <span className="text-zinc-500">// Profil &amp; Polyvalence Full-Stack</span>
-                      {"\n"}
-                      <span className="text-purple-400">export const</span>{" "}
-                      <span className="text-yellow-300">GauthierMinor</span> = {"{"}
-                      {"\n"}  frontend: [<span className="text-emerald-300">&quot;React&quot;</span>, <span className="text-emerald-300">&quot;Next.js&quot;</span>, <span className="text-emerald-300">&quot;TypeScript&quot;</span>, <span className="text-emerald-300">&quot;Tailwind&quot;</span>],
-                      {"\n"}  backend:  [<span className="text-emerald-300">&quot;PHP 8&quot;</span>, <span className="text-emerald-300">&quot;Symfony&quot;</span>, <span className="text-emerald-300">&quot;Node.js&quot;</span>, <span className="text-emerald-300">&quot;APIs REST&quot;</span>],
-                      {"\n"}  ecommerce: [<span className="text-emerald-300">&quot;PrestaShop 9&quot;</span>, <span className="text-emerald-300">&quot;Drupal&quot;</span>, <span className="text-emerald-300">&quot;Headless&quot;</span>],
-                      {"\n"}  databases: [<span className="text-emerald-300">&quot;MySQL&quot;</span>, <span className="text-emerald-300">&quot;PostgreSQL&quot;</span>, <span className="text-emerald-300">&quot;Prisma&quot;</span>],
-                      {"\n"}  devops: [<span className="text-emerald-300">&quot;Git&quot;</span>, <span className="text-emerald-300">&quot;Docker&quot;</span>, <span className="text-emerald-300">&quot;cPanel&quot;</span>, <span className="text-emerald-300">&quot;Vercel&quot;</span>],
-                      {"\n"}  availability: <span className="text-emerald-400">true</span>,
-                      {"\n"}{"}"};
-                    </code>
-                  </pre>
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between text-[11px] text-zinc-400 border-b border-white/[0.06] pb-2">
+                      <span className="text-emerald-400 font-semibold">// Profil &amp; Polyvalence Full-Stack</span>
+                      <span className="px-1.5 py-0.5 rounded bg-emerald-950/80 text-emerald-400 text-[10px] border border-emerald-500/30">Actif</span>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 font-sans text-xs">
+                      <div className="p-2.5 rounded-xl bg-black/60 border border-white/[0.06] space-y-1">
+                        <span className="text-[10px] font-mono text-zinc-400 block uppercase">Frontend</span>
+                        <span className="font-bold text-white block">Next.js 15, React 19, TypeScript</span>
+                      </div>
+                      <div className="p-2.5 rounded-xl bg-black/60 border border-white/[0.06] space-y-1">
+                        <span className="text-[10px] font-mono text-zinc-400 block uppercase">Backend</span>
+                        <span className="font-bold text-white block">PHP 8, Symfony, Node.js</span>
+                      </div>
+                      <div className="p-2.5 rounded-xl bg-black/60 border border-white/[0.06] space-y-1">
+                        <span className="text-[10px] font-mono text-zinc-400 block uppercase">E-Commerce</span>
+                        <span className="font-bold text-emerald-300 block">PrestaShop (v1.6 ➔ v9)</span>
+                      </div>
+                      <div className="p-2.5 rounded-xl bg-black/60 border border-white/[0.06] space-y-1">
+                        <span className="text-[10px] font-mono text-zinc-400 block uppercase">Databases</span>
+                        <span className="font-bold text-white block">PostgreSQL, MySQL, Prisma</span>
+                      </div>
+                    </div>
+                  </div>
                 )}
 
                 {activeTab === "stack" && (
-                  <pre className="text-zinc-300">
-                    <code>
-                      <span className="text-zinc-500">// Architecture Backend &amp; Gestion des Données</span>
-                      {"\n"}
-                      <span className="text-blue-400">class</span> <span className="text-yellow-300">BackendArchitecture</span> {"{"}
-                      {"\n"}  <span className="text-zinc-500">/** Architecture scalable &amp; requêtes SQL optimisées */</span>
-                      {"\n"}  <span className="text-purple-400">public</span> <span className="text-blue-300">execute</span>() {"{"}
-                      {"\n"}    <span className="text-purple-400">return</span> [
-                      {"\n"}      <span className="text-emerald-300">&quot;Migration de bases legacy (MySQL / PostgreSQL)&quot;</span>,
-                      {"\n"}      <span className="text-emerald-300">&quot;Modules personnalisés PrestaShop &amp; Symfony&quot;</span>,
-                      {"\n"}      <span className="text-emerald-300">&quot;Intégration d&apos;APIs sécurisées &amp; Webhooks&quot;</span>
-                      {"\n"}    ];
-                      {"\n"}  {"}"}
-                      {"\n"}{"}"}
-                    </code>
-                  </pre>
+                  <div className="space-y-3">
+                    <div className="text-[11px] text-zinc-400 border-b border-white/[0.06] pb-2">
+                      <span className="text-blue-400 font-semibold">// Architecture Backend &amp; Données</span>
+                    </div>
+                    <ul className="space-y-2 font-sans text-xs">
+                      <li className="p-2.5 rounded-xl bg-black/60 border border-white/[0.06] flex items-center gap-2 text-zinc-200">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0" />
+                        <span>Migration de bases legacy (MySQL / PostgreSQL)</span>
+                      </li>
+                      <li className="p-2.5 rounded-xl bg-black/60 border border-white/[0.06] flex items-center gap-2 text-zinc-200">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0" />
+                        <span>Modules personnalisés PrestaShop &amp; Symfony</span>
+                      </li>
+                      <li className="p-2.5 rounded-xl bg-black/60 border border-white/[0.06] flex items-center gap-2 text-zinc-200">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0" />
+                        <span>Intégration d&apos;APIs sécurisées &amp; Webhooks</span>
+                      </li>
+                    </ul>
+                  </div>
                 )}
 
                 {activeTab === "perf" && (
-                  <div className="space-y-3 py-1">
-                    <span className="text-zinc-400 block">// Standards de livraison &amp; Performance :</span>
-                    <div className="grid grid-cols-2 gap-2">
-                      <div className="p-2.5 rounded-lg bg-black/60 border border-white/[0.06] flex items-center justify-between">
-                        <span className="text-zinc-300">Performance</span>
-                        <span className="text-emerald-400 font-bold">100 / 100</span>
+                  <div className="space-y-3">
+                    <span className="text-zinc-400 block text-[11px] font-mono">// Standards de livraison &amp; Performance :</span>
+                    <div className="grid grid-cols-2 gap-2 font-sans">
+                      <div className="p-2.5 rounded-xl bg-black/60 border border-white/[0.06] flex items-center justify-between">
+                        <span className="text-zinc-300 text-xs">Performance</span>
+                        <span className="text-emerald-400 font-bold font-mono text-xs sm:text-sm">100/100</span>
                       </div>
-                      <div className="p-2.5 rounded-lg bg-black/60 border border-white/[0.06] flex items-center justify-between">
-                        <span className="text-zinc-300">Accessibilité</span>
-                        <span className="text-emerald-400 font-bold">100 / 100</span>
+                      <div className="p-2.5 rounded-xl bg-black/60 border border-white/[0.06] flex items-center justify-between">
+                        <span className="text-zinc-300 text-xs">Accessibilité</span>
+                        <span className="text-emerald-400 font-bold font-mono text-xs sm:text-sm">100/100</span>
                       </div>
-                      <div className="p-2.5 rounded-lg bg-black/60 border border-white/[0.06] flex items-center justify-between">
-                        <span className="text-zinc-300">Best Practices</span>
-                        <span className="text-emerald-400 font-bold">100 / 100</span>
+                      <div className="p-2.5 rounded-xl bg-black/60 border border-white/[0.06] flex items-center justify-between">
+                        <span className="text-zinc-300 text-xs">Best Practices</span>
+                        <span className="text-emerald-400 font-bold font-mono text-xs sm:text-sm">100/100</span>
                       </div>
-                      <div className="p-2.5 rounded-lg bg-black/60 border border-white/[0.06] flex items-center justify-between">
-                        <span className="text-zinc-300">SEO Google</span>
-                        <span className="text-emerald-400 font-bold">100 / 100</span>
+                      <div className="p-2.5 rounded-xl bg-black/60 border border-white/[0.06] flex items-center justify-between">
+                        <span className="text-zinc-300 text-xs">SEO Google</span>
+                        <span className="text-emerald-400 font-bold font-mono text-xs sm:text-sm">100/100</span>
                       </div>
                     </div>
                   </div>
                 )}
 
                 {/* Bottom Terminal Status */}
-                <div className="pt-4 border-t border-white/[0.06] flex items-center justify-between text-[11px] text-zinc-400">
+                <div className="pt-3.5 border-t border-white/[0.06] flex items-center justify-between text-[10px] sm:text-[11px] text-zinc-400">
                   <span className="flex items-center gap-1.5">
                     <span className="w-2 h-2 rounded-full bg-emerald-400" />
                     <span>Multi-stack &bull; Prêt pour production</span>
                   </span>
-                  <span className="text-zinc-500">Next.js &bull; Symfony &bull; PrestaShop</span>
+                  <span className="text-zinc-500 font-mono hidden sm:inline">Next.js &bull; Symfony &bull; PrestaShop</span>
                 </div>
               </div>
             </div>
