@@ -24,40 +24,43 @@ export function Hero({ settings }: HeroProps) {
   ];
 
   return (
-    <section className="relative pt-12 pb-20 md:pt-20 md:pb-28 overflow-hidden border-b border-white/[0.08]">
+    <section className="relative pt-8 pb-16 sm:pt-16 sm:pb-24 md:pt-20 md:pb-28 overflow-hidden border-b border-white/[0.08]">
       {/* Subtle background grid pattern */}
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(#1f1f23_1px,transparent_1px)] [background-size:24px_24px] opacity-35" />
+      <div className="absolute inset-0 -z-10 bg-[radial-gradient(#1f1f23_1px,transparent_1px)] [background-size:20px_20px] sm:[background-size:24px_24px] opacity-35" />
+
+      {/* Mobile-optimized radiant ambient glow */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-72 sm:w-96 h-72 sm:h-96 bg-emerald-500/[0.06] rounded-full blur-3xl pointer-events-none -z-10" />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-8 items-center">
           {/* Left Column: Authoritative Editorial Presentation */}
-          <div className="lg:col-span-7 space-y-8">
+          <div className="lg:col-span-7 space-y-6 sm:space-y-8">
             {/* Status Pill */}
-            <div className="inline-flex items-center gap-2.5 px-3 py-1.5 rounded-full bg-zinc-900 border border-white/[0.1] text-xs">
-              <span className="flex h-2 w-2 relative">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-zinc-900/90 border border-white/[0.1] text-xs shadow-sm">
+              <span className="flex h-2 w-2 relative shrink-0">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
               </span>
-              <span className="text-zinc-200 font-medium font-mono text-[11px] sm:text-xs">
+              <span className="text-zinc-200 font-medium font-mono text-[11px] sm:text-xs truncate">
                 {badge}
               </span>
             </div>
 
             {/* Main Marquee Headline */}
-            <div className="space-y-4">
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white font-sans leading-[1.08]">
+            <div className="space-y-3 sm:space-y-4">
+              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white font-sans leading-[1.12] sm:leading-[1.08]">
                 {title}
               </h1>
-              <p className="text-base sm:text-lg text-zinc-300 max-w-2xl leading-relaxed font-normal">
+              <p className="text-sm sm:text-base lg:text-lg text-zinc-300 max-w-2xl leading-relaxed font-normal">
                 {subtitle}
               </p>
             </div>
 
-            {/* Action Buttons */}
-            <div className="flex flex-wrap items-center gap-4">
+            {/* Action Buttons (Full-width on mobile, responsive flex on desktop) */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 pt-1">
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-sm font-bold uppercase tracking-wider text-black bg-white hover:bg-zinc-200 transition-all duration-150 active:scale-95 shadow-lg"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider text-black bg-white hover:bg-zinc-200 transition-all duration-150 active:scale-95 shadow-xl cursor-pointer"
               >
                 <span>Démarrer un projet</span>
                 <ArrowUpRight className="w-4 h-4" />
@@ -65,20 +68,23 @@ export function Hero({ settings }: HeroProps) {
 
               <Link
                 href="/projets"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-sm font-semibold text-zinc-200 bg-zinc-900 hover:bg-zinc-800 border border-white/[0.1] hover:border-white/[0.2] transition-all duration-150"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-xs sm:text-sm font-semibold text-zinc-200 bg-zinc-900/90 hover:bg-zinc-800 border border-white/[0.1] hover:border-white/[0.2] transition-all duration-150 cursor-pointer text-center"
               >
                 <span>Voir les réalisations</span>
               </Link>
             </div>
 
-            {/* Proof Points Strip */}
-            <div className="pt-4 border-t border-white/[0.08] grid grid-cols-3 gap-4">
+            {/* Proof Points Strip (Touch-friendly card metrics on mobile) */}
+            <div className="pt-4 border-t border-white/[0.08] grid grid-cols-3 gap-2 sm:gap-4">
               {metrics.map((m, idx) => (
-                <div key={idx} className="space-y-1">
-                  <span className="text-2xl sm:text-3xl font-extrabold text-white font-mono">
+                <div
+                  key={idx}
+                  className="p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-black/40 sm:bg-transparent border border-white/[0.06] sm:border-0 space-y-0.5 sm:space-y-1 text-center sm:text-left"
+                >
+                  <span className="text-lg sm:text-2xl lg:text-3xl font-extrabold text-white font-mono block">
                     {m.value}
                   </span>
-                  <span className="text-xs text-zinc-400 block">
+                  <span className="text-[10px] sm:text-xs text-zinc-400 block leading-tight font-sans">
                     {m.label}
                   </span>
                 </div>

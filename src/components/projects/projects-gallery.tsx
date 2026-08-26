@@ -74,62 +74,62 @@ export function ProjectsGallery({ initialProjects }: ProjectsGalleryProps) {
   }, [initialProjects]);
 
   return (
-    <div className="space-y-12">
-      {/* Metrics Banner Strip */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-6 rounded-3xl bg-[#0d0d10] border border-white/[0.08] shadow-2xl">
-        <div className="flex items-center gap-3.5 p-2">
-          <div className="w-10 h-10 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 shrink-0">
-            <Layers className="w-5 h-5" />
+    <div className="space-y-8 sm:space-y-12">
+      {/* Metrics Banner Strip (Mobile optimized) */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 p-4 sm:p-6 rounded-2xl sm:rounded-3xl bg-[#0d0d10] border border-white/[0.08] shadow-2xl">
+        <div className="flex items-center gap-3 p-1.5 sm:p-2">
+          <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl sm:rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 shrink-0">
+            <Layers className="w-4 h-4 sm:w-5 sm:h-5" />
           </div>
           <div>
-            <div className="text-xl sm:text-2xl font-extrabold text-white font-mono">
+            <div className="text-lg sm:text-2xl font-extrabold text-white font-mono">
               {initialProjects.length}
             </div>
-            <div className="text-xs text-zinc-400 font-medium">Projets livrés</div>
+            <div className="text-[11px] sm:text-xs text-zinc-400 font-medium">Projets livrés</div>
           </div>
         </div>
 
-        <div className="flex items-center gap-3.5 p-2">
-          <div className="w-10 h-10 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 shrink-0">
-            <TrendingUp className="w-5 h-5" />
+        <div className="flex items-center gap-3 p-1.5 sm:p-2">
+          <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl sm:rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 shrink-0">
+            <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5" />
           </div>
           <div>
-            <div className="text-xl sm:text-2xl font-extrabold text-white font-mono">
+            <div className="text-lg sm:text-2xl font-extrabold text-white font-mono">
               90k+
             </div>
-            <div className="text-xs text-zinc-400 font-medium">Commandes / an</div>
+            <div className="text-[11px] sm:text-xs text-zinc-400 font-medium">Commandes / an</div>
           </div>
         </div>
 
-        <div className="flex items-center gap-3.5 p-2">
-          <div className="w-10 h-10 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 shrink-0">
-            <Zap className="w-5 h-5" />
+        <div className="flex items-center gap-3 p-1.5 sm:p-2">
+          <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl sm:rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 shrink-0">
+            <Zap className="w-4 h-4 sm:w-5 sm:h-5" />
           </div>
           <div>
-            <div className="text-xl sm:text-2xl font-extrabold text-white font-mono">
-              &lt; 0.3s
+            <div className="text-lg sm:text-2xl font-extrabold text-white font-mono">
+              &lt; 0.4s
             </div>
-            <div className="text-xs text-zinc-400 font-medium">Vitesse moyenne</div>
+            <div className="text-[11px] sm:text-xs text-zinc-400 font-medium">Temps de chargement</div>
           </div>
         </div>
 
-        <div className="flex items-center gap-3.5 p-2">
-          <div className="w-10 h-10 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 shrink-0">
-            <Code2 className="w-5 h-5" />
+        <div className="flex items-center gap-3 p-1.5 sm:p-2">
+          <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl sm:rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 shrink-0">
+            <ShieldCheck className="w-4 h-4 sm:w-5 sm:h-5" />
           </div>
           <div>
-            <div className="text-xl sm:text-2xl font-extrabold text-white font-mono">
+            <div className="text-lg sm:text-2xl font-extrabold text-white font-mono">
               100%
             </div>
-            <div className="text-xs text-zinc-400 font-medium">Code sur-mesure</div>
+            <div className="text-[11px] sm:text-xs text-zinc-400 font-medium">Code sur-mesure</div>
           </div>
         </div>
       </div>
 
-      {/* Filter and Search Bar Toolbar */}
+      {/* Filter and Search Bar Toolbar (Swipeable on mobile) */}
       <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4">
-        {/* Category Pills */}
-        <div className="flex flex-wrap items-center gap-2 p-1.5 rounded-2xl bg-[#0d0d10] border border-white/[0.08] shadow-md">
+        {/* Category Pills (Horizontal Scroll on mobile) */}
+        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar p-1.5 rounded-2xl bg-[#0d0d10] border border-white/[0.08] shadow-md scroll-smooth">
           {CATEGORIES.map((cat) => {
             const isActive = activeCategory === cat.key;
             const count = categoryCounts[cat.key] || 0;
@@ -138,7 +138,7 @@ export function ProjectsGallery({ initialProjects }: ProjectsGalleryProps) {
                 key={cat.key}
                 type="button"
                 onClick={() => setActiveCategory(cat.key)}
-                className={`px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-150 cursor-pointer flex items-center gap-2 ${
+                className={`px-3 sm:px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-150 cursor-pointer flex items-center gap-2 shrink-0 ${
                   isActive
                     ? "bg-white text-black font-bold shadow-md"
                     : "text-zinc-400 hover:text-white hover:bg-zinc-900"
@@ -160,7 +160,7 @@ export function ProjectsGallery({ initialProjects }: ProjectsGalleryProps) {
         </div>
 
         {/* Search Box */}
-        <div className="relative min-w-[260px] sm:min-w-[300px]">
+        <div className="relative min-w-[240px] sm:min-w-[300px]">
           <Search className="w-4 h-4 text-zinc-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
           <input
             type="text"
@@ -175,7 +175,7 @@ export function ProjectsGallery({ initialProjects }: ProjectsGalleryProps) {
       {/* Grid of Projects */}
       <motion.div
         layout
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
       >
         <AnimatePresence mode="popLayout">
           {filteredProjects.map((project, idx) => {
@@ -194,10 +194,11 @@ export function ProjectsGallery({ initialProjects }: ProjectsGalleryProps) {
               >
                 {isTopHero ? (
                   /* Hero Project Card for #1 (Solera Platform) */
-                  <div className="group relative rounded-3xl bg-[#0d0d10] border border-white/[0.08] hover:border-white/[0.22] transition-all duration-300 overflow-hidden shadow-2xl p-6 sm:p-8 lg:p-10">
+                  <div className="group relative rounded-3xl bg-[#0d0d10] border border-white/[0.08] hover:border-emerald-500/40 transition-all duration-300 overflow-hidden shadow-2xl p-5 sm:p-8 lg:p-10 hover:shadow-[0_0_35px_rgba(16,185,129,0.07)]">
+                    <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-emerald-400/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                     <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-500/[0.04] rounded-full blur-3xl pointer-events-none" />
 
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-12 items-center relative z-10">
                       {/* Left: Info & Metrics */}
                       <div className="lg:col-span-7 space-y-6 flex flex-col justify-between">
                         <div className="space-y-4">

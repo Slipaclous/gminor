@@ -104,36 +104,36 @@ export function Header() {
           <button
             type="button"
             onClick={openCommandMenu}
-            className="p-2 text-zinc-400 hover:text-white rounded-lg bg-zinc-900 border border-white/[0.08]"
+            className="p-2 text-zinc-400 hover:text-white rounded-xl bg-zinc-900/90 border border-white/[0.1] active:scale-95 transition-all"
             aria-label="Recherche"
           >
             <Search className="w-4 h-4" />
           </button>
           <Link
             href="/contact"
-            className="px-3.5 py-1.5 rounded-xl text-xs font-bold uppercase text-black bg-white"
+            className="px-3.5 py-1.5 rounded-xl text-xs font-bold uppercase tracking-wider text-black bg-white active:scale-95 shadow-md transition-all"
           >
             Devis
           </Link>
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 text-zinc-400 hover:text-white focus:outline-none cursor-pointer"
+            className="p-2 text-zinc-300 hover:text-white rounded-xl bg-zinc-900/90 border border-white/[0.1] active:scale-95 transition-all cursor-pointer"
             aria-label="Menu"
           >
             {mobileMenuOpen ? (
-              <X className="w-6 h-6" />
+              <X className="w-5 h-5 text-white" />
             ) : (
-              <Menu className="w-6 h-6" />
+              <Menu className="w-5 h-5 text-white" />
             )}
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-b border-white/[0.08] bg-[#0c0d12] px-6 py-6 space-y-4 shadow-xl">
-          <nav className="flex flex-col space-y-3">
+        <div className="md:hidden border-b border-white/[0.1] bg-[#0c0d12]/95 backdrop-blur-xl px-5 py-6 space-y-5 shadow-2xl animate-in slide-in-from-top-3 duration-200">
+          <nav className="flex flex-col space-y-1">
             {NAV_LINKS.map((link) => {
               const isActive =
                 link.href === "/"
@@ -143,16 +143,28 @@ export function Header() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`text-base font-medium py-1.5 flex items-center justify-between ${
-                    isActive ? "text-white font-bold" : "text-zinc-400 hover:text-white"
+                  className={`text-base font-semibold py-3 px-4 rounded-xl flex items-center justify-between transition-all ${
+                    isActive
+                      ? "bg-zinc-900 text-white font-bold border border-white/[0.1] shadow-inner"
+                      : "text-zinc-300 hover:text-white hover:bg-zinc-900/50"
                   }`}
                 >
                   <span>{link.label}</span>
-                  <ArrowUpRight className="w-4 h-4 text-zinc-500" />
+                  <ArrowUpRight className={`w-4 h-4 ${isActive ? "text-emerald-400" : "text-zinc-500"}`} />
                 </Link>
               );
             })}
           </nav>
+
+          <div className="pt-3 border-t border-white/[0.08] flex items-center justify-between gap-3">
+            <Link
+              href="/contact"
+              className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-xs font-bold uppercase tracking-wider bg-white text-black shadow-lg"
+            >
+              <span>Demander un devis</span>
+              <ArrowUpRight className="w-4 h-4" />
+            </Link>
+          </div>
         </div>
       )}
     </header>
