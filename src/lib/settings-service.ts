@@ -52,10 +52,15 @@ export interface FaqItem {
 
 export interface ContactInfoSettings {
   email: string;
+  phone?: string;
   location: string;
   githubUrl: string;
   linkedinUrl: string;
+  twitterUrl?: string;
+  instagramUrl?: string;
+  calcomUrl?: string;
   availabilityText: string;
+  workingHours?: string;
 }
 
 export interface SiteSettings {
@@ -264,11 +269,16 @@ export const DEFAULT_SITE_SETTINGS: SiteSettings = {
     },
   ],
   contactInfo: {
-    email: "contact@gauthierminor.dev",
-    location: "Belgique (Enghien) & Remote partout",
-    githubUrl: "https://github.com",
-    linkedinUrl: "https://linkedin.com",
-    availabilityText: "Ouvert aux nouveaux projets",
+    email: "contact@gauthierminor.com",
+    phone: "+32 470 00 00 00",
+    location: "Belgique (Bruxelles / Enghien / Wallonie) • Remote",
+    githubUrl: "https://github.com/Slipaclous",
+    linkedinUrl: "https://linkedin.com/in/gauthier-minor",
+    twitterUrl: "",
+    instagramUrl: "",
+    calcomUrl: "",
+    availabilityText: "Disponible pour nouveaux projets",
+    workingHours: "Du lundi au vendredi • 9h00 - 18h30",
   },
 };
 

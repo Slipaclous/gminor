@@ -857,12 +857,12 @@ export function SettingsTabs({ initialSettings }: SettingsTabsProps) {
       {/* Tab 6: Contact Info Settings */}
       {activeTab === "contact" && (
         <form action={contactFormAction} className="space-y-8 max-w-4xl">
-          <div className="rounded-3xl bg-[#0d0d10] border border-white/[0.08] p-6 sm:p-8 space-y-6 shadow-xl">
+          <div className="rounded-3xl bg-[#0d0d10] border border-white/[0.08] p-6 sm:p-8 space-y-8 shadow-xl">
             <div className="flex items-center justify-between pb-4 border-b border-white/[0.08]">
               <div className="space-y-1">
                 <h2 className="text-xl font-bold text-white">Coordonnées &amp; Réseaux Sociaux</h2>
                 <p className="text-xs text-zinc-400">
-                  Modifiez votre email public, statut de disponibilité et liens de réseaux
+                  Personnalisez vos moyens de contact directs, vos profils de réseaux sociaux et vos statuts de disponibilité affichés sur tout le site.
                 </p>
               </div>
               {contactState?.success && (
@@ -873,76 +873,171 @@ export function SettingsTabs({ initialSettings }: SettingsTabsProps) {
               )}
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <div className="space-y-2">
-                <label className="block text-xs font-mono uppercase tracking-wider text-zinc-300">
-                  Email de contact public *
-                </label>
-                <input
-                  name="email"
-                  type="email"
-                  required
-                  defaultValue={initialSettings.contactInfo.email}
-                  className="w-full px-4 py-3 rounded-xl bg-black border border-white/[0.1] text-sm text-white font-mono"
-                />
+            {/* Section 1: Coordonnées Directes */}
+            <div className="space-y-4">
+              <span className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-semibold block">
+                01. Coordonnées directes
+              </span>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <label className="block text-xs font-mono uppercase tracking-wider text-zinc-300">
+                    Email de contact public *
+                  </label>
+                  <input
+                    name="email"
+                    type="email"
+                    required
+                    defaultValue={initialSettings.contactInfo.email}
+                    placeholder="contact@gauthierminor.com"
+                    className="w-full px-4 py-3 rounded-xl bg-black border border-white/[0.1] text-sm text-white font-mono focus:outline-none focus:border-emerald-400"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <label className="block text-xs font-mono uppercase tracking-wider text-zinc-300">
+                    Téléphone direct (facultatif)
+                  </label>
+                  <input
+                    name="phone"
+                    type="tel"
+                    defaultValue={initialSettings.contactInfo.phone || ""}
+                    placeholder="+32 470 00 00 00"
+                    className="w-full px-4 py-3 rounded-xl bg-black border border-white/[0.1] text-sm text-white font-mono focus:outline-none focus:border-emerald-400"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <label className="block text-xs font-mono uppercase tracking-wider text-zinc-300">
+                    Localisation / Zone d&apos;intervention
+                  </label>
+                  <input
+                    name="location"
+                    type="text"
+                    defaultValue={initialSettings.contactInfo.location}
+                    placeholder="Belgique (Bruxelles / Enghien / Wallonie) • Remote"
+                    className="w-full px-4 py-3 rounded-xl bg-black border border-white/[0.1] text-sm text-white focus:outline-none focus:border-emerald-400"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <label className="block text-xs font-mono uppercase tracking-wider text-zinc-300">
+                    Horaires de contact / Disponibilité
+                  </label>
+                  <input
+                    name="workingHours"
+                    type="text"
+                    defaultValue={initialSettings.contactInfo.workingHours || ""}
+                    placeholder="Du lundi au vendredi • 9h00 - 18h30"
+                    className="w-full px-4 py-3 rounded-xl bg-black border border-white/[0.1] text-sm text-white focus:outline-none focus:border-emerald-400"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Section 2: Réseaux Sociaux & Liens */}
+            <div className="space-y-4 pt-6 border-t border-white/[0.08]">
+              <span className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-semibold block">
+                02. Réseaux Sociaux &amp; Liens Externes
+              </span>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <label className="block text-xs font-mono uppercase tracking-wider text-zinc-300">
+                    Lien LinkedIn
+                  </label>
+                  <input
+                    name="linkedinUrl"
+                    type="url"
+                    defaultValue={initialSettings.contactInfo.linkedinUrl}
+                    placeholder="https://linkedin.com/in/gauthier-minor"
+                    className="w-full px-4 py-3 rounded-xl bg-black border border-white/[0.1] text-sm text-white font-mono focus:outline-none focus:border-emerald-400"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <label className="block text-xs font-mono uppercase tracking-wider text-zinc-300">
+                    Lien GitHub
+                  </label>
+                  <input
+                    name="githubUrl"
+                    type="url"
+                    defaultValue={initialSettings.contactInfo.githubUrl}
+                    placeholder="https://github.com/Slipaclous"
+                    className="w-full px-4 py-3 rounded-xl bg-black border border-white/[0.1] text-sm text-white font-mono focus:outline-none focus:border-emerald-400"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <label className="block text-xs font-mono uppercase tracking-wider text-zinc-300">
+                    Lien X (Twitter)
+                  </label>
+                  <input
+                    name="twitterUrl"
+                    type="url"
+                    defaultValue={initialSettings.contactInfo.twitterUrl || ""}
+                    placeholder="https://x.com/votre_pseudo"
+                    className="w-full px-4 py-3 rounded-xl bg-black border border-white/[0.1] text-sm text-white font-mono focus:outline-none focus:border-emerald-400"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <label className="block text-xs font-mono uppercase tracking-wider text-zinc-300">
+                    Lien Instagram
+                  </label>
+                  <input
+                    name="instagramUrl"
+                    type="url"
+                    defaultValue={initialSettings.contactInfo.instagramUrl || ""}
+                    placeholder="https://instagram.com/votre_profil"
+                    className="w-full px-4 py-3 rounded-xl bg-black border border-white/[0.1] text-sm text-white font-mono focus:outline-none focus:border-emerald-400"
+                  />
+                </div>
               </div>
 
               <div className="space-y-2">
                 <label className="block text-xs font-mono uppercase tracking-wider text-zinc-300">
-                  Localisation
+                  Lien de prise de RDV direct (Cal.com / Google Meet / Calendly)
                 </label>
                 <input
-                  name="location"
+                  name="calcomUrl"
+                  type="url"
+                  defaultValue={initialSettings.contactInfo.calcomUrl || ""}
+                  placeholder="https://cal.com/gauthier-minor ou https://meet.google.com/..."
+                  className="w-full px-4 py-3 rounded-xl bg-black border border-white/[0.1] text-sm text-white font-mono focus:outline-none focus:border-emerald-400"
+                />
+              </div>
+            </div>
+
+            {/* Section 3: Statut de Disponibilité */}
+            <div className="space-y-4 pt-6 border-t border-white/[0.08]">
+              <span className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-semibold block">
+                03. Statut &amp; Disponibilité
+              </span>
+
+              <div className="space-y-2">
+                <label className="block text-xs font-mono uppercase tracking-wider text-zinc-300">
+                  Badge de statut public (affiché dans le header &amp; page contact)
+                </label>
+                <input
+                  name="availabilityText"
                   type="text"
-                  defaultValue={initialSettings.contactInfo.location}
-                  className="w-full px-4 py-3 rounded-xl bg-black border border-white/[0.1] text-sm text-white"
+                  defaultValue={initialSettings.contactInfo.availabilityText}
+                  placeholder="Disponible immédiatement pour nouveaux projets"
+                  className="w-full px-4 py-3 rounded-xl bg-black border border-white/[0.1] text-sm text-white focus:outline-none focus:border-emerald-400"
                 />
               </div>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <div className="space-y-2">
-                <label className="block text-xs font-mono uppercase tracking-wider text-zinc-300">
-                  Lien GitHub
-                </label>
-                <input
-                  name="githubUrl"
-                  type="url"
-                  defaultValue={initialSettings.contactInfo.githubUrl}
-                  className="w-full px-4 py-3 rounded-xl bg-black border border-white/[0.1] text-sm text-white font-mono"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <label className="block text-xs font-mono uppercase tracking-wider text-zinc-300">
-                  Lien LinkedIn
-                </label>
-                <input
-                  name="linkedinUrl"
-                  type="url"
-                  defaultValue={initialSettings.contactInfo.linkedinUrl}
-                  className="w-full px-4 py-3 rounded-xl bg-black border border-white/[0.1] text-sm text-white font-mono"
-                />
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <label className="block text-xs font-mono uppercase tracking-wider text-zinc-300">
-                Texte de disponibilité
-              </label>
-              <input
-                name="availabilityText"
-                type="text"
-                defaultValue={initialSettings.contactInfo.availabilityText}
-                className="w-full px-4 py-3 rounded-xl bg-black border border-white/[0.1] text-sm text-white"
-              />
             </div>
 
             <div className="pt-4 flex justify-end">
               <button
                 type="submit"
                 disabled={isContactPending}
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-xs font-bold uppercase tracking-wider bg-white hover:bg-zinc-200 text-black transition-colors cursor-pointer shadow-md disabled:opacity-50"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-xs font-bold uppercase tracking-wider bg-emerald-400 hover:bg-emerald-300 text-black transition-colors cursor-pointer shadow-md disabled:opacity-50"
               >
                 {isContactPending ? (
                   <Loader2 className="w-4 h-4 animate-spin" />

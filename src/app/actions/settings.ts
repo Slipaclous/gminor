@@ -229,23 +229,35 @@ export async function saveContactInfoSettingsAction(
   }
 
   const email = (formData.get("email") as string)?.trim();
+  const phone = (formData.get("phone") as string)?.trim() || "";
   const location = (formData.get("location") as string)?.trim();
   const githubUrl = (formData.get("githubUrl") as string)?.trim();
   const linkedinUrl = (formData.get("linkedinUrl") as string)?.trim();
+  const twitterUrl = (formData.get("twitterUrl") as string)?.trim() || "";
+  const instagramUrl = (formData.get("instagramUrl") as string)?.trim() || "";
+  const calcomUrl = (formData.get("calcomUrl") as string)?.trim() || "";
   const availabilityText = (formData.get("availabilityText") as string)?.trim();
+  const workingHours = (formData.get("workingHours") as string)?.trim() || "";
 
   await updateSiteSettings({
     contactInfo: {
-      email: email || "contact@gauthierminor.dev",
-      location: location || "Paris, France (Disponible en remote partout)",
-      githubUrl: githubUrl || "https://github.com",
-      linkedinUrl: linkedinUrl || "https://linkedin.com",
-      availabilityText: availabilityText || "Ouvert aux nouveaux projets",
+      email: email || "contact@gauthierminor.com",
+      phone,
+      location: location || "Belgique (Bruxelles / Enghien / Wallonie) • Remote",
+      githubUrl: githubUrl || "https://github.com/Slipaclous",
+      linkedinUrl: linkedinUrl || "https://linkedin.com/in/gauthier-minor",
+      twitterUrl,
+      instagramUrl,
+      calcomUrl,
+      availabilityText: availabilityText || "Disponible pour nouveaux projets",
+      workingHours,
     },
   });
 
   revalidatePath("/");
   revalidatePath("/contact");
   revalidatePath("/services");
+  revalidatePath("/faq");
+  revalidatePath("/admin/contenu");
   return { success: true };
 }
