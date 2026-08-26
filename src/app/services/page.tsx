@@ -79,8 +79,10 @@ export default async function ServicesPage() {
               <div
                 key={service.id}
                 id={service.id}
-                className="rounded-3xl bg-[#0d0d10] border border-white/[0.08] p-8 flex flex-col justify-between space-y-8 hover:border-white/[0.22] transition-all duration-200 shadow-xl"
+                className="group relative rounded-3xl bg-[#0d0d10] border border-white/[0.08] p-8 flex flex-col justify-between space-y-8 hover:border-emerald-500/30 transition-all duration-300 shadow-xl hover:shadow-[0_0_24px_rgba(16,185,129,0.04)] overflow-hidden"
               >
+                {/* Subtle top border beam highlight on hover */}
+                <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-emerald-400/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
                 <div className="space-y-6">
                   <div className="flex items-center justify-between">
                     <div className="w-12 h-12 rounded-xl bg-zinc-900 border border-white/[0.1] flex items-center justify-center text-white">

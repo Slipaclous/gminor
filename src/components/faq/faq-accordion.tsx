@@ -22,12 +22,15 @@ export function FaqAccordion({ faqs }: FaqAccordionProps) {
         return (
           <div
             key={idx}
-            className={`rounded-2xl border transition-all duration-200 overflow-hidden ${
+            className={`group relative rounded-2xl border transition-all duration-300 overflow-hidden ${
               isOpen
-                ? "bg-[#0d0d10] border-white/[0.22] shadow-xl"
-                : "bg-[#070709] border-white/[0.08] hover:border-white/[0.16]"
+                ? "bg-[#0d0d10] border-emerald-500/40 shadow-xl shadow-emerald-950/20"
+                : "bg-[#070709] border-white/[0.08] hover:border-white/[0.2] hover:border-emerald-500/20"
             }`}
           >
+            {isOpen && (
+              <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-emerald-400/40 to-transparent pointer-events-none" />
+            )}
             <button
               type="button"
               onClick={() => toggle(idx)}
