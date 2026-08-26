@@ -7,6 +7,7 @@ import { ScrollProgress } from "@/components/ui/scroll-progress";
 import { FilmGrain } from "@/components/ui/film-grain";
 import { RecaptchaScript } from "@/components/ui/recaptcha-script";
 import { CommandMenu } from "@/components/ui/command-menu";
+import { ScrollToTop } from "@/components/ui/scroll-to-top";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
@@ -225,6 +226,7 @@ export default function RootLayout({
         <FilmGrain />
         <RecaptchaScript />
         <CommandMenu />
+        <ScrollToTop />
         <SiteShell footer={<Footer />}>
           {children}
         </SiteShell>

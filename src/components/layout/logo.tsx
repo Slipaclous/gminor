@@ -1,14 +1,26 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 interface LogoProps {
   className?: string;
 }
 
 export function Logo({ className = "" }: LogoProps) {
+  const pathname = usePathname();
+
+  const handleClick = () => {
+    if (pathname === "/") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
   return (
     <Link
       href="/"
+      onClick={handleClick}
       className={`group inline-flex items-center focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 rounded-xl transition-all select-none ${className}`}
       aria-label="Accueil - G-Minor"
     >

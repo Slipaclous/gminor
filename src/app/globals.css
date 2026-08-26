@@ -60,3 +60,8 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #3f4058;
 }
+
+/* Masquage officiel du badge flottant Google reCAPTCHA v3 */
+.grecaptcha-badge {
+  visibility: hidden !important;
+}

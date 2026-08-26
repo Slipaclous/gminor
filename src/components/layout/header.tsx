@@ -63,6 +63,9 @@ export function Header() {
               <Link
                 key={link.href}
                 href={link.href}
+                onClick={() => {
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                }}
                 className={`text-sm font-medium transition-colors ${
                   isActive
                     ? "text-white font-bold"
@@ -92,9 +95,10 @@ export function Header() {
 
           <Link
             href="/contact"
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider text-black bg-white hover:bg-zinc-200 transition-all duration-150 shadow-md active:scale-95"
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider bg-white text-black hover:bg-zinc-200 transition-colors shadow-sm active:scale-95 cursor-pointer"
           >
-            <span>Devis Gratuit</span>
+            <span>Devis sous 24h</span>
             <ArrowUpRight className="w-3.5 h-3.5" />
           </Link>
         </div>
@@ -109,12 +113,6 @@ export function Header() {
           >
             <Search className="w-4 h-4" />
           </button>
-          <Link
-            href="/contact"
-            className="px-3.5 py-1.5 rounded-xl text-xs font-bold uppercase tracking-wider text-black bg-white active:scale-95 shadow-md transition-all"
-          >
-            Devis
-          </Link>
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -143,6 +141,10 @@ export function Header() {
                 <Link
                   key={link.href}
                   href={link.href}
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                  }}
                   className={`text-base font-semibold py-3 px-4 rounded-xl flex items-center justify-between transition-all ${
                     isActive
                       ? "bg-zinc-900 text-white font-bold border border-white/[0.1] shadow-inner"
@@ -159,6 +161,10 @@ export function Header() {
           <div className="pt-3 border-t border-white/[0.08] flex items-center justify-between gap-3">
             <Link
               href="/contact"
+              onClick={() => {
+                setMobileMenuOpen(false);
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }}
               className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-xs font-bold uppercase tracking-wider bg-white text-black shadow-lg"
             >
               <span>Demander un devis</span>
