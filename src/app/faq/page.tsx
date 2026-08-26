@@ -5,6 +5,8 @@ import { FaqAccordion } from "@/components/faq/faq-accordion";
 import { CtaBanner } from "@/components/home/cta-banner";
 import { HelpCircle, MessageCircleQuestion } from "lucide-react";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "Foire Aux Questions (FAQ) — Gauthier Minor",
   description:

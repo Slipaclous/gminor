@@ -289,13 +289,7 @@ export const DEFAULT_SITE_SETTINGS: SiteSettings = {
 
 const SETTINGS_FILE_PATH = path.join(process.cwd(), "src/data/settings.json");
 
-let memorySettings: SiteSettings | null = null;
-
 export async function getSiteSettings(): Promise<SiteSettings> {
-  if (memorySettings) {
-    return memorySettings;
-  }
-
   // 1. Essayer depuis Neon DB en priorité
   try {
     if (process.env.DATABASE_URL && !process.env.DATABASE_URL.includes("localhost:5432")) {
@@ -303,8 +297,7 @@ export async function getSiteSettings(): Promise<SiteSettings> {
         where: { id: "default" },
       });
       if (dbSetting?.data) {
-        memorySettings = dbSetting.data as unknown as SiteSettings;
-        return memorySettings;
+        return dbSetting.data as unknown as SiteSettings;
       }
     }
   } catch (err) {
@@ -315,15 +308,13 @@ export async function getSiteSettings(): Promise<SiteSettings> {
   try {
     if (fs.existsSync(SETTINGS_FILE_PATH)) {
       const data = fs.readFileSync(SETTINGS_FILE_PATH, "utf-8");
-      memorySettings = JSON.parse(data);
-      return memorySettings as SiteSettings;
+      return JSON.parse(data) as SiteSettings;
     }
   } catch (err) {
     console.warn("Could not read settings.json:", err);
   }
 
-  memorySettings = DEFAULT_SITE_SETTINGS;
-  return memorySettings;
+  return DEFAULT_SITE_SETTINGS;
 }
 
 export async function updateSiteSettings(
@@ -341,8 +332,6 @@ export async function updateSiteSettings(
       ? { ...current.estimator, ...updated.estimator }
       : current.estimator,
   };
-
-  memorySettings = merged;
 
   // 1. Sauvegarder dans Neon PostgreSQL
   try {

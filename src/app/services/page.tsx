@@ -13,6 +13,8 @@ import {
   HelpCircle,
 } from "lucide-react";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "Services & Tarifs — Gauthier Minor",
   description:
