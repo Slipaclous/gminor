@@ -26,17 +26,17 @@ interface ProjectEstimatorProps {
 }
 
 const DEFAULT_PROJECT_TYPES: EstimatorOption[] = [
-  { id: "vitrine", name: "Site Vitrine & Entreprise", price: 2500, days: 14 },
-  { id: "saas", name: "Application Web / SaaS", price: 6500, days: 30 },
-  { id: "ecommerce", name: "Boutique E-Commerce", price: 4500, days: 21 },
-  { id: "refonte", name: "Refonte & Modernisation", price: 2000, days: 10 },
+  { id: "vitrine", name: "Site Vitrine & Entreprise", price: 1500, days: 10 },
+  { id: "refonte", name: "Refonte, Migration & Optimisation", price: 1200, days: 7 },
+  { id: "ecommerce", name: "Boutique E-Commerce", price: 3200, days: 18 },
+  { id: "saas", name: "Application Web / SaaS", price: 4800, days: 25 },
 ];
 
 const DEFAULT_ADDONS: EstimatorOption[] = [
-  { id: "admin", name: "Espace Admin & Back-office sur-mesure", price: 800, days: 5 },
-  { id: "seo", name: "Optimisation SEO & Vitesse Google (Score 98+)", price: 500, days: 3 },
-  { id: "stripe", name: "Paiement en ligne / Abonnements (Stripe)", price: 900, days: 4 },
-  { id: "cms", name: "Gestionnaire de contenus dynamique", price: 600, days: 3 },
+  { id: "admin", name: "Espace Admin & Back-office sur-mesure", price: 600, days: 4 },
+  { id: "seo", name: "Optimisation SEO & Vitesse Google (Score 98+)", price: 400, days: 2 },
+  { id: "stripe", name: "Paiement en ligne / Abonnements (Stripe)", price: 600, days: 3 },
+  { id: "cms", name: "Gestionnaire de contenus dynamique", price: 450, days: 2 },
 ];
 
 const CONTACT_CHANNELS = [
@@ -83,10 +83,10 @@ export function ProjectEstimator({ settings }: ProjectEstimatorProps) {
   const addonsTotal = selectedAddonsList.reduce((acc, curr) => acc + curr.price, 0);
 
   const daysTotal =
-    (selectedType?.days || 14) +
+    (selectedType?.days || 10) +
     selectedAddonsList.reduce((acc, curr) => acc + curr.days, 0);
 
-  const totalPrice = (selectedType?.price || 2500) + addonsTotal;
+  const totalPrice = (selectedType?.price || 1500) + addonsTotal;
   const weeksTotal = Math.ceil(daysTotal / 7);
 
   const channelLabel =
@@ -103,13 +103,13 @@ export function ProjectEstimator({ settings }: ProjectEstimatorProps) {
     formData.append("email", email);
     formData.append("company", company);
     formData.append("service", selectedType?.name || "Projet");
-    formData.append("budget", `~ ${totalPrice.toLocaleString("fr-FR")} € (${weeksTotal} sem.)`);
+    formData.append("budget", `À partir de ~ ${totalPrice.toLocaleString("fr-FR")} € (${weeksTotal} sem.)`);
     formData.append(
       "message",
       `[DEMANDE DE PROJET & DEVIS DU SIMULATEUR]\n` +
       `• Projet : ${selectedType?.name}\n` +
       `• Options incluses : ${selectedAddonsList.map((a) => a.name).join(", ") || "Formule de base"}\n` +
-      `• Budget estimé : ~ ${totalPrice.toLocaleString("fr-FR")} €\n` +
+      `• Budget estimé : À partir de ~ ${totalPrice.toLocaleString("fr-FR")} €\n` +
       `• Délai indicatif : ${weeksTotal} à ${weeksTotal + 1} semaines\n\n` +
       `[PRÉFÉRENCES DE CONTACT & DISPONIBILITÉS DU PROSPECT]\n` +
       `• Canal préféré : ${channelLabel}\n` +
@@ -134,16 +134,16 @@ export function ProjectEstimator({ settings }: ProjectEstimatorProps) {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-white/[0.08]">
           <div className="space-y-1">
             <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-zinc-400 font-semibold">
-              <Calculator className="w-4 h-4 text-white" />
+              <Calculator className="w-4 h-4 text-emerald-400" />
               <span>Simulateur de Devis &amp; Délais</span>
             </div>
-            <h3 className="text-2xl font-bold text-white tracking-tight">
+            <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
               Estimez votre budget en direct
             </h3>
           </div>
 
           <span className="text-xs text-zinc-400 font-mono">
-            Transparence tarifaire intégrale
+            Tarifs indicatifs &bull; Transparence totale
           </span>
         </div>
 
@@ -165,13 +165,13 @@ export function ProjectEstimator({ settings }: ProjectEstimatorProps) {
                       onClick={() => setSelectedType(type)}
                       className={`p-3.5 rounded-xl text-left transition-all border cursor-pointer ${
                         isSelected
-                          ? "bg-zinc-800 border-white text-white shadow-sm"
+                          ? "bg-zinc-800 border-emerald-400 text-white shadow-md"
                           : "bg-black border-white/[0.08] text-zinc-300 hover:border-white/[0.2]"
                       }`}
                     >
                       <div className="font-semibold text-sm">{type.name}</div>
-                      <span className="text-xs text-zinc-400 font-mono">
-                        Dès {type.price.toLocaleString("fr-FR")} €
+                      <span className="text-xs text-emerald-400/90 font-mono font-medium block mt-0.5">
+                        À partir de {type.price.toLocaleString("fr-FR")} €
                       </span>
                     </button>
                   );
@@ -193,7 +193,7 @@ export function ProjectEstimator({ settings }: ProjectEstimatorProps) {
                       onClick={() => toggleAddon(addon.id)}
                       className={`p-3 rounded-xl border transition-all cursor-pointer flex items-center justify-between gap-3 ${
                         isChecked
-                          ? "bg-zinc-800/90 border-white/60 text-white"
+                          ? "bg-zinc-800/90 border-emerald-400/60 text-white"
                           : "bg-black border-white/[0.08] text-zinc-300 hover:border-white/[0.2]"
                       }`}
                     >
@@ -206,7 +206,7 @@ export function ProjectEstimator({ settings }: ProjectEstimatorProps) {
                       <div
                         className={`w-5 h-5 rounded-md flex items-center justify-center border shrink-0 ${
                           isChecked
-                            ? "bg-white border-white text-black"
+                            ? "bg-emerald-400 border-emerald-400 text-black"
                             : "border-white/[0.2]"
                         }`}
                       >
@@ -223,13 +223,14 @@ export function ProjectEstimator({ settings }: ProjectEstimatorProps) {
           <div className="lg:col-span-5 rounded-2xl bg-black border border-white/[0.1] p-6 space-y-6">
             <div className="space-y-1">
               <span className="text-xs text-zinc-400 font-mono uppercase tracking-wider block">
-                Budget estimatif indicatif
+                Estimation indicative
               </span>
-              <div className="text-3xl sm:text-4xl font-extrabold text-white font-mono tracking-tight">
-                ~ {totalPrice.toLocaleString("fr-FR")} €
+              <div className="text-2xl sm:text-3xl font-extrabold text-white font-mono tracking-tight flex items-baseline gap-2 flex-wrap">
+                <span className="text-sm font-normal text-zinc-400">À partir de</span>
+                <span className="text-3xl sm:text-4xl text-emerald-400">~ {totalPrice.toLocaleString("fr-FR")} €</span>
               </div>
-              <span className="text-[11px] text-zinc-400 block">
-                Prix clé en main (code source &amp; déploiement inclus)
+              <span className="text-[11px] text-zinc-400 block pt-1">
+                Tarif clé en main (code source &amp; déploiement inclus)
               </span>
             </div>
 
@@ -256,7 +257,7 @@ export function ProjectEstimator({ settings }: ProjectEstimatorProps) {
                 setIsSuccess(false);
                 setIsModalOpen(true);
               }}
-              className="w-full inline-flex items-center justify-center gap-2 py-3.5 px-5 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider bg-white hover:bg-zinc-200 text-black transition-all cursor-pointer shadow-lg active:scale-95"
+              className="w-full inline-flex items-center justify-center gap-2 py-3.5 px-5 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider bg-emerald-400 hover:bg-emerald-300 text-black transition-all cursor-pointer shadow-lg active:scale-95"
             >
               <span>Valider ce devis &amp; mes disponibilités</span>
               <ArrowUpRight className="w-4 h-4" />
@@ -288,7 +289,7 @@ export function ProjectEstimator({ settings }: ProjectEstimatorProps) {
                     Votre demande et vos préférences ont été transmises !
                   </h3>
                   <p className="text-sm text-zinc-300 max-w-md mx-auto leading-relaxed">
-                    Merci {name}. J&apos;ai bien reçu votre configuration pour le projet <strong>{selectedType?.name}</strong> (~{totalPrice.toLocaleString("fr-FR")} €). Je vous recontacte sous 24h par <strong>{channelLabel.toLowerCase()}</strong> en tenant compte de votre créneau (<strong>{slotLabel}</strong>).
+                    Merci {name}. J&apos;ai bien reçu votre configuration pour le projet <strong>{selectedType?.name}</strong> (à partir de ~{totalPrice.toLocaleString("fr-FR")} €). Je vous recontacte sous 24h par <strong>{channelLabel.toLowerCase()}</strong> en tenant compte de votre créneau (<strong>{slotLabel}</strong>).
                   </p>
                 </div>
                 <button
@@ -321,8 +322,8 @@ export function ProjectEstimator({ settings }: ProjectEstimatorProps) {
                     </span>
                   </div>
                   <div className="sm:text-right">
-                    <span className="text-zinc-500 font-mono block">Budget estimé :</span>
-                    <span className="font-bold text-white text-sm font-mono">~ {totalPrice.toLocaleString("fr-FR")} €</span>
+                    <span className="text-zinc-500 font-mono block">Estimation indicative :</span>
+                    <span className="font-bold text-white text-sm font-mono">À partir de ~ {totalPrice.toLocaleString("fr-FR")} €</span>
                     <span className="text-zinc-400 block text-[11px] font-mono">{weeksTotal} à {weeksTotal + 1} sem.</span>
                   </div>
                 </div>

@@ -183,58 +183,58 @@ export const DEFAULT_SITE_SETTINGS: SiteSettings = {
     },
   ],
   estimator: {
-    "projectTypes": [
+    projectTypes: [
       {
-        "id": "vitrine",
-        "name": "Site Vitrine & Entreprise",
-        "price": 2500,
-        "days": 14
+        id: "vitrine",
+        name: "Site Vitrine & Entreprise",
+        price: 1500,
+        days: 10,
       },
       {
-        "id": "saas",
-        "name": "Application Web / SaaS",
-        "price": 6500,
-        "days": 30
+        id: "refonte",
+        name: "Refonte, Migration & Optimisation",
+        price: 1200,
+        days: 7,
       },
       {
-        "id": "ecommerce",
-        "name": "Boutique E-Commerce (PrestaShop / Custom)",
-        "price": 4500,
-        "days": 21
+        id: "ecommerce",
+        name: "Boutique E-Commerce (PrestaShop / Custom)",
+        price: 3200,
+        days: 18,
       },
       {
-        "id": "refonte",
-        "name": "Refonte, Migration & Optimisation",
-        "price": 2000,
-        "days": 10
-      }
+        id: "saas",
+        name: "Application Web / SaaS",
+        price: 4800,
+        days: 25,
+      },
     ],
-    "addons": [
+    addons: [
       {
-        "id": "admin",
-        "name": "Espace Admin & Back-office sur-mesure",
-        "price": 800,
-        "days": 5
+        id: "admin",
+        name: "Espace Admin & Back-office sur-mesure",
+        price: 600,
+        days: 4,
       },
       {
-        "id": "seo",
-        "name": "Optimisation SEO & Vitesse Google (Score 98+)",
-        "price": 500,
-        "days": 3
+        id: "seo",
+        name: "Optimisation SEO & Vitesse Google (Score 98+)",
+        price: 400,
+        days: 2,
       },
       {
-        "id": "stripe",
-        "name": "Paiement en ligne / Abonnements (Stripe)",
-        "price": 900,
-        "days": 4
+        id: "stripe",
+        name: "Paiement en ligne / Abonnements (Stripe)",
+        price: 600,
+        days: 3,
       },
       {
-        "id": "cms",
-        "name": "Gestionnaire de contenus dynamique",
-        "price": 600,
-        "days": 3
-      }
-    ]
+        id: "cms",
+        name: "Gestionnaire de contenus dynamique",
+        price: 450,
+        days: 2,
+      },
+    ],
   },
   faqs: [
     {
