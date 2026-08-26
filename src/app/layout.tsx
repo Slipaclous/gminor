@@ -5,6 +5,7 @@ import { SiteShell } from "@/components/layout/site-shell";
 import { Footer } from "@/components/layout/footer";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
 import { FilmGrain } from "@/components/ui/film-grain";
+import { RecaptchaScript } from "@/components/ui/recaptcha-script";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -183,6 +184,7 @@ export default function RootLayout({
       <body className="min-h-screen flex flex-col bg-black text-zinc-100 relative selection:bg-[#c96442] selection:text-white">
         <ScrollProgress />
         <FilmGrain />
+        <RecaptchaScript />
         <SiteShell footer={<Footer />}>
           {children}
         </SiteShell>

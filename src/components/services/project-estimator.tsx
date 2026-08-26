@@ -21,6 +21,8 @@ import {
   Sparkles,
 } from "lucide-react";
 
+import { getRecaptchaToken } from "@/lib/use-recaptcha";
+
 interface ProjectEstimatorProps {
   settings?: EstimatorSettings;
 }
@@ -98,7 +100,12 @@ export function ProjectEstimator({ settings }: ProjectEstimatorProps) {
     e.preventDefault();
     setIsSubmitting(true);
 
+    const recaptchaToken = await getRecaptchaToken("estimator_form");
+
     const formData = new FormData();
+    if (recaptchaToken) {
+      formData.append("g-recaptcha-response", recaptchaToken);
+    }
     formData.append("name", name);
     formData.append("email", email);
     formData.append("company", company);
@@ -119,8 +126,10 @@ export function ProjectEstimator({ settings }: ProjectEstimatorProps) {
     );
 
     try {
-      await submitContactForm(null, formData);
-      setIsSuccess(true);
+      const res = await submitContactForm(null, formData);
+      if (res?.success) {
+        setIsSuccess(true);
+      }
     } catch (err) {
       console.error(err);
     } finally {

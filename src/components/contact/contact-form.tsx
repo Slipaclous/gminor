@@ -3,6 +3,7 @@
 import React, { useActionState, useState } from "react";
 import { submitContactForm, ContactState } from "@/app/actions/contact";
 import { ArrowUpRight, CheckCircle2, Send, Loader2, ShieldCheck, Sparkles, HelpCircle } from "lucide-react";
+import { getRecaptchaToken } from "@/lib/use-recaptcha";
 
 interface ContactFormProps {
   initialService?: string;
@@ -27,6 +28,14 @@ export function ContactForm({ initialService, initialBudget }: ContactFormProps)
     initialService || SERVICE_OPTIONS[0]
   );
   const [budget, setBudget] = useState(initialBudget || "Je ne sais pas encore");
+
+  const handleSubmit = async (formData: FormData) => {
+    const token = await getRecaptchaToken("contact_form");
+    if (token) {
+      formData.append("g-recaptcha-response", token);
+    }
+    formAction(formData);
+  };
 
   if (state?.success) {
     return (
@@ -57,9 +66,12 @@ export function ContactForm({ initialService, initialBudget }: ContactFormProps)
 
   return (
     <form
-      action={formAction}
-      className="rounded-3xl bg-[#13141c] border border-white/[0.1] p-6 sm:p-10 space-y-8 shadow-2xl"
+      action={handleSubmit}
+      className="group relative rounded-3xl bg-[#13141c] border border-white/[0.1] hover:border-emerald-500/30 p-6 sm:p-10 space-y-8 shadow-2xl transition-all duration-300 overflow-hidden"
     >
+      {/* Subtle top border beam highlight */}
+      <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-emerald-400/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+
       {/* Top Form Header */}
       <div className="space-y-2 pb-4 border-b border-white/[0.08]">
         <div className="flex items-center gap-2">

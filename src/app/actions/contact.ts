@@ -3,6 +3,7 @@
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { sendContactNotificationEmail } from "@/lib/resend";
+import { verifyRecaptchaToken } from "@/lib/recaptcha";
 
 export interface ContactState {
   errors?: {
@@ -26,8 +27,21 @@ export async function submitContactForm(
   const message = (formData.get("message") as string)?.trim();
   const contactPref = (formData.get("contactPref") as string)?.trim() || null;
   const availabilityPref = (formData.get("availabilityPref") as string)?.trim() || null;
+  const recaptchaToken =
+    (formData.get("g-recaptcha-response") as string) ||
+    (formData.get("recaptchaToken") as string) ||
+    null;
 
-  // Basic validation
+  // 1. Validation de sécurité anti-spam Google reCAPTCHA v3
+  const recaptchaCheck = await verifyRecaptchaToken(recaptchaToken, "contact_form");
+  if (!recaptchaCheck.success) {
+    return {
+      success: false,
+      message: recaptchaCheck.error || "Validation de sécurité reCAPTCHA échouée.",
+    };
+  }
+
+  // 2. Validation basique des champs
   const errors: { name?: string[]; email?: string[]; message?: string[] } = {};
 
   if (!name || name.length < 2) {
