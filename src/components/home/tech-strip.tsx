@@ -88,8 +88,8 @@ const SKILL_DOMAINS: SkillDomain[] = [
 ];
 
 export function TechStrip() {
-  // Sur mobile, on ouvre le 1er domaine par défaut, tout en permettant d'ouvrir/fermer chaque domaine
-  const [openDomain, setOpenDomain] = useState<string | null>("frontend");
+  // Tous les domaines sont pliés par défaut sur mobile pour une navigation épurée
+  const [openDomain, setOpenDomain] = useState<string | null>(null);
 
   const toggleDomain = (id: string) => {
     setOpenDomain((prev) => (prev === id ? null : id));
@@ -97,18 +97,18 @@ export function TechStrip() {
 
   return (
     <section className="border-b border-white/[0.08] bg-[#070709] py-12 sm:py-16 overflow-hidden">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 space-y-8 sm:space-y-10">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 space-y-6 sm:space-y-10">
         {/* Section Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
           <div className="space-y-2 max-w-2xl">
-            <span className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-semibold flex items-center gap-2">
+            <span className="text-[11px] font-mono uppercase tracking-widest text-emerald-400 font-bold flex items-center gap-2">
               <Sparkles className="w-3.5 h-3.5" />
               <span>// MAÎTRISE TECHNIQUE MULTI-STACK</span>
             </span>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight font-sans">
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight font-sans leading-tight">
               Une expertise polyvalente adaptée à vos enjeux
             </h2>
-            <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed font-normal">
+            <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed font-normal">
               Touchez un domaine pour explorer les compétences détaillées, stacks et cas d&apos;application concrets.
             </p>
           </div>
@@ -119,8 +119,8 @@ export function TechStrip() {
           </div>
         </div>
 
-        {/* Mobile Accordion View (Sleek, Collapsible & Touch-Optimized for Phones) */}
-        <div className="block lg:hidden space-y-3">
+        {/* Mobile Accordion View (Closed by default, touch-optimized) */}
+        <div className="block lg:hidden space-y-2.5">
           {SKILL_DOMAINS.map((domain) => {
             const Icon = domain.icon;
             const isOpen = openDomain === domain.id;
@@ -153,14 +153,14 @@ export function TechStrip() {
                     </div>
                     <div className="min-w-0">
                       <div className="flex items-center gap-2 flex-wrap">
-                        <h3 className="text-sm sm:text-base font-bold text-white tracking-tight truncate">
+                        <h3 className="text-sm font-bold text-white tracking-tight truncate">
                           {domain.title}
                         </h3>
                         <span className="px-2 py-0.5 rounded-md text-[10px] font-mono bg-zinc-900 text-zinc-300 border border-white/[0.08]">
                           {domain.badge}
                         </span>
                       </div>
-                      <p className="text-[11px] text-zinc-400 truncate mt-0.5">
+                      <p className="text-[11px] text-zinc-400 truncate mt-0.5 font-normal">
                         {domain.tagline}
                       </p>
                     </div>
@@ -178,20 +178,20 @@ export function TechStrip() {
                 {/* Collapsible Content */}
                 {isOpen && (
                   <div className="px-4 sm:px-5 pb-5 pt-1 space-y-4 border-t border-white/[0.06] animate-in fade-in-50 duration-200">
-                    <p className="text-xs text-zinc-300 leading-relaxed pt-2">
+                    <p className="text-xs text-zinc-300 leading-relaxed pt-2 font-normal">
                       {domain.description}
                     </p>
 
                     {/* Highlights */}
-                    <div className="space-y-2 bg-black/40 p-3.5 rounded-xl border border-white/[0.06]">
-                      <span className="text-[10px] font-mono uppercase tracking-wider text-zinc-400 font-semibold block">
+                    <div className="space-y-2 bg-black/50 p-3.5 rounded-xl border border-white/[0.06]">
+                      <span className="text-[10px] font-mono uppercase tracking-wider text-emerald-400 font-semibold block">
                         Livrables &amp; Spécificités clés :
                       </span>
                       <ul className="space-y-1.5">
                         {domain.highlights.map((h, hIdx) => (
                           <li
                             key={hIdx}
-                            className="flex items-start gap-2 text-xs text-zinc-300 leading-snug"
+                            className="flex items-start gap-2 text-xs text-zinc-200 leading-snug"
                           >
                             <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
                             <span>{h}</span>
@@ -209,7 +209,7 @@ export function TechStrip() {
                         {domain.skills.map((skill) => (
                           <span
                             key={skill}
-                            className="px-2.5 py-1 rounded-lg text-xs font-mono text-zinc-200 bg-zinc-900 border border-white/[0.1] font-medium"
+                            className="px-2.5 py-1 rounded-lg text-xs font-mono text-zinc-100 bg-zinc-900 border border-white/[0.12] font-semibold"
                           >
                             {skill}
                           </span>
