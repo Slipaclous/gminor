@@ -48,6 +48,7 @@ export async function getDbProjects(): Promise<ProjectItem[]> {
             solution: p.solution || "",
             results: p.results,
             metrics: parsedMetrics.length > 0 ? parsedMetrics : (PROJECTS_DATA.find((item) => item.slug === p.slug)?.metrics || []),
+            modules: PROJECTS_DATA.find((item) => item.slug === p.slug)?.modules,
           };
         });
       }

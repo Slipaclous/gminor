@@ -1,3 +1,10 @@
+export interface ProjectModule {
+  title: string;
+  subtitle: string;
+  description: string;
+  highlights: string[];
+}
+
 export interface ProjectItem {
   id: string;
   slug: string;
@@ -20,6 +27,7 @@ export interface ProjectItem {
   solution: string;
   results: string[];
   metrics: { label: string; value: string }[];
+  modules?: ProjectModule[];
 }
 
 export const PROJECTS_DATA: ProjectItem[] = [
@@ -27,9 +35,10 @@ export const PROJECTS_DATA: ProjectItem[] = [
     id: "proj_solera",
     slug: "solera-platform",
     title: "Solera Platform",
-    tagline: "Architecture SaaS multitenant & portail de pilotage technique des données",
+    tagline:
+      "ERP & Plateforme SaaS Logistique Multi-Rôles : Tournées géospatiales, scan QR entrepôt, commandes d'impression & émargement tactile",
     description:
-      "Conception et développement de la plateforme Solera : architecture SaaS moderne, gestion multitenant sécurisée, dashboards de métriques en temps réel et performances extrêmes.",
+      "Solera Platform est un écosystème ERP & SaaS d'envergure industrielle conçu pour interconnecter l'ensemble de la chaîne logistique, administrative et éducative : répartiteurs, chauffeurs-livreurs, gestionnaires d'entrepôt, imprimeurs industriels, établissements scolaires et étudiants.",
     category: "SAAS",
     categoryLabel: "SaaS & Web App",
     client: "Solera Inc.",
@@ -38,29 +47,107 @@ export const PROJECTS_DATA: ProjectItem[] = [
     imageUrl:
       "https://hkjqevinuoraripkoyhf.supabase.co/storage/v1/object/public/portfolio-uploads/d037a58d-48e1-4f2a-90f8-931312bfc66f.png",
     techStack: [
-      "Next.js 15",
+      "Next.js 16",
+      "React 19",
       "TypeScript",
-      "Tailwind CSS",
-      "Prisma",
+      "Prisma ORM",
       "PostgreSQL",
-      "Framer Motion",
+      "Leaflet & D3-Geo",
+      "Turf.js",
+      "HTML5-QRCode & ZXing",
+      "PDF-Lib",
+      "React Signature Canvas",
+      "ExcelJS",
+      "Tailwind CSS 4",
+      "NextAuth.js",
+      "Resend",
     ],
     liveUrl: "https://solera-platform.vercel.app",
     featured: true,
     order: 1,
     challenge:
-      "Concevoir une interface de gestion de données volumineuses capable de charger en moins de 400ms tout en offrant une expérience utilisateur fluide et une sécurité multitenant stricte.",
+      "Unifier un écosystème logistique complexe et éclaté entre 7 profils d'utilisateurs distincts (gestionnaires, chauffeurs, imprimeurs, écoles...) tout en garantissant un traitement temps réel de flux massifs : planification de tournées sur carte interactive, scan d'entrepôt haute vélocité, génération instantanée de bordereaux PDF et émargement tactile sur le terrain.",
     solution:
-      "Mise en place d'une architecture modulaire sous Next.js avec Server Components, modélisation relationnelle optimisée sous PostgreSQL et interface soignée avec design system sombre sur-mesure.",
+      "Conception d'une architecture modulaire sous Next.js 16 (App Router) articulée autour d'un Service Layer strict et d'un schéma relationnel PostgreSQL de plus de 45 modèles. Intégration de briques de pointe : calcul géospatial (Turf.js / Leaflet) pour l'optimisation des tournées, lecture optique de QR codes pour la traçabilité des colis, et capture de signature électronique synchronisée avec la génération de bordereaux PDF horodatés.",
     results: [
-      "-75% de temps de chargement des tableaux de bord",
-      "Architecture prête pour l'échelle multitenant",
-      "Score Lighthouse 100/100 sur l'ensemble des écrans clés",
+      "Ordonnancement fluide des tournées de livraison sur carte interactive avec affectation instantanée des camions et livreurs",
+      "Suppression totale des erreurs de préparation grâce au scan QR code temps réel des palettes et colis en entrepôt",
+      "Génération et émargement tactile des bordereaux de livraison PDF avec signature électronique horodatée",
+      "Cloisonnement hermétique des données sur 7 portails utilisateurs sécurisés par RBAC et NextAuth",
     ],
     metrics: [
+      { label: "Modèles de données", value: "45+ Tables" },
+      { label: "Portails Métiers", value: "7 Espaces Dédiés" },
       { label: "Temps de chargement", value: "< 0.4s" },
-      { label: "Disponibilité SaaS", value: "99.9%" },
-      { label: "Score Lighthouse", value: "100/100" },
+      { label: "Flux Zéro Papier", value: "100% PDF & Signature" },
+    ],
+    modules: [
+      {
+        title: "Logistique Géospatiale & Optimisation de Tournées",
+        subtitle: "Leaflet • D3-Geo • Turf.js",
+        description:
+          "Planification cartographique interactive pour le calcul d'itinéraires optimisés, le découpage des secteurs géographiques, l'affectation des chauffeurs par camion et le suivi en direct des arrêts de livraison.",
+        highlights: [
+          "Calcul géospatial et ordonnancement de tournées par glisser-déposer (DnD)",
+          "Gestion des camions, volumes de chargement et contraintes d'horaires d'écoles",
+          "Export d'itinéraires et synchronisation temps réel pour les chauffeurs",
+        ],
+      },
+      {
+        title: "Gestion d'Entrepôt, Palettisation & Scan QR Code",
+        subtitle: "HTML5-QRCode • ZXing • Caméra temps réel",
+        description:
+          "Interface opérateur haute vélocité intégrant un moteur de scan optique pour le contrôle de conformité des palettes, la traçabilité des colis et la préparation des expéditions sans erreur.",
+        highlights: [
+          "Scan caméra fluide sans matériel dédié nécessaire",
+          "Contrôle d'intégrité des colis et validation instantanée des chargements",
+          "Historique complet des mouvements de stock et journalisation d'audit",
+        ],
+      },
+      {
+        title: "Émargement Tactile & Bordereaux PDF à la Volée",
+        subtitle: "React Signature Canvas • PDF-Lib • Horodatage",
+        description:
+          "Module de signature électronique sur écran tactile de smartphone/tablette intégré dynamiquement dans des bordereaux de livraison PDF officiels générés à la volée.",
+        highlights: [
+          "Récépissés conformes légalement avec signature vectorisée intégrée",
+          "Archivage cloud automatique et notification email aux destinataires",
+          "Mode déconnecté robuste avec synchronisation dès retour réseau",
+        ],
+      },
+      {
+        title: "Moteur de Commande & Tarification d'Impressions Industrielles",
+        subtitle: "Calculateur temps réel • Portail Imprimeurs",
+        description:
+          "Calculateur de devis dynamique pour l'impression de syllabus et brochures (paliers de quantité, types de reliures, finitions couleur) avec portail dédié aux imprimeurs partenaires.",
+        highlights: [
+          "Grilles tarifaires dynamiques multi-critères (papier, reliure, couleur)",
+          "Suivi du cycle d'impression et validation des épreuves (BAT)",
+          "Génération automatisée des ordres de fabrication pour les imprimeurs",
+        ],
+      },
+      {
+        title: "Architecture Multi-Tenancy & 7 Portails Métiers Sécurisés",
+        subtitle: "NextAuth.js • JWT • RBAC • SSO",
+        description:
+          "Gestion fine des habilitations séparant hermétiquement les espaces Administrateurs, Dispatchers, Chauffeurs-Livreurs, Imprimeurs, Établissements Scolaires, Enseignants et Étudiants.",
+        highlights: [
+          "Cloisonnement strict des données selon le rôle de l'utilisateur",
+          "Système de notifications transactionnelles ciblées par email (Resend)",
+          "Journalisation de sécurité (SSO Logs) et conformité RGPD intégrée",
+        ],
+      },
+      {
+        title: "Service Layer & Traitement de Données Volumineuses",
+        subtitle: "PostgreSQL • Prisma ORM • ExcelJS",
+        description:
+          "Modélisation relationnelle de plus de 45 tables sous PostgreSQL et moteur de traitement par flux (streaming) de fichiers Excel volumineux sans bloquer l'infrastructure.",
+        highlights: [
+          "Architecture Service Layer isolant la logique métier des contrôleurs",
+          "Imports/Exports Excel sur des dizaines de milliers de lignes en streaming",
+          "Indexation SQL et optimisation des requêtes pour des dashboards < 0.4s",
+        ],
+      },
     ],
   },
   {

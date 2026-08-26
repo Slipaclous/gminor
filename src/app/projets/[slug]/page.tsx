@@ -255,6 +255,63 @@ export default async function ProjectDetailPage({ params }: ProjectDetailProps) 
             </div>
           )}
 
+          {/* Deep Architecture & Modules Grid (If available) */}
+          {project.modules && project.modules.length > 0 && (
+            <div className="space-y-6 pt-4">
+              <div className="space-y-1">
+                <span className="text-[10px] font-mono uppercase tracking-wider text-emerald-400 font-bold px-2.5 py-1 rounded-md bg-emerald-950/80 border border-emerald-500/30 inline-block">
+                  Ingénierie &amp; Capacités Système
+                </span>
+                <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight pt-2">
+                  Ce que la plateforme accomplit au quotidien
+                </h2>
+                <p className="text-xs sm:text-sm text-zinc-400">
+                  Une suite de modules interconnectés conçus pour absorber des flux logistiques, administratifs et d&apos;impression industriels.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                {project.modules.map((mod, idx) => (
+                  <div
+                    key={idx}
+                    className="group relative rounded-3xl bg-[#0d0e14] border border-white/[0.08] hover:border-emerald-500/40 p-6 sm:p-7 space-y-4 shadow-xl transition-all duration-300 overflow-hidden"
+                  >
+                    <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-emerald-400/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+
+                    <div className="space-y-1.5">
+                      <div className="flex items-center justify-between">
+                        <span className="text-[10px] font-mono text-zinc-500 font-bold">
+                          MODULE 0{idx + 1}
+                        </span>
+                        <span className="text-[10px] font-mono text-emerald-400 bg-emerald-950/80 px-2 py-0.5 rounded-md border border-emerald-500/30">
+                          {mod.subtitle}
+                        </span>
+                      </div>
+                      <h3 className="text-base sm:text-lg font-bold text-white group-hover:text-emerald-300 transition-colors">
+                        {mod.title}
+                      </h3>
+                    </div>
+
+                    <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed font-normal">
+                      {mod.description}
+                    </p>
+
+                    {mod.highlights && mod.highlights.length > 0 && (
+                      <ul className="space-y-2 pt-2 border-t border-white/[0.06]">
+                        {mod.highlights.map((item, hIdx) => (
+                          <li key={hIdx} className="flex items-start gap-2 text-xs text-zinc-400 font-mono">
+                            <span className="text-emerald-400 font-bold shrink-0 mt-0.5">&bull;</span>
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
           {/* Results Checklist */}
           {project.results && project.results.length > 0 && (
             <div className="group relative rounded-3xl bg-[#0d0d10] border border-white/[0.08] hover:border-emerald-500/30 p-6 sm:p-8 space-y-4 transition-all duration-300 overflow-hidden shadow-xl">
