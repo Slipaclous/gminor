@@ -172,57 +172,46 @@ export function ContactForm({ initialService, initialBudget }: ContactFormProps)
         </div>
       </div>
 
-      {/* Row 4: Budget Flexible (Quick Buttons + Champ Libre) */}
-      <div className="space-y-3">
-        <div className="flex items-center justify-between gap-2 flex-wrap">
-          <label className="block text-sm sm:text-base font-semibold text-zinc-100">
-            Budget envisagé <span className="text-xs font-normal text-zinc-400 font-mono">(facultatif)</span>
-          </label>
-          <span className="text-xs text-zinc-400 font-mono">
-            Renseignez un montant ou choisissez une option rapide
+      {/* Row 4: Budget (Bouton 'Je ne sais pas encore' OU Champ de saisie) */}
+      <div className="space-y-2.5">
+        <label
+          htmlFor="budget-input"
+          className="block text-sm sm:text-base font-semibold text-zinc-100"
+        >
+          Budget envisagé{" "}
+          <span className="text-xs font-normal text-zinc-400 font-mono">
+            (facultatif)
           </span>
-        </div>
+        </label>
 
-        <div className="space-y-2.5">
-          {/* Quick Choice Buttons */}
-          <div className="flex flex-wrap gap-2">
-            <button
-              type="button"
-              onClick={() => setBudget("Je ne sais pas encore")}
-              className={`px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all cursor-pointer flex items-center gap-1.5 ${
-                budget === "Je ne sais pas encore"
-                  ? "bg-emerald-400 text-black font-bold shadow-md"
-                  : "bg-[#0b0c10] text-zinc-300 hover:text-white hover:bg-zinc-800 border border-white/[0.1]"
-              }`}
-            >
-              <span>Je ne sais pas encore</span>
-            </button>
+        {/* Hidden input passed to server action */}
+        <input type="hidden" name="budget" value={budget} />
 
-            <button
-              type="button"
-              onClick={() => setBudget("À définir ensemble")}
-              className={`px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all cursor-pointer flex items-center gap-1.5 ${
-                budget === "À définir ensemble"
-                  ? "bg-emerald-400 text-black font-bold shadow-md"
-                  : "bg-[#0b0c10] text-zinc-300 hover:text-white hover:bg-zinc-800 border border-white/[0.1]"
-              }`}
-            >
-              <span>À définir ensemble</span>
-            </button>
-          </div>
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+          <button
+            type="button"
+            onClick={() => setBudget("Je ne sais pas encore")}
+            className={`px-4 py-3.5 rounded-xl text-sm font-semibold transition-all cursor-pointer whitespace-nowrap shrink-0 border ${
+              budget === "Je ne sais pas encore"
+                ? "bg-white text-black border-white shadow-md font-bold"
+                : "bg-[#0b0c10] text-zinc-300 hover:text-white hover:bg-zinc-800 border-white/[0.12]"
+            }`}
+          >
+            Je ne sais pas encore
+          </button>
 
-          {/* Champ libre */}
-          <div className="relative">
-            <input
-              type="text"
-              id="budget"
-              name="budget"
-              value={budget}
-              onChange={(e) => setBudget(e.target.value)}
-              placeholder="Ou saisissez librement : ex. 2 000 €, 5 000 €, selon devis..."
-              className="w-full px-4 py-3 rounded-xl bg-[#0b0c10] border border-white/[0.12] text-sm sm:text-base text-white placeholder:text-zinc-500 focus:outline-none focus:border-[#c96442] focus:ring-1 focus:ring-[#c96442] transition-all font-sans"
-            />
-          </div>
+          <span className="text-xs font-mono text-zinc-500 uppercase text-center sm:text-left">
+            ou
+          </span>
+
+          <input
+            id="budget-input"
+            type="text"
+            value={budget === "Je ne sais pas encore" ? "" : budget}
+            onChange={(e) => setBudget(e.target.value)}
+            placeholder="Saisissez votre budget (ex: 2 500 €, 5 000 €...)"
+            className="flex-1 px-4 py-3.5 rounded-xl bg-[#0b0c10] border border-white/[0.12] text-base text-white placeholder:text-zinc-500 focus:outline-none focus:border-[#c96442] focus:ring-1 focus:ring-[#c96442] transition-all font-sans"
+          />
         </div>
       </div>
 
