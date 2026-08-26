@@ -6,6 +6,9 @@ import { Footer } from "@/components/layout/footer";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
 import { FilmGrain } from "@/components/ui/film-grain";
 import { RecaptchaScript } from "@/components/ui/recaptcha-script";
+import { CommandMenu } from "@/components/ui/command-menu";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -185,9 +188,12 @@ export default function RootLayout({
         <ScrollProgress />
         <FilmGrain />
         <RecaptchaScript />
+        <CommandMenu />
         <SiteShell footer={<Footer />}>
           {children}
         </SiteShell>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
