@@ -8,6 +8,7 @@ import {
   PillarItem,
   ServiceItem,
   FaqItem,
+  EstimatorOption,
 } from "@/lib/settings-service";
 
 export interface SettingsFormState {
@@ -153,59 +154,31 @@ export async function saveEstimatorSettingsAction(
     return { error: "Non autorisé" };
   }
 
-  const projectTypes = [
-    {
-      id: "vitrine",
-      name: (formData.get("type_vitrine_name") as string)?.trim() || "Site Vitrine & Entreprise",
-      price: Number(formData.get("type_vitrine_price")) || 2500,
-      days: Number(formData.get("type_vitrine_days")) || 14,
-    },
-    {
-      id: "saas",
-      name: (formData.get("type_saas_name") as string)?.trim() || "Application Web / SaaS",
-      price: Number(formData.get("type_saas_price")) || 6500,
-      days: Number(formData.get("type_saas_days")) || 30,
-    },
-    {
-      id: "ecommerce",
-      name: (formData.get("type_ecommerce_name") as string)?.trim() || "Boutique E-Commerce",
-      price: Number(formData.get("type_ecommerce_price")) || 4500,
-      days: Number(formData.get("type_ecommerce_days")) || 21,
-    },
-    {
-      id: "refonte",
-      name: (formData.get("type_refonte_name") as string)?.trim() || "Refonte & Modernisation",
-      price: Number(formData.get("type_refonte_price")) || 2000,
-      days: Number(formData.get("type_refonte_days")) || 10,
-    },
-  ];
+  const projectTypesJson = (formData.get("projectTypesJson") as string)?.trim();
+  const addonsJson = (formData.get("addonsJson") as string)?.trim();
 
-  const addons = [
-    {
-      id: "admin",
-      name: (formData.get("addon_admin_name") as string)?.trim() || "Espace Admin & Back-office sur-mesure",
-      price: Number(formData.get("addon_admin_price")) || 800,
-      days: Number(formData.get("addon_admin_days")) || 5,
-    },
-    {
-      id: "seo",
-      name: (formData.get("addon_seo_name") as string)?.trim() || "Optimisation SEO & Vitesse Google (Score 98+)",
-      price: Number(formData.get("addon_seo_price")) || 500,
-      days: Number(formData.get("addon_seo_days")) || 3,
-    },
-    {
-      id: "stripe",
-      name: (formData.get("addon_stripe_name") as string)?.trim() || "Paiement en ligne / Abonnements (Stripe)",
-      price: Number(formData.get("addon_stripe_price")) || 900,
-      days: Number(formData.get("addon_stripe_days")) || 4,
-    },
-    {
-      id: "cms",
-      name: (formData.get("addon_cms_name") as string)?.trim() || "Gestionnaire de contenus dynamique",
-      price: Number(formData.get("addon_cms_price")) || 600,
-      days: Number(formData.get("addon_cms_days")) || 3,
-    },
-  ];
+  let projectTypes: EstimatorOption[] = [];
+  let addons: EstimatorOption[] = [];
+
+  try {
+    if (projectTypesJson) {
+      projectTypes = JSON.parse(projectTypesJson);
+    }
+  } catch (err) {
+    console.error("Erreur parsing projectTypesJson:", err);
+  }
+
+  try {
+    if (addonsJson) {
+      addons = JSON.parse(addonsJson);
+    }
+  } catch (err) {
+    console.error("Erreur parsing addonsJson:", err);
+  }
+
+  if (projectTypes.length === 0) {
+    return { error: "Vous devez conserver au moins un type de projet principal." };
+  }
 
   await updateSiteSettings({
     estimator: {
@@ -215,6 +188,7 @@ export async function saveEstimatorSettingsAction(
   });
 
   revalidatePath("/services");
+  revalidatePath("/admin/contenu");
   return { success: true };
 }
 

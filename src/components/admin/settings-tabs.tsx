@@ -103,6 +103,74 @@ export function SettingsTabs({ initialSettings }: SettingsTabsProps) {
     );
   };
 
+  // Dynamic Estimator state
+  const [projectTypesList, setProjectTypesList] = useState<EstimatorOption[]>(
+    initialSettings.estimator?.projectTypes || []
+  );
+  const [addonsList, setAddonsList] = useState<EstimatorOption[]>(
+    initialSettings.estimator?.addons || []
+  );
+
+  const addProjectTypeItem = () => {
+    setProjectTypesList((prev) => [
+      ...prev,
+      {
+        id: `type_${Date.now()}`,
+        name: "Nouveau type de projet",
+        price: 3000,
+        days: 14,
+      },
+    ]);
+  };
+
+  const removeProjectTypeItem = (index: number) => {
+    if (projectTypesList.length <= 1) {
+      alert("Vous devez conserver au moins un type de projet.");
+      return;
+    }
+    setProjectTypesList((prev) => prev.filter((_, i) => i !== index));
+  };
+
+  const updateProjectTypeItem = (
+    index: number,
+    field: "name" | "price" | "days",
+    value: string | number
+  ) => {
+    setProjectTypesList((prev) =>
+      prev.map((item, i) =>
+        i === index ? { ...item, [field]: value } : item
+      )
+    );
+  };
+
+  const addAddonItem = () => {
+    setAddonsList((prev) => [
+      ...prev,
+      {
+        id: `addon_${Date.now()}`,
+        name: "Nouvelle option / fonctionnalité",
+        price: 500,
+        days: 3,
+      },
+    ]);
+  };
+
+  const removeAddonItem = (index: number) => {
+    setAddonsList((prev) => prev.filter((_, i) => i !== index));
+  };
+
+  const updateAddonItem = (
+    index: number,
+    field: "name" | "price" | "days",
+    value: string | number
+  ) => {
+    setAddonsList((prev) =>
+      prev.map((item, i) =>
+        i === index ? { ...item, [field]: value } : item
+      )
+    );
+  };
+
   const TABS = [
     { id: "hero", label: "Hero & Accueil", icon: Sparkles },
     { id: "pillars", label: "Piliers d'Ingénierie", icon: Layers },
@@ -489,12 +557,23 @@ export function SettingsTabs({ initialSettings }: SettingsTabsProps) {
       {/* Tab 4: Estimator Settings */}
       {activeTab === "estimator" && (
         <form action={estimatorFormAction} className="space-y-8 max-w-4xl">
-          <div className="rounded-3xl bg-[#0d0d10] border border-white/[0.08] p-6 sm:p-8 space-y-6 shadow-xl">
+          <input
+            type="hidden"
+            name="projectTypesJson"
+            value={JSON.stringify(projectTypesList)}
+          />
+          <input
+            type="hidden"
+            name="addonsJson"
+            value={JSON.stringify(addonsList)}
+          />
+
+          <div className="rounded-3xl bg-[#0d0d10] border border-white/[0.08] p-6 sm:p-8 space-y-8 shadow-xl">
             <div className="flex items-center justify-between pb-4 border-b border-white/[0.08]">
               <div className="space-y-1">
                 <h2 className="text-xl font-bold text-white">Tarifs du Simulateur de Devis</h2>
                 <p className="text-xs text-zinc-400">
-                  Définissez les prix de base et délais calculés pour chaque type de projet et option
+                  Ajoutez, modifiez ou supprimez les types de projets principaux et les options additionnelles calculées en direct.
                 </p>
               </div>
               {estimatorState?.success && (
@@ -505,47 +584,78 @@ export function SettingsTabs({ initialSettings }: SettingsTabsProps) {
               )}
             </div>
 
-            {/* Types de projets */}
+            {/* Section 1: Types de projets */}
             <div className="space-y-4">
-              <span className="text-xs font-mono uppercase tracking-wider text-zinc-400 font-semibold block">
-                Types de projets principaux
-              </span>
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-mono uppercase tracking-wider text-zinc-300 font-semibold block">
+                  Types de projets principaux ({projectTypesList.length})
+                </span>
+                <button
+                  type="button"
+                  onClick={addProjectTypeItem}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 border border-white/[0.1] text-xs font-semibold text-white transition-colors cursor-pointer"
+                >
+                  <Plus className="w-3.5 h-3.5 text-emerald-400" />
+                  <span>Ajouter un type de projet</span>
+                </button>
+              </div>
+
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {initialSettings.estimator.projectTypes.map((type: EstimatorOption) => (
+                {projectTypesList.map((type, idx) => (
                   <div
-                    key={type.id}
-                    className="p-4 rounded-xl bg-black border border-white/[0.08] space-y-3"
+                    key={type.id || idx}
+                    className="p-5 rounded-2xl bg-black border border-white/[0.08] space-y-3 relative group hover:border-white/[0.2] transition-colors"
                   >
-                    <span className="text-xs font-bold text-white font-mono uppercase">
-                      {type.id}
-                    </span>
-                    <input
-                      name={`type_${type.id}_name`}
-                      type="text"
-                      defaultValue={type.name}
-                      className="w-full px-3 py-2 rounded-lg bg-zinc-900 border border-white/[0.1] text-xs text-white"
-                    />
-                    <div className="grid grid-cols-2 gap-2">
-                      <div>
-                        <label className="text-[10px] font-mono text-zinc-500 block">
-                          Prix (€)
+                    <div className="flex items-center justify-between">
+                      <span className="text-[11px] font-mono font-bold text-emerald-400 uppercase">
+                        Projet 0{idx + 1}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => removeProjectTypeItem(idx)}
+                        className="p-1 rounded-lg text-zinc-500 hover:text-red-400 hover:bg-red-950/40 transition-colors cursor-pointer"
+                        title="Supprimer ce type de projet"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
+
+                    <div className="space-y-1">
+                      <label className="text-[10px] font-mono text-zinc-400 block">
+                        Nom affiché au client
+                      </label>
+                      <input
+                        type="text"
+                        value={type.name}
+                        onChange={(e) => updateProjectTypeItem(idx, "name", e.target.value)}
+                        placeholder="ex: Site Vitrine & Entreprise"
+                        className="w-full px-3 py-2 rounded-lg bg-zinc-900 border border-white/[0.1] text-xs text-white focus:outline-none focus:border-emerald-400"
+                      />
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-2 pt-1">
+                      <div className="space-y-1">
+                        <label className="text-[10px] font-mono text-zinc-400 block">
+                          Prix de base (€)
                         </label>
                         <input
-                          name={`type_${type.id}_price`}
                           type="number"
-                          defaultValue={type.price}
-                          className="w-full px-3 py-1.5 rounded-lg bg-zinc-900 border border-white/[0.1] text-xs text-white font-mono"
+                          value={type.price}
+                          onChange={(e) => updateProjectTypeItem(idx, "price", Number(e.target.value))}
+                          placeholder="2500"
+                          className="w-full px-3 py-1.5 rounded-lg bg-zinc-900 border border-white/[0.1] text-xs text-white font-mono focus:outline-none focus:border-emerald-400"
                         />
                       </div>
-                      <div>
-                        <label className="text-[10px] font-mono text-zinc-500 block">
-                          Jours estimés
+                      <div className="space-y-1">
+                        <label className="text-[10px] font-mono text-zinc-400 block">
+                          Délai moyen (jours)
                         </label>
                         <input
-                          name={`type_${type.id}_days`}
                           type="number"
-                          defaultValue={type.days}
-                          className="w-full px-3 py-1.5 rounded-lg bg-zinc-900 border border-white/[0.1] text-xs text-white font-mono"
+                          value={type.days}
+                          onChange={(e) => updateProjectTypeItem(idx, "days", Number(e.target.value))}
+                          placeholder="14"
+                          className="w-full px-3 py-1.5 rounded-lg bg-zinc-900 border border-white/[0.1] text-xs text-white font-mono focus:outline-none focus:border-emerald-400"
                         />
                       </div>
                     </div>
@@ -554,47 +664,78 @@ export function SettingsTabs({ initialSettings }: SettingsTabsProps) {
               </div>
             </div>
 
-            {/* Options additionnelles */}
-            <div className="space-y-4 pt-4 border-t border-white/[0.08]">
-              <span className="text-xs font-mono uppercase tracking-wider text-zinc-400 font-semibold block">
-                Options additionnelles
-              </span>
+            {/* Section 2: Options additionnelles */}
+            <div className="space-y-4 pt-6 border-t border-white/[0.08]">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-mono uppercase tracking-wider text-zinc-300 font-semibold block">
+                  Options &amp; Fonctionnalités au choix ({addonsList.length})
+                </span>
+                <button
+                  type="button"
+                  onClick={addAddonItem}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 border border-white/[0.1] text-xs font-semibold text-white transition-colors cursor-pointer"
+                >
+                  <Plus className="w-3.5 h-3.5 text-emerald-400" />
+                  <span>Ajouter une option</span>
+                </button>
+              </div>
+
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {initialSettings.estimator.addons.map((addon: EstimatorOption) => (
+                {addonsList.map((addon, idx) => (
                   <div
-                    key={addon.id}
-                    className="p-4 rounded-xl bg-black border border-white/[0.08] space-y-3"
+                    key={addon.id || idx}
+                    className="p-5 rounded-2xl bg-black border border-white/[0.08] space-y-3 relative group hover:border-white/[0.2] transition-colors"
                   >
-                    <span className="text-xs font-bold text-white font-mono uppercase">
-                      {addon.id}
-                    </span>
-                    <input
-                      name={`addon_${addon.id}_name`}
-                      type="text"
-                      defaultValue={addon.name}
-                      className="w-full px-3 py-2 rounded-lg bg-zinc-900 border border-white/[0.1] text-xs text-white"
-                    />
-                    <div className="grid grid-cols-2 gap-2">
-                      <div>
-                        <label className="text-[10px] font-mono text-zinc-500 block">
-                          Prix (€)
+                    <div className="flex items-center justify-between">
+                      <span className="text-[11px] font-mono font-bold text-zinc-400 uppercase">
+                        Option 0{idx + 1}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => removeAddonItem(idx)}
+                        className="p-1 rounded-lg text-zinc-500 hover:text-red-400 hover:bg-red-950/40 transition-colors cursor-pointer"
+                        title="Supprimer cette option"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
+
+                    <div className="space-y-1">
+                      <label className="text-[10px] font-mono text-zinc-400 block">
+                        Nom de l&apos;option
+                      </label>
+                      <input
+                        type="text"
+                        value={addon.name}
+                        onChange={(e) => updateAddonItem(idx, "name", e.target.value)}
+                        placeholder="ex: Espace Admin & Back-office sur-mesure"
+                        className="w-full px-3 py-2 rounded-lg bg-zinc-900 border border-white/[0.1] text-xs text-white focus:outline-none focus:border-emerald-400"
+                      />
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-2 pt-1">
+                      <div className="space-y-1">
+                        <label className="text-[10px] font-mono text-zinc-400 block">
+                          Prix additionnel (€)
                         </label>
                         <input
-                          name={`addon_${addon.id}_price`}
                           type="number"
-                          defaultValue={addon.price}
-                          className="w-full px-3 py-1.5 rounded-lg bg-zinc-900 border border-white/[0.1] text-xs text-white font-mono"
+                          value={addon.price}
+                          onChange={(e) => updateAddonItem(idx, "price", Number(e.target.value))}
+                          placeholder="800"
+                          className="w-full px-3 py-1.5 rounded-lg bg-zinc-900 border border-white/[0.1] text-xs text-white font-mono focus:outline-none focus:border-emerald-400"
                         />
                       </div>
-                      <div>
-                        <label className="text-[10px] font-mono text-zinc-500 block">
-                          Jours estimés
+                      <div className="space-y-1">
+                        <label className="text-[10px] font-mono text-zinc-400 block">
+                          Délai ajouté (jours)
                         </label>
                         <input
-                          name={`addon_${addon.id}_days`}
                           type="number"
-                          defaultValue={addon.days}
-                          className="w-full px-3 py-1.5 rounded-lg bg-zinc-900 border border-white/[0.1] text-xs text-white font-mono"
+                          value={addon.days}
+                          onChange={(e) => updateAddonItem(idx, "days", Number(e.target.value))}
+                          placeholder="5"
+                          className="w-full px-3 py-1.5 rounded-lg bg-zinc-900 border border-white/[0.1] text-xs text-white font-mono focus:outline-none focus:border-emerald-400"
                         />
                       </div>
                     </div>
