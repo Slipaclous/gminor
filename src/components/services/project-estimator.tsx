@@ -250,6 +250,17 @@ export function ProjectEstimator({ settings }: ProjectEstimatorProps) {
               </div>
             </div>
 
+            {/* Price Variance & Complexity Disclaimer */}
+            <div className="p-3.5 rounded-xl bg-zinc-950/90 border border-white/[0.08] text-[11px] text-zinc-400 space-y-1.5">
+              <div className="flex items-center gap-1.5 font-semibold text-zinc-300">
+                <Sparkles className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                <span>Tarif indicatif &amp; sur-mesure</span>
+              </div>
+              <p className="leading-relaxed">
+                Ces montants sont fournis <strong>à titre indicatif</strong>. Chaque projet étant unique, le budget final peut être <strong>ajusté à la baisse ou à la hausse</strong> en fonction de la complexité technique, du volume de pages et de vos besoins spécifiques.
+              </p>
+            </div>
+
             {/* In-Place Request / Preferences Trigger Button */}
             <button
               type="button"
@@ -327,6 +338,10 @@ export function ProjectEstimator({ settings }: ProjectEstimatorProps) {
                     <span className="text-zinc-400 block text-[11px] font-mono">{weeksTotal} à {weeksTotal + 1} sem.</span>
                   </div>
                 </div>
+
+                <p className="text-[11px] text-zinc-400 italic">
+                  * Montant indicatif : un devis sur-mesure précis sera établi ensemble, avec possibilité d&apos;ajustement à la baisse ou à la hausse selon vos exigences techniques.
+                </p>
 
                 {/* Preferred Contact Channel */}
                 <div className="space-y-2.5">
