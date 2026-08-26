@@ -177,6 +177,17 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
               </div>
             </div>
 
+            {/* Regional Coverage & Mobility Card */}
+            <div className="rounded-2xl bg-[#0d0d10] border border-white/[0.08] p-5 sm:p-6 space-y-3">
+              <span className="text-[10px] font-mono uppercase tracking-wider text-emerald-400 font-bold flex items-center gap-1.5">
+                <MapPin className="w-3.5 h-3.5 text-emerald-400" />
+                <span>// ANCRAGE LOCAL &amp; DÉPLACEMENTS</span>
+              </span>
+              <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed">
+                Basé à <strong className="text-white">Enghien (7850, Hainaut)</strong>, je me déplace pour des réunions de cadrage et ateliers à <strong className="text-white">Bruxelles, Mons, Ath, Tournai, Nivelles, Braine-le-Comte, Soignies, Tubize, Lille</strong> et collabore à distance avec des clients dans toute la Belgique et en Europe.
+              </p>
+            </div>
+
             {/* Commitments list */}
             <div className="space-y-3 pt-2">
               <span className="text-xs font-mono uppercase tracking-wider text-zinc-500 block">
@@ -185,8 +196,8 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
               <ul className="space-y-2.5">
                 {[
                   "Réponse garantie et détaillée sous 24h ouvrées",
-                  "Devis gratuit et sans aucun engagement",
-                  "Conseil bienveillant et transparent sur les choix techniques",
+                  "Devis gratuit, transparent et sans aucun engagement",
+                  "Possibilité d'échange en visio ou rendez-vous physique",
                 ].map((item, idx) => (
                   <li
                     key={idx}

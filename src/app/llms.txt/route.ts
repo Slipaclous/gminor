@@ -12,8 +12,9 @@ export async function GET() {
 > Portfolio officiel et profil technique de Gauthier Minor, Développeur Full-Stack spécialisé dans les applications SaaS modernes, les plateformes e-commerce à fort trafic (PrestaShop 9 & Symfony) et les sites d'entreprises haute performance.
 
 - **Nom**: Gauthier Minor
-- **Rôle**: Développeur Full-Stack / Ingénieur Logiciel Web
-- **Localisation**: Enghien (Belgique), disponible en Remote (France, Belgique, International)
+- **Rôle**: Développeur Web Freelance / Architecte Full-Stack
+- **Localisation**: Enghien (7850, Hainaut, Belgique)
+- **Zone d'intervention**: Déplacements physiques à Enghien, Bruxelles, Mons, Ath, Tournai, Nivelles, Braine-le-Comte, Soignies, Tubize, Brabant Wallon, Lille, et prestations à distance (Belgique, France, International)
 - **Site web**: ${baseUrl}
 - **Contact**: ${settings.contactInfo.email}
 - **GitHub**: https://github.com/Slipaclous
