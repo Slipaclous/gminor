@@ -2,8 +2,8 @@
   <rect width="32" height="32" rx="8" fill="#0d0e12" />
   <rect width="32" height="32" rx="8" stroke="rgba(255,255,255,0.15)" stroke-width="1.2" />
   
-  <!-- Clean Typographic GM -->
-  <text x="14" y="21.5" text-anchor="middle" fill="#ffffff" font-size="13" font-weight="900" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" letter-spacing="-0.04em">GM</text>
+  <!-- Clean Typographic G- -->
+  <text x="14" y="21.5" text-anchor="middle" fill="#ffffff" font-size="13" font-weight="900" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" letter-spacing="-0.04em">G<tspan fill="#10b981">-</tspan></text>
   
   <!-- Emerald Status Diode -->
   <circle cx="26" cy="26" r="2" fill="#10b981" />
