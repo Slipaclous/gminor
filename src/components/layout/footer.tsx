@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { getSiteSettings } from "@/lib/settings-service";
 import { Logo } from "./logo";
-import { GithubIcon, LinkedinIcon } from "../ui/icons";
+import { GithubIcon, LinkedinIcon, InstagramIcon, XIcon } from "../ui/icons";
 
 export async function Footer() {
   const settings = await getSiteSettings();
@@ -19,24 +19,50 @@ export async function Footer() {
               Ingénieur Full-Stack &amp; UI Architect. Création de sites internet d&apos;exception et d&apos;applications SaaS scalables (Next.js, Prisma, PostgreSQL).
             </p>
             <div className="flex items-center gap-3 pt-2">
-              <a
-                href={info.githubUrl || "https://github.com"}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-8 h-8 rounded-lg bg-zinc-900 border border-white/[0.08] hover:border-white/[0.2] flex items-center justify-center text-zinc-400 hover:text-white transition-colors"
-                aria-label="GitHub"
-              >
-                <GithubIcon className="w-4 h-4" />
-              </a>
-              <a
-                href={info.linkedinUrl || "https://linkedin.com"}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-8 h-8 rounded-lg bg-zinc-900 border border-white/[0.08] hover:border-white/[0.2] flex items-center justify-center text-zinc-400 hover:text-white transition-colors"
-                aria-label="LinkedIn"
-              >
-                <LinkedinIcon className="w-4 h-4" />
-              </a>
+              {info.githubUrl && (
+                <a
+                  href={info.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-8 h-8 rounded-lg bg-zinc-900 border border-white/[0.08] hover:border-white/[0.2] flex items-center justify-center text-zinc-400 hover:text-white transition-colors"
+                  aria-label="GitHub"
+                >
+                  <GithubIcon className="w-4 h-4" />
+                </a>
+              )}
+              {info.linkedinUrl && (
+                <a
+                  href={info.linkedinUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-8 h-8 rounded-lg bg-zinc-900 border border-white/[0.08] hover:border-white/[0.2] flex items-center justify-center text-zinc-400 hover:text-white transition-colors"
+                  aria-label="LinkedIn"
+                >
+                  <LinkedinIcon className="w-4 h-4" />
+                </a>
+              )}
+              {info.instagramUrl && (
+                <a
+                  href={info.instagramUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-8 h-8 rounded-lg bg-zinc-900 border border-white/[0.08] hover:border-white/[0.2] flex items-center justify-center text-zinc-400 hover:text-white transition-colors"
+                  aria-label="Instagram"
+                >
+                  <InstagramIcon className="w-4 h-4" />
+                </a>
+              )}
+              {info.twitterUrl && (
+                <a
+                  href={info.twitterUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-8 h-8 rounded-lg bg-zinc-900 border border-white/[0.08] hover:border-white/[0.2] flex items-center justify-center text-zinc-400 hover:text-white transition-colors"
+                  aria-label="X (Twitter)"
+                >
+                  <XIcon className="w-3.5 h-3.5" />
+                </a>
+              )}
             </div>
           </div>
 

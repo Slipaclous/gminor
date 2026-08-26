@@ -1,68 +1,90 @@
 {
+  "faqs": [
+    {
+      "answer": "Pas du tout. Je prends en charge l'ensemble des aspects techniques (hébergement, nom de domaine, base de données, code) et je vous explique chaque étape avec des termes simples.",
+      "question": "Je n'ai pas de compétences techniques, est-ce un frein ?"
+    },
+    {
+      "answer": "Oui, tout à fait. J'ai une solide expérience sur l'écosystème PHP (Symfony, PrestaShop avec des migrations de v1.6 à v9, création de modules et intégrations MySQL) ainsi que sur les stacks modernes (Next.js, React, Node.js). Je m'adapte à votre existant technique.",
+      "question": "Travaillez-vous aussi sur des technologies comme PHP, Symfony ou PrestaShop ?"
+    },
+    {
+      "answer": "Oui. Chaque projet intègre un espace d'administration épuré et sécurisé vous permettant de mettre à jour vos coordonnées, réalisations et textes en toute autonomie.",
+      "question": "Puis-je modifier mes textes et photos moi-même après livraison ?"
+    },
+    {
+      "answer": "Le tarif varie selon le périmètre fonctionnel. Vous pouvez utiliser le simulateur interactif ci-dessous pour obtenir une estimation immédiate et transparente.",
+      "question": "Combien coûte la création ou la refonte d'un projet ?"
+    },
+    {
+      "answer": "Vous bénéficiez d'une période de garantie et de support de 30 jours pour tout ajustement. Je propose également des contrats de maintenance pour assurer la sécurité et les évolutions futures.",
+      "question": "Que se passe-t-il après la mise en production ?"
+    }
+  ],
   "hero": {
     "badge": "Gauthier Minor • Développeur Web Full-Stack",
     "title": "Ingénierie logicielle & solutions web sur-mesure.",
-    "subtitle": "Je développe des applications SaaS, des sites d'entreprises et des plateformes e-commerce à fort trafic. Solide maîtrise de l'écosystème web moderne (React/Next.js, PHP/Symfony, PrestaShop, PostgreSQL & MySQL).",
-    "available": true,
     "metrics": [
       {
-        "value": "< 0.4s",
-        "label": "Temps de chargement moyen"
+        "label": "Temps de chargement moyen",
+        "value": "< 0.4s"
       },
       {
-        "value": "100%",
-        "label": "Score de performance Google"
+        "label": "Score de performance Google",
+        "value": "100%"
       },
       {
-        "value": "5+ ans",
-        "label": "Pratique Full-Stack"
+        "label": "Pratique Full-Stack",
+        "value": "5+ ans"
       }
-    ]
+    ],
+    "subtitle": "Je développe des applications SaaS, des sites d'entreprises et des plateformes e-commerce à fort trafic. Solide maîtrise de l'écosystème web moderne (React/Next.js, PHP/Symfony, PrestaShop, PostgreSQL & MySQL).",
+    "available": true
   },
   "pillars": [
     {
       "id": 1,
       "title": "Performance & Vitesse Radicale",
-      "tagline": "Un site qui se charge en moins de 0.4 seconde",
-      "description": "Chaque milliseconde compte pour votre référencement Google et le taux de conversion de vos prospects. Optimisation complète des Core Web Vitals.",
       "points": [
         "Score Lighthouse 100/100 garanti",
         "Architecture moderne & requêtes optimisées",
         "Zéro perte de prospects due aux lenteurs"
-      ]
+      ],
+      "tagline": "Un site qui se charge en moins de 0.4 seconde",
+      "description": "Chaque milliseconde compte pour votre référencement Google et le taux de conversion de vos prospects. Optimisation complète des Core Web Vitals."
     },
     {
       "id": 2,
       "title": "Architecture & Données Robustes",
-      "tagline": "PostgreSQL, MySQL & Frameworks éprouvés",
-      "description": "Des schémas de bases de données stricts, sécurisés et scalables pour vos applications SaaS, Symfony ou vos flux PrestaShop.",
       "points": [
         "Typage et validation stricts de bout en bout",
         "Migrations de données sécurisées et sans rupture",
         "Code maintenable et documenté"
-      ]
+      ],
+      "tagline": "PostgreSQL, MySQL & Frameworks éprouvés",
+      "description": "Des schémas de bases de données stricts, sécurisés et scalables pour vos applications SaaS, Symfony ou vos flux PrestaShop."
     },
     {
       "id": 3,
       "title": "Design d'Exception & Conversion",
-      "tagline": "Une identité visuelle sur-mesure et mémorable",
-      "description": "Zéro template impersonnel. Une interface soignée, responsive et pensée pour guider l'utilisateur vers la prise de contact ou l'achat.",
       "points": [
         "Direction artistique sur-mesure et moderne",
         "Ergonomie fluide sur mobile, tablette et desktop",
         "Parcours utilisateur axé sur la conversion"
-      ]
+      ],
+      "tagline": "Une identité visuelle sur-mesure et mémorable",
+      "description": "Zéro template impersonnel. Une interface soignée, responsive et pensée pour guider l'utilisateur vers la prise de contact ou l'achat."
     },
     {
       "id": 4,
       "title": "Autonomie Totale & Back-Office",
-      "tagline": "Modifiez vos contenus sans dépendre d'un tiers",
-      "description": "Chaque projet est livré avec un espace d'administration intuitif et sécurisé pour actualiser vos réalisations, tarifs et contenus en 1 clic.",
       "points": [
         "Panneau d'administration épuré et sécurisé",
         "Gestion des demandes de contact et devis",
         "Garantie et support technique inclus 30 jours"
-      ]
+      ],
+      "tagline": "Modifiez vos contenus sans dépendre d'un tiers",
+      "description": "Chaque projet est livré avec un espace d'administration intuitif et sécurisé pour actualiser vos réalisations, tarifs et contenus en 1 clic."
     }
   ],
   "services": [
@@ -115,91 +137,69 @@
     }
   ],
   "estimator": {
-    "projectTypes": [
-      {
-        "id": "vitrine",
-        "name": "Site Vitrine & Entreprise",
-        "price": 1500,
-        "days": 10
-      },
-      {
-        "id": "refonte",
-        "name": "Refonte, Migration & Optimisation",
-        "price": 1200,
-        "days": 7
-      },
-      {
-        "id": "ecommerce",
-        "name": "Boutique E-Commerce (PrestaShop / Custom)",
-        "price": 3200,
-        "days": 18
-      },
-      {
-        "id": "saas",
-        "name": "Application Web / SaaS",
-        "price": 4800,
-        "days": 25
-      }
-    ],
     "addons": [
       {
         "id": "admin",
+        "days": 4,
         "name": "Espace Admin & Back-office sur-mesure",
-        "price": 600,
-        "days": 4
+        "price": 500
       },
       {
         "id": "seo",
+        "days": 2,
         "name": "Optimisation SEO & Vitesse Google (Score 98+)",
-        "price": 400,
-        "days": 2
+        "price": 400
       },
       {
         "id": "stripe",
+        "days": 3,
         "name": "Paiement en ligne / Abonnements (Stripe)",
-        "price": 600,
-        "days": 3
+        "price": 600
       },
       {
         "id": "cms",
+        "days": 2,
         "name": "Gestionnaire de contenus dynamique",
-        "price": 450,
-        "days": 2
+        "price": 450
+      }
+    ],
+    "projectTypes": [
+      {
+        "id": "vitrine",
+        "days": 10,
+        "name": "Site Vitrine & Entreprise",
+        "price": 1000
+      },
+      {
+        "id": "refonte",
+        "days": 7,
+        "name": "Refonte, Migration & Optimisation",
+        "price": 1200
+      },
+      {
+        "id": "ecommerce",
+        "days": 18,
+        "name": "Boutique E-Commerce (PrestaShop / Custom)",
+        "price": 3200
+      },
+      {
+        "id": "saas",
+        "days": 25,
+        "name": "Application Web / SaaS",
+        "price": 4800
       }
     ]
   },
-  "faqs": [
-    {
-      "question": "Je n'ai pas de compétences techniques, est-ce un frein ?",
-      "answer": "Pas du tout. Je prends en charge l'ensemble des aspects techniques (hébergement, nom de domaine, base de données, code) et je vous explique chaque étape avec des termes simples."
-    },
-    {
-      "question": "Travaillez-vous aussi sur des technologies comme PHP, Symfony ou PrestaShop ?",
-      "answer": "Oui, tout à fait. J'ai une solide expérience sur l'écosystème PHP (Symfony, PrestaShop avec des migrations de v1.6 à v9, création de modules et intégrations MySQL) ainsi que sur les stacks modernes (Next.js, React, Node.js). Je m'adapte à votre existant technique."
-    },
-    {
-      "question": "Puis-je modifier mes textes et photos moi-même après livraison ?",
-      "answer": "Oui. Chaque projet intègre un espace d'administration épuré et sécurisé vous permettant de mettre à jour vos coordonnées, réalisations et textes en toute autonomie."
-    },
-    {
-      "question": "Combien coûte la création ou la refonte d'un projet ?",
-      "answer": "Le tarif varie selon le périmètre fonctionnel. Vous pouvez utiliser le simulateur interactif ci-dessous pour obtenir une estimation immédiate et transparente."
-    },
-    {
-      "question": "Que se passe-t-il après la mise en production ?",
-      "answer": "Vous bénéficiez d'une période de garantie et de support de 30 jours pour tout ajustement. Je propose également des contrats de maintenance pour assurer la sécurité et les évolutions futures."
-    }
-  ],
   "contactInfo": {
-    "email": "contact@gauthierminor.com",
-    "phone": "+32 470 00 00 00",
-    "location": "Belgique (Bruxelles / Enghien / Wallonie) • Remote",
+    "email": "gauthier.minor@gmail.com",
+    "location": "Belgique (Enghien) & Remote partout",
     "githubUrl": "https://github.com/Slipaclous",
-    "linkedinUrl": "https://linkedin.com/in/gauthier-minor",
+    "linkedinUrl": "https://be.linkedin.com/in/gauthier-minor-a0a4a229b",
+    "availabilityText": "Ouvert aux nouveaux projets",
+    "phone": "+32 473 25 66 33",
     "twitterUrl": "",
-    "instagramUrl": "",
+    "instagramUrl": "https://www.instagram.com/gauthierminor/",
     "calcomUrl": "",
-    "availabilityText": "Disponible pour nouveaux projets",
-    "workingHours": "Du lundi au vendredi • 9h00 - 18h30"
+    "workingHours": ""
   }
 }

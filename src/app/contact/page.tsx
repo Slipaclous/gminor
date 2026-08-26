@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { getSiteSettings } from "@/lib/settings-service";
 import { ContactForm } from "@/components/contact/contact-form";
 import { Mail, MapPin, Clock, CheckCircle2, Phone, Calendar, ArrowUpRight } from "lucide-react";
-import { GithubIcon, LinkedinIcon } from "@/components/ui/icons";
+import { GithubIcon, LinkedinIcon, InstagramIcon, XIcon } from "@/components/ui/icons";
 
 export const metadata: Metadata = {
   title: "Contact & Devis Gratuit — Gauthier Minor",
@@ -146,6 +146,28 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
                     title="GitHub"
                   >
                     <GithubIcon className="w-4 h-4" />
+                  </a>
+                )}
+                {info.instagramUrl && (
+                  <a
+                    href={info.instagramUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2 rounded-lg bg-zinc-900 border border-white/[0.08] hover:border-white/[0.2] text-zinc-400 hover:text-white transition-colors"
+                    title="Instagram"
+                  >
+                    <InstagramIcon className="w-4 h-4" />
+                  </a>
+                )}
+                {info.twitterUrl && (
+                  <a
+                    href={info.twitterUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2 rounded-lg bg-zinc-900 border border-white/[0.08] hover:border-white/[0.2] text-zinc-400 hover:text-white transition-colors"
+                    title="X (Twitter)"
+                  >
+                    <XIcon className="w-3.5 h-3.5" />
                   </a>
                 )}
               </div>
