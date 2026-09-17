@@ -16,10 +16,10 @@ export function Hero({ settings }: HeroProps) {
   const title = settings?.title || "Ingénierie logicielle & solutions web sur-mesure.";
   const subtitle =
     settings?.subtitle ||
-    "Je développe des applications SaaS, des sites d'entreprises et des plateformes e-commerce à fort trafic. Solide maîtrise de l'écosystème web moderne (React/Next.js, PHP/Symfony, PrestaShop, PostgreSQL & MySQL).";
+    "Applications SaaS, sites d'entreprise haute performance et plateformes e-commerce. Conception sur-mesure de bout en bout.";
   const metrics = settings?.metrics || [
-    { value: "< 0.4s", label: "Temps de chargement moyen" },
-    { value: "100%", label: "Score de performance Google" },
+    { value: "< 0.4s", label: "Chargement moyen" },
+    { value: "100%", label: "Score Google Lighthouse" },
     { value: "5+ ans", label: "Pratique Full-Stack" },
   ];
 
@@ -47,17 +47,17 @@ export function Hero({ settings }: HeroProps) {
             </div>
 
             {/* Main Marquee Headline */}
-            <div className="space-y-3 sm:space-y-4">
-              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white font-sans leading-[1.12] sm:leading-[1.08]">
+            <div className="space-y-4 sm:space-y-6">
+              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white font-sans leading-[1.14] sm:leading-[1.10]">
                 {title}
               </h1>
-              <p className="text-sm sm:text-base lg:text-lg text-zinc-300 max-w-2xl leading-relaxed font-normal">
+              <p className="text-base sm:text-lg text-zinc-400 max-w-xl leading-relaxed font-normal">
                 {subtitle}
               </p>
             </div>
 
             {/* Action Buttons (Full-width on mobile, responsive flex on desktop) */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 pt-1">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 pt-2">
               <Link
                 href="/contact"
                 className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider text-black bg-white hover:bg-zinc-200 transition-all duration-150 active:scale-95 shadow-xl cursor-pointer"
@@ -152,7 +152,7 @@ export function Hero({ settings }: HeroProps) {
                 {activeTab === "arch" && (
                   <div className="space-y-3">
                     <div className="flex items-center justify-between text-[11px] text-zinc-400 border-b border-white/[0.06] pb-2">
-                      <span className="text-emerald-400 font-semibold">// Profil &amp; Polyvalence Full-Stack</span>
+                      <span className="text-emerald-400 font-semibold">{"// Profil & Polyvalence Full-Stack"}</span>
                       <span className="px-1.5 py-0.5 rounded bg-emerald-950/80 text-emerald-400 text-[10px] border border-emerald-500/30">Actif</span>
                     </div>
 
@@ -180,7 +180,7 @@ export function Hero({ settings }: HeroProps) {
                 {activeTab === "stack" && (
                   <div className="space-y-3">
                     <div className="text-[11px] text-zinc-400 border-b border-white/[0.06] pb-2">
-                      <span className="text-blue-400 font-semibold">// Architecture Backend &amp; Données</span>
+                      <span className="text-blue-400 font-semibold">{"// Architecture Backend & Données"}</span>
                     </div>
                     <ul className="space-y-2 font-sans text-xs">
                       <li className="p-2.5 rounded-xl bg-black/60 border border-white/[0.06] flex items-center gap-2 text-zinc-200">
@@ -201,7 +201,7 @@ export function Hero({ settings }: HeroProps) {
 
                 {activeTab === "perf" && (
                   <div className="space-y-3">
-                    <span className="text-zinc-400 block text-[11px] font-mono">// Standards de livraison &amp; Performance :</span>
+                    <span className="text-zinc-400 block text-[11px] font-mono">{"// Standards de livraison & Performance :"}</span>
                     <div className="grid grid-cols-2 gap-2 font-sans">
                       <div className="p-2.5 rounded-xl bg-black/60 border border-white/[0.06] flex items-center justify-between">
                         <span className="text-zinc-300 text-xs">Performance</span>

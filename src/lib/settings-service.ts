@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import { prisma } from "@/lib/prisma";
+import { prisma, type Prisma } from "@/lib/prisma";
 
 export interface HeroMetric {
   value: string;
@@ -338,8 +338,8 @@ export async function updateSiteSettings(
     if (process.env.DATABASE_URL && !process.env.DATABASE_URL.includes("localhost:5432")) {
       await prisma.siteSetting.upsert({
         where: { id: "default" },
-        update: { data: merged as any },
-        create: { id: "default", data: merged as any },
+        update: { data: merged as unknown as Prisma.InputJsonValue },
+        create: { id: "default", data: merged as unknown as Prisma.InputJsonValue },
       });
     }
   } catch (err) {

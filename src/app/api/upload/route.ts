@@ -40,10 +40,11 @@ export async function POST(request: NextRequest) {
     });
 
     return NextResponse.json({ url: blob.url });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Erreur API upload blob:", error);
+    const message = error instanceof Error ? error.message : "Erreur interne lors du téléversement";
     return NextResponse.json(
-      { error: error?.message || "Erreur interne lors du téléversement" },
+      { error: message },
       { status: 500 }
     );
   }

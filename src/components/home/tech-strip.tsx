@@ -103,7 +103,7 @@ export function TechStrip() {
           <div className="space-y-2 max-w-2xl">
             <span className="text-[11px] font-mono uppercase tracking-widest text-emerald-400 font-bold flex items-center gap-2">
               <Sparkles className="w-3.5 h-3.5" />
-              <span>// MAÎTRISE TECHNIQUE MULTI-STACK</span>
+              <span>{"// MAÎTRISE TECHNIQUE MULTI-STACK"}</span>
             </span>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight font-sans leading-tight">
               Une expertise polyvalente adaptée à vos enjeux

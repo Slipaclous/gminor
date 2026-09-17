@@ -31,8 +31,9 @@ export async function uploadImageAction(formData: FormData): Promise<{ url?: str
     });
 
     return { url: blob.url };
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error("Erreur upload Vercel Blob:", err);
-    return { error: err?.message || "Erreur lors de l'upload vers Vercel Blob" };
+    const message = err instanceof Error ? err.message : "Erreur lors de l'upload vers Vercel Blob";
+    return { error: message };
   }
 }

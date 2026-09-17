@@ -32,7 +32,7 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
           <div className="lg:col-span-5 space-y-8">
             <div className="space-y-4">
               <span className="text-xs font-mono uppercase tracking-wider text-zinc-400 block">
-                // CONTACT &amp; ESTIMATION
+                {"// CONTACT & ESTIMATION"}
               </span>
               <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-white font-sans leading-tight">
                 Discutons de votre projet en direct.
@@ -181,7 +181,7 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
             <div className="rounded-2xl bg-[#0d0d10] border border-white/[0.08] p-5 sm:p-6 space-y-3">
               <span className="text-[10px] font-mono uppercase tracking-wider text-emerald-400 font-bold flex items-center gap-1.5">
                 <MapPin className="w-3.5 h-3.5 text-emerald-400" />
-                <span>// ANCRAGE LOCAL &amp; DÉPLACEMENTS</span>
+                <span>{"// ANCRAGE LOCAL & DÉPLACEMENTS"}</span>
               </span>
               <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed">
                 Basé à <strong className="text-white">Enghien (7850, Hainaut)</strong>, je me déplace pour des réunions de cadrage et ateliers à <strong className="text-white">Bruxelles, Mons, Ath, Tournai, Nivelles, Braine-le-Comte, Soignies, Tubize, Lille</strong> et collabore à distance avec des clients dans toute la Belgique et en Europe.

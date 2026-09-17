@@ -102,7 +102,7 @@ export default async function Image() {
               letterSpacing: "2px",
             }}
           >
-            // DÉVELOPPEUR FULL-STACK &bull; NEXT.JS &bull; PRESTASHOP &bull; SYMFONY
+            {"// DÉVELOPPEUR FULL-STACK • NEXT.JS • PRESTASHOP • SYMFONY"}
           </div>
           <div
             style={{

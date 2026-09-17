@@ -195,7 +195,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailProps) 
         {project.metrics && project.metrics.length > 0 && (
           <div className="space-y-4">
             <span className="text-xs font-mono uppercase tracking-wider text-zinc-400 font-semibold block">
-              // IMPACT &amp; RÉSULTATS CHIFFRÉS
+              {"// IMPACT & RÉSULTATS CHIFFRÉS"}
             </span>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               {project.metrics.map((m, idx) => (

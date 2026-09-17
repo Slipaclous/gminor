@@ -1,6 +1,8 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
+import { Category } from "@/generated/prisma/enums";
+import type { Prisma } from "@/generated/prisma/client";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { verifyAdminSession } from "@/lib/auth";
@@ -94,7 +96,7 @@ export async function createProjectAction(
           title,
           tagline,
           description: description || tagline,
-          category: category as any,
+          category: (Category[category as keyof typeof Category] || Category.FULLSTACK),
           client,
           role,
           year,
@@ -107,7 +109,7 @@ export async function createProjectAction(
           challenge,
           solution,
           results,
-          metrics: metrics as any,
+          metrics: metrics as unknown as Prisma.InputJsonValue,
         },
       });
     }
@@ -217,7 +219,7 @@ export async function updateProjectAction(
           title,
           tagline,
           description: description || tagline,
-          category: category as any,
+          category: (Category[category as keyof typeof Category] || Category.FULLSTACK),
           client,
           role,
           year,
@@ -230,7 +232,7 @@ export async function updateProjectAction(
           challenge,
           solution,
           results,
-          metrics: metrics as any,
+          metrics: metrics as unknown as Prisma.InputJsonValue,
         },
       });
     }

@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 dotenv.config({ path: ".env.local" });
 dotenv.config();
 
-import { PrismaClient } from "../src/generated/prisma/client";
+import { PrismaClient, type Prisma } from "../src/generated/prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { Pool } from "pg";
 import { PROJECTS_DATA } from "../src/data/projects";
@@ -41,7 +41,7 @@ async function main() {
         challenge: p.challenge,
         solution: p.solution,
         results: p.results,
-        metrics: (p.metrics as any) || [],
+        metrics: (p.metrics as unknown as Prisma.InputJsonValue) || [],
       },
     });
     console.log(`✅ Projet synchronisé en base : ${p.title}`);

@@ -23,7 +23,7 @@ export default async function FaqPage() {
         {/* Page Header */}
         <div className="space-y-4 max-w-3xl">
           <span className="text-xs font-mono uppercase tracking-wider text-zinc-400 block">
-            // FOIRE AUX QUESTIONS
+            {"// FOIRE AUX QUESTIONS"}
           </span>
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-white font-sans leading-tight">
             Tout ce que vous devez savoir avant de lancer votre projet.

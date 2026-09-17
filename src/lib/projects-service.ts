@@ -16,7 +16,7 @@ export async function getDbProjects(): Promise<ProjectItem[]> {
           let parsedMetrics: { label: string; value: string }[] = [];
           if (p.metrics) {
             if (Array.isArray(p.metrics)) {
-              parsedMetrics = p.metrics as any;
+              parsedMetrics = p.metrics as unknown as { label: string; value: string }[];
             } else if (typeof p.metrics === "string") {
               try {
                 parsedMetrics = JSON.parse(p.metrics);

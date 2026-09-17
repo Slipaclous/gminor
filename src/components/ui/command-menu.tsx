@@ -134,12 +134,19 @@ export function CommandMenu() {
   // Focus input on open
   useEffect(() => {
     if (isOpen) {
-      setTimeout(() => inputRef.current?.focus(), 50);
-    } else {
+      const timer = setTimeout(() => inputRef.current?.focus(), 50);
+      return () => clearTimeout(timer);
+    }
+  }, [isOpen]);
+
+  const [prevIsOpen, setPrevIsOpen] = useState(isOpen);
+  if (prevIsOpen !== isOpen) {
+    setPrevIsOpen(isOpen);
+    if (!isOpen) {
       setQuery("");
       setSelectedIndex(0);
     }
-  }, [isOpen]);
+  }
 
   // Dynamic actions
   const allCommands: CommandItem[] = [

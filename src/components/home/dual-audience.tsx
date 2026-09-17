@@ -75,7 +75,7 @@ export function DualAudience({ pillars }: DualAudienceProps) {
       {/* Header with reveal */}
       <ScrollReveal className="space-y-3 sm:space-y-4 max-w-3xl mb-10 sm:mb-16">
         <span className="text-xs font-mono uppercase tracking-wider text-zinc-400 block">
-          // MÉTHODE &amp; VALEUR AJOUTÉE
+          {"// MÉTHODE & VALEUR AJOUTÉE"}
         </span>
         <h2 className="text-2xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white font-sans leading-tight">
           L&apos;exigence de l&apos;ingénierie au service de votre image.
@@ -86,26 +86,26 @@ export function DualAudience({ pillars }: DualAudienceProps) {
       </ScrollReveal>
 
       {/* 4 Pillars Grid with Stagger */}
-      <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
+      <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
         {displayPillars.map((pillar, idx) => {
           const Icon = DEFAULT_ICONS[idx % DEFAULT_ICONS.length];
           return (
             <StaggerItem key={pillar.id || idx}>
-              <div className="group relative rounded-3xl bg-[#0d0d10] border border-white/[0.08] hover:border-emerald-500/30 p-6 sm:p-8 flex flex-col justify-between space-y-6 transition-all duration-300 shadow-xl h-full overflow-hidden hover:shadow-[0_0_24px_rgba(16,185,129,0.04)]">
+              <div className="group relative rounded-3xl bg-[#0d0d10] border border-white/[0.08] hover:border-emerald-500/30 p-7 sm:p-9 flex flex-col justify-between space-y-6 transition-all duration-300 shadow-xl h-full overflow-hidden hover:shadow-[0_0_24px_rgba(16,185,129,0.04)]">
                 <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-emerald-400/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
 
-                <div className="space-y-4 sm:space-y-5">
+                <div className="space-y-5">
                   <div className="flex items-center justify-between">
-                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-zinc-900 border border-white/[0.1] flex items-center justify-center text-white">
-                      <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-emerald-400" />
+                    <div className="w-12 h-12 rounded-2xl bg-zinc-900 border border-white/[0.1] flex items-center justify-center text-white">
+                      <Icon className="w-5 h-5 text-emerald-400" />
                     </div>
                     <span className="text-xs font-mono text-zinc-500 font-bold">
                       0{pillar.id || idx + 1}
                     </span>
                   </div>
 
-                  <div className="space-y-1 sm:space-y-1.5">
-                    <h3 className="text-lg sm:text-xl font-bold text-white tracking-tight">
+                  <div className="space-y-1.5">
+                    <h3 className="text-xl font-bold text-white tracking-tight leading-snug">
                       {pillar.title}
                     </h3>
                     <span className="text-xs font-mono text-zinc-400 block">
@@ -113,11 +113,11 @@ export function DualAudience({ pillars }: DualAudienceProps) {
                     </span>
                   </div>
 
-                  <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed font-normal">
+                  <p className="text-sm text-zinc-400 leading-relaxed font-normal">
                     {pillar.description}
                   </p>
 
-                  <ul className="space-y-2 pt-2 border-t border-white/[0.06]">
+                  <ul className="space-y-2.5 pt-3 border-t border-white/[0.06]">
                     {pillar.points.map((pt, pIdx) => (
                       <li
                         key={pIdx}

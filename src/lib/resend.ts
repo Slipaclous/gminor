@@ -105,8 +105,9 @@ export async function sendContactNotificationEmail({
     }
 
     return { success: true };
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error("Erreur envoi email Resend:", err);
-    return { success: false, error: err?.message || "Erreur inconnue" };
+    const message = err instanceof Error ? err.message : "Erreur inconnue";
+    return { success: false, error: message };
   }
 }

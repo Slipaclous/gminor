@@ -59,7 +59,7 @@ export function CollaborationJourney() {
           <div className="space-y-3 max-w-2xl">
             <span className="text-[11px] font-mono uppercase tracking-widest text-emerald-400 font-bold flex items-center gap-2">
               <Sparkles className="w-3.5 h-3.5" />
-              <span>// VOTRE EXPÉRIENCE CLIENT &amp; SÉRÉNITÉ</span>
+              <span>{"// VOTRE EXPÉRIENCE CLIENT & SÉRÉNITÉ"}</span>
             </span>
             <h2 className="text-2xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white font-sans leading-tight">
               Comment se déroule notre collaboration.

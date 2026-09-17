@@ -36,9 +36,10 @@ export function ImageUpload({ initialValue = "", name = "imageUrl" }: ImageUploa
       } else if (data.url) {
         setImageUrl(data.url);
       }
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error("Erreur upload client:", err);
-      setErrorMessage(err?.message || "Erreur de connexion lors du téléversement.");
+      const message = err instanceof Error ? err.message : "Erreur de connexion lors du téléversement.";
+      setErrorMessage(message);
     } finally {
       setIsUploading(false);
     }

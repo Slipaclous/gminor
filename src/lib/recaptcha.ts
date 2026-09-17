@@ -68,7 +68,7 @@ export async function verifyRecaptchaToken(
     }
 
     return { success: true, score };
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error("Erreur appel API reCAPTCHA:", err);
     // En cas de panne temporaire des serveurs Google, on ne bloque pas les prospects légitimes
     return { success: true, score: 0.8 };

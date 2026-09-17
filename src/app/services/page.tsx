@@ -61,7 +61,7 @@ export default async function ServicesPage() {
         {/* Page Header */}
         <div className="space-y-4 max-w-3xl">
           <span className="text-xs font-mono uppercase tracking-wider text-zinc-400 block">
-            // SERVICES &amp; OFFRES
+            {"// SERVICES & OFFRES"}
           </span>
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-white font-sans leading-tight">
             Des solutions logicielles sur-mesure pour votre activité.
@@ -150,7 +150,7 @@ export default async function ServicesPage() {
         <div className="rounded-3xl bg-[#0d0d10] border border-white/[0.1] p-8 sm:p-12 md:p-16 space-y-12 shadow-xl">
           <div className="space-y-3 max-w-2xl">
             <span className="text-xs font-mono uppercase tracking-wider text-zinc-400 block">
-              // PROCESSUS DE TRAVAIL
+              {"// PROCESSUS DE TRAVAIL"}
             </span>
             <h2 className="text-3xl font-extrabold text-white tracking-tight">
               Une méthode transparente en 4 étapes.
