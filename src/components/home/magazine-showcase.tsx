@@ -12,7 +12,7 @@ interface MagazineShowcaseProps {
   totalProjectsCount?: number;
 }
 
-const AUTOPLAY_INTERVAL = 6000; // 6 seconds per project
+const PROJECT_DURATION_MS = 6000; // 6 seconds per project
 
 export function MagazineShowcase({
   projects,
@@ -20,30 +20,35 @@ export function MagazineShowcase({
 }: MagazineShowcaseProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-  const [progressKey, setProgressKey] = useState(0);
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const [progress, setProgress] = useState(0); // 0 to 100%
 
   const displayCount = totalProjectsCount || projects.length;
   const currentProject = projects[activeIndex] || projects[0];
   const primaryMetric = currentProject?.metrics?.[0];
 
-  // Autoplay loop with smooth cadence
+  // Smooth continuous progress ticker with pause support
   useEffect(() => {
     if (isPaused || projects.length <= 1) return;
 
-    timerRef.current = setTimeout(() => {
-      setActiveIndex((prev) => (prev + 1) % projects.length);
-      setProgressKey((k) => k + 1);
-    }, AUTOPLAY_INTERVAL);
+    const intervalStep = 50;
+    const increment = (intervalStep / PROJECT_DURATION_MS) * 100;
 
-    return () => {
-      if (timerRef.current) clearTimeout(timerRef.current);
-    };
-  }, [activeIndex, isPaused, projects.length]);
+    const timer = setInterval(() => {
+      setProgress((prev) => {
+        if (prev + increment >= 100) {
+          setActiveIndex((currentIdx) => (currentIdx + 1) % projects.length);
+          return 0;
+        }
+        return prev + increment;
+      });
+    }, intervalStep);
+
+    return () => clearInterval(timer);
+  }, [isPaused, projects.length]);
 
   const handleManualSelect = (idx: number) => {
     setActiveIndex(idx);
-    setProgressKey((k) => k + 1);
+    setProgress(0);
   };
 
   return (
@@ -153,15 +158,9 @@ export function MagazineShowcase({
                 {/* Progress bar line for active item */}
                 {isActive && (
                   <div className="absolute bottom-0 left-0 right-0 h-1 bg-white/20">
-                    <motion.div
-                      key={progressKey}
-                      className="h-full bg-emerald-400"
-                      initial={{ width: "0%" }}
-                      animate={{ width: isPaused ? "100%" : "100%" }}
-                      transition={{
-                        duration: isPaused ? 0 : AUTOPLAY_INTERVAL / 1000,
-                        ease: "linear",
-                      }}
+                    <div
+                      className="h-full bg-emerald-400 transition-all duration-75 ease-linear"
+                      style={{ width: `${progress}%` }}
                     />
                   </div>
                 )}
@@ -297,7 +296,7 @@ export function MagazineShowcase({
                     type="button"
                     onClick={() => {
                       setActiveIndex((prev) => (prev + 1) % projects.length);
-                      setProgressKey((k) => k + 1);
+                      setProgress(0);
                     }}
                     className="inline-flex items-center gap-1.5 text-xs font-mono font-semibold text-[#555765] hover:text-[#18191f] transition-colors cursor-pointer"
                   >

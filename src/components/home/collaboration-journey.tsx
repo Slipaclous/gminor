@@ -89,34 +89,39 @@ const JOURNEY_STEPS = [
   },
 ];
 
-const AUTOPLAY_INTERVAL = 6500; // 6.5s per step
+const STEP_DURATION_MS = 6000;
 
 export function CollaborationJourney() {
   const [activeStep, setActiveStep] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-  const [progressKey, setProgressKey] = useState(0);
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const [progress, setProgress] = useState(0); // 0 to 100%
 
   const current = JOURNEY_STEPS[activeStep];
   const StepIcon = current.icon;
 
-  // Autoplay progression
+  // Accurate interval ticker that pauses smoothly without restarting from 0
   useEffect(() => {
     if (isPaused) return;
 
-    timerRef.current = setTimeout(() => {
-      setActiveStep((prev) => (prev + 1) % JOURNEY_STEPS.length);
-      setProgressKey((k) => k + 1);
-    }, AUTOPLAY_INTERVAL);
+    const intervalStep = 50; // update every 50ms for buttery smooth bar
+    const increment = (intervalStep / STEP_DURATION_MS) * 100;
 
-    return () => {
-      if (timerRef.current) clearTimeout(timerRef.current);
-    };
-  }, [activeStep, isPaused]);
+    const timer = setInterval(() => {
+      setProgress((prev) => {
+        if (prev + increment >= 100) {
+          setActiveStep((currentIdx) => (currentIdx + 1) % JOURNEY_STEPS.length);
+          return 0;
+        }
+        return prev + increment;
+      });
+    }, intervalStep);
+
+    return () => clearInterval(timer);
+  }, [isPaused]);
 
   const handleManualSelect = (idx: number) => {
     setActiveStep(idx);
-    setProgressKey((k) => k + 1);
+    setProgress(0);
   };
 
   return (
@@ -241,18 +246,12 @@ export function CollaborationJourney() {
                         {item.badge}
                       </p>
 
-                      {/* Animated Progress Bar for Active Step */}
+                      {/* Smooth Progress Bar for Active Step */}
                       {isActive && (
                         <div className="absolute bottom-0 left-0 right-0 h-1 bg-[#e6e6df]">
-                          <motion.div
-                            key={progressKey}
-                            className="h-full bg-emerald-600"
-                            initial={{ width: "0%" }}
-                            animate={{ width: isPaused ? "100%" : "100%" }}
-                            transition={{
-                              duration: isPaused ? 0 : AUTOPLAY_INTERVAL / 1000,
-                              ease: "linear",
-                            }}
+                          <div
+                            className="h-full bg-emerald-600 transition-all duration-75 ease-linear"
+                            style={{ width: `${progress}%` }}
                           />
                         </div>
                       )}
@@ -346,7 +345,7 @@ export function CollaborationJourney() {
                     type="button"
                     onClick={() => {
                       setActiveStep((prev) => (prev + 1) % JOURNEY_STEPS.length);
-                      setProgressKey((k) => k + 1);
+                      setProgress(0);
                     }}
                     className="inline-flex items-center gap-1.5 text-xs font-mono font-semibold text-[#555765] hover:text-[#18191f] transition-colors cursor-pointer"
                   >
