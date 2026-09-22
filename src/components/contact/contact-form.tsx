@@ -67,21 +67,15 @@ export function ContactForm({ initialService, initialBudget }: ContactFormProps)
   return (
     <form
       action={handleSubmit}
-      className="group relative rounded-3xl bg-white border border-[#e6e6df] hover:border-emerald-500/40 p-6 sm:p-10 space-y-8 shadow-card transition-all duration-300 overflow-hidden"
+      className="rounded-3xl bg-white border border-[#e6e6df] p-7 sm:p-10 space-y-8 shadow-sm transition-all duration-200"
     >
       {/* Top Form Header */}
-      <div className="space-y-2 pb-4 border-b border-[#e6e6df]">
-        <div className="flex items-center gap-2">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-700" />
-          <span className="text-xs font-mono text-emerald-800 font-semibold uppercase tracking-wider">
-            Échange direct &bull; Réponse sous 24h
-          </span>
-        </div>
-        <h2 className="text-2xl sm:text-3xl font-extrabold text-[#18191f] tracking-tight">
-          Parlons de votre projet
+      <div className="space-y-2 pb-5 border-b border-[#e6e6df]">
+        <h2 className="text-xl sm:text-2xl font-bold text-[#18191f] tracking-tight">
+          Votre projet en quelques lignes
         </h2>
-        <p className="text-sm sm:text-base text-[#555765]">
-          Remplissez ce formulaire et je vous réponds sous 24h ouvrées avec une première approche concrète.
+        <p className="text-sm text-[#555765] leading-relaxed">
+          Décrivez brièvement vos attentes. Plus vos précisions sont claires, plus mon retour et mon estimation seront précis.
         </p>
       </div>
 
@@ -92,13 +86,13 @@ export function ContactForm({ initialService, initialBudget }: ContactFormProps)
       )}
 
       {/* Row 1: Name & Email */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
         <div className="space-y-2">
           <label
             htmlFor="name"
             className="block text-xs font-mono uppercase tracking-wider text-[#18191f] font-bold"
           >
-            Votre Nom &amp; Prénom *
+            Votre nom &amp; prénom *
           </label>
           <input
             id="name"
@@ -106,7 +100,7 @@ export function ContactForm({ initialService, initialBudget }: ContactFormProps)
             type="text"
             required
             placeholder="Sophie Martin"
-            className="w-full px-4 py-3 rounded-xl bg-[#fafaf8] border border-[#e6e6df] text-sm text-[#18191f] placeholder:text-[#555765]/50 focus:outline-none focus:border-[#18191f] focus:bg-white transition-all shadow-xs"
+            className="w-full px-4 py-3 rounded-xl bg-[#fafaf8] border border-[#e6e6df] text-sm text-[#18191f] placeholder:text-[#555765]/40 focus:outline-none focus:border-[#18191f] focus:bg-white transition-all shadow-2xs"
           />
         </div>
 
@@ -115,7 +109,7 @@ export function ContactForm({ initialService, initialBudget }: ContactFormProps)
             htmlFor="email"
             className="block text-xs font-mono uppercase tracking-wider text-[#18191f] font-bold"
           >
-            Votre Email Professionnel *
+            Email professionnel *
           </label>
           <input
             id="email"
@@ -123,26 +117,26 @@ export function ContactForm({ initialService, initialBudget }: ContactFormProps)
             type="email"
             required
             placeholder="sophie@entreprise.be"
-            className="w-full px-4 py-3 rounded-xl bg-[#fafaf8] border border-[#e6e6df] text-sm text-[#18191f] placeholder:text-[#555765]/50 focus:outline-none focus:border-[#18191f] focus:bg-white transition-all shadow-xs"
+            className="w-full px-4 py-3 rounded-xl bg-[#fafaf8] border border-[#e6e6df] text-sm text-[#18191f] placeholder:text-[#555765]/40 focus:outline-none focus:border-[#18191f] focus:bg-white transition-all shadow-2xs"
           />
         </div>
       </div>
 
       {/* Row 2: Company & Phone */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
         <div className="space-y-2">
           <label
             htmlFor="company"
             className="block text-xs font-mono uppercase tracking-wider text-[#18191f] font-bold"
           >
-            Entreprise ou Activité
+            Société ou structure <span className="text-[#555765] font-normal">(facultatif)</span>
           </label>
           <input
             id="company"
             name="company"
             type="text"
             placeholder="Cabinet Martin, Boutique..."
-            className="w-full px-4 py-3 rounded-xl bg-[#fafaf8] border border-[#e6e6df] text-sm text-[#18191f] placeholder:text-[#555765]/50 focus:outline-none focus:border-[#18191f] focus:bg-white transition-all shadow-xs"
+            className="w-full px-4 py-3 rounded-xl bg-[#fafaf8] border border-[#e6e6df] text-sm text-[#18191f] placeholder:text-[#555765]/40 focus:outline-none focus:border-[#18191f] focus:bg-white transition-all shadow-2xs"
           />
         </div>
 
@@ -151,14 +145,14 @@ export function ContactForm({ initialService, initialBudget }: ContactFormProps)
             htmlFor="phone"
             className="block text-xs font-mono uppercase tracking-wider text-[#18191f] font-bold"
           >
-            Téléphone
+            Téléphone <span className="text-[#555765] font-normal">(facultatif)</span>
           </label>
           <input
             id="phone"
             name="phone"
             type="tel"
             placeholder="0470 12 34 56"
-            className="w-full px-4 py-3 rounded-xl bg-[#fafaf8] border border-[#e6e6df] text-sm text-[#18191f] placeholder:text-[#555765]/50 focus:outline-none focus:border-[#18191f] focus:bg-white transition-all shadow-xs"
+            className="w-full px-4 py-3 rounded-xl bg-[#fafaf8] border border-[#e6e6df] text-sm text-[#18191f] placeholder:text-[#555765]/40 focus:outline-none focus:border-[#18191f] focus:bg-white transition-all shadow-2xs"
           />
         </div>
       </div>
@@ -166,7 +160,7 @@ export function ContactForm({ initialService, initialBudget }: ContactFormProps)
       {/* Row 3: Service Selection */}
       <div className="space-y-3">
         <label className="block text-xs font-mono uppercase tracking-wider text-[#18191f] font-bold">
-          Type de projet souhaité
+          Type de prestation recherchée
         </label>
         <div className="flex flex-wrap gap-2">
           {SERVICE_OPTIONS.map((srv) => {
@@ -176,10 +170,10 @@ export function ContactForm({ initialService, initialBudget }: ContactFormProps)
                 key={srv}
                 type="button"
                 onClick={() => setSelectedService(srv)}
-                className={`px-3.5 py-2 rounded-xl text-xs font-medium transition-all border cursor-pointer ${
+                className={`px-3.5 py-2 rounded-xl text-xs transition-all border cursor-pointer ${
                   isSelected
                     ? "bg-[#18191f] text-white border-[#18191f] font-semibold shadow-xs"
-                    : "bg-[#fafaf8] text-[#555765] border-[#e6e6df] hover:border-[#18191f]/40 hover:bg-white"
+                    : "bg-[#fafaf8] text-[#555765] border-[#e6e6df] hover:border-[#18191f]/40 hover:bg-white font-medium"
                 }`}
               >
                 {srv}
@@ -187,41 +181,41 @@ export function ContactForm({ initialService, initialBudget }: ContactFormProps)
             );
           })}
         </div>
+      </div>
 
-        {/* Budget Selection (Bouton 'Je ne sais pas encore' OU Champ de saisie) */}
-        <div className="space-y-2 pt-1">
-          <label
-            htmlFor="budget-input"
-            className="block text-xs font-mono uppercase tracking-wider text-[#18191f] font-bold"
+      {/* Row 4: Budget Selection */}
+      <div className="space-y-2.5">
+        <label
+          htmlFor="budget-input"
+          className="block text-xs font-mono uppercase tracking-wider text-[#18191f] font-bold"
+        >
+          Ordre de grandeur du budget <span className="text-[#555765] font-normal">(facultatif)</span>
+        </label>
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+          <button
+            type="button"
+            onClick={() => setBudget("Je ne sais pas encore")}
+            className={`px-4 py-2.5 rounded-xl text-xs transition-all cursor-pointer whitespace-nowrap shrink-0 border ${
+              budget === "Je ne sais pas encore"
+                ? "bg-[#18191f] text-white border-[#18191f] font-bold shadow-xs"
+                : "bg-[#fafaf8] text-[#555765] hover:text-[#18191f] hover:bg-white border-[#e6e6df] font-medium"
+            }`}
           >
-            Budget envisagé <span className="text-[#555765] font-normal">(facultatif)</span>
-          </label>
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-            <button
-              type="button"
-              onClick={() => setBudget("Je ne sais pas encore")}
-              className={`px-4 py-3 rounded-xl text-xs font-semibold transition-all cursor-pointer whitespace-nowrap shrink-0 border ${
-                budget === "Je ne sais pas encore"
-                  ? "bg-[#18191f] text-white border-[#18191f] shadow-xs font-bold"
-                  : "bg-[#fafaf8] text-[#555765] hover:text-[#18191f] hover:bg-white border-[#e6e6df]"
-              }`}
-            >
-              Je ne sais pas encore
-            </button>
+            À définir ensemble
+          </button>
 
-            <span className="text-xs font-mono text-[#555765] uppercase text-center sm:text-left">
-              ou
-            </span>
+          <span className="text-xs font-mono text-[#555765] uppercase text-center sm:text-left">
+            ou
+          </span>
 
-            <input
-              id="budget-input"
-              type="text"
-              value={budget === "Je ne sais pas encore" ? "" : budget}
-              onChange={(e) => setBudget(e.target.value)}
-              placeholder="Saisissez votre budget (ex: 2 500 €, 5 000 €...)"
-              className="flex-1 px-4 py-3 rounded-xl bg-[#fafaf8] border border-[#e6e6df] text-sm text-[#18191f] placeholder:text-[#555765]/50 focus:outline-none focus:border-[#18191f] focus:bg-white transition-all shadow-xs"
-            />
-          </div>
+          <input
+            id="budget-input"
+            type="text"
+            value={budget === "Je ne sais pas encore" ? "" : budget}
+            onChange={(e) => setBudget(e.target.value)}
+            placeholder="Ex : 2 000 €, 4 500 €..."
+            className="flex-1 px-4 py-2.5 rounded-xl bg-[#fafaf8] border border-[#e6e6df] text-sm text-[#18191f] placeholder:text-[#555765]/40 focus:outline-none focus:border-[#18191f] focus:bg-white transition-all shadow-2xs"
+          />
         </div>
       </div>
 
@@ -231,36 +225,36 @@ export function ContactForm({ initialService, initialBudget }: ContactFormProps)
           htmlFor="message"
           className="block text-xs font-mono uppercase tracking-wider text-[#18191f] font-bold"
         >
-          Quelques mots sur votre projet ou vos objectifs *
+          Détails de votre besoin ou objectifs *
         </label>
         <textarea
           id="message"
           name="message"
           rows={4}
           required
-          placeholder="Ex : Bonjour Gauthier, je souhaite créer un nouveau site pour mon entreprise avec environ 4 ou 5 pages, une présentation de nos services et un formulaire de contact..."
-          className="w-full px-4 py-3 rounded-xl bg-[#fafaf8] border border-[#e6e6df] text-sm text-[#18191f] placeholder:text-[#555765]/50 focus:outline-none focus:border-[#18191f] focus:bg-white transition-all resize-y min-h-[120px] leading-relaxed shadow-xs"
+          placeholder="Ex : Bonjour Gauthier, je souhaite refondre le site web de notre activité afin de moderniser notre image et acquérir de nouveaux clients..."
+          className="w-full px-4 py-3 rounded-xl bg-[#fafaf8] border border-[#e6e6df] text-sm text-[#18191f] placeholder:text-[#555765]/40 focus:outline-none focus:border-[#18191f] focus:bg-white transition-all resize-y min-h-[120px] leading-relaxed shadow-2xs"
         />
         {state?.errors?.message && (
           <p className="text-xs text-red-600">{state.errors.message[0]}</p>
         )}
       </div>
 
-      {/* Submit Button */}
+      {/* Submit Button & Reassurance */}
       <div className="space-y-3 pt-2">
         <button
           type="submit"
           disabled={isPending}
-          className="w-full inline-flex items-center justify-center gap-2 py-4 px-6 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider text-white bg-[#18191f] hover:bg-[#2d2e38] disabled:opacity-50 transition-all duration-150 active:scale-[0.98] cursor-pointer shadow-md"
+          className="w-full inline-flex items-center justify-center gap-2 py-4 px-6 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider text-white bg-[#18191f] hover:bg-[#2d2e38] disabled:opacity-50 transition-all duration-150 active:scale-[0.99] cursor-pointer shadow-sm"
         >
           {isPending ? (
             <>
               <Loader2 className="w-4 h-4 animate-spin" />
-              <span>Envoi de votre message en cours...</span>
+              <span>Envoi de votre demande en cours...</span>
             </>
           ) : (
             <>
-              <span>Envoyer ma demande de projet</span>
+              <span>Envoyer ma demande</span>
               <Send className="w-4 h-4 text-emerald-400" />
             </>
           )}
@@ -268,11 +262,11 @@ export function ContactForm({ initialService, initialBudget }: ContactFormProps)
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2 text-xs text-[#555765] text-center font-mono">
           <div className="flex items-center gap-1.5">
-            <ShieldCheck className="w-4 h-4 text-emerald-600" />
+            <ShieldCheck className="w-4 h-4 text-emerald-700" />
             <span>Réponse garantie sous 24h</span>
           </div>
           <span className="hidden sm:inline text-[#d5d5cc]">&bull;</span>
-          <span>Devis gratuit et sans engagement</span>
+          <span>Devis 100% gratuit et sans engagement</span>
         </div>
       </div>
     </form>
