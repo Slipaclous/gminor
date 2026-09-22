@@ -31,9 +31,6 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
           {/* Left Column: Direct Info & Reassurance */}
           <div className="lg:col-span-5 space-y-8">
             <div className="space-y-4">
-              <span className="text-xs font-mono uppercase tracking-wider text-[#555765] block font-semibold">
-                {"// CONTACT & ESTIMATION"}
-              </span>
               <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-[#18191f] font-sans leading-tight">
                 Discutons de votre projet en direct.
               </h1>

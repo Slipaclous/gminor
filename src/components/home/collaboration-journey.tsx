@@ -129,9 +129,6 @@ export function CollaborationJourney() {
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div className="space-y-3 max-w-2xl">
-            <span className="text-[11px] font-mono uppercase tracking-widest text-emerald-800 font-bold block">
-              MÉTHODE &amp; PROCESSUS CLIENT
-            </span>
             <h2 className="text-2xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-[#18191f] font-sans leading-tight">
               Comment se déroule notre collaboration.
             </h2>

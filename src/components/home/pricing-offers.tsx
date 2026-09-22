@@ -71,9 +71,6 @@ export function PricingOffers() {
         
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4">
-          <span className="text-xs font-mono uppercase tracking-wider text-emerald-700 font-bold block">
-            OFFRES CLAIRES &amp; TRANSPARENTES
-          </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#18191f] leading-tight">
             Des formules adaptées à votre étape de croissance.
           </h2>

@@ -12,10 +12,6 @@ export function CtaBanner() {
         <div className="absolute top-0 right-0 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
 
         <div className="relative z-10 max-w-3xl space-y-6">
-          <div className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-bold">
-            PROCHAINE ÉTAPE
-          </div>
-
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white leading-tight">
             Prêt à donner à votre entreprise le site qu&apos;elle mérite ?
           </h2>

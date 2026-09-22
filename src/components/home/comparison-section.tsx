@@ -49,9 +49,6 @@ export function ComparisonSection() {
         
         {/* Editorial Header */}
         <div className="space-y-4 max-w-3xl">
-          <span className="text-xs font-mono uppercase tracking-wider text-emerald-700 font-bold block">
-            COMPARATIF &amp; TRANSPARENCE
-          </span>
           <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#18191f] leading-tight">
             Pourquoi les chefs d&apos;entreprise évitent les agences classiques.
           </h2>
