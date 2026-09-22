@@ -1,14 +1,9 @@
 import React from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { getSiteSettings } from "@/lib/settings-service";
 import { PricingOffers } from "@/components/home/pricing-offers";
 import { CtaBanner } from "@/components/home/cta-banner";
 import {
-  Globe,
-  Layers,
-  Zap,
-  CheckCircle2,
   ArrowUpRight,
   HelpCircle,
 } from "lucide-react";
@@ -20,8 +15,6 @@ export const metadata: Metadata = {
   description:
     "Création de sites internet d'entreprise haute performance et développement d'applications SaaS sur-mesure (Next.js, Prisma, PostgreSQL).",
 };
-
-const SERVICE_ICONS = [Globe, Layers, Zap];
 
 const PROCESS_STEPS = [
   {
@@ -51,10 +44,6 @@ const PROCESS_STEPS = [
 ];
 
 export default async function ServicesPage() {
-  const settings = await getSiteSettings();
-  const services = settings.services;
-  const faqs = settings.faqs;
-
   return (
     <main className="flex-1 py-16 sm:py-24 bg-[#fafaf8]">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 space-y-24">
@@ -66,76 +55,6 @@ export default async function ServicesPage() {
           <p className="text-lg sm:text-xl text-[#555765] leading-relaxed font-normal">
             Sites vitrines ultra-rapides, boutiques e-commerce performantes et outils de gestion sur-mesure pour PME et indépendants.
           </p>
-        </div>
-
-        {/* Services Cards */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {services.map((service, idx) => {
-            const Icon = SERVICE_ICONS[idx % SERVICE_ICONS.length];
-            return (
-              <div
-                key={service.id}
-                id={service.id}
-                className="group relative rounded-3xl bg-white border border-[#e6e6df] p-8 flex flex-col justify-between space-y-8 hover:border-emerald-500/40 transition-all duration-300 shadow-card hover:shadow-lg overflow-hidden"
-              >
-                <div className="space-y-6">
-                  <div className="flex items-center justify-between">
-                    <div className="w-12 h-12 rounded-xl bg-[#f4f4f0] border border-[#e6e6df] flex items-center justify-center text-[#18191f]">
-                      <Icon className="w-6 h-6" />
-                    </div>
-                    <span className="text-xs font-mono text-[#555765] font-semibold px-2.5 py-1 rounded-md bg-[#fafaf8] border border-[#e6e6df]">
-                      {service.badge}
-                    </span>
-                  </div>
-
-                  <div className="space-y-2">
-                    <h2 className="text-2xl font-bold text-[#18191f] tracking-tight">
-                      {service.title}
-                    </h2>
-                    <p className="text-sm sm:text-base text-[#555765] leading-relaxed font-normal">
-                      {service.tagline}
-                    </p>
-                  </div>
-
-                  {/* Feature list */}
-                  <div className="space-y-3 pt-2">
-                    <span className="text-xs font-mono uppercase tracking-wider text-[#18191f] font-bold block">
-                      Livrables inclus :
-                    </span>
-                    <ul className="space-y-2.5">
-                      {service.features.map((feat, fIdx) => (
-                        <li
-                          key={fIdx}
-                          className="flex items-start gap-2.5 text-xs sm:text-sm text-[#555765] leading-relaxed"
-                        >
-                          <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                          <span>{feat}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-
-                {/* Bottom details & action */}
-                <div className="space-y-4 pt-6 border-t border-[#e6e6df]">
-                  <div className="flex items-center justify-between text-xs sm:text-sm font-semibold text-[#555765]">
-                    <span>Délai moyen :</span>
-                    <span className="text-[#18191f] font-bold font-mono">
-                      {service.deliveryTime}
-                    </span>
-                  </div>
-
-                  <Link
-                    href={`/contact?service=${encodeURIComponent(service.title)}`}
-                    className="w-full inline-flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl text-xs font-bold uppercase tracking-wider bg-[#18191f] hover:bg-[#2d2e38] text-white transition-all shadow-md active:scale-[0.98]"
-                  >
-                    <span>Demander un devis gratuit</span>
-                    <ArrowUpRight className="w-4 h-4 text-emerald-400" />
-                  </Link>
-                </div>
-              </div>
-            );
-          })}
         </div>
 
         {/* Pricing Packages Table */}
