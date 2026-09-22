@@ -10,7 +10,7 @@ export function PricingOffers() {
       badge: "Formule Recommandée",
       title: "Site Vitrine & Professionnel",
       price: "1 500 €",
-      period: "Forfait clé en main",
+      period: "À partir de • Forfait clé en main",
       description:
         "Idéal pour artisans, cabinets libéraux, consultants et commerçants voulant asseoir leur crédibilité et attirer des demandes de devis qualifiées.",
       features: [
@@ -29,7 +29,7 @@ export function PricingOffers() {
       badge: "Vente en ligne",
       title: "Boutique E-Commerce Réactive",
       price: "3 200 €",
-      period: "Forfait clé en main",
+      period: "À partir de • Forfait clé en main",
       description:
         "Pour les commerçants et marques souhaitant vendre leurs produits 24h/24 avec un parcours d'achat ultra-fluide et sans friction d'abandon de panier.",
       features: [
@@ -120,6 +120,13 @@ export function PricingOffers() {
 
                 {/* Price Display */}
                 <div className="pt-4 border-t border-current/10 space-y-1">
+                  <span
+                    className={`text-xs font-mono block ${
+                      pkg.popular ? "text-zinc-400" : "text-[#555765]"
+                    }`}
+                  >
+                    {pkg.price === "Sur devis" ? "Sur cahier des charges" : "À partir de"}
+                  </span>
                   <div className="flex items-baseline gap-2">
                     <span className="text-3xl sm:text-4xl font-extrabold font-mono tracking-tight">
                       {pkg.price}
