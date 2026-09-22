@@ -7,7 +7,7 @@ import {
   X,
   ArrowRight,
   FolderGit2,
-  Sparkles,
+  Home,
   Layers,
   HelpCircle,
   Mail,
@@ -37,7 +37,7 @@ const STATIC_COMMANDS: CommandItem[] = [
     category: "Navigation",
     subtitle: "Page principale du portfolio",
     href: "/",
-    icon: Sparkles,
+    icon: Home,
   },
   {
     id: "nav-projects",

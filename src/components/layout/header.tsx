@@ -43,7 +43,7 @@ export function Header() {
     <header
       className={`sticky top-0 z-50 w-full transition-all duration-200 ${
         scrolled
-          ? "bg-black/90 backdrop-blur-md border-b border-white/[0.08] py-3.5"
+          ? "bg-[#fafaf8]/90 backdrop-blur-md border-b border-[#e6e6df] shadow-xs py-3.5"
           : "bg-transparent py-5"
       }`}
     >
@@ -70,8 +70,8 @@ export function Header() {
                 }}
                 className={`text-sm font-medium transition-colors ${
                   isActive
-                    ? "text-white font-bold"
-                    : "text-zinc-400 hover:text-white"
+                    ? "text-[#18191f] font-bold"
+                    : "text-[#555765] hover:text-[#18191f]"
                 }`}
               >
                 {link.label}
@@ -85,12 +85,12 @@ export function Header() {
           <button
             type="button"
             onClick={openCommandMenu}
-            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-zinc-900/80 hover:bg-zinc-800 border border-white/[0.08] hover:border-white/[0.2] text-xs text-zinc-400 hover:text-white transition-all cursor-pointer shadow-sm"
+            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white hover:bg-[#f4f4f0] border border-[#e6e6df] text-xs text-[#555765] hover:text-[#18191f] transition-all cursor-pointer shadow-xs"
             aria-label="Recherche rapide (Cmd + K)"
           >
-            <Search className="w-3.5 h-3.5" />
-            <span className="font-mono text-[11px]">Recherche</span>
-            <kbd className="px-1.5 py-0.5 rounded bg-black border border-white/[0.15] text-[10px] font-mono text-zinc-400">
+            <Search className="w-3.5 h-3.5 text-zinc-400" />
+            <span className="text-[11px] font-medium">Recherche</span>
+            <kbd className="px-1.5 py-0.5 rounded bg-[#f4f4f0] border border-[#e6e6df] text-[10px] font-mono text-[#7c7e8c]">
               ⌘K
             </kbd>
           </button>
@@ -98,10 +98,10 @@ export function Header() {
           <Link
             href="/contact"
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider bg-white text-black hover:bg-zinc-200 transition-colors shadow-sm active:scale-95 cursor-pointer"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider bg-[#18191f] text-white hover:bg-[#2d2e38] transition-colors shadow-sm active:scale-95 cursor-pointer"
           >
             <span>Devis sous 24h</span>
-            <ArrowUpRight className="w-3.5 h-3.5" />
+            <ArrowUpRight className="w-3.5 h-3.5 text-emerald-400" />
           </Link>
         </div>
 
@@ -110,7 +110,7 @@ export function Header() {
           <button
             type="button"
             onClick={openCommandMenu}
-            className="p-2 text-zinc-400 hover:text-white rounded-xl bg-zinc-900/90 border border-white/[0.1] active:scale-95 transition-all"
+            className="p-2 text-[#555765] hover:text-[#18191f] rounded-xl bg-white border border-[#e6e6df] active:scale-95 transition-all shadow-xs"
             aria-label="Recherche"
           >
             <Search className="w-4 h-4" />
@@ -118,13 +118,13 @@ export function Header() {
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 text-zinc-300 hover:text-white rounded-xl bg-zinc-900/90 border border-white/[0.1] active:scale-95 transition-all cursor-pointer"
+            className="p-2 text-[#18191f] rounded-xl bg-white border border-[#e6e6df] active:scale-95 transition-all cursor-pointer shadow-xs"
             aria-label="Menu"
           >
             {mobileMenuOpen ? (
-              <X className="w-5 h-5 text-white" />
+              <X className="w-5 h-5 text-[#18191f]" />
             ) : (
-              <Menu className="w-5 h-5 text-white" />
+              <Menu className="w-5 h-5 text-[#18191f]" />
             )}
           </button>
         </div>
@@ -132,7 +132,7 @@ export function Header() {
 
       {/* Mobile Menu Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-b border-white/[0.1] bg-[#0c0d12]/95 backdrop-blur-xl px-5 py-6 space-y-5 shadow-2xl animate-in slide-in-from-top-3 duration-200">
+        <div className="md:hidden border-b border-[#e6e6df] bg-white/98 backdrop-blur-xl px-5 py-6 space-y-5 shadow-xl animate-in slide-in-from-top-3 duration-200">
           <nav className="flex flex-col space-y-1">
             {NAV_LINKS.map((link) => {
               const isActive =
@@ -149,28 +149,28 @@ export function Header() {
                   }}
                   className={`text-base font-semibold py-3 px-4 rounded-xl flex items-center justify-between transition-all ${
                     isActive
-                      ? "bg-zinc-900 text-white font-bold border border-white/[0.1] shadow-inner"
-                      : "text-zinc-300 hover:text-white hover:bg-zinc-900/50"
+                      ? "bg-[#f4f4f0] text-[#18191f] font-bold border border-[#e6e6df]"
+                      : "text-[#555765] hover:text-[#18191f] hover:bg-[#fafaf8]"
                   }`}
                 >
                   <span>{link.label}</span>
-                  <ArrowUpRight className={`w-4 h-4 ${isActive ? "text-emerald-400" : "text-zinc-500"}`} />
+                  <ArrowUpRight className={`w-4 h-4 ${isActive ? "text-emerald-600" : "text-zinc-400"}`} />
                 </Link>
               );
             })}
           </nav>
 
-          <div className="pt-3 border-t border-white/[0.08] flex items-center justify-between gap-3">
+          <div className="pt-3 border-t border-[#e6e6df] flex items-center justify-between gap-3">
             <Link
               href="/contact"
               onClick={() => {
                 setMobileMenuOpen(false);
                 window.scrollTo({ top: 0, behavior: "smooth" });
               }}
-              className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-xs font-bold uppercase tracking-wider bg-white text-black shadow-lg"
+              className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-xs font-bold uppercase tracking-wider bg-[#18191f] text-white shadow-md"
             >
-              <span>Demander un devis</span>
-              <ArrowUpRight className="w-4 h-4" />
+              <span>Demander un devis gratuit</span>
+              <ArrowUpRight className="w-4 h-4 text-emerald-400" />
             </Link>
           </div>
         </div>

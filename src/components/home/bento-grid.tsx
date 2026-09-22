@@ -24,10 +24,10 @@ export async function BentoGrid() {
 
         <Link
           href="/projets"
-          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-zinc-900 border border-white/[0.1] text-xs font-semibold text-zinc-300 hover:text-white hover:border-white/[0.25] transition-colors shrink-0 shadow-sm"
+          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white border border-[#e6e6df] text-xs font-semibold text-[#18191f] hover:bg-[#f4f4f0] hover:border-[#d5d5cc] transition-colors shrink-0 shadow-xs"
         >
           <span>Voir tous les projets ({allProjects.length})</span>
-          <ArrowUpRight className="w-4 h-4 text-emerald-400" />
+          <ArrowUpRight className="w-4 h-4 text-emerald-600" />
         </Link>
       </ScrollReveal>
 

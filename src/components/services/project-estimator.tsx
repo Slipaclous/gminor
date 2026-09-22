@@ -18,7 +18,6 @@ import {
   Video,
   Sun,
   Sunset,
-  Sparkles,
 } from "lucide-react";
 
 import { getRecaptchaToken } from "@/lib/use-recaptcha";
@@ -139,19 +138,19 @@ export function ProjectEstimator({ settings }: ProjectEstimatorProps) {
 
   return (
     <>
-      <div className="rounded-3xl bg-[#0d0d10] border border-white/[0.1] p-6 sm:p-10 space-y-8 shadow-2xl">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-white/[0.08]">
+      <div className="rounded-3xl bg-white border border-[#e6e6df] p-6 sm:p-10 space-y-8 shadow-card">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[#e6e6df]">
           <div className="space-y-1">
-            <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-zinc-400 font-semibold">
-              <Calculator className="w-4 h-4 text-emerald-400" />
+            <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-[#555765] font-semibold">
+              <Calculator className="w-4 h-4 text-emerald-600" />
               <span>Simulateur de Devis &amp; Délais</span>
             </div>
-            <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+            <h3 className="text-2xl sm:text-3xl font-extrabold text-[#18191f] tracking-tight">
               Estimez votre budget en direct
             </h3>
           </div>
 
-          <span className="text-xs text-zinc-400 font-mono">
+          <span className="text-xs text-[#555765] font-mono">
             Tarifs indicatifs &bull; Transparence totale
           </span>
         </div>
@@ -161,7 +160,7 @@ export function ProjectEstimator({ settings }: ProjectEstimatorProps) {
           <div className="lg:col-span-7 space-y-6">
             {/* Step 1: Project Type */}
             <div className="space-y-3">
-              <label className="block text-xs font-mono uppercase tracking-wider text-zinc-400 font-semibold">
+              <label className="block text-xs font-mono uppercase tracking-wider text-[#18191f] font-bold">
                 01. Type de projet principal
               </label>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
@@ -174,12 +173,12 @@ export function ProjectEstimator({ settings }: ProjectEstimatorProps) {
                       onClick={() => setSelectedType(type)}
                       className={`p-3.5 rounded-xl text-left transition-all border cursor-pointer ${
                         isSelected
-                          ? "bg-zinc-800 border-emerald-400 text-white shadow-md"
-                          : "bg-black border-white/[0.08] text-zinc-300 hover:border-white/[0.2]"
+                          ? "bg-[#18191f] border-[#18191f] text-white shadow-md"
+                          : "bg-[#fafaf8] border-[#e6e6df] text-[#18191f] hover:border-[#18191f]/40 hover:bg-white"
                       }`}
                     >
                       <div className="font-semibold text-sm">{type.name}</div>
-                      <span className="text-xs text-emerald-400/90 font-mono font-medium block mt-0.5">
+                      <span className={`text-xs font-mono font-medium block mt-0.5 ${isSelected ? "text-emerald-400" : "text-emerald-700"}`}>
                         À partir de {type.price.toLocaleString("fr-FR")} €
                       </span>
                     </button>
@@ -190,7 +189,7 @@ export function ProjectEstimator({ settings }: ProjectEstimatorProps) {
 
             {/* Step 2: Addons */}
             <div className="space-y-3">
-              <label className="block text-xs font-mono uppercase tracking-wider text-zinc-400 font-semibold">
+              <label className="block text-xs font-mono uppercase tracking-wider text-[#18191f] font-bold">
                 02. Options &amp; Fonctionnalités souhaitées
               </label>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
@@ -202,21 +201,21 @@ export function ProjectEstimator({ settings }: ProjectEstimatorProps) {
                       onClick={() => toggleAddon(addon.id)}
                       className={`p-3 rounded-xl border transition-all cursor-pointer flex items-center justify-between gap-3 ${
                         isChecked
-                          ? "bg-zinc-800/90 border-emerald-400/60 text-white"
-                          : "bg-black border-white/[0.08] text-zinc-300 hover:border-white/[0.2]"
+                          ? "bg-[#f4f4f0] border-[#18191f] text-[#18191f]"
+                          : "bg-[#fafaf8] border-[#e6e6df] text-[#555765] hover:border-[#18191f]/30 hover:bg-white"
                       }`}
                     >
                       <div className="space-y-0.5">
-                        <div className="text-xs font-semibold">{addon.name}</div>
-                        <div className="text-[11px] text-zinc-400 font-mono">
+                        <div className="text-xs font-semibold text-[#18191f]">{addon.name}</div>
+                        <div className="text-[11px] text-[#555765] font-mono">
                           +{addon.price} €
                         </div>
                       </div>
                       <div
                         className={`w-5 h-5 rounded-md flex items-center justify-center border shrink-0 ${
                           isChecked
-                            ? "bg-emerald-400 border-emerald-400 text-black"
-                            : "border-white/[0.2]"
+                            ? "bg-[#18191f] border-[#18191f] text-white"
+                            : "border-[#d5d5cc] bg-white"
                         }`}
                       >
                         {isChecked && <Check className="w-3.5 h-3.5 stroke-[3]" />}
@@ -229,40 +228,40 @@ export function ProjectEstimator({ settings }: ProjectEstimatorProps) {
           </div>
 
           {/* Right Summary Box */}
-          <div className="lg:col-span-5 rounded-2xl bg-black border border-white/[0.1] p-6 space-y-6">
+          <div className="lg:col-span-5 rounded-2xl bg-[#fafaf8] border border-[#e6e6df] p-6 space-y-6">
             <div className="space-y-1">
-              <span className="text-xs text-zinc-400 font-mono uppercase tracking-wider block">
+              <span className="text-xs text-[#555765] font-mono uppercase tracking-wider block">
                 Estimation indicative
               </span>
-              <div className="text-2xl sm:text-3xl font-extrabold text-white font-mono tracking-tight flex items-baseline gap-2 flex-wrap">
-                <span className="text-sm font-normal text-zinc-400">À partir de</span>
-                <span className="text-3xl sm:text-4xl text-emerald-400">~ {totalPrice.toLocaleString("fr-FR")} €</span>
+              <div className="text-2xl sm:text-3xl font-extrabold text-[#18191f] font-mono tracking-tight flex items-baseline gap-2 flex-wrap">
+                <span className="text-sm font-normal text-[#555765]">À partir de</span>
+                <span className="text-3xl sm:text-4xl text-[#18191f]">~ {totalPrice.toLocaleString("fr-FR")} €</span>
               </div>
-              <span className="text-[11px] text-zinc-400 block pt-1">
+              <span className="text-[11px] text-[#555765] block pt-1">
                 Tarif clé en main (code source &amp; déploiement inclus)
               </span>
             </div>
 
-            <div className="pt-4 border-t border-white/[0.08] space-y-2">
-              <div className="flex items-center justify-between text-xs text-zinc-300">
+            <div className="pt-4 border-t border-[#e6e6df] space-y-2">
+              <div className="flex items-center justify-between text-xs text-[#555765]">
                 <span className="flex items-center gap-1.5">
-                  <Clock className="w-4 h-4 text-emerald-400" />
+                  <Clock className="w-4 h-4 text-emerald-600" />
                   <span>Délai moyen de livraison :</span>
                 </span>
-                <span className="font-bold text-white font-mono">
+                <span className="font-bold text-[#18191f] font-mono">
                   {weeksTotal} à {weeksTotal + 1} semaines
                 </span>
               </div>
-              <div className="flex items-center justify-between text-xs text-zinc-300">
+              <div className="flex items-center justify-between text-xs text-[#555765]">
                 <span>Garantie support incluse :</span>
-                <span className="font-bold text-emerald-400 font-mono">30 jours</span>
+                <span className="font-bold text-emerald-700 font-mono">30 jours</span>
               </div>
             </div>
 
             {/* Price Variance & Complexity Disclaimer */}
-            <div className="p-3.5 rounded-xl bg-zinc-950/90 border border-white/[0.08] text-[11px] text-zinc-400 space-y-1.5">
-              <div className="flex items-center gap-1.5 font-semibold text-zinc-300">
-                <Sparkles className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+            <div className="p-3.5 rounded-xl bg-white border border-[#e6e6df] text-[11px] text-[#555765] space-y-1.5 shadow-xs">
+              <div className="flex items-center gap-1.5 font-semibold text-[#18191f]">
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
                 <span>Tarif indicatif &amp; sur-mesure</span>
               </div>
               <p className="leading-relaxed">
@@ -277,10 +276,10 @@ export function ProjectEstimator({ settings }: ProjectEstimatorProps) {
                 setIsSuccess(false);
                 setIsModalOpen(true);
               }}
-              className="w-full inline-flex items-center justify-center gap-2 py-3.5 px-5 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider bg-emerald-400 hover:bg-emerald-300 text-black transition-all cursor-pointer shadow-lg active:scale-95"
+              className="w-full inline-flex items-center justify-center gap-2 py-3.5 px-5 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider bg-[#18191f] hover:bg-[#2d2e38] text-white transition-all cursor-pointer shadow-md active:scale-95"
             >
               <span>Valider ce devis &amp; mes disponibilités</span>
-              <ArrowUpRight className="w-4 h-4" />
+              <ArrowUpRight className="w-4 h-4 text-emerald-400" />
             </button>
           </div>
         </div>
@@ -288,34 +287,34 @@ export function ProjectEstimator({ settings }: ProjectEstimatorProps) {
 
       {/* Interactive Preferences & Booking Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-200">
-          <div className="relative w-full max-w-2xl rounded-3xl bg-[#0d0d10] border border-white/[0.15] p-6 sm:p-8 shadow-2xl space-y-6 max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm animate-in fade-in duration-200">
+          <div className="relative w-full max-w-2xl rounded-3xl bg-white border border-[#e6e6df] p-6 sm:p-8 shadow-2xl space-y-6 max-h-[90vh] overflow-y-auto">
             {/* Close Button */}
             <button
               type="button"
               onClick={() => setIsModalOpen(false)}
-              className="absolute top-6 right-6 p-2 rounded-full bg-zinc-900 border border-white/[0.1] text-zinc-400 hover:text-white transition-colors cursor-pointer"
+              className="absolute top-6 right-6 p-2 rounded-full bg-[#f4f4f0] border border-[#e6e6df] text-[#555765] hover:text-[#18191f] transition-colors cursor-pointer"
             >
               <X className="w-4 h-4" />
             </button>
 
             {isSuccess ? (
               <div className="py-8 text-center space-y-5">
-                <div className="w-16 h-16 rounded-2xl bg-zinc-900 border border-emerald-500/40 text-emerald-400 flex items-center justify-center mx-auto shadow-xl">
+                <div className="w-16 h-16 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-600 flex items-center justify-center mx-auto shadow-sm">
                   <CheckCircle2 className="w-8 h-8" />
                 </div>
                 <div className="space-y-2">
-                  <h3 className="text-2xl font-bold text-white">
+                  <h3 className="text-2xl font-bold text-[#18191f]">
                     Votre demande et vos préférences ont été transmises !
                   </h3>
-                  <p className="text-sm text-zinc-300 max-w-md mx-auto leading-relaxed">
+                  <p className="text-sm text-[#555765] max-w-md mx-auto leading-relaxed">
                     Merci {name}. J&apos;ai bien reçu votre configuration pour le projet <strong>{selectedType?.name}</strong> (à partir de ~{totalPrice.toLocaleString("fr-FR")} €). Je vous recontacte sous 24h par <strong>{channelLabel.toLowerCase()}</strong> en tenant compte de votre créneau (<strong>{slotLabel}</strong>).
                   </p>
                 </div>
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
-                  className="px-6 py-2.5 rounded-xl bg-white text-black font-bold text-xs uppercase tracking-wider cursor-pointer"
+                  className="px-6 py-2.5 rounded-xl bg-[#18191f] text-white font-bold text-xs uppercase tracking-wider cursor-pointer shadow-md"
                 >
                   Fermer
                 </button>
@@ -323,38 +322,38 @@ export function ProjectEstimator({ settings }: ProjectEstimatorProps) {
             ) : (
               <form onSubmit={handlePreferencesSubmit} className="space-y-6">
                 <div className="space-y-1">
-                  <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-zinc-900 border border-white/[0.1] text-[11px] font-mono text-emerald-400">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                  <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#f4f4f0] border border-[#e6e6df] text-[11px] font-mono text-emerald-700">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
                     <span>Devis &amp; Préférences de Contact</span>
                   </div>
-                  <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+                  <h3 className="text-xl sm:text-2xl font-bold text-[#18191f] tracking-tight">
                     Validez votre devis &amp; vos disponibilités
                   </h3>
                 </div>
 
                 {/* Recap Box */}
-                <div className="p-4 rounded-2xl bg-black border border-white/[0.08] flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+                <div className="p-4 rounded-2xl bg-[#fafaf8] border border-[#e6e6df] flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
                   <div>
-                    <span className="text-zinc-500 font-mono block">Configuration retenue :</span>
-                    <span className="font-bold text-white text-sm">{selectedType?.name}</span>
-                    <span className="text-zinc-400 block text-[11px]">
+                    <span className="text-[#555765] font-mono block">Configuration retenue :</span>
+                    <span className="font-bold text-[#18191f] text-sm">{selectedType?.name}</span>
+                    <span className="text-[#555765] block text-[11px]">
                       {selectedAddonsList.map((a) => a.name).join(" • ") || "Options de base"}
                     </span>
                   </div>
                   <div className="sm:text-right">
-                    <span className="text-zinc-500 font-mono block">Estimation indicative :</span>
-                    <span className="font-bold text-white text-sm font-mono">À partir de ~ {totalPrice.toLocaleString("fr-FR")} €</span>
-                    <span className="text-zinc-400 block text-[11px] font-mono">{weeksTotal} à {weeksTotal + 1} sem.</span>
+                    <span className="text-[#555765] font-mono block">Estimation indicative :</span>
+                    <span className="font-bold text-[#18191f] text-sm font-mono">À partir de ~ {totalPrice.toLocaleString("fr-FR")} €</span>
+                    <span className="text-[#555765] block text-[11px] font-mono">{weeksTotal} à {weeksTotal + 1} sem.</span>
                   </div>
                 </div>
 
-                <p className="text-[11px] text-zinc-400 italic">
+                <p className="text-[11px] text-[#555765] italic">
                   * Montant indicatif : un devis sur-mesure précis sera établi ensemble, avec possibilité d&apos;ajustement à la baisse ou à la hausse selon vos exigences techniques.
                 </p>
 
                 {/* Preferred Contact Channel */}
                 <div className="space-y-2.5">
-                  <label className="block text-xs font-mono uppercase tracking-wider text-zinc-300">
+                  <label className="block text-xs font-mono uppercase tracking-wider text-[#18191f] font-bold">
                     1. Comment préférez-vous être recontacté ?
                   </label>
                   <div className="grid grid-cols-3 gap-2">
@@ -368,8 +367,8 @@ export function ProjectEstimator({ settings }: ProjectEstimatorProps) {
                           onClick={() => setSelectedChannel(ch.id)}
                           className={`flex flex-col sm:flex-row items-center justify-center gap-2 p-3 rounded-xl text-xs font-semibold transition-all border cursor-pointer ${
                             isSelected
-                              ? "bg-white text-black border-white font-bold shadow-sm"
-                              : "bg-black text-zinc-300 border-white/[0.08] hover:border-white/[0.2]"
+                              ? "bg-[#18191f] text-white border-[#18191f] font-bold shadow-xs"
+                              : "bg-[#fafaf8] text-[#555765] border-[#e6e6df] hover:border-[#18191f]/40"
                           }`}
                         >
                           <Icon className="w-4 h-4 shrink-0" />
@@ -382,7 +381,7 @@ export function ProjectEstimator({ settings }: ProjectEstimatorProps) {
 
                 {/* Preferred Availability Slot */}
                 <div className="space-y-2.5">
-                  <label className="block text-xs font-mono uppercase tracking-wider text-zinc-300">
+                  <label className="block text-xs font-mono uppercase tracking-wider text-[#18191f] font-bold">
                     2. Vos plages horaires préférées :
                   </label>
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
@@ -395,8 +394,8 @@ export function ProjectEstimator({ settings }: ProjectEstimatorProps) {
                           onClick={() => setSelectedAvailability(slot.id)}
                           className={`py-2 px-2 rounded-xl text-xs text-center font-mono transition-all border cursor-pointer ${
                             isSelected
-                              ? "bg-zinc-800 text-white border-white font-bold shadow-sm"
-                              : "bg-black text-zinc-400 border-white/[0.08] hover:border-white/[0.2]"
+                              ? "bg-[#18191f] text-white border-[#18191f] font-bold shadow-xs"
+                              : "bg-[#fafaf8] text-[#555765] border-[#e6e6df] hover:border-[#18191f]/40"
                           }`}
                         >
                           {slot.label}
@@ -409,7 +408,7 @@ export function ProjectEstimator({ settings }: ProjectEstimatorProps) {
                 {/* User Info Fields */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1.5">
-                    <label className="text-xs font-mono uppercase tracking-wider text-zinc-300 block">
+                    <label className="text-xs font-mono uppercase tracking-wider text-[#18191f] block font-semibold">
                       Votre nom et prénom *
                     </label>
                     <input
@@ -418,12 +417,12 @@ export function ProjectEstimator({ settings }: ProjectEstimatorProps) {
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       placeholder="Sophie Martin"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-black border border-white/[0.1] text-sm text-white focus:outline-none focus:border-white"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#e6e6df] text-sm text-[#18191f] focus:outline-none focus:border-[#18191f] shadow-xs"
                     />
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="text-xs font-mono uppercase tracking-wider text-zinc-300 block">
+                    <label className="text-xs font-mono uppercase tracking-wider text-[#18191f] block font-semibold">
                       Votre email *
                     </label>
                     <input
@@ -432,27 +431,27 @@ export function ProjectEstimator({ settings }: ProjectEstimatorProps) {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="sophie@entreprise.com"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-black border border-white/[0.1] text-sm text-white focus:outline-none focus:border-white"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#e6e6df] text-sm text-[#18191f] focus:outline-none focus:border-[#18191f] shadow-xs"
                     />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1.5">
-                    <label className="text-xs font-mono uppercase tracking-wider text-zinc-300 block">
+                    <label className="text-xs font-mono uppercase tracking-wider text-[#18191f] block font-semibold">
                       Entreprise / Activité
                     </label>
                     <input
                       type="text"
                       value={company}
                       onChange={(e) => setCompany(e.target.value)}
-                      placeholder="Cabinet Martin, SaaS XYZ..."
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-black border border-white/[0.1] text-sm text-white focus:outline-none focus:border-white"
+                      placeholder="Cabinet Martin, Boutique..."
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#e6e6df] text-sm text-[#18191f] focus:outline-none focus:border-[#18191f] shadow-xs"
                     />
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="text-xs font-mono uppercase tracking-wider text-zinc-300 block">
+                    <label className="text-xs font-mono uppercase tracking-wider text-[#18191f] block font-semibold">
                       Téléphone {selectedChannel === "phone" ? "*" : "(facultatif)"}
                     </label>
                     <input
@@ -461,14 +460,14 @@ export function ProjectEstimator({ settings }: ProjectEstimatorProps) {
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
                       placeholder="06 12 34 56 78"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-black border border-white/[0.1] text-sm text-white focus:outline-none focus:border-white"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#e6e6df] text-sm text-[#18191f] focus:outline-none focus:border-[#18191f] shadow-xs"
                     />
                   </div>
                 </div>
 
                 {/* Specific days / details textarea */}
                 <div className="space-y-1.5">
-                  <label className="text-xs font-mono uppercase tracking-wider text-zinc-300 block">
+                  <label className="text-xs font-mono uppercase tracking-wider text-[#18191f] block font-semibold">
                     Précisions sur vos disponibilités ou votre projet (facultatif)
                   </label>
                   <textarea
@@ -476,7 +475,7 @@ export function ProjectEstimator({ settings }: ProjectEstimatorProps) {
                     value={availabilityDetails}
                     onChange={(e) => setAvailabilityDetails(e.target.value)}
                     placeholder="Ex : Disponible plutôt les mardis et jeudis après-midi, projet à lancer d'ici le mois prochain..."
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-black border border-white/[0.1] text-xs text-white focus:outline-none focus:border-white leading-relaxed"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#e6e6df] text-xs text-[#18191f] focus:outline-none focus:border-[#18191f] leading-relaxed shadow-xs"
                   />
                 </div>
 
@@ -485,7 +484,7 @@ export function ProjectEstimator({ settings }: ProjectEstimatorProps) {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full inline-flex items-center justify-center gap-2 py-3.5 rounded-xl text-xs font-bold uppercase tracking-wider bg-white hover:bg-zinc-200 text-black transition-colors cursor-pointer shadow-lg disabled:opacity-50"
+                    className="w-full inline-flex items-center justify-center gap-2 py-3.5 rounded-xl text-xs font-bold uppercase tracking-wider bg-[#18191f] hover:bg-[#2d2e38] text-white transition-colors cursor-pointer shadow-md disabled:opacity-50"
                   >
                     {isSubmitting ? (
                       <>
@@ -495,12 +494,12 @@ export function ProjectEstimator({ settings }: ProjectEstimatorProps) {
                     ) : (
                       <>
                         <span>Transmettre mon devis &amp; mes préférences</span>
-                        <Send className="w-4 h-4" />
+                        <Send className="w-4 h-4 text-emerald-400" />
                       </>
                     )}
                   </button>
 
-                  <p className="text-[11px] text-zinc-500 text-center font-mono">
+                  <p className="text-[11px] text-[#555765] text-center font-mono">
                     Devis gratuit et sans engagement • Réponse garantie sous 24h ouvrées
                   </p>
                 </div>

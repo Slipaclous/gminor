@@ -212,7 +212,7 @@ export default function RootLayout({
   return (
     <html
       lang="fr"
-      className={`${geistSans.variable} ${geistMono.variable} dark antialiased scroll-smooth`}
+      className={`${geistSans.variable} ${geistMono.variable} antialiased scroll-smooth`}
     >
       <head>
         <link rel="alternate" type="text/markdown" href="/llms.txt" title="Documentation LLM" />
@@ -221,9 +221,8 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="min-h-screen flex flex-col bg-black text-zinc-100 relative selection:bg-[#c96442] selection:text-white">
+      <body className="min-h-screen flex flex-col bg-[#fafaf8] text-[#18191f] relative selection:bg-emerald-600 selection:text-white">
         <ScrollProgress />
-        <FilmGrain />
         <RecaptchaScript />
         <CommandMenu />
         <ScrollToTop />

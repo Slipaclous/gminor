@@ -1,20 +1,22 @@
 @import "tailwindcss";
 
-/* Linear × Claude Design System Tokens */
+/* Studio & Artisan Web Design Tokens — Warm, Clear & Welcoming for PME */
 :root {
-  --bg: #0b0c10;
-  --bg-surface: #13141c;
-  --bg-card: #161822;
-  --border: rgba(255, 255, 255, 0.08);
-  --border-strong: rgba(255, 255, 255, 0.16);
-  --text-primary: #f4f4f7;
-  --text-secondary: #a1a1b2;
-  --text-muted: #717182;
-  --accent-terracotta: #c96442;
-  --accent-terracotta-hover: #b55738;
-  --accent-terracotta-soft: rgba(201, 100, 66, 0.15);
-  --accent-emerald: #10b981;
-  --accent-emerald-soft: rgba(16, 185, 129, 0.12);
+  --bg: #fafaf8;
+  --bg-surface: #ffffff;
+  --bg-card: #ffffff;
+  --bg-card-subtle: #f4f4f0;
+  --border: #e6e6df;
+  --border-strong: #d5d5cc;
+  --text-primary: #18191f;
+  --text-secondary: #555765;
+  --text-muted: #7c7e8c;
+  --accent-emerald: #059669;
+  --accent-emerald-soft: rgba(5, 150, 105, 0.08);
+  --accent-emerald-border: rgba(5, 150, 105, 0.25);
+  --accent-warm: #d97706;
+  --shadow-soft: 0 4px 20px -2px rgba(24, 25, 31, 0.05), 0 2px 6px -1px rgba(24, 25, 31, 0.03);
+  --shadow-card: 0 10px 30px -4px rgba(24, 25, 31, 0.06), 0 4px 10px -2px rgba(24, 25, 31, 0.04);
 }
 
 @theme inline {
@@ -25,7 +27,7 @@
 }
 
 html {
-  color-scheme: dark;
+  color-scheme: light;
   scroll-behavior: smooth;
 }
 
@@ -39,26 +41,26 @@ body {
 }
 
 ::selection {
-  background-color: #c96442;
+  background-color: #059669;
   color: #ffffff;
 }
 
-/* Subtle Linear-style scrollbar */
+/* Studio-style smooth scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #0b0c10;
+  background: #fafaf8;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #272838;
+  background: #d5d5cc;
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #3f4058;
+  background: #a1a19a;
 }
 
 /* Masquage officiel du badge flottant Google reCAPTCHA v3 */

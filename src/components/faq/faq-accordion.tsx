@@ -22,35 +22,32 @@ export function FaqAccordion({ faqs }: FaqAccordionProps) {
         return (
           <div
             key={idx}
-            className={`group relative rounded-2xl border transition-all duration-300 overflow-hidden ${
+            className={`group relative rounded-2xl border transition-all duration-200 overflow-hidden ${
               isOpen
-                ? "bg-[#0d0d10] border-emerald-500/40 shadow-xl shadow-emerald-950/20"
-                : "bg-[#070709] border-white/[0.08] hover:border-white/[0.2] hover:border-emerald-500/20"
+                ? "bg-white border-[#18191f] shadow-card"
+                : "bg-white border-[#e6e6df] hover:border-[#18191f]/40 shadow-xs"
             }`}
           >
-            {isOpen && (
-              <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-emerald-400/40 to-transparent pointer-events-none" />
-            )}
             <button
               type="button"
               onClick={() => toggle(idx)}
               className="w-full p-6 sm:p-7 text-left flex items-start justify-between gap-4 cursor-pointer"
             >
               <div className="flex items-start gap-3.5">
-                <span className="text-xs font-mono font-bold text-zinc-500 mt-1">
+                <span className="text-xs font-mono font-bold text-emerald-700 mt-1">
                   0{idx + 1}
                 </span>
-                <h3 className="text-base sm:text-lg font-bold text-white tracking-tight">
+                <h3 className="text-base sm:text-lg font-bold text-[#18191f] tracking-tight">
                   {faq.question}
                 </h3>
               </div>
-              <div className="w-8 h-8 rounded-lg bg-zinc-900 border border-white/[0.08] flex items-center justify-center text-zinc-400 shrink-0 mt-0.5">
-                {isOpen ? <Minus className="w-4 h-4 text-white" /> : <Plus className="w-4 h-4" />}
+              <div className="w-8 h-8 rounded-lg bg-[#f4f4f0] border border-[#e6e6df] flex items-center justify-center text-[#18191f] shrink-0 mt-0.5">
+                {isOpen ? <Minus className="w-4 h-4 text-[#18191f]" /> : <Plus className="w-4 h-4 text-[#555765]" />}
               </div>
             </button>
 
             {isOpen && (
-              <div className="px-6 sm:px-7 pb-6 sm:pb-7 pt-0 text-sm sm:text-base text-zinc-300 leading-relaxed pl-12 sm:pl-14 border-t border-white/[0.04] animate-in fade-in duration-200">
+              <div className="px-6 sm:px-7 pb-6 sm:pb-7 pt-0 text-sm sm:text-base text-[#555765] leading-relaxed pl-12 sm:pl-14 border-t border-[#e6e6df] animate-in fade-in duration-200">
                 {faq.answer}
               </div>
             )}

@@ -2,7 +2,7 @@
 
 import React, { useActionState, useState } from "react";
 import { submitContactForm, ContactState } from "@/app/actions/contact";
-import { ArrowUpRight, CheckCircle2, Send, Loader2, ShieldCheck, Sparkles, HelpCircle } from "lucide-react";
+import { ArrowUpRight, CheckCircle2, Send, Loader2, ShieldCheck, HelpCircle } from "lucide-react";
 import { getRecaptchaToken } from "@/lib/use-recaptcha";
 
 interface ContactFormProps {
@@ -39,15 +39,15 @@ export function ContactForm({ initialService, initialBudget }: ContactFormProps)
 
   if (state?.success) {
     return (
-      <div className="rounded-3xl bg-[#13141c] border border-emerald-500/40 p-8 sm:p-12 text-center space-y-6 shadow-2xl">
-        <div className="w-16 h-16 rounded-2xl bg-emerald-950/80 border border-emerald-500/40 text-emerald-400 flex items-center justify-center mx-auto">
+      <div className="rounded-3xl bg-white border border-emerald-500/40 p-8 sm:p-12 text-center space-y-6 shadow-card">
+        <div className="w-16 h-16 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-600 flex items-center justify-center mx-auto">
           <CheckCircle2 className="w-8 h-8" />
         </div>
         <div className="space-y-2">
-          <h3 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+          <h3 className="text-2xl sm:text-3xl font-bold text-[#18191f] tracking-tight">
             Merci, votre message est bien envoyé !
           </h3>
-          <p className="text-base sm:text-lg text-zinc-200 max-w-lg mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg text-[#555765] max-w-lg mx-auto leading-relaxed">
             {state.message}
           </p>
         </div>
@@ -55,7 +55,7 @@ export function ContactForm({ initialService, initialBudget }: ContactFormProps)
           <button
             type="button"
             onClick={() => window.location.reload()}
-            className="text-sm font-semibold text-[#e89268] hover:underline underline-offset-4 cursor-pointer"
+            className="text-sm font-semibold text-[#18191f] hover:underline underline-offset-4 cursor-pointer"
           >
             Envoyer un autre message
           </button>
@@ -67,29 +67,26 @@ export function ContactForm({ initialService, initialBudget }: ContactFormProps)
   return (
     <form
       action={handleSubmit}
-      className="group relative rounded-3xl bg-[#13141c] border border-white/[0.1] hover:border-emerald-500/30 p-6 sm:p-10 space-y-8 shadow-2xl transition-all duration-300 overflow-hidden"
+      className="group relative rounded-3xl bg-white border border-[#e6e6df] hover:border-emerald-500/40 p-6 sm:p-10 space-y-8 shadow-card transition-all duration-300 overflow-hidden"
     >
-      {/* Subtle top border beam highlight */}
-      <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-emerald-400/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-
       {/* Top Form Header */}
-      <div className="space-y-2 pb-4 border-b border-white/[0.08]">
+      <div className="space-y-2 pb-4 border-b border-[#e6e6df]">
         <div className="flex items-center gap-2">
-          <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
-          <span className="text-xs font-mono text-emerald-400 font-semibold uppercase tracking-wider">
-            Disponible pour nouveaux projets
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-700" />
+          <span className="text-xs font-mono text-emerald-800 font-semibold uppercase tracking-wider">
+            Échange direct &bull; Réponse sous 24h
           </span>
         </div>
-        <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+        <h2 className="text-2xl sm:text-3xl font-extrabold text-[#18191f] tracking-tight">
           Parlons de votre projet
         </h2>
-        <p className="text-sm sm:text-base text-zinc-300">
-          Remplissez ce formulaire et je vous réponds sous 24h ouvrées avec une première approche technique.
+        <p className="text-sm sm:text-base text-[#555765]">
+          Remplissez ce formulaire et je vous réponds sous 24h ouvrées avec une première approche concrète.
         </p>
       </div>
 
       {state?.message && !state?.success && (
-        <div className="p-4 rounded-2xl bg-red-950/50 border border-red-500/50 text-red-200 text-sm">
+        <div className="p-4 rounded-2xl bg-red-50 border border-red-200 text-red-700 text-sm">
           {state.message}
         </div>
       )}
@@ -99,153 +96,153 @@ export function ContactForm({ initialService, initialBudget }: ContactFormProps)
         <div className="space-y-2">
           <label
             htmlFor="name"
-            className="block text-sm sm:text-base font-semibold text-zinc-100"
+            className="block text-xs font-mono uppercase tracking-wider text-[#18191f] font-bold"
           >
-            Votre nom et prénom <span className="text-[#c96442]">*</span>
+            Votre Nom &amp; Prénom *
           </label>
           <input
             id="name"
             name="name"
             type="text"
             required
-            placeholder="ex: Jean Dupont"
-            className="w-full px-4 py-3.5 rounded-xl bg-[#0b0c10] border border-white/[0.12] text-base text-white placeholder:text-zinc-500 focus:outline-none focus:border-[#c96442] focus:ring-1 focus:ring-[#c96442] transition-all font-sans"
+            placeholder="Sophie Martin"
+            className="w-full px-4 py-3 rounded-xl bg-[#fafaf8] border border-[#e6e6df] text-sm text-[#18191f] placeholder:text-[#555765]/50 focus:outline-none focus:border-[#18191f] focus:bg-white transition-all shadow-xs"
           />
-          {state?.errors?.name && (
-            <p className="text-sm text-red-400">{state.errors.name[0]}</p>
-          )}
         </div>
 
         <div className="space-y-2">
           <label
             htmlFor="email"
-            className="block text-sm sm:text-base font-semibold text-zinc-100"
+            className="block text-xs font-mono uppercase tracking-wider text-[#18191f] font-bold"
           >
-            Votre adresse email <span className="text-[#c96442]">*</span>
+            Votre Email Professionnel *
           </label>
           <input
             id="email"
             name="email"
             type="email"
             required
-            placeholder="ex: jean@entreprise.com"
-            className="w-full px-4 py-3.5 rounded-xl bg-[#0b0c10] border border-white/[0.12] text-base text-white placeholder:text-zinc-500 focus:outline-none focus:border-[#c96442] focus:ring-1 focus:ring-[#c96442] transition-all font-sans"
+            placeholder="sophie@entreprise.be"
+            className="w-full px-4 py-3 rounded-xl bg-[#fafaf8] border border-[#e6e6df] text-sm text-[#18191f] placeholder:text-[#555765]/50 focus:outline-none focus:border-[#18191f] focus:bg-white transition-all shadow-xs"
           />
-          {state?.errors?.email && (
-            <p className="text-sm text-red-400">{state.errors.email[0]}</p>
-          )}
         </div>
       </div>
 
-      {/* Row 2: Company */}
-      <div className="space-y-2">
-        <label
-          htmlFor="company"
-          className="block text-sm sm:text-base font-semibold text-zinc-100"
-        >
-          Entreprise, marque ou nom du projet{" "}
-          <span className="text-xs font-normal text-zinc-400 font-mono">
-            (facultatif)
-          </span>
-        </label>
-        <input
-          id="company"
-          name="company"
-          type="text"
-          placeholder="ex: Acme Corp, Mon Startup..."
-          className="w-full px-4 py-3.5 rounded-xl bg-[#0b0c10] border border-white/[0.12] text-base text-white placeholder:text-zinc-500 focus:outline-none focus:border-[#c96442] focus:ring-1 focus:ring-[#c96442] transition-all font-sans"
-        />
+      {/* Row 2: Company & Phone */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div className="space-y-2">
+          <label
+            htmlFor="company"
+            className="block text-xs font-mono uppercase tracking-wider text-[#18191f] font-bold"
+          >
+            Entreprise ou Activité
+          </label>
+          <input
+            id="company"
+            name="company"
+            type="text"
+            placeholder="Cabinet Martin, Boutique..."
+            className="w-full px-4 py-3 rounded-xl bg-[#fafaf8] border border-[#e6e6df] text-sm text-[#18191f] placeholder:text-[#555765]/50 focus:outline-none focus:border-[#18191f] focus:bg-white transition-all shadow-xs"
+          />
+        </div>
+
+        <div className="space-y-2">
+          <label
+            htmlFor="phone"
+            className="block text-xs font-mono uppercase tracking-wider text-[#18191f] font-bold"
+          >
+            Téléphone
+          </label>
+          <input
+            id="phone"
+            name="phone"
+            type="tel"
+            placeholder="0470 12 34 56"
+            className="w-full px-4 py-3 rounded-xl bg-[#fafaf8] border border-[#e6e6df] text-sm text-[#18191f] placeholder:text-[#555765]/50 focus:outline-none focus:border-[#18191f] focus:bg-white transition-all shadow-xs"
+          />
+        </div>
       </div>
 
       {/* Row 3: Service Selection */}
       <div className="space-y-3">
-        <label className="block text-sm sm:text-base font-semibold text-zinc-100">
-          Quel est votre type de projet ?
+        <label className="block text-xs font-mono uppercase tracking-wider text-[#18191f] font-bold">
+          Type de projet souhaité
         </label>
-        <input type="hidden" name="service" value={selectedService} />
-        <div className="flex flex-wrap gap-2.5">
-          {SERVICE_OPTIONS.map((svc) => {
-            const isSelected = selectedService === svc;
+        <div className="flex flex-wrap gap-2">
+          {SERVICE_OPTIONS.map((srv) => {
+            const isSelected = selectedService === srv;
             return (
               <button
-                key={svc}
+                key={srv}
                 type="button"
-                onClick={() => setSelectedService(svc)}
-                className={`px-4 py-2.5 rounded-xl text-sm sm:text-base font-medium transition-all cursor-pointer ${
+                onClick={() => setSelectedService(srv)}
+                className={`px-3.5 py-2 rounded-xl text-xs font-medium transition-all border cursor-pointer ${
                   isSelected
-                    ? "bg-[#c96442] text-white font-bold shadow-md ring-1 ring-[#e89268]"
-                    : "bg-[#0b0c10] text-zinc-200 hover:text-white hover:bg-zinc-800 border border-white/[0.1]"
+                    ? "bg-[#18191f] text-white border-[#18191f] font-semibold shadow-xs"
+                    : "bg-[#fafaf8] text-[#555765] border-[#e6e6df] hover:border-[#18191f]/40 hover:bg-white"
                 }`}
               >
-                {svc}
+                {srv}
               </button>
             );
           })}
         </div>
-      </div>
 
-      {/* Row 4: Budget (Bouton 'Je ne sais pas encore' OU Champ de saisie) */}
-      <div className="space-y-2.5">
-        <label
-          htmlFor="budget-input"
-          className="block text-sm sm:text-base font-semibold text-zinc-100"
-        >
-          Budget envisagé{" "}
-          <span className="text-xs font-normal text-zinc-400 font-mono">
-            (facultatif)
-          </span>
-        </label>
-
-        {/* Hidden input passed to server action */}
-        <input type="hidden" name="budget" value={budget} />
-
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-          <button
-            type="button"
-            onClick={() => setBudget("Je ne sais pas encore")}
-            className={`px-4 py-3.5 rounded-xl text-sm font-semibold transition-all cursor-pointer whitespace-nowrap shrink-0 border ${
-              budget === "Je ne sais pas encore"
-                ? "bg-white text-black border-white shadow-md font-bold"
-                : "bg-[#0b0c10] text-zinc-300 hover:text-white hover:bg-zinc-800 border-white/[0.12]"
-            }`}
+        {/* Budget Selection (Bouton 'Je ne sais pas encore' OU Champ de saisie) */}
+        <div className="space-y-2 pt-1">
+          <label
+            htmlFor="budget-input"
+            className="block text-xs font-mono uppercase tracking-wider text-[#18191f] font-bold"
           >
-            Je ne sais pas encore
-          </button>
+            Budget envisagé <span className="text-[#555765] font-normal">(facultatif)</span>
+          </label>
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+            <button
+              type="button"
+              onClick={() => setBudget("Je ne sais pas encore")}
+              className={`px-4 py-3 rounded-xl text-xs font-semibold transition-all cursor-pointer whitespace-nowrap shrink-0 border ${
+                budget === "Je ne sais pas encore"
+                  ? "bg-[#18191f] text-white border-[#18191f] shadow-xs font-bold"
+                  : "bg-[#fafaf8] text-[#555765] hover:text-[#18191f] hover:bg-white border-[#e6e6df]"
+              }`}
+            >
+              Je ne sais pas encore
+            </button>
 
-          <span className="text-xs font-mono text-zinc-500 uppercase text-center sm:text-left">
-            ou
-          </span>
+            <span className="text-xs font-mono text-[#555765] uppercase text-center sm:text-left">
+              ou
+            </span>
 
-          <input
-            id="budget-input"
-            type="text"
-            value={budget === "Je ne sais pas encore" ? "" : budget}
-            onChange={(e) => setBudget(e.target.value)}
-            placeholder="Saisissez votre budget (ex: 2 500 €, 5 000 €...)"
-            className="flex-1 px-4 py-3.5 rounded-xl bg-[#0b0c10] border border-white/[0.12] text-base text-white placeholder:text-zinc-500 focus:outline-none focus:border-[#c96442] focus:ring-1 focus:ring-[#c96442] transition-all font-sans"
-          />
+            <input
+              id="budget-input"
+              type="text"
+              value={budget === "Je ne sais pas encore" ? "" : budget}
+              onChange={(e) => setBudget(e.target.value)}
+              placeholder="Saisissez votre budget (ex: 2 500 €, 5 000 €...)"
+              className="flex-1 px-4 py-3 rounded-xl bg-[#fafaf8] border border-[#e6e6df] text-sm text-[#18191f] placeholder:text-[#555765]/50 focus:outline-none focus:border-[#18191f] focus:bg-white transition-all shadow-xs"
+            />
+          </div>
         </div>
       </div>
 
       {/* Row 5: Message */}
-      <div className="space-y-2.5">
+      <div className="space-y-2">
         <label
           htmlFor="message"
-          className="block text-sm sm:text-base font-semibold text-zinc-100"
+          className="block text-xs font-mono uppercase tracking-wider text-[#18191f] font-bold"
         >
-          Quelques mots sur votre projet ou vos objectifs{" "}
-          <span className="text-[#c96442]">*</span>
+          Quelques mots sur votre projet ou vos objectifs *
         </label>
         <textarea
           id="message"
           name="message"
           rows={4}
           required
-          placeholder="Ex : Bonjour Gauthier, je souhaite créer un nouveau site vitrine pour mon entreprise avec environ 4 ou 5 pages, une galerie photo et une page de contact..."
-          className="w-full px-4 py-3.5 rounded-xl bg-[#0b0c10] border border-white/[0.12] text-base text-white placeholder:text-zinc-500 focus:outline-none focus:border-[#c96442] focus:ring-1 focus:ring-[#c96442] transition-all resize-y min-h-[130px] font-sans leading-relaxed"
+          placeholder="Ex : Bonjour Gauthier, je souhaite créer un nouveau site pour mon entreprise avec environ 4 ou 5 pages, une présentation de nos services et un formulaire de contact..."
+          className="w-full px-4 py-3 rounded-xl bg-[#fafaf8] border border-[#e6e6df] text-sm text-[#18191f] placeholder:text-[#555765]/50 focus:outline-none focus:border-[#18191f] focus:bg-white transition-all resize-y min-h-[120px] leading-relaxed shadow-xs"
         />
         {state?.errors?.message && (
-          <p className="text-sm text-red-400">{state.errors.message[0]}</p>
+          <p className="text-xs text-red-600">{state.errors.message[0]}</p>
         )}
       </div>
 
@@ -254,27 +251,27 @@ export function ContactForm({ initialService, initialBudget }: ContactFormProps)
         <button
           type="submit"
           disabled={isPending}
-          className="w-full inline-flex items-center justify-center gap-2.5 py-4 px-6 rounded-2xl text-base sm:text-lg font-bold text-white bg-[#c96442] hover:bg-[#b55738] disabled:opacity-50 transition-all duration-200 active:scale-[0.99] cursor-pointer shadow-xl shadow-[#c96442]/20"
+          className="w-full inline-flex items-center justify-center gap-2 py-4 px-6 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider text-white bg-[#18191f] hover:bg-[#2d2e38] disabled:opacity-50 transition-all duration-150 active:scale-[0.98] cursor-pointer shadow-md"
         >
           {isPending ? (
             <>
-              <Loader2 className="w-5 h-5 animate-spin" />
+              <Loader2 className="w-4 h-4 animate-spin" />
               <span>Envoi de votre message en cours...</span>
             </>
           ) : (
             <>
               <span>Envoyer ma demande de projet</span>
-              <Send className="w-5 h-5" />
+              <Send className="w-4 h-4 text-emerald-400" />
             </>
           )}
         </button>
 
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2 text-xs text-zinc-400 text-center font-mono">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2 text-xs text-[#555765] text-center font-mono">
           <div className="flex items-center gap-1.5">
-            <ShieldCheck className="w-4 h-4 text-emerald-400" />
+            <ShieldCheck className="w-4 h-4 text-emerald-600" />
             <span>Réponse garantie sous 24h</span>
           </div>
-          <span className="hidden sm:inline text-zinc-600">&bull;</span>
+          <span className="hidden sm:inline text-[#d5d5cc]">&bull;</span>
           <span>Devis gratuit et sans engagement</span>
         </div>
       </div>

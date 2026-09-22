@@ -7,7 +7,6 @@ import {
   ShoppingBag,
   Database,
   ChevronDown,
-  Sparkles,
   CheckCircle2,
   Cpu,
   ArrowUpRight,
@@ -27,62 +26,62 @@ interface SkillDomain {
 const SKILL_DOMAINS: SkillDomain[] = [
   {
     id: "frontend",
-    title: "Frontend & UI Moderne",
-    badge: "Next.js & React 19",
-    skills: ["React 19", "Next.js 15/16", "TypeScript", "Tailwind CSS", "Framer Motion", "HTML5 / Twig"],
+    title: "Sites Web Vitrines & Rapides",
+    badge: "Next.js & React",
+    skills: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Mobile First", "SEO Google 100/100"],
     icon: Layers,
-    tagline: "Interfaces réactives & design haute précision",
+    tagline: "Des sites élégants, fluides et ultra-rapides (< 0.4s)",
     description:
-      "Conception d'expériences web immersives, fluides et ultra-rapides (< 0.4s). Respect strict des Core Web Vitals et ergonomie mobile-first.",
+      "Votre vitrine sur internet : un design sur-mesure valorisant votre savoir-faire, parfaitement lisible sur smartphone et optimisé pour le référencement naturel.",
     highlights: [
-      "Architecture App Router & Server Components",
-      "Animations interactives & Micro-interactions",
-      "Accessibilité WCAG & score SEO 100/100",
-    ],
-  },
-  {
-    id: "backend",
-    title: "Backend & Architecture",
-    badge: "PHP 8 & Symfony",
-    skills: ["PHP 8.3", "Symfony", "Node.js", "APIs REST", "Webhooks", "Architecture MVC"],
-    icon: Server,
-    tagline: "Logique serveur robuste & flux automatisés",
-    description:
-      "Développement de serveurs fiables, sécurisés et scalables pour vos applications SaaS et vos outils de gestion d'entreprise.",
-    highlights: [
-      "Développement d'APIs RESTful sécurisées",
-      "Intégration de passerelles Stripe, Resend, CRM",
-      "Traitement asynchrone & tâches planifiées (Cron)",
+      "Affichage instantané sans attente (< 0.4s)",
+      "Score Google PageSpeed 100/100 garanti",
+      "Formulaires de contact et devis sécurisés",
     ],
   },
   {
     id: "ecommerce",
-    title: "E-Commerce & PrestaShop",
-    badge: "Expertise v1.6 à v9",
-    skills: ["PrestaShop 9", "Modules Sur-Mesure", "Migration de Données", "Drupal", "Headless"],
+    title: "Boutiques E-Commerce",
+    badge: "Expert PrestaShop",
+    skills: ["PrestaShop 9", "Paiements Sécurisés", "Modules Sur-Mesure", "Migration de Données", "Gestion Stocks"],
     icon: ShoppingBag,
-    tagline: "Boutiques à fort trafic & refontes complexes",
+    tagline: "Vente en ligne fluide & encaissement sécurisé",
     description:
-      "Spécialiste PrestaShop reconnu : création de modules personnalisés, interfaçage ERP et migration sans interruption de service.",
+      "Création, modernisation et maintenance de boutiques en ligne. Spécialiste PrestaShop reconnu (migration v1.6 vers v9, modules de paiement, gestion de catalogue).",
     highlights: [
-      "Migration majeure v1.6 / 1.7 vers PrestaShop 8/9",
-      "Modules de paiement, export et tarification sur-mesure",
-      "Optimisation de bases e-commerce à +100 000 produits",
+      "Panier fluide pensé pour éviter les abandons",
+      "Paiements Stripe, Bancontact, PayPal & Cartes",
+      "Migration de boutique sans interruption de vente",
+    ],
+  },
+  {
+    id: "backend",
+    title: "Outils Métier & Automatisation",
+    badge: "PHP, Symfony & Node.js",
+    skills: ["PHP 8", "Symfony", "Node.js", "Connexions API", "Génération PDF", "Exports Excel"],
+    icon: Server,
+    tagline: "Gagnez du temps sur vos tâches répétitives",
+    description:
+      "Développement d'outils web sur-mesure pour votre entreprise : tunnels de réservation, espaces membres, génération d'attestations ou synchronisation avec vos logiciels.",
+    highlights: [
+      "Fin de la paperasse et des fichiers Excel désynchronisés",
+      "Génération automatique de PDF, devis et factures",
+      "Notifications email et rappels automatiques",
     ],
   },
   {
     id: "database",
-    title: "Bases de Données & Infra",
-    badge: "PostgreSQL & MySQL",
-    skills: ["PostgreSQL", "MySQL", "Prisma ORM", "Docker", "Git", "Vercel / cPanel"],
+    title: "Hébergement & Sérénité",
+    badge: "Sécurité & Zéro Panne",
+    skills: ["Bases de Données", "Hébergement Cloud", "Certificats SSL", "Sauvegardes Auto", "Maintenance"],
     icon: Database,
-    tagline: "Modélisation relationnelle & haute disponibilité",
+    tagline: "Un site sécurisé, sauvegardé et toujours en ligne",
     description:
-      "Structuration stricte des données, indexation avancée pour requêtes instantanées et déploiement continu automatisé.",
+      "Je configure et sécurise votre infrastructure : hébergement haute performance, nom de domaine, messagerie professionnelle, sauvegardes et certificat HTTPS inclus.",
     highlights: [
-      "Schémas typés TypeScript avec Prisma ORM",
-      "Optimisation et profiling des requêtes SQL lentes",
-      "Pipelines CI/CD & environnements de staging",
+      "Sauvegardes régulières et protection anti-piratage",
+      "Zéro maintenance complexe pour vous",
+      "Assistance technique réactive et directe",
     ],
   },
 ];
@@ -96,31 +95,31 @@ export function TechStrip() {
   };
 
   return (
-    <section className="border-b border-white/[0.08] bg-[#070709] py-12 sm:py-16 overflow-hidden">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 space-y-6 sm:space-y-10">
+    <section className="border-b border-[#e6e6df] bg-[#fafaf8] py-14 sm:py-20 overflow-hidden">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 space-y-8 sm:space-y-12">
         {/* Section Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
-          <div className="space-y-2 max-w-2xl">
-            <span className="text-[11px] font-mono uppercase tracking-widest text-emerald-400 font-bold flex items-center gap-2">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>{"// MAÎTRISE TECHNIQUE MULTI-STACK"}</span>
+          <div className="space-y-2.5 max-w-2xl">
+            <span className="text-[11px] font-mono uppercase tracking-widest text-emerald-800 font-bold flex items-center gap-2">
+              <Cpu className="w-3.5 h-3.5" />
+              <span>EXPERTISE &amp; SOLUTIONS CONCRÈTES</span>
             </span>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight font-sans leading-tight">
-              Une expertise polyvalente adaptée à vos enjeux
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#18191f] tracking-tight font-sans leading-tight">
+              Des solutions concrètes pour développer votre activité
             </h2>
-            <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed font-normal">
-              Touchez un domaine pour explorer les compétences détaillées, stacks et cas d&apos;application concrets.
+            <p className="text-xs sm:text-sm text-[#555765] leading-relaxed font-normal">
+              Cliquez sur un domaine pour découvrir comment je peux vous aider à moderniser et développer votre présence digitale.
             </p>
           </div>
 
-          <div className="hidden sm:flex items-center gap-2 text-xs font-mono text-zinc-400 bg-zinc-900 border border-white/[0.08] px-3.5 py-2 rounded-xl shrink-0">
-            <span className="w-2 h-2 rounded-full bg-emerald-400" />
-            <span>4 Pôles d&apos;ingénierie logicielle</span>
+          <div className="hidden sm:flex items-center gap-2 text-xs font-medium text-[#555765] bg-white border border-[#e6e6df] px-3.5 py-2 rounded-xl shrink-0 shadow-xs">
+            <span className="w-2 h-2 rounded-full bg-emerald-500" />
+            <span>4 Pôles d&apos;expertise au service de votre entreprise</span>
           </div>
         </div>
 
-        {/* Mobile Accordion View (Closed by default, touch-optimized) */}
-        <div className="block lg:hidden space-y-2.5">
+        {/* Mobile Accordion View */}
+        <div className="block lg:hidden space-y-3">
           {SKILL_DOMAINS.map((domain) => {
             const Icon = domain.icon;
             const isOpen = openDomain === domain.id;
@@ -128,10 +127,10 @@ export function TechStrip() {
             return (
               <div
                 key={domain.id}
-                className={`rounded-2xl border transition-all duration-300 overflow-hidden shadow-lg ${
+                className={`rounded-2xl border transition-all duration-300 overflow-hidden shadow-xs ${
                   isOpen
-                    ? "bg-[#0f1016] border-emerald-500/40 shadow-emerald-950/20"
-                    : "bg-[#0b0c10] border-white/[0.08] hover:border-white/[0.18]"
+                    ? "bg-white border-emerald-500/40 shadow-md"
+                    : "bg-white border-[#e6e6df] hover:border-[#d5d5cc]"
                 }`}
               >
                 {/* Accordion Touch Trigger Button */}
@@ -145,30 +144,30 @@ export function TechStrip() {
                     <div
                       className={`w-10 h-10 rounded-xl border flex items-center justify-center shrink-0 transition-colors ${
                         isOpen
-                          ? "bg-emerald-950/80 border-emerald-500/40 text-emerald-400"
-                          : "bg-zinc-900 border-white/[0.1] text-zinc-300"
+                          ? "bg-emerald-50 border-emerald-300 text-emerald-700"
+                          : "bg-[#f7f7f4] border-[#e6e6df] text-[#18191f]"
                       }`}
                     >
                       <Icon className="w-5 h-5" />
                     </div>
                     <div className="min-w-0">
                       <div className="flex items-center gap-2 flex-wrap">
-                        <h3 className="text-sm font-bold text-white tracking-tight truncate">
+                        <h3 className="text-sm font-bold text-[#18191f] tracking-tight truncate">
                           {domain.title}
                         </h3>
-                        <span className="px-2 py-0.5 rounded-md text-[10px] font-mono bg-zinc-900 text-zinc-300 border border-white/[0.08]">
+                        <span className="px-2 py-0.5 rounded-md text-[10px] font-medium bg-[#f4f4f0] text-[#555765] border border-[#e6e6df]">
                           {domain.badge}
                         </span>
                       </div>
-                      <p className="text-[11px] text-zinc-400 truncate mt-0.5 font-normal">
+                      <p className="text-[11px] text-[#555765] truncate mt-0.5 font-normal">
                         {domain.tagline}
                       </p>
                     </div>
                   </div>
 
                   <div
-                    className={`w-8 h-8 rounded-lg bg-zinc-900/90 border border-white/[0.08] flex items-center justify-center text-zinc-400 shrink-0 transition-transform duration-300 ${
-                      isOpen ? "rotate-180 text-emerald-400 border-emerald-500/30" : ""
+                    className={`w-8 h-8 rounded-lg bg-[#f4f4f0] border border-[#e6e6df] flex items-center justify-center text-[#555765] shrink-0 transition-transform duration-300 ${
+                      isOpen ? "rotate-180 text-emerald-700 border-emerald-300" : ""
                     }`}
                   >
                     <ChevronDown className="w-4 h-4" />
@@ -177,23 +176,23 @@ export function TechStrip() {
 
                 {/* Collapsible Content */}
                 {isOpen && (
-                  <div className="px-4 sm:px-5 pb-5 pt-1 space-y-4 border-t border-white/[0.06] animate-in fade-in-50 duration-200">
-                    <p className="text-xs text-zinc-300 leading-relaxed pt-2 font-normal">
+                  <div className="px-4 sm:px-5 pb-5 pt-1 space-y-4 border-t border-[#e6e6df] animate-in fade-in-50 duration-200">
+                    <p className="text-xs text-[#555765] leading-relaxed pt-2 font-normal">
                       {domain.description}
                     </p>
 
                     {/* Highlights */}
-                    <div className="space-y-2 bg-black/50 p-3.5 rounded-xl border border-white/[0.06]">
-                      <span className="text-[10px] font-mono uppercase tracking-wider text-emerald-400 font-semibold block">
+                    <div className="space-y-2 bg-[#fafaf8] p-3.5 rounded-xl border border-[#e6e6df]">
+                      <span className="text-[10px] font-mono uppercase tracking-wider text-emerald-700 font-bold block">
                         Livrables &amp; Spécificités clés :
                       </span>
                       <ul className="space-y-1.5">
                         {domain.highlights.map((h, hIdx) => (
                           <li
                             key={hIdx}
-                            className="flex items-start gap-2 text-xs text-zinc-200 leading-snug"
+                            className="flex items-start gap-2 text-xs text-[#18191f] leading-snug"
                           >
-                            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
+                            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
                             <span>{h}</span>
                           </li>
                         ))}
@@ -202,14 +201,14 @@ export function TechStrip() {
 
                     {/* Skill Badges */}
                     <div className="space-y-2">
-                      <span className="text-[10px] font-mono uppercase tracking-wider text-zinc-400 font-semibold block">
-                        Technologies maîtrisées :
+                      <span className="text-[10px] font-mono uppercase tracking-wider text-[#7c7e8c] font-bold block">
+                        Technologies &amp; Standards :
                       </span>
                       <div className="flex flex-wrap gap-1.5">
                         {domain.skills.map((skill) => (
                           <span
                             key={skill}
-                            className="px-2.5 py-1 rounded-lg text-xs font-mono text-zinc-100 bg-zinc-900 border border-white/[0.12] font-semibold"
+                            className="px-2.5 py-1 rounded-lg text-xs font-medium text-[#18191f] bg-[#f4f4f0] border border-[#e6e6df]"
                           >
                             {skill}
                           </span>
@@ -223,56 +222,53 @@ export function TechStrip() {
           })}
         </div>
 
-        {/* Desktop 4-Column Grid View (Stately & High-Craft for Larger Screens) */}
-        <div className="hidden lg:grid grid-cols-4 gap-4">
+        {/* Desktop 4-Column Grid View */}
+        <div className="hidden lg:grid grid-cols-4 gap-5">
           {SKILL_DOMAINS.map((domain) => {
             const Icon = domain.icon;
             return (
               <div
                 key={domain.id}
-                className="group relative rounded-2xl bg-[#0d0d10] border border-white/[0.08] hover:border-emerald-500/40 p-5 space-y-4 transition-all duration-300 shadow-xl flex flex-col justify-between overflow-hidden hover:shadow-[0_0_25px_rgba(16,185,129,0.06)]"
+                className="group relative rounded-2xl bg-white border border-[#e6e6df] hover:border-emerald-500/40 p-6 space-y-4 transition-all duration-300 shadow-card flex flex-col justify-between overflow-hidden hover:shadow-lg"
               >
-                {/* Subtle top border beam highlight */}
-                <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-emerald-400/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-
-                <div className="space-y-3">
+                <div className="space-y-3.5">
                   <div className="flex items-center justify-between">
-                    <div className="w-10 h-10 rounded-xl bg-zinc-900 border border-white/[0.1] flex items-center justify-center text-white group-hover:text-emerald-400 transition-colors">
+                    <div className="w-10 h-10 rounded-xl bg-[#f7f7f4] border border-[#e6e6df] flex items-center justify-center text-[#18191f] group-hover:text-emerald-700 group-hover:bg-emerald-50 transition-colors">
                       <Icon className="w-5 h-5" />
                     </div>
-                    <span className="text-[10px] font-mono font-semibold px-2 py-0.5 rounded-md bg-zinc-900 text-zinc-400 border border-white/[0.08]">
+                    <span className="text-[10px] font-medium px-2 py-0.5 rounded-md bg-[#f4f4f0] text-[#555765] border border-[#e6e6df]">
                       {domain.badge}
                     </span>
                   </div>
 
                   <div>
-                    <h3 className="text-sm font-bold text-white tracking-tight">
+                    <h3 className="text-base font-bold text-[#18191f] tracking-tight">
                       {domain.title}
                     </h3>
-                    <p className="text-xs text-zinc-400 mt-1 leading-relaxed">
+                    <p className="text-xs text-[#555765] mt-1.5 leading-relaxed">
                       {domain.description}
                     </p>
                   </div>
                 </div>
 
-                <div className="space-y-3 pt-3 border-t border-white/[0.06]">
-                  <ul className="space-y-1">
+                <div className="space-y-3 pt-3 border-t border-[#e6e6df]">
+                  <ul className="space-y-1.5">
                     {domain.highlights.slice(0, 2).map((h, hIdx) => (
                       <li
                         key={hIdx}
-                        className="flex items-start gap-1.5 text-[11px] text-zinc-300 leading-tight"
+                        className="flex items-start gap-1.5 text-[11px] text-[#18191f] leading-tight"
                       >
-                        <CheckCircle2 className="w-3 h-3 text-emerald-400 shrink-0 mt-0.5" />
+                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
                         <span className="truncate">{h}</span>
                       </li>
                     ))}
                   </ul>
 
                   <div className="flex flex-wrap gap-1.5 pt-1">
-                    {domain.skills.map((skill) => (
+                    {domain.skills.slice(0, 3).map((skill) => (
                       <span
                         key={skill}
-                        className="px-2 py-0.5 rounded-md text-[10px] font-mono text-zinc-300 bg-black border border-white/[0.08]"
+                        className="px-2 py-0.5 rounded-md text-[10px] font-medium text-[#555765] bg-[#fafaf8] border border-[#e6e6df]"
                       >
                         {skill}
                       </span>

@@ -1,239 +1,166 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import Link from "next/link";
+import Image from "next/image";
+import { ArrowUpRight, CheckCircle2, Phone, ShieldCheck, MapPin } from "lucide-react";
 import { HeroSettings } from "@/lib/settings-service";
-import { ArrowUpRight } from "lucide-react";
 
 interface HeroProps {
   settings?: HeroSettings;
 }
 
 export function Hero({ settings }: HeroProps) {
-  const [activeTab, setActiveTab] = useState<"arch" | "stack" | "perf">("arch");
-
-  const badge = settings?.badge || "Gauthier Minor • Développeur Web Full-Stack";
-  const title = settings?.title || "Ingénierie logicielle & solutions web sur-mesure.";
-  const subtitle =
-    settings?.subtitle ||
-    "Applications SaaS, sites d'entreprise haute performance et plateformes e-commerce. Conception sur-mesure de bout en bout.";
-  const metrics = settings?.metrics || [
-    { value: "< 0.4s", label: "Chargement moyen" },
-    { value: "100%", label: "Score Google Lighthouse" },
-    { value: "5+ ans", label: "Pratique Full-Stack" },
-  ];
-
   return (
-    <section className="relative pt-8 pb-16 sm:pt-16 sm:pb-24 md:pt-20 md:pb-28 overflow-hidden border-b border-white/[0.08]">
-      {/* Subtle background grid pattern */}
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(#1f1f23_1px,transparent_1px)] [background-size:20px_20px] sm:[background-size:24px_24px] opacity-35" />
-
-      {/* Mobile-optimized radiant ambient glow */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-72 sm:w-96 h-72 sm:h-96 bg-emerald-500/[0.06] rounded-full blur-3xl pointer-events-none -z-10" />
+    <section className="relative pt-12 pb-20 sm:pt-20 sm:pb-28 border-b border-[#e6e6df] bg-[#fafaf8] overflow-hidden">
+      {/* Editorial subtle pattern */}
+      <div className="absolute inset-0 -z-10 bg-[radial-gradient(#d5d5cc_1px,transparent_1px)] [background-size:24px_24px] opacity-35" />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-8 items-center">
-          {/* Left Column: Authoritative Editorial Presentation */}
-          <div className="lg:col-span-7 space-y-6 sm:space-y-8">
-            {/* Status Pill */}
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-zinc-900/90 border border-white/[0.1] text-xs shadow-sm">
-              <span className="flex h-2 w-2 relative shrink-0">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-              </span>
-              <span className="text-zinc-200 font-medium font-mono text-[11px] sm:text-xs truncate">
-                {badge}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          
+          {/* Left Column: Big Editorial Statement & Craft Positioning */}
+          <div className="lg:col-span-7 space-y-8">
+            
+            {/* Direct Local Anchor Tag */}
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-[#f4f4f0] border border-[#e6e6df] text-xs">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-700" />
+              <span className="text-[#18191f] font-medium text-[11px] sm:text-xs">
+                Enghien &bull; Déplacements en Wallonie, Bruxelles &amp; Hauts-de-France
               </span>
             </div>
 
-            {/* Main Marquee Headline */}
-            <div className="space-y-4 sm:space-y-6">
-              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white font-sans leading-[1.14] sm:leading-[1.10]">
-                {title}
+            {/* Main Headline for SMEs */}
+            <div className="space-y-5">
+              <h1 className="text-3xl sm:text-5xl lg:text-[56px] font-extrabold tracking-tight text-[#18191f] leading-[1.1]">
+                Votre entreprise mérite un site web rapide, clair et rentable.
               </h1>
-              <p className="text-base sm:text-lg text-zinc-400 max-w-xl leading-relaxed font-normal">
-                {subtitle}
+              
+              <p className="text-base sm:text-lg text-[#555765] max-w-xl leading-relaxed font-normal">
+                Je conçois des sites vitrines, des boutiques en ligne et des outils de gestion pour les PME, artisans et commerçants. 
+                <strong className="text-[#18191f] font-semibold"> Zéro abonnement forcé, zéro usine à gaz, 100% propriétaire.</strong>
               </p>
             </div>
 
-            {/* Action Buttons (Full-width on mobile, responsive flex on desktop) */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 pt-2">
+            {/* Direct Action Bar */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 pt-1">
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider text-black bg-white hover:bg-zinc-200 transition-all duration-150 active:scale-95 shadow-xl cursor-pointer"
+                className="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider text-white bg-[#18191f] hover:bg-[#2d2e38] transition-all shadow-md active:scale-95 cursor-pointer"
               >
-                <span>Démarrer un projet</span>
-                <ArrowUpRight className="w-4 h-4" />
+                <span>Demander un devis gratuit</span>
+                <ArrowUpRight className="w-4 h-4 text-emerald-400" />
               </Link>
 
               <Link
                 href="/projets"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-xs sm:text-sm font-semibold text-zinc-200 bg-zinc-900/90 hover:bg-zinc-800 border border-white/[0.1] hover:border-white/[0.2] transition-all duration-150 cursor-pointer text-center"
+                className="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl text-xs sm:text-sm font-semibold text-[#18191f] bg-white hover:bg-[#f4f4f0] border border-[#e6e6df] hover:border-[#18191f]/30 transition-all shadow-xs text-center"
               >
-                <span>Voir les réalisations</span>
+                <span>Découvrir les réalisations</span>
               </Link>
             </div>
 
-            {/* Proof Points Strip (Touch-friendly card metrics on mobile) */}
-            <div className="pt-4 border-t border-white/[0.08] grid grid-cols-3 gap-2 sm:gap-4">
-              {metrics.map((m, idx) => (
-                <div
-                  key={idx}
-                  className="p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-black/40 sm:bg-transparent border border-white/[0.06] sm:border-0 space-y-0.5 sm:space-y-1 text-center sm:text-left"
-                >
-                  <span className="text-lg sm:text-2xl lg:text-3xl font-extrabold text-white font-mono block">
-                    {m.value}
-                  </span>
-                  <span className="text-[10px] sm:text-xs text-zinc-400 block leading-tight font-sans">
-                    {m.label}
-                  </span>
-                </div>
-              ))}
+            {/* Concrete Reassurances Strip */}
+            <div className="pt-6 border-t border-[#e6e6df] grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div className="flex items-center gap-2.5 text-xs text-[#555765]">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                <span>Chargement ultra-rapide (&lt; 0.4s)</span>
+              </div>
+              <div className="flex items-center gap-2.5 text-xs text-[#555765]">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                <span>Interlocuteur direct sans intermédiaire</span>
+              </div>
+              <div className="flex items-center gap-2.5 text-xs text-[#555765]">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                <span>Garantie support 30 jours incluse</span>
+              </div>
             </div>
+
           </div>
 
-          {/* Right Column: Live Interactive Architecture & Code Card */}
+          {/* Right Column: Physical Studio Identity Card / Personal Representation */}
           <div className="lg:col-span-5">
-            <div className="group relative rounded-2xl sm:rounded-3xl bg-[#0a0a0d] border border-white/[0.12] hover:border-emerald-500/30 overflow-hidden shadow-2xl transition-all duration-300">
-              {/* Subtle top border beam */}
-              <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-emerald-400/40 to-transparent pointer-events-none" />
+            <div className="relative">
+              {/* Background ambient card shadow layer */}
+              <div className="absolute -inset-2 bg-gradient-to-tr from-emerald-500/10 via-amber-500/5 to-transparent rounded-3xl blur-xl opacity-60 -z-10" />
 
-              {/* Window Bar Header */}
-              <div className="flex items-center justify-between px-3.5 sm:px-4 py-2.5 sm:py-3 bg-[#111116] border-b border-white/[0.08]">
-                <div className="flex items-center gap-1.5">
-                  <span className="w-2.5 h-2.5 rounded-full bg-zinc-700 inline-block" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-zinc-700 inline-block" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-zinc-700 inline-block" />
-                  <span className="ml-1.5 text-[11px] font-mono text-zinc-400 truncate max-w-[110px] sm:max-w-none">
-                    gminor-stack.ts
-                  </span>
-                </div>
+              {/* Physical Studio Business Card */}
+              <div className="rounded-3xl bg-white border border-[#e6e6df] p-7 sm:p-9 shadow-card space-y-6">
+                
+                {/* Header with Photo & Badge */}
+                <div className="flex items-center gap-4 pb-6 border-b border-[#e6e6df]">
+                  <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden bg-[#f4f4f0] border-2 border-[#e6e6df] shrink-0 flex items-center justify-center shadow-xs">
+                    <Image
+                      src="/images/gauthier.jpg"
+                      alt="Gauthier Minor"
+                      width={80}
+                      height={80}
+                      className="object-cover w-full h-full"
+                      onError={(e) => {
+                        e.currentTarget.style.display = "none";
+                      }}
+                    />
+                    <span className="text-lg font-black text-[#18191f] select-none">GM</span>
+                  </div>
 
-                {/* Tab Switcher */}
-                <div className="flex items-center gap-1 bg-black/60 p-0.5 sm:p-1 rounded-lg border border-white/[0.06]">
-                  <button
-                    type="button"
-                    onClick={() => setActiveTab("arch")}
-                    className={`px-2 sm:px-2.5 py-1 rounded-md text-[10px] sm:text-[11px] font-mono transition-colors cursor-pointer ${
-                      activeTab === "arch"
-                        ? "bg-zinc-800 text-white font-semibold shadow-sm"
-                        : "text-zinc-400 hover:text-white"
-                    }`}
-                  >
-                    Stack
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setActiveTab("stack")}
-                    className={`px-2 sm:px-2.5 py-1 rounded-md text-[10px] sm:text-[11px] font-mono transition-colors cursor-pointer ${
-                      activeTab === "stack"
-                        ? "bg-zinc-800 text-white font-semibold shadow-sm"
-                        : "text-zinc-400 hover:text-white"
-                    }`}
-                  >
-                    Backend
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setActiveTab("perf")}
-                    className={`px-2 sm:px-2.5 py-1 rounded-md text-[10px] sm:text-[11px] font-mono transition-colors cursor-pointer ${
-                      activeTab === "perf"
-                        ? "bg-zinc-800 text-white font-semibold shadow-sm"
-                        : "text-zinc-400 hover:text-white"
-                    }`}
-                  >
-                    Audits
-                  </button>
-                </div>
-              </div>
-
-              {/* Card Content (Mobile-Friendly Visual Presentation + Desktop Code Highlighting) */}
-              <div className="p-4 sm:p-5 font-mono text-xs text-zinc-300 leading-relaxed min-h-[260px] flex flex-col justify-between">
-                {activeTab === "arch" && (
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between text-[11px] text-zinc-400 border-b border-white/[0.06] pb-2">
-                      <span className="text-emerald-400 font-semibold">{"// Profil & Polyvalence Full-Stack"}</span>
-                      <span className="px-1.5 py-0.5 rounded bg-emerald-950/80 text-emerald-400 text-[10px] border border-emerald-500/30">Actif</span>
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-2">
+                      <h2 className="text-lg sm:text-xl font-extrabold text-[#18191f]">
+                        Gauthier Minor
+                      </h2>
                     </div>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 font-sans text-xs">
-                      <div className="p-2.5 rounded-xl bg-black/60 border border-white/[0.06] space-y-1">
-                        <span className="text-[10px] font-mono text-zinc-400 block uppercase">Frontend</span>
-                        <span className="font-bold text-white block">Next.js 15, React 19, TypeScript</span>
-                      </div>
-                      <div className="p-2.5 rounded-xl bg-black/60 border border-white/[0.06] space-y-1">
-                        <span className="text-[10px] font-mono text-zinc-400 block uppercase">Backend</span>
-                        <span className="font-bold text-white block">PHP 8, Symfony, Node.js</span>
-                      </div>
-                      <div className="p-2.5 rounded-xl bg-black/60 border border-white/[0.06] space-y-1">
-                        <span className="text-[10px] font-mono text-zinc-400 block uppercase">E-Commerce</span>
-                        <span className="font-bold text-emerald-300 block">PrestaShop (v1.6 ➔ v9)</span>
-                      </div>
-                      <div className="p-2.5 rounded-xl bg-black/60 border border-white/[0.06] space-y-1">
-                        <span className="text-[10px] font-mono text-zinc-400 block uppercase">Databases</span>
-                        <span className="font-bold text-white block">PostgreSQL, MySQL, Prisma</span>
-                      </div>
+                    <p className="text-xs text-[#555765] font-medium">
+                      Concepteur &amp; Développeur Web Indépendant
+                    </p>
+                    <div className="flex items-center gap-1.5 text-[11px] text-[#555765] font-mono">
+                      <MapPin className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                      <span>Enghien, Belgique</span>
                     </div>
                   </div>
-                )}
-
-                {activeTab === "stack" && (
-                  <div className="space-y-3">
-                    <div className="text-[11px] text-zinc-400 border-b border-white/[0.06] pb-2">
-                      <span className="text-blue-400 font-semibold">{"// Architecture Backend & Données"}</span>
-                    </div>
-                    <ul className="space-y-2 font-sans text-xs">
-                      <li className="p-2.5 rounded-xl bg-black/60 border border-white/[0.06] flex items-center gap-2 text-zinc-200">
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0" />
-                        <span>Migration de bases legacy (MySQL / PostgreSQL)</span>
-                      </li>
-                      <li className="p-2.5 rounded-xl bg-black/60 border border-white/[0.06] flex items-center gap-2 text-zinc-200">
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0" />
-                        <span>Modules personnalisés PrestaShop &amp; Symfony</span>
-                      </li>
-                      <li className="p-2.5 rounded-xl bg-black/60 border border-white/[0.06] flex items-center gap-2 text-zinc-200">
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0" />
-                        <span>Intégration d&apos;APIs sécurisées &amp; Webhooks</span>
-                      </li>
-                    </ul>
-                  </div>
-                )}
-
-                {activeTab === "perf" && (
-                  <div className="space-y-3">
-                    <span className="text-zinc-400 block text-[11px] font-mono">{"// Standards de livraison & Performance :"}</span>
-                    <div className="grid grid-cols-2 gap-2 font-sans">
-                      <div className="p-2.5 rounded-xl bg-black/60 border border-white/[0.06] flex items-center justify-between">
-                        <span className="text-zinc-300 text-xs">Performance</span>
-                        <span className="text-emerald-400 font-bold font-mono text-xs sm:text-sm">100/100</span>
-                      </div>
-                      <div className="p-2.5 rounded-xl bg-black/60 border border-white/[0.06] flex items-center justify-between">
-                        <span className="text-zinc-300 text-xs">Accessibilité</span>
-                        <span className="text-emerald-400 font-bold font-mono text-xs sm:text-sm">100/100</span>
-                      </div>
-                      <div className="p-2.5 rounded-xl bg-black/60 border border-white/[0.06] flex items-center justify-between">
-                        <span className="text-zinc-300 text-xs">Best Practices</span>
-                        <span className="text-emerald-400 font-bold font-mono text-xs sm:text-sm">100/100</span>
-                      </div>
-                      <div className="p-2.5 rounded-xl bg-black/60 border border-white/[0.06] flex items-center justify-between">
-                        <span className="text-zinc-300 text-xs">SEO Google</span>
-                        <span className="text-emerald-400 font-bold font-mono text-xs sm:text-sm">100/100</span>
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {/* Bottom Terminal Status */}
-                <div className="pt-3.5 border-t border-white/[0.06] flex items-center justify-between text-[10px] sm:text-[11px] text-zinc-400">
-                  <span className="flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-emerald-400" />
-                    <span>Multi-stack &bull; Prêt pour production</span>
-                  </span>
-                  <span className="text-zinc-500 font-mono hidden sm:inline">Next.js &bull; Symfony &bull; PrestaShop</span>
                 </div>
+
+                {/* Key Pillars for Decision Makers */}
+                <div className="space-y-3.5 text-xs text-[#555765]">
+                  <div className="p-3.5 rounded-xl bg-[#fafaf8] border border-[#e6e6df] flex items-start gap-3">
+                    <span className="text-base">🤝</span>
+                    <div>
+                      <strong className="text-[#18191f] block font-semibold">Une relation humaine et transparente</strong>
+                      <span>Pas de jargon incompréhensible ni d&apos;agence opaque. On parle objectifs concrets et retours sur investissement.</span>
+                    </div>
+                  </div>
+
+                  <div className="p-3.5 rounded-xl bg-[#fafaf8] border border-[#e6e6df] flex items-start gap-3">
+                    <span className="text-base">⚡</span>
+                    <div>
+                      <strong className="text-[#18191f] block font-semibold">Des sites taillés pour convertir</strong>
+                      <span>Optimisés pour le référencement naturel Google (SEO) et parfaitement adaptés aux smartphones de vos clients.</span>
+                    </div>
+                  </div>
+
+                  <div className="p-3.5 rounded-xl bg-[#fafaf8] border border-[#e6e6df] flex items-start gap-3">
+                    <span className="text-base">🔑</span>
+                    <div>
+                      <strong className="text-[#18191f] block font-semibold">Vous êtes 100% propriétaire</strong>
+                      <span>Code source livré, hébergement à votre nom, liberté absolue de modifier vos textes et images sans facture surprise.</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Quick Call / Meeting Button */}
+                <div className="pt-2">
+                  <Link
+                    href="/contact"
+                    className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#fafaf8] hover:bg-[#f4f4f0] border border-[#e6e6df] hover:border-[#18191f]/30 text-xs font-semibold text-[#18191f] transition-all shadow-xs"
+                  >
+                    <Phone className="w-3.5 h-3.5 text-emerald-600" />
+                    <span>Un projet en tête ? Parlons-en ensemble</span>
+                  </Link>
+                </div>
+
               </div>
             </div>
           </div>
+
         </div>
       </div>
     </section>

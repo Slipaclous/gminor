@@ -71,17 +71,17 @@ export function DualAudience({ pillars }: DualAudienceProps) {
         ];
 
   return (
-    <section className="py-16 sm:py-24 max-w-6xl mx-auto px-4 sm:px-6 border-b border-white/[0.08]">
+    <section className="py-16 sm:py-24 max-w-6xl mx-auto px-4 sm:px-6 border-b border-[#e6e6df] bg-[#fafaf8]">
       {/* Header with reveal */}
       <ScrollReveal className="space-y-3 sm:space-y-4 max-w-3xl mb-10 sm:mb-16">
-        <span className="text-xs font-mono uppercase tracking-wider text-zinc-400 block">
+        <span className="text-xs font-mono uppercase tracking-wider text-emerald-700 font-bold block">
           {"// MÉTHODE & VALEUR AJOUTÉE"}
         </span>
-        <h2 className="text-2xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white font-sans leading-tight">
-          L&apos;exigence de l&apos;ingénierie au service de votre image.
+        <h2 className="text-2xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-[#18191f] font-sans leading-tight">
+          L&apos;exigence technique au service de votre image de marque.
         </h2>
-        <p className="text-sm sm:text-base lg:text-lg text-zinc-300 leading-relaxed font-normal">
-          Que vous soyez une entreprise cherchant à moderniser sa présence ou une startup lançant un produit SaaS, je combine rigueur technique et sens du détail.
+        <p className="text-sm sm:text-base lg:text-lg text-[#555765] leading-relaxed font-normal">
+          Que vous soyez un commerce local, un artisan ou une PME en pleine croissance, vous bénéficiez de la même rigueur et du même sens du détail pour réussir en ligne.
         </p>
       </ScrollReveal>
 
@@ -91,39 +91,37 @@ export function DualAudience({ pillars }: DualAudienceProps) {
           const Icon = DEFAULT_ICONS[idx % DEFAULT_ICONS.length];
           return (
             <StaggerItem key={pillar.id || idx}>
-              <div className="group relative rounded-3xl bg-[#0d0d10] border border-white/[0.08] hover:border-emerald-500/30 p-7 sm:p-9 flex flex-col justify-between space-y-6 transition-all duration-300 shadow-xl h-full overflow-hidden hover:shadow-[0_0_24px_rgba(16,185,129,0.04)]">
-                <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-emerald-400/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-
+              <div className="group relative rounded-3xl bg-white border border-[#e6e6df] hover:border-emerald-500/40 p-7 sm:p-9 flex flex-col justify-between space-y-6 transition-all duration-300 shadow-card h-full overflow-hidden hover:shadow-lg">
                 <div className="space-y-5">
                   <div className="flex items-center justify-between">
-                    <div className="w-12 h-12 rounded-2xl bg-zinc-900 border border-white/[0.1] flex items-center justify-center text-white">
-                      <Icon className="w-5 h-5 text-emerald-400" />
+                    <div className="w-12 h-12 rounded-2xl bg-[#f7f7f4] border border-[#e6e6df] flex items-center justify-center text-[#18191f] group-hover:text-emerald-700 group-hover:bg-emerald-50 transition-colors">
+                      <Icon className="w-5 h-5 text-emerald-600" />
                     </div>
-                    <span className="text-xs font-mono text-zinc-500 font-bold">
+                    <span className="text-xs font-mono text-[#7c7e8c] font-bold">
                       0{pillar.id || idx + 1}
                     </span>
                   </div>
 
                   <div className="space-y-1.5">
-                    <h3 className="text-xl font-bold text-white tracking-tight leading-snug">
+                    <h3 className="text-xl font-bold text-[#18191f] tracking-tight leading-snug">
                       {pillar.title}
                     </h3>
-                    <span className="text-xs font-mono text-zinc-400 block">
+                    <span className="text-xs font-medium text-emerald-700 block">
                       {pillar.tagline}
                     </span>
                   </div>
 
-                  <p className="text-sm text-zinc-400 leading-relaxed font-normal">
+                  <p className="text-sm text-[#555765] leading-relaxed font-normal">
                     {pillar.description}
                   </p>
 
-                  <ul className="space-y-2.5 pt-3 border-t border-white/[0.06]">
+                  <ul className="space-y-2.5 pt-3 border-t border-[#e6e6df]">
                     {pillar.points.map((pt, pIdx) => (
                       <li
                         key={pIdx}
-                        className="flex items-center gap-2.5 text-xs text-zinc-300"
+                        className="flex items-center gap-2.5 text-xs text-[#18191f]"
                       >
-                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
                         <span>{pt}</span>
                       </li>
                     ))}
