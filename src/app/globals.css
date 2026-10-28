@@ -1,69 +1,142 @@
 @import "tailwindcss";
 
-/* Studio & Artisan Web Design Tokens — Warm, Clear & Welcoming for PME */
+/* Motion studio tokens — ink, paper & signal */
 :root {
-  --bg: #fafaf8;
-  --bg-surface: #ffffff;
-  --bg-card: #ffffff;
-  --bg-card-subtle: #f4f4f0;
-  --border: #e6e6df;
-  --border-strong: #d5d5cc;
-  --text-primary: #18191f;
-  --text-secondary: #555765;
-  --text-muted: #7c7e8c;
-  --accent-emerald: #059669;
-  --accent-emerald-soft: rgba(5, 150, 105, 0.08);
-  --accent-emerald-border: rgba(5, 150, 105, 0.25);
-  --accent-warm: #d97706;
-  --shadow-soft: 0 4px 20px -2px rgba(24, 25, 31, 0.05), 0 2px 6px -1px rgba(24, 25, 31, 0.03);
-  --shadow-card: 0 10px 30px -4px rgba(24, 25, 31, 0.06), 0 4px 10px -2px rgba(24, 25, 31, 0.04);
+  --ink: #0b0b0a;
+  --ink-2: #151513;
+  --ink-3: #20201d;
+  --paper: #efebe3;
+  --paper-dim: #a9a59c;
+  --paper-mute: #6d6a63;
+  --line: rgba(239, 235, 227, 0.12);
+  --signal: #8ea6ff;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @theme inline {
-  --color-background: var(--bg);
-  --color-foreground: var(--text-primary);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-paper: var(--paper);
+  --color-paper-dim: var(--paper-dim);
+  --color-paper-mute: var(--paper-mute);
+  --color-line: var(--line);
+  --color-signal: var(--signal);
   --font-sans: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
   --font-mono: var(--font-geist-mono), monospace;
+  --font-serif: var(--font-instrument-serif), Georgia, serif;
+  --ease-expo: var(--ease-out-expo);
 }
 
 html {
-  color-scheme: light;
-  scroll-behavior: smooth;
+  color-scheme: dark;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
 }
 
 body {
-  background-color: var(--bg);
-  color: var(--text-primary);
-  font-feature-settings: "cv02", "cv03", "cv04", "cv11", "ss01";
+  background-color: var(--ink);
+  color: var(--paper);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  line-height: 1.6;
+  line-height: 1.55;
 }
 
 ::selection {
-  background-color: #059669;
-  color: #ffffff;
+  background-color: var(--signal);
+  color: var(--ink);
 }
 
-/* Studio-style smooth scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
+/* Hide native cursor only when the custom cursor is mounted on a fine pointer */
+@media (pointer: fine) {
+  html.has-cursor,
+  html.has-cursor * {
+    cursor: none !important;
+  }
 }
 
-::-webkit-scrollbar-track {
-  background: #fafaf8;
+/* Grain overlay */
+.grain::after {
+  content: "";
+  position: fixed;
+  inset: -50%;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.07;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: grain 1.2s steps(6) infinite;
 }
 
-::-webkit-scrollbar-thumb {
-  background: #d5d5cc;
-  border-radius: 3px;
+@keyframes grain {
+  0% { transform: translate(0, 0); }
+  20% { transform: translate(-3%, 2%); }
+  40% { transform: translate(2%, -4%); }
+  60% { transform: translate(-4%, -1%); }
+  80% { transform: translate(3%, 3%); }
+  100% { transform: translate(0, 0); }
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #a1a19a;
+@keyframes marquee {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
+}
+
+.marquee-track {
+  animation: marquee var(--marquee-duration, 30s) linear infinite;
+}
+
+@keyframes caret-blink {
+  0%, 50% { opacity: 1; }
+  50.01%, 100% { opacity: 0; }
+}
+
+.caret-blink {
+  animation: caret-blink 1.1s steps(1) infinite;
+}
+
+.outline-text {
+  color: transparent;
+  -webkit-text-stroke: 1px var(--paper);
+}
+
+/* Route transitions */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.6s;
+  animation-timing-function: var(--ease-out-expo);
+}
+
+::view-transition-group(*) {
+  animation-duration: 0.8s;
+  animation-timing-function: var(--ease-out-expo);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track,
+  .caret-blink,
+  .grain::after {
+    animation: none;
+  }
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
 }
 
 /* Masquage officiel du badge flottant Google reCAPTCHA v3 */
 .grecaptcha-badge {
   visibility: hidden !important;
 }
+

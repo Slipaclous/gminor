@@ -1,13 +1,10 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
 import "./globals.css";
 import { SiteShell } from "@/components/layout/site-shell";
 import { Footer } from "@/components/layout/footer";
-import { ScrollProgress } from "@/components/ui/scroll-progress";
-import { FilmGrain } from "@/components/ui/film-grain";
+import { GlobalSearch } from "@/components/search/global-search";
 import { RecaptchaScript } from "@/components/ui/recaptcha-script";
-import { CommandMenu } from "@/components/ui/command-menu";
-import { ScrollToTop } from "@/components/ui/scroll-to-top";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
@@ -20,6 +17,14 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: "swap",
+});
+
+const instrumentSerif = Instrument_Serif({
+  variable: "--font-instrument-serif",
+  subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
   display: "swap",
 });
 
@@ -86,7 +91,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#000000",
+  themeColor: "#0b0b0a",
   width: "device-width",
   initialScale: 1,
 };
@@ -212,7 +217,7 @@ export default function RootLayout({
   return (
     <html
       lang="fr"
-      className={`${geistSans.variable} ${geistMono.variable} antialiased scroll-smooth`}
+      className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable} antialiased`}
     >
       <head>
         <link rel="alternate" type="text/markdown" href="/llms.txt" title="Documentation LLM" />
@@ -221,12 +226,9 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="min-h-screen flex flex-col bg-[#fafaf8] text-[#18191f] relative selection:bg-emerald-600 selection:text-white">
-        <ScrollProgress />
+      <body className="min-h-screen flex flex-col bg-ink text-paper relative">
         <RecaptchaScript />
-        <CommandMenu />
-        <ScrollToTop />
-        <SiteShell footer={<Footer />}>
+        <SiteShell footer={<Footer />} search={<GlobalSearch />}>
           {children}
         </SiteShell>
         <Analytics />

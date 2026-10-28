@@ -2,57 +2,39 @@
 
 import React from "react";
 import Link from "next/link";
-import { ArrowUpRight, CheckCircle2, Phone } from "lucide-react";
+import { Magnetic } from "../motion/magnetic";
+import { SplitText } from "../motion/split-text";
 
 export function CtaBanner() {
   return (
-    <section className="py-20 max-w-6xl mx-auto px-4 sm:px-6">
-      <div className="rounded-3xl bg-[#18191f] text-white p-8 sm:p-14 lg:p-16 shadow-2xl relative overflow-hidden">
-        {/* Subtle accent corner glow */}
-        <div className="absolute top-0 right-0 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
+    <section className="relative px-5 sm:px-10 py-32 sm:py-44 border-t border-line overflow-hidden">
+      <h2 className="text-[16vw] sm:text-[12vw] leading-[0.85] tracking-[-0.06em] font-medium">
+        <SplitText text="Parlons" />
+        <br />
+        <span className="font-serif italic font-normal">
+          <SplitText text="de vous." delay={0.15} />
+        </span>
+      </h2>
 
-        <div className="relative z-10 max-w-3xl space-y-6">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white leading-tight">
-            Prêt à donner à votre entreprise le site qu&apos;elle mérite ?
-          </h2>
-
-          <p className="text-base sm:text-lg text-zinc-300 leading-relaxed font-normal">
-            Parlons de vos objectifs, de votre budget et de vos délais. Je vous réponds sous 24 heures avec une proposition claire et transparente, sans aucun engagement.
-          </p>
-
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
-            <Link
-              href="/contact"
-              className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider bg-white hover:bg-zinc-100 text-[#18191f] transition-all shadow-md active:scale-95 cursor-pointer"
-            >
-              <span>Demander mon devis gratuit</span>
-              <ArrowUpRight className="w-4 h-4 text-emerald-600" />
-            </Link>
-
-            <a
-              href="tel:0470123456"
-              className="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl text-xs sm:text-sm font-semibold text-white bg-white/10 hover:bg-white/15 border border-white/15 transition-all text-center"
-            >
-              <Phone className="w-4 h-4 text-emerald-400" />
-              <span>Échanger par téléphone</span>
-            </a>
-          </div>
-
-          {/* Micro assurances */}
-          <div className="pt-6 border-t border-white/10 flex flex-wrap items-center gap-6 text-xs text-zinc-400 font-mono">
-            <div className="flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-              <span>Devis gratuit sous 24h</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-              <span>Aucun engagement</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-              <span>Confidentialité assurée</span>
-            </div>
-          </div>
+      <div className="mt-16 flex flex-wrap items-center gap-10">
+        <Magnetic>
+          <Link
+            href="/questionnaire"
+            className="group relative flex items-center justify-center w-44 h-44 sm:w-56 sm:h-56 rounded-full bg-signal text-ink overflow-hidden"
+          >
+            <span className="absolute inset-0 rounded-full bg-paper scale-0 transition-transform duration-700 ease-expo group-hover:scale-100" />
+            <span className="relative text-lg font-medium text-center leading-tight">
+              Démarrer
+              <br />
+              <span className="font-serif italic text-2xl">un projet</span>
+            </span>
+          </Link>
+        </Magnetic>
+        <div className="space-y-2 text-paper-dim max-w-xs">
+          <p>Un questionnaire de 2 minutes pour cadrer votre besoin. Réponse personnelle sous 24h.</p>
+          <Link href="/contact" className="inline-block text-paper border-b border-paper pb-0.5 hover:text-signal hover:border-signal transition-colors">
+            Ou m&apos;écrire directement →
+          </Link>
         </div>
       </div>
     </section>

@@ -4,14 +4,16 @@ import React from "react";
 import { usePathname } from "next/navigation";
 import { Header } from "./header";
 import { ToastProvider } from "../ui/toast";
-import { CommandMenu } from "../ui/command-menu";
+import { SmoothScroll } from "../motion/smooth-scroll";
+import { Cursor } from "../motion/cursor";
 
 interface SiteShellProps {
   children: React.ReactNode;
   footer: React.ReactNode;
+  search: React.ReactNode;
 }
 
-export function SiteShell({ children, footer }: SiteShellProps) {
+export function SiteShell({ children, footer, search }: SiteShellProps) {
   const pathname = usePathname();
   const isAdmin = pathname.startsWith("/admin");
 
@@ -25,10 +27,13 @@ export function SiteShell({ children, footer }: SiteShellProps) {
 
   return (
     <ToastProvider>
+      <SmoothScroll />
+      <Cursor />
+      <div className="grain" aria-hidden />
+      {search}
       <Header />
       <div className="flex-1 flex flex-col">{children}</div>
       {footer}
-      <CommandMenu />
     </ToastProvider>
   );
 }

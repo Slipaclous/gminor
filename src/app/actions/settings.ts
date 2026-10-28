@@ -141,7 +141,6 @@ export async function saveServicesSettingsAction(
 
   await updateSiteSettings({ services });
 
-  revalidatePath("/services");
   return { success: true };
 }
 
@@ -187,7 +186,6 @@ export async function saveEstimatorSettingsAction(
     },
   });
 
-  revalidatePath("/services");
   revalidatePath("/admin/contenu");
   return { success: true };
 }
@@ -215,7 +213,6 @@ export async function saveFaqSettingsAction(
   await updateSiteSettings({ faqs });
 
   revalidatePath("/faq");
-  revalidatePath("/services");
   return { success: true };
 }
 
@@ -256,7 +253,6 @@ export async function saveContactInfoSettingsAction(
 
   revalidatePath("/");
   revalidatePath("/contact");
-  revalidatePath("/services");
   revalidatePath("/faq");
   revalidatePath("/admin/contenu");
   return { success: true };

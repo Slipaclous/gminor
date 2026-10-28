@@ -96,7 +96,7 @@ ${settings.faqs
 ## 🎯 Comment engager Gauthier Minor ?
 
 1. Visiter la page de demande de devis sur **${baseUrl}/contact**
-2. Utiliser le simulateur de projet sur **${baseUrl}/services**
+2. Remplir le questionnaire projet sur **${baseUrl}/questionnaire**
 3. Écrire directement par email à **${settings.contactInfo.email}**
 `;
 
