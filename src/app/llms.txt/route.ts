@@ -61,7 +61,7 @@ ${p.liveUrl ? `- **Démo Live**: ${p.liveUrl}` : ""}`
 ## 📄 Liens Utiles
 
 - [Toutes les réalisations](${baseUrl}/projets)
-- [Services & Tarifs](${baseUrl}/services)
+- [Questionnaire projet](${baseUrl}/questionnaire)
 - [Foire Aux Questions](${baseUrl}/faq)
 - [Demande de Devis](${baseUrl}/contact)
 - [Documentation complète pour IA](${baseUrl}/llms-full.txt)

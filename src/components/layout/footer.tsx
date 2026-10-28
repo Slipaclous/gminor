@@ -1,148 +1,63 @@
 import React from "react";
 import Link from "next/link";
 import { getSiteSettings } from "@/lib/settings-service";
-import { Logo } from "./logo";
-import { GithubIcon, LinkedinIcon, InstagramIcon, XIcon } from "../ui/icons";
-import { CopyEmailButton } from "../ui/copy-email-button";
+
+const SITEMAP = [
+  { href: "/", label: "Accueil" },
+  { href: "/projets", label: "Réalisations" },
+  { href: "/questionnaire", label: "Questionnaire projet" },
+  { href: "/faq", label: "FAQ" },
+  { href: "/contact", label: "Contact" },
+];
 
 export async function Footer() {
   const settings = await getSiteSettings();
   const info = settings.contactInfo;
+  const socials = [
+    { href: info.linkedinUrl, label: "LinkedIn" },
+    { href: info.githubUrl, label: "GitHub" },
+    { href: info.instagramUrl, label: "Instagram" },
+    { href: info.twitterUrl, label: "X / Twitter" },
+  ].filter((s) => s.href);
 
   return (
-    <footer className="border-t border-[#e6e6df] bg-white text-[#555765] py-16 text-sm">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 space-y-12">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10">
-          {/* Brand Col */}
-          <div className="md:col-span-5 space-y-4">
-            <Logo />
-            <p className="text-[#555765] text-xs sm:text-sm max-w-sm leading-relaxed">
-              Création de sites internet sur-mesure ultra-rapides, boutiques e-commerce PrestaShop et outils métier pour indépendants et PME. Basé à Enghien et actif partout en Belgique.
-            </p>
-            <div className="flex items-center gap-3 pt-2">
-              {info.githubUrl && (
-                <a
-                  href={info.githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-8 h-8 rounded-lg bg-[#fafaf8] border border-[#e6e6df] hover:border-[#d5d5cc] flex items-center justify-center text-[#555765] hover:text-[#18191f] transition-colors"
-                  aria-label="GitHub"
-                >
-                  <GithubIcon className="w-4 h-4" />
-                </a>
-              )}
-              {info.linkedinUrl && (
-                <a
-                  href={info.linkedinUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-8 h-8 rounded-lg bg-[#fafaf8] border border-[#e6e6df] hover:border-[#d5d5cc] flex items-center justify-center text-[#555765] hover:text-[#18191f] transition-colors"
-                  aria-label="LinkedIn"
-                >
-                  <LinkedinIcon className="w-4 h-4" />
-                </a>
-              )}
-              {info.instagramUrl && (
-                <a
-                  href={info.instagramUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-8 h-8 rounded-lg bg-[#fafaf8] border border-[#e6e6df] hover:border-[#d5d5cc] flex items-center justify-center text-[#555765] hover:text-[#18191f] transition-colors"
-                  aria-label="Instagram"
-                >
-                  <InstagramIcon className="w-4 h-4" />
-                </a>
-              )}
-              {info.twitterUrl && (
-                <a
-                  href={info.twitterUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-8 h-8 rounded-lg bg-[#fafaf8] border border-[#e6e6df] hover:border-[#d5d5cc] flex items-center justify-center text-[#555765] hover:text-[#18191f] transition-colors"
-                  aria-label="X (Twitter)"
-                >
-                  <XIcon className="w-3.5 h-3.5" />
-                </a>
-              )}
-            </div>
-          </div>
-
-          {/* Nav Links */}
-          <div className="md:col-span-3 space-y-3">
-            <span className="text-xs font-mono uppercase tracking-wider text-[#18191f] font-bold block">
-              Navigation
-            </span>
-            <ul className="space-y-2 text-xs">
-              <li>
-                <Link href="/" className="hover:text-[#18191f] transition-colors">
-                  Accueil
-                </Link>
-              </li>
-              <li>
-                <Link href="/projets" className="hover:text-[#18191f] transition-colors">
-                  Réalisations &amp; Études de cas
-                </Link>
-              </li>
-              <li>
-                <Link href="/services" className="hover:text-[#18191f] transition-colors">
-                  Services &amp; Tarifs
-                </Link>
-              </li>
-              <li>
-                <Link href="/faq" className="hover:text-[#18191f] transition-colors">
-                  Foire Aux Questions (FAQ)
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="hover:text-[#18191f] transition-colors">
-                  Demande de devis
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Admin & Direct Coordinates */}
-          <div className="md:col-span-4 space-y-3">
-            <span className="text-xs font-mono uppercase tracking-wider text-[#18191f] font-bold block">
-              Contact Direct
-            </span>
-            <ul className="space-y-2 text-xs">
-              <li>
-                <span className="text-[#7c7e8c]">Localisation :</span>{" "}
-                <span className="text-[#18191f] font-medium">{info.location}</span>
-              </li>
-              <li className="flex items-center gap-2 flex-wrap">
-                <span className="text-[#7c7e8c]">Contact :</span>{" "}
-                <a
-                  href={`mailto:${info.email}`}
-                  className="text-[#18191f] font-medium hover:underline"
-                >
-                  {info.email}
-                </a>
-                <CopyEmailButton email={info.email} label="Copier" />
-              </li>
-              <li className="pt-2">
-                <Link
-                  href="/admin"
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#fafaf8] border border-[#e6e6df] text-[11px] font-mono text-[#555765] hover:text-[#18191f] hover:border-[#d5d5cc] transition-colors"
-                >
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                  <span>Accès Back-Office Admin</span>
-                </Link>
-              </li>
-            </ul>
-          </div>
+    <footer className="relative bg-ink-2 text-paper overflow-hidden">
+      <div className="px-5 sm:px-10 pt-20 pb-8 grid grid-cols-2 md:grid-cols-12 gap-10 text-sm">
+        <div className="col-span-2 md:col-span-5 space-y-4">
+          <p className="text-3xl sm:text-4xl leading-[1.05] tracking-[-0.03em] font-medium max-w-md">
+            Du code solide, des interfaces soignées.
+          </p>
+          <a href={`mailto:${info.email}`} className="inline-block text-paper-dim hover:text-signal transition-colors underline underline-offset-4 decoration-line">
+            {info.email}
+          </a>
         </div>
-
-        {/* Bottom copyright */}
-        <div className="pt-8 border-t border-[#e6e6df] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#7c7e8c] font-mono">
-          <div>
-            © {new Date().getFullYear()} Gauthier Minor. Tous droits réservés.
-          </div>
-          <div>
-            Hébergé en Europe &bull; 100% sans tracking intrusif.
-          </div>
+        <div className="md:col-span-2 md:col-start-8 space-y-3">
+          <p className="font-mono text-xs text-paper-mute">Plan</p>
+          {SITEMAP.map((l) => (
+            <Link key={l.href} href={l.href} className="block hover:text-signal transition-colors">
+              {l.label}
+            </Link>
+          ))}
         </div>
+        <div className="md:col-span-2 space-y-3">
+          <p className="font-mono text-xs text-paper-mute">Réseaux</p>
+          {socials.map((s) => (
+            <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" className="block hover:text-signal transition-colors">
+              {s.label} ↗
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <div aria-hidden className="px-3 pb-[5vw] select-none pointer-events-none">
+        <p className="text-[24.5vw] leading-[0.78] font-semibold tracking-[-0.075em] whitespace-nowrap">
+          gminor<span className="caret-blink text-signal">_</span>
+        </p>
+      </div>
+
+      <div className="px-5 sm:px-10 py-6 flex flex-wrap justify-between gap-4 text-xs font-mono text-paper-mute border-t border-line">
+        <span>© {new Date().getFullYear()} Gauthier Minor — {info.location}</span>
+        <span>Next.js · TypeScript · hébergé sur Vercel</span>
       </div>
     </footer>
   );

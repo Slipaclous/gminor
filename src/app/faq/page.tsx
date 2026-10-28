@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { getSiteSettings } from "@/lib/settings-service";
 import { FaqAccordion } from "@/components/faq/faq-accordion";
 import { CtaBanner } from "@/components/home/cta-banner";
-import { HelpCircle, MessageCircleQuestion } from "lucide-react";
+import { SplitText } from "@/components/motion/split-text";
 
 export const dynamic = "force-dynamic";
 
@@ -15,27 +15,20 @@ export const metadata: Metadata = {
 
 export default async function FaqPage() {
   const settings = await getSiteSettings();
-  const faqs = settings.faqs;
 
   return (
-    <main className="flex-1 py-16 sm:py-24 bg-[#fafaf8]">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 space-y-16">
-        {/* Page Header */}
-        <div className="space-y-4 max-w-3xl">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-[#18191f] font-sans leading-tight">
-            Tout ce que vous devez savoir avant de lancer votre projet.
-          </h1>
-          <p className="text-lg sm:text-xl text-[#555765] leading-relaxed font-normal">
-            Des réponses claires et transparentes sur ma méthode de travail, les aspects techniques, les tarifs et l&apos;autonomie après livraison.
-          </p>
-        </div>
-
-        {/* Dynamic Accordion */}
-        <FaqAccordion faqs={faqs} />
-
-        {/* Bottom CTA */}
-        <CtaBanner />
-      </div>
+    <main className="flex-1">
+      <section className="px-5 sm:px-10 pt-40 pb-24">
+        <h1 className="text-[14vw] sm:text-[9vw] leading-[0.88] tracking-[-0.055em] font-medium mb-20 max-w-5xl">
+          <SplitText text="Les réponses" immediate />
+          <br />
+          <span className="font-serif italic font-normal text-paper-dim">
+            <SplitText text="avant de se lancer." immediate delay={0.2} />
+          </span>
+        </h1>
+        <FaqAccordion faqs={settings.faqs} />
+      </section>
+      <CtaBanner />
     </main>
   );
 }

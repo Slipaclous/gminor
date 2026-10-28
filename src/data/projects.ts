@@ -357,39 +357,6 @@ export const PROJECTS_DATA: ProjectItem[] = [
     ],
   },
   {
-    id: "proj_amarea",
-    slug: "amarea",
-    title: "Amarea Wedding",
-    tagline: "Plateforme SaaS sur-mesure pour wedding planner haut de gamme",
-    description:
-      "Conception d'une plateforme web moderne et responsive pour une agence de wedding planning événementiel haut de gamme en Belgique et en France.",
-    category: "WEBSITE",
-    categoryLabel: "Site Entreprise & PME",
-    client: "Amarea Agency",
-    role: "Développeur Front-End & Designer",
-    year: "2025",
-    imageUrl:
-      "https://hkjqevinuoraripkoyhf.supabase.co/storage/v1/object/public/portfolio-uploads/a76f6b55-d143-4dc9-9804-03c0ca6fbfe4.png",
-    techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
-    liveUrl: "https://www.amarea-wedding.com",
-    featured: false,
-    order: 7,
-    challenge:
-      "Refléter l'élégance et le raffinement des mariages haut de gamme tout en assurant une vitesse de chargement instantanée et une conversion fluide des prospects.",
-    solution:
-      "Design épuré hautement contrasté avec animations douces et micro-interactions au scroll, formulaires de contact qualifiés et optimisation des médias.",
-    results: [
-      "+45% de demandes de devis qualifiées dès le premier mois",
-      "Temps de chargement divisé par 2 sur smartphone",
-      "Identité visuelle premium saluée par les futurs mariés",
-    ],
-    metrics: [
-      { label: "Conversion mobile", value: "+45%" },
-      { label: "Score Performance", value: "98/100" },
-      { label: "Temps chargement", value: "0.4s" },
-    ],
-  },
-  {
     id: "proj_mgevents",
     slug: "mgevents",
     title: "MgEvents",
@@ -484,39 +451,6 @@ export const PROJECTS_DATA: ProjectItem[] = [
       { label: "Prise de RDV en ligne", value: "+80%" },
       { label: "SEO Local", value: "Top 3 Google" },
       { label: "Vitesse", value: "0.3s" },
-    ],
-  },
-  {
-    id: "proj_bruxelles_proprete",
-    slug: "bruxelles-proprete",
-    title: "Bruxelles Propreté",
-    tagline: "Portail institutionnel Drupal 10 pour l'agence publique de gestion des déchets",
-    description:
-      "Contribution au développement du portail public de l'agence Bruxelles-Propreté. Développement de modules personnalisés Drupal 10, formulaires citoyens et conformité stricte aux normes d'accessibilité RGAA.",
-    category: "FULLSTACK",
-    categoryLabel: "Outils & Full-Stack",
-    client: "Région de Bruxelles-Capitale",
-    role: "Développeur Drupal & PHP",
-    year: "2023",
-    imageUrl:
-      "https://hkjqevinuoraripkoyhf.supabase.co/storage/v1/object/public/portfolio-uploads/4890b9b3-1fcf-49b0-bc42-990a42398555.png",
-    techStack: ["Drupal 10", "PHP", "Twig", "MySQL", "Docker", "Sass"],
-    liveUrl: "https://arp-gan.be",
-    featured: false,
-    order: 11,
-    challenge:
-      "Rendre accessible l'ensemble des démarches de collecte de déchets pour plus d'un million de citoyens bruxellois dans le respect des normes d'accessibilité numérique de l'État.",
-    solution:
-      "Développement de templates Twig sémantiques conformes RGAA niveau AA et intégration de formulaires de demandes d'encombrants et signalements.",
-    results: [
-      "Mise en ligne d'un portail citoyen clair et structuré",
-      "Gestion multilingue fluide",
-      "Validation de mon diplôme avec mention",
-    ],
-    metrics: [
-      { label: "Audience ciblée", value: "1M+ citoyens" },
-      { label: "CMS", value: "Drupal 10" },
-      { label: "Accessibilité", value: "Normes RGAA" },
     ],
   },
   {

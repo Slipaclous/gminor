@@ -1,36 +1,19 @@
-"use client";
-
 import React from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 
 interface LogoProps {
   className?: string;
 }
 
 export function Logo({ className = "" }: LogoProps) {
-  const pathname = usePathname();
-
-  const handleClick = () => {
-    if (pathname === "/") {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-  };
-
   return (
     <Link
       href="/"
-      onClick={handleClick}
-      className={`group inline-flex items-center focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 rounded-xl transition-all select-none ${className}`}
+      className={`group inline-flex items-baseline select-none text-xl font-semibold tracking-[-0.05em] ${className}`}
       aria-label="Accueil - G-Minor"
     >
-      {/* Pure Typographic Studio Wordmark (G-Minor.) */}
-      <div className="flex items-center text-lg sm:text-xl font-extrabold tracking-tight text-[#18191f] font-sans leading-none">
-        <span className="transition-colors group-hover:text-emerald-700">G</span>
-        <span className="text-emerald-600 font-bold mx-0.5">-</span>
-        <span className="transition-colors group-hover:text-emerald-700">Minor</span>
-        <span className="text-emerald-600 font-extrabold text-xl group-hover:scale-125 transition-transform origin-bottom inline-block">.</span>
-      </div>
+      <span className="leading-none">gminor</span>
+      <span className="leading-none text-signal group-hover:[animation:caret-blink_1.1s_steps(1)_infinite]">_</span>
     </Link>
   );
 }
