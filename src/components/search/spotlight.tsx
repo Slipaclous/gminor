@@ -110,13 +110,13 @@ export function Spotlight({ entries }: { entries: SearchEntry[] }) {
             role="dialog"
             aria-modal="true"
             aria-label="Recherche"
-            className="relative w-full max-w-3xl overflow-hidden rounded-2xl border border-white/10 bg-ink-3/75 backdrop-blur-2xl shadow-2xl shadow-black/60"
+            className="relative w-full max-w-3xl overflow-hidden rounded-2xl border border-line bg-ink-3/75 backdrop-blur-2xl shadow-2xl shadow-black/30"
             initial={{ scale: 0.96, y: -10 }}
             animate={{ scale: 1, y: 0 }}
             exit={{ scale: 0.97, y: -6 }}
             transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
           >
-            <div className="flex items-center gap-4 px-5 h-16 border-b border-white/10">
+            <div className="flex items-center gap-4 px-5 h-16 border-b border-line">
               <svg aria-hidden viewBox="0 0 24 24" className="w-5 h-5 text-paper-dim shrink-0" fill="none" stroke="currentColor" strokeWidth="2">
                 <circle cx="11" cy="11" r="7" />
                 <path d="m20 20-3.5-3.5" />
@@ -133,11 +133,11 @@ export function Spotlight({ entries }: { entries: SearchEntry[] }) {
                 aria-label="Rechercher sur le site"
                 className="flex-1 bg-transparent outline-none text-xl placeholder:text-paper-mute"
               />
-              <kbd className="hidden sm:block font-mono text-[11px] text-paper-mute border border-white/10 rounded px-1.5 py-0.5">esc</kbd>
+              <kbd className="hidden sm:block font-mono text-[11px] text-paper-mute border border-line rounded px-1.5 py-0.5">esc</kbd>
             </div>
 
             <div className="grid sm:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] h-[min(60vh,26rem)]">
-              <div ref={listRef} className="overflow-y-auto py-2 sm:border-r border-white/10">
+              <div ref={listRef} className="overflow-y-auto py-2 sm:border-r border-line">
                 {ordered.length === 0 && <p className="px-5 py-6 text-paper-dim">Aucun résultat pour « {query} ».</p>}
                 {GROUP_ORDER.map((group) => {
                   const items = ordered.filter((r) => r.group === group);
@@ -191,7 +191,7 @@ export function Spotlight({ entries }: { entries: SearchEntry[] }) {
               </div>
             </div>
 
-            <div className="flex items-center gap-5 px-5 h-10 border-t border-white/10 text-[11px] text-paper-mute">
+            <div className="flex items-center gap-5 px-5 h-10 border-t border-line text-[11px] text-paper-mute">
               <span><kbd className="font-mono">↑↓</kbd> naviguer</span>
               <span><kbd className="font-mono">↵</kbd> ouvrir</span>
               <span className="ml-auto"><kbd className="font-mono">⌘K</kbd> rechercher partout</span>

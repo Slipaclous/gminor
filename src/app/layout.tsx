@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
 import "./globals.css";
 import { SiteShell } from "@/components/layout/site-shell";
+import { themeInitScript } from "@/components/layout/theme-toggle";
 import { Footer } from "@/components/layout/footer";
 import { GlobalSearch } from "@/components/search/global-search";
 import { RecaptchaScript } from "@/components/ui/recaptcha-script";
@@ -91,7 +92,10 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0b0b0a",
+  themeColor: [
+    { media: "(prefers-color-scheme: dark)", color: "#0b0b0a" },
+    { media: "(prefers-color-scheme: light)", color: "#f4f1ea" },
+  ],
   width: "device-width",
   initialScale: 1,
 };
@@ -217,9 +221,16 @@ export default function RootLayout({
   return (
     <html
       lang="fr"
+      suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable} antialiased`}
     >
       <head>
+        {/* Inline script pattern from the Next docs: runs on the server render only, no client warning */}
+        <script
+          type={typeof window === "undefined" ? "text/javascript" : "text/plain"}
+          suppressHydrationWarning
+          dangerouslySetInnerHTML={{ __html: themeInitScript }}
+        />
         <link rel="alternate" type="text/markdown" href="/llms.txt" title="Documentation LLM" />
         <script
           type="application/ld+json"
