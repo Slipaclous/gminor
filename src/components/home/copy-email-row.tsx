@@ -27,11 +27,12 @@ export function CtaRowInner({ index, title, note }: { index: string; title: stri
     <span className="relative flex items-baseline gap-5 border-t border-line py-6 sm:py-7 px-1 overflow-hidden">
       <span className="absolute inset-0 bg-paper origin-bottom scale-y-0 transition-transform duration-500 ease-expo group-hover:scale-y-100" />
       <span className="relative font-mono text-xs text-moss group-hover:text-ink/60 transition-colors">{index}</span>
-      <span className="relative flex-1 min-w-0 truncate text-2xl sm:text-3xl tracking-[-0.03em] font-medium transition-colors group-hover:text-ink">
+      <span className="relative flex-1 min-w-0 truncate text-xl sm:text-3xl tracking-[-0.03em] font-medium transition-colors group-hover:text-ink">
         {title}
       </span>
       <span className="relative shrink-0 text-sm text-paper-dim transition-colors group-hover:text-ink">
-        <span className={note.endsWith("✓") ? "text-moss group-hover:text-ink" : ""}>{note}</span> <span className="inline-block transition-transform duration-500 group-hover:translate-x-1">→</span>
+        {/* On phones only the arrow shows, except for the "copied" feedback */}
+        <span className={note.endsWith("✓") ? "text-moss group-hover:text-ink" : "max-sm:sr-only"}>{note}</span> <span className="inline-block transition-transform duration-500 group-hover:translate-x-1">→</span>
       </span>
     </span>
   );

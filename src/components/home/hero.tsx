@@ -33,7 +33,7 @@ export function Hero({ available, intro }: HeroProps) {
       <LivingField className="absolute inset-0 w-full h-full" />
       <motion.div style={reduceMotion ? undefined : { y, opacity }} className="relative z-10 flex-1 flex flex-col justify-end px-5 sm:px-10 pb-10 pt-28">
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-10">
-          <h1 ref={titleRef} className="leading-[0.86] tracking-[-0.055em] font-medium text-[18vw] sm:text-[15vw] lg:text-[12vw]">
+          <h1 ref={titleRef} className="leading-[0.86] tracking-[-0.055em] font-medium text-[21vw] sm:text-[15vw] lg:text-[12vw]">
             <span className="block">
               <SplitText text="Code" immediate delay={0.2} />
             </span>

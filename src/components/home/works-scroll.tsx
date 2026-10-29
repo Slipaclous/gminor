@@ -55,7 +55,7 @@ export function WorksScroll({ projects, total }: WorksScrollProps) {
       ref={ref}
       id="travaux"
       style={pinned ? { height: `${(projects.length + 1) * 70}vh` } : undefined}
-      className={pinned ? "relative" : "relative py-24"}
+      className={pinned ? "relative" : "relative py-16 sm:py-24"}
     >
       <div className={pinned ? "sticky top-0 h-svh overflow-hidden flex flex-col justify-center" : "relative"}>
         <motion.div
@@ -101,7 +101,7 @@ export function WorksScroll({ projects, total }: WorksScrollProps) {
                   {String(i + 1).padStart(2, "0")}
                 </span>
               </div>
-              <div className="mt-5 flex items-baseline justify-between gap-6">
+              <div className="mt-5 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
                 <h3 className="text-2xl sm:text-4xl tracking-tight font-medium transition-all duration-500 group-hover:font-serif group-hover:italic">
                   {project.title}
                 </h3>

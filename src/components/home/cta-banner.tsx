@@ -10,8 +10,8 @@ export async function CtaBanner() {
   const available = settings.hero.available;
 
   return (
-    <section className="px-5 sm:px-10 py-28 sm:py-36 border-t border-line">
-      <div className="grid lg:grid-cols-12 gap-14 lg:gap-10 items-end">
+    <section className="px-5 sm:px-10 py-20 sm:py-36 border-t border-line">
+      <div className="grid lg:grid-cols-12 gap-14 lg:gap-10 items-end [&>*]:min-w-0">
         <div className="lg:col-span-7">
           <h2 className="text-[16vw] sm:text-[12vw] lg:text-[8.5vw] leading-[0.86] tracking-[-0.06em] font-medium">
             <SplitText text="Parlons" />

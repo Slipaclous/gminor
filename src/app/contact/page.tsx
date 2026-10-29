@@ -43,7 +43,7 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
             </span>
           </>
         }
-        aside={<p>Une idée, une question, un projet à cadrer ? Je réponds personnellement sous 24h.</p>}
+        aside={<p>Une idée, une question, un projet à cadrer&nbsp;? Je réponds personnellement sous 24h.</p>}
       />
 
       <div className="mt-20 grid lg:grid-cols-12 gap-16">
@@ -65,7 +65,7 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
             ))}
           </dl>
           <Link href="/questionnaire" className="block border border-line p-6 hover:border-signal transition-colors group">
-            <p className="font-mono text-xs text-paper-mute">Projet complet ?</p>
+            <p className="font-mono text-xs text-paper-mute">Projet complet&nbsp;?</p>
             <p className="mt-2 text-2xl font-serif italic group-hover:text-signal transition-colors">Le questionnaire en 5 étapes →</p>
           </Link>
         </aside>
