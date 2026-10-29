@@ -59,7 +59,7 @@ export function Hero({ available, intro, terminal }: HeroProps) {
             ))}
           </p>
           <span className="flex items-center gap-2 text-sm text-paper-dim">
-            <span className={`w-2 h-2 rounded-full ${available ? "bg-signal animate-pulse" : "bg-paper-mute"}`} />
+            <span className={`w-2 h-2 rounded-full ${available ? "bg-moss animate-pulse" : "bg-paper-mute"}`} />
             {available ? "Disponible pour nouveaux projets" : "Agenda complet"}
           </span>
         </div>

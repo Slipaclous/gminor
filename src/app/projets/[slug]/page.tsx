@@ -82,7 +82,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailProps) 
               ["Catégorie", project.categoryLabel],
             ].map(([label, value]) => (
               <div key={label} className="border-t border-line pt-3">
-                <dt className="font-mono text-xs text-paper-mute">{label}</dt>
+                <dt className="font-mono text-xs text-moss/80">{label}</dt>
                 <dd className="mt-1">{value}</dd>
               </div>
             ))}
@@ -134,7 +134,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailProps) 
             <div className="mt-12 space-y-px bg-line">
               {project.modules.map((mod) => (
                 <Reveal key={mod.title} className="bg-ink py-6">
-                  <p className="font-mono text-xs text-paper-mute">{mod.subtitle}</p>
+                  <p className="font-mono text-xs text-moss/80">{mod.subtitle}</p>
                   <h3 className="mt-1 text-2xl font-medium tracking-tight">{mod.title}</h3>
                   <p className="mt-2 text-paper-dim">{mod.description}</p>
                 </Reveal>
@@ -160,7 +160,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailProps) 
             {project.results.map((r, i) => (
               <Reveal key={r} delay={i * 0.05}>
                 <li className="flex gap-6 text-lg leading-relaxed">
-                  <span className="font-mono text-xs text-signal pt-2">→</span>
+                  <span className="font-mono text-xs text-moss pt-2">✓</span>
                   <span>{r}</span>
                 </li>
               </Reveal>

@@ -4,6 +4,7 @@ import { getSiteSettings } from "@/lib/settings-service";
 import { FaqAccordion } from "@/components/faq/faq-accordion";
 import { CtaBanner } from "@/components/home/cta-banner";
 import { SplitText } from "@/components/motion/split-text";
+import { PageHeader } from "@/components/layout/page-header";
 
 export const dynamic = "force-dynamic";
 
@@ -19,13 +20,19 @@ export default async function FaqPage() {
   return (
     <main className="flex-1">
       <section className="px-5 sm:px-10 pt-40 pb-24">
-        <h1 className="text-[14vw] sm:text-[9vw] leading-[0.88] tracking-[-0.055em] font-medium mb-20 max-w-5xl">
-          <SplitText text="Les réponses" immediate />
-          <br />
-          <span className="font-serif italic font-normal text-paper-dim">
-            <SplitText text="avant de se lancer." immediate delay={0.2} />
-          </span>
-        </h1>
+        <PageHeader
+          className="mb-20"
+          title={
+            <>
+              <SplitText text="Les réponses" immediate />
+              <br />
+              <span className="font-serif italic font-normal text-paper-dim">
+                <SplitText text="avant de se lancer." immediate delay={0.2} />
+              </span>
+            </>
+          }
+          aside={<p>Méthode, technique, tarifs et suivi après la mise en ligne : l&apos;essentiel pour démarrer sereinement.</p>}
+        />
         <FaqAccordion faqs={settings.faqs} />
       </section>
       <CtaBanner />

@@ -96,12 +96,12 @@ export function LiveTerminal({ script: rawScript }: { script: string[] }) {
 
 function prefix(kind: Line["kind"]) {
   if (kind === "cmd") return <span className="text-signal">❯ </span>;
-  if (kind === "ok") return <span className="text-signal">✓ </span>;
+  if (kind === "ok") return <span className="text-moss">✓ </span>;
   return null;
 }
 
 function lineClass(kind: Line["kind"]) {
   if (kind === "cmd") return "text-paper";
-  if (kind === "metric") return "text-paper mt-1 px-2 py-1 -mx-2 rounded bg-signal/15";
+  if (kind === "metric") return "text-moss mt-1 px-2 py-1 -mx-2 rounded bg-moss/10";
   return "text-paper-dim";
 }

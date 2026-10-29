@@ -69,7 +69,7 @@ export function WorksScroll({ projects, total }: WorksScrollProps) {
                     className="object-cover object-top transition-transform duration-[1.2s] ease-expo group-hover:scale-[1.06]"
                   />
                 </ViewTransition>
-                <span className="absolute top-4 left-4 font-mono text-xs bg-ink/70 backdrop-blur px-2 py-1">
+                <span className="absolute top-4 left-4 font-mono text-xs text-moss bg-ink/70 backdrop-blur px-2 py-1">
                   {String(i + 1).padStart(2, "0")}
                 </span>
               </div>
@@ -77,7 +77,7 @@ export function WorksScroll({ projects, total }: WorksScrollProps) {
                 <h3 className="text-2xl sm:text-4xl tracking-tight font-medium transition-all duration-500 group-hover:font-serif group-hover:italic">
                   {project.title}
                 </h3>
-                <span className="shrink-0 font-mono text-xs text-paper-mute">
+                <span className="shrink-0 font-mono text-xs text-moss/80">
                   {project.categoryLabel} — {project.year}
                 </span>
               </div>

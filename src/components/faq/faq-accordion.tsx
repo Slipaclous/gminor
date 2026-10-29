@@ -85,7 +85,7 @@ export function FaqAccordion({ faqs }: FaqAccordionProps) {
                 aria-expanded={isOpen}
                 className="w-full flex items-start gap-6 p-6 sm:p-8 text-left"
               >
-                <span className="font-mono text-xs text-paper-mute pt-2 w-6 shrink-0">{String(idx + 1).padStart(2, "0")}</span>
+                <span className="font-mono text-xs text-moss/80 pt-2 w-6 shrink-0">{String(idx + 1).padStart(2, "0")}</span>
                 <span className="flex-1 text-xl sm:text-2xl tracking-[-0.02em] font-medium leading-snug">{faq.question}</span>
                 <span
                   className={`shrink-0 w-9 h-9 rounded-full border flex items-center justify-center transition-all duration-500 ${

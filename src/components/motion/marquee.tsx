@@ -13,7 +13,7 @@ export function Marquee({ items, className, duration = 30, reverse = false }: Ma
       {items.map((item) => (
         <span key={item} className="flex items-center">
           <span className="px-8">{item}</span>
-          <span className="text-signal">✺</span>
+          <span className="text-moss">✺</span>
         </span>
       ))}
     </div>

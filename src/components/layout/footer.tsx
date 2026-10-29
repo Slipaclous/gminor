@@ -32,7 +32,7 @@ export async function Footer() {
           </a>
         </div>
         <div className="md:col-span-2 md:col-start-8 space-y-3">
-          <p className="font-mono text-xs text-paper-mute">Plan</p>
+          <p className="font-mono text-xs text-moss">Plan</p>
           {SITEMAP.map((l) => (
             <Link key={l.href} href={l.href} className="block hover:text-signal transition-colors">
               {l.label}
@@ -40,7 +40,7 @@ export async function Footer() {
           ))}
         </div>
         <div className="md:col-span-2 space-y-3">
-          <p className="font-mono text-xs text-paper-mute">Réseaux</p>
+          <p className="font-mono text-xs text-moss">Réseaux</p>
           {socials.map((s) => (
             <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" className="block hover:text-signal transition-colors">
               {s.label} ↗

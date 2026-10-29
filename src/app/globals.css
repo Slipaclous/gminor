@@ -10,6 +10,8 @@
   --paper-mute: #6d6a63;
   --line: rgba(239, 235, 227, 0.12);
   --signal: #8ea6ff;
+  /* Support accent: metadata, success and availability states */
+  --moss: #b3d99f;
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -22,6 +24,7 @@
   --color-paper-mute: var(--paper-mute);
   --color-line: var(--line);
   --color-signal: var(--signal);
+  --color-moss: var(--moss);
   --font-sans: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
   --font-mono: var(--font-geist-mono), monospace;
   --font-serif: var(--font-instrument-serif), Georgia, serif;

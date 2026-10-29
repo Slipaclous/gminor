@@ -87,7 +87,7 @@ export function ProjectsGallery({ initialProjects }: ProjectsGalleryProps) {
                   {project.title}
                 </span>
                 <span className="hidden sm:block col-span-3 text-sm text-paper-dim">{project.categoryLabel}</span>
-                <span className="hidden sm:block col-span-2 text-right font-mono text-xs text-paper-mute">{project.year}</span>
+                <span className="hidden sm:block col-span-2 text-right font-mono text-xs text-moss/80">{project.year}</span>
               </Link>
             </motion.li>
           ))}
@@ -116,7 +116,7 @@ export function ProjectsGallery({ initialProjects }: ProjectsGalleryProps) {
                 </div>
                 <div className="mt-4 flex justify-between gap-4">
                   <h2 className="text-2xl tracking-tight font-medium">{project.title}</h2>
-                  <span className="font-mono text-xs text-paper-mute">{project.year}</span>
+                  <span className="font-mono text-xs text-moss/80">{project.year}</span>
                 </div>
                 <p className="mt-1 text-sm text-paper-dim line-clamp-2">{project.tagline}</p>
               </Link>
