@@ -75,9 +75,6 @@ export function WorksScroll({ projects, total }: WorksScrollProps) {
                 <SplitText text="récents" delay={0.2} />
               </span>
             </h2>
-            <p className="mt-8 max-w-sm text-paper-dim">
-              Sites vitrines, e-commerce et plateformes SaaS. Chaque projet est pensé, dessiné et développé de A à Z.
-            </p>
             <Link href="/projets" className="mt-8 inline-flex items-center gap-2 border-b border-paper pb-1 hover:text-signal hover:border-signal transition-colors">
               Voir les {total} projets →
             </Link>

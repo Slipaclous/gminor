@@ -7,17 +7,13 @@ export function ServicesList({ items }: { items: ExpertiseItem[] }) {
 
   return (
     <section id="services" className="relative px-5 sm:px-10 py-32">
-      <div className="mb-20 grid lg:grid-cols-12 gap-10 items-end">
-        <h2 className="lg:col-span-8 text-[10vw] sm:text-[6vw] leading-[0.92] tracking-[-0.05em] font-medium">
+      <div className="mb-20">
+        <h2 className="text-[10vw] sm:text-[6vw] leading-[0.92] tracking-[-0.05em] font-medium">
           <SplitText text="Du premier croquis" by="word" />{" "}
           <span className="font-serif italic font-normal text-paper-dim">
             <SplitText text="à la mise en ligne." by="word" delay={0.2} />
           </span>
         </h2>
-        <p className="lg:col-span-4 lg:pb-[0.8vw] text-lg text-paper-dim leading-relaxed">
-          Je prends le projet en entier : la stratégie, l&apos;interface et tout le code, sans sous-traitance ni
-          intermédiaire.
-        </p>
       </div>
 
       <ul className="border-t border-line">

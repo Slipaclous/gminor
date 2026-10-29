@@ -59,7 +59,7 @@ export const DEFAULT_SITE_SETTINGS: SiteSettings = {
   hero: {
     available: true,
     intro:
-      "Je suis Gauthier Minor, développeur web full-stack. J'écris des sites et des applications rapides et solides, et je soigne leur design autant que leur code.",
+      "Je suis Gauthier Minor. Je conçois et développe des sites rapides, beaux et solides.",
     terminal: [
       "$ npx create-next-app@latest client-site",
       "✓ Projet créé — Next.js · TypeScript · Tailwind",
@@ -81,32 +81,29 @@ export const DEFAULT_SITE_SETTINGS: SiteSettings = {
   expertise: [
     {
       title: "Développement sur mesure",
-      text: "Sites Next.js ultra-rapides, animés et administrables. Performances, SEO et accessibilité intégrés dès le départ.",
+      text: "Sites Next.js rapides, animés et faciles à gérer.",
       tags: ["Next.js", "CMS", "SEO"],
     },
     {
       title: "E-commerce & SaaS",
-      text: "Boutiques PrestaShop, plateformes métier et espaces clients : des outils robustes qui supportent la charge.",
+      text: "Boutiques et outils métier qui tiennent la charge.",
       tags: ["PrestaShop", "PostgreSQL", "Stripe"],
     },
     {
       title: "UI / UX design",
-      text: "Parcours, wireframes et maquettes Figma haute fidélité, testés sur mobile avant la première ligne de code.",
+      text: "Maquettes testées sur mobile avant de coder.",
       tags: ["Wireframes", "Prototypes", "Responsive"],
     },
     {
       title: "Direction artistique",
-      text: "Identité, univers visuel, typographie et système de design. Une image qui vous ressemble et qui se reconnaît.",
+      text: "Une identité visuelle qui vous ressemble.",
       tags: ["Logo & identité", "Moodboard", "Design system"],
     },
   ],
   about: {
     title: "Développeur d'abord,",
     titleAccent: "exigeant sur le design.",
-    paragraphs: [
-      "Mon métier, c'est le code : architectures solides, sites qui chargent en un éclair, outils métier qui tiennent la charge. Je développe tout moi-même, du back-end à l'interface.",
-      "Mais un bon produit doit aussi donner envie. Alors je dessine mes interfaces avec le même soin, pour que rien ne se perde entre la maquette et l'écran.",
-    ],
+    paragraphs: ["Je code tout moi-même, du serveur à l'interface. Et je dessine chaque écran avec le même soin."],
     stack: ["Next.js", "React", "TypeScript", "Node", "PHP / Symfony", "PrestaShop", "PostgreSQL", "MySQL", "Prisma", "Figma"],
   },
   faqs: [

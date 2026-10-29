@@ -139,12 +139,20 @@ export default async function ProjectDetailPage({ params }: ProjectDetailProps) 
             <p className="text-lg leading-relaxed text-paper-dim">{project.solution}</p>
           </Reveal>
           {project.modules && project.modules.length > 0 && (
-            <div className="mt-12 space-y-px bg-line">
+            <div className="mt-12 border-t border-line">
               {project.modules.map((mod) => (
-                <Reveal key={mod.title} className="bg-ink py-6">
-                  <p className="font-mono text-xs text-moss/80">{mod.subtitle}</p>
-                  <h3 className="mt-1 text-2xl font-medium tracking-tight">{mod.title}</h3>
-                  <p className="mt-2 text-paper-dim">{mod.description}</p>
+                <Reveal key={mod.title}>
+                  {/* Details stay one click away: the scan shows titles only */}
+                  <details className="group border-b border-line">
+                    <summary className="flex cursor-pointer list-none items-baseline justify-between gap-6 py-5 [&::-webkit-details-marker]:hidden">
+                      <span>
+                        <span className="block text-xl sm:text-2xl font-medium tracking-tight">{mod.title}</span>
+                        <span className="mt-1 block font-mono text-xs text-moss/80">{mod.subtitle}</span>
+                      </span>
+                      <span aria-hidden className="shrink-0 text-2xl text-paper-mute transition-transform duration-500 ease-expo group-open:rotate-45">+</span>
+                    </summary>
+                    <p className="pb-6 -mt-1 text-paper-dim leading-relaxed">{mod.description}</p>
+                  </details>
                 </Reveal>
               ))}
             </div>
