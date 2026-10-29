@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/prisma";
-import { PROJECTS_DATA, ProjectItem } from "@/data/projects";
+import { PROJECTS_DATA, ProjectItem, type ProjectModule } from "@/data/projects";
 
 // In-memory runtime cache for fallback
 let memoryProjects: ProjectItem[] = [...PROJECTS_DATA];
@@ -48,7 +48,10 @@ export async function getDbProjects(): Promise<ProjectItem[]> {
             solution: p.solution || "",
             results: p.results,
             metrics: parsedMetrics.length > 0 ? parsedMetrics : (PROJECTS_DATA.find((item) => item.slug === p.slug)?.metrics || []),
-            modules: PROJECTS_DATA.find((item) => item.slug === p.slug)?.modules,
+            modules:
+              Array.isArray(p.modules) && p.modules.length > 0
+                ? (p.modules as unknown as ProjectModule[])
+                : PROJECTS_DATA.find((item) => item.slug === p.slug)?.modules,
           };
         });
       }

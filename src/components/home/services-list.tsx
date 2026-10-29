@@ -1,30 +1,9 @@
 import React from "react";
+import type { ExpertiseItem } from "@/lib/settings-service";
 import { SplitText } from "../motion/split-text";
 
-const SERVICES = [
-  {
-    title: "Développement sur mesure",
-    text: "Sites Next.js ultra-rapides, animés et administrables. Performances, SEO et accessibilité intégrés dès le départ.",
-    tags: ["Next.js", "CMS", "SEO"],
-  },
-  {
-    title: "E-commerce & SaaS",
-    text: "Boutiques PrestaShop, plateformes métier et espaces clients : des outils robustes qui supportent la charge.",
-    tags: ["PrestaShop", "PostgreSQL", "Stripe"],
-  },
-  {
-    title: "UI / UX design",
-    text: "Parcours, wireframes et maquettes Figma haute fidélité, testés sur mobile avant la première ligne de code.",
-    tags: ["Wireframes", "Prototypes", "Responsive"],
-  },
-  {
-    title: "Direction artistique",
-    text: "Identité, univers visuel, typographie et système de design. Une image qui vous ressemble et qui se reconnaît.",
-    tags: ["Logo & identité", "Moodboard", "Design system"],
-  },
-];
 
-export function ServicesList() {
+export function ServicesList({ items }: { items: ExpertiseItem[] }) {
 
   return (
     <section id="services" className="relative px-5 sm:px-10 py-32">
@@ -38,7 +17,7 @@ export function ServicesList() {
       </div>
 
       <ul className="border-t border-line">
-        {SERVICES.map((service, i) => (
+        {items.map((service, i) => (
           <li
             key={service.title}
             className="group border-b border-line py-8 sm:py-10 grid md:grid-cols-12 gap-4 items-baseline transition-colors duration-500 hover:bg-paper hover:text-ink px-2 sm:px-4 -mx-2 sm:-mx-4"

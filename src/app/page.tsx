@@ -18,10 +18,10 @@ export default async function HomePage() {
 
   return (
     <main className="flex flex-col flex-1">
-      <Hero available={settings.hero.available} />
+      <Hero available={settings.hero.available} intro={settings.hero.intro} terminal={settings.hero.terminal} />
       <WorksScroll projects={displayProjects} total={allProjects.length} />
-      <ServicesList />
-      <About metrics={settings.hero.metrics.slice(0, 4)} />
+      <ServicesList items={settings.expertise} />
+      <About metrics={settings.hero.metrics.slice(0, 4)} about={settings.about} />
       <CtaBanner />
     </main>
   );

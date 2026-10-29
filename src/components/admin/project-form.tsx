@@ -6,7 +6,7 @@ import {
   updateProjectAction,
   ProjectFormState,
 } from "@/app/actions/projects";
-import { ProjectItem } from "@/data/projects";
+import { ProjectItem, type ProjectModule } from "@/data/projects";
 import Link from "next/link";
 import { ImageUpload } from "./image-upload";
 import {
@@ -19,6 +19,8 @@ import {
   Layers,
   Target,
   Lightbulb,
+  Plus,
+  Trash2,
 } from "lucide-react";
 
 interface ProjectFormProps {
@@ -39,6 +41,9 @@ export function ProjectForm({ initialData, isEdit = false }: ProjectFormProps) {
   const [title, setTitle] = useState(initialData?.title || "");
   const [slug, setSlug] = useState(initialData?.slug || "");
   const [featured, setFeatured] = useState(initialData?.featured || false);
+  const [modules, setModules] = useState<ProjectModule[]>(initialData?.modules ?? []);
+  const updateModule = (index: number, patch: Partial<ProjectModule>) =>
+    setModules((prev) => prev.map((m, i) => (i === index ? { ...m, ...patch } : m)));
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value;
@@ -432,6 +437,75 @@ export function ProjectForm({ initialData, isEdit = false }: ProjectFormProps) {
             placeholder="-70% de temps de chargement&#10;+140% de conversion sur les devis&#10;Score Lighthouse 98/100"
             className="w-full px-4 py-3 rounded-xl bg-zinc-950/90 border border-white/[0.12] text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:border-emerald-400"
           />
+        </div>
+      </div>
+
+      {/* Gallery & Case Study Modules */}
+      <div className="rounded-3xl bg-zinc-900/40 border border-white/[0.08] p-6 sm:p-8 space-y-6">
+        <input type="hidden" name="modulesJson" value={JSON.stringify(modules)} />
+        <h2 className="text-lg font-bold text-white">Galerie &amp; Modules de l&apos;étude de cas</h2>
+
+        <div className="space-y-2">
+          <label htmlFor="gallery" className="block text-xs font-semibold uppercase tracking-wider text-zinc-300">
+            Galerie d&apos;images (1 URL par ligne)
+          </label>
+          <textarea
+            id="gallery"
+            name="gallery"
+            rows={3}
+            defaultValue={initialData?.gallery?.join("\n") || ""}
+            placeholder="https://…/capture-1.jpg"
+            className="w-full px-4 py-3 rounded-xl bg-zinc-950/90 border border-white/[0.12] text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:border-emerald-400 font-mono text-xs"
+          />
+        </div>
+
+        <div className="space-y-3">
+          <p className="block text-xs font-semibold uppercase tracking-wider text-zinc-300">
+            Modules (section « L&apos;approche »)
+          </p>
+          {modules.map((mod, i) => (
+            <div key={i} className="p-4 rounded-2xl bg-black/60 border border-white/[0.08] space-y-2">
+              <div className="flex gap-2">
+                <input
+                  value={mod.title}
+                  onChange={(e) => updateModule(i, { title: e.target.value })}
+                  placeholder="Titre du module"
+                  aria-label={`Titre du module ${i + 1}`}
+                  className="w-full px-4 py-3 rounded-xl bg-zinc-950/90 border border-white/[0.12] text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:border-emerald-400 font-semibold"
+                />
+                <button
+                  type="button"
+                  onClick={() => setModules((prev) => prev.filter((_, j) => j !== i))}
+                  className="p-2 text-zinc-500 hover:text-red-400"
+                  aria-label="Supprimer le module"
+                >
+                  <Trash2 className="w-4 h-4" />
+                </button>
+              </div>
+              <input
+                value={mod.subtitle}
+                onChange={(e) => updateModule(i, { subtitle: e.target.value })}
+                placeholder="Sous-titre (ex : Leaflet · Turf.js)"
+                aria-label={`Sous-titre du module ${i + 1}`}
+                className="w-full px-4 py-3 rounded-xl bg-zinc-950/90 border border-white/[0.12] text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:border-emerald-400 font-mono text-xs"
+              />
+              <textarea
+                value={mod.description}
+                onChange={(e) => updateModule(i, { description: e.target.value })}
+                rows={2}
+                placeholder="Description"
+                aria-label={`Description du module ${i + 1}`}
+                className="w-full px-4 py-3 rounded-xl bg-zinc-950/90 border border-white/[0.12] text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:border-emerald-400"
+              />
+            </div>
+          ))}
+          <button
+            type="button"
+            onClick={() => setModules((prev) => [...prev, { title: "", subtitle: "", description: "", highlights: [] }])}
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-dashed border-white/20 text-sm text-zinc-300 hover:text-white hover:border-white/40"
+          >
+            <Plus className="w-4 h-4" /> Ajouter un module
+          </button>
         </div>
       </div>
 

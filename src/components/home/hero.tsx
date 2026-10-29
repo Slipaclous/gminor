@@ -8,9 +8,13 @@ import { LiveTerminal } from "./live-terminal";
 
 interface HeroProps {
   available: boolean;
+  intro: string;
+  terminal: string[];
 }
 
-export function Hero({ available }: HeroProps) {
+const NAME = "Gauthier Minor";
+
+export function Hero({ available, intro, terminal }: HeroProps) {
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   // Explicit clamped mappings: fade out over the first 60% of the hero, never back in.
@@ -41,14 +45,18 @@ export function Hero({ available }: HeroProps) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.9, duration: 1, ease: [0.16, 1, 0.3, 1] }}
           >
-            <LiveTerminal />
+            <LiveTerminal script={terminal} />
           </motion.div>
         </div>
 
         <div className="mt-10 flex flex-wrap items-end justify-between gap-6">
           <p className="text-lg sm:text-xl leading-snug max-w-xl text-paper-dim">
-            Je suis <span className="text-paper">Gauthier Minor</span>, développeur web full-stack. J&apos;écris des
-            sites et des applications rapides et solides, et je soigne leur design autant que leur code.
+            {intro.split(NAME).map((part, i) => (
+              <React.Fragment key={i}>
+                {i > 0 && <span className="text-paper">{NAME}</span>}
+                {part}
+              </React.Fragment>
+            ))}
           </p>
           <span className="flex items-center gap-2 text-sm text-paper-dim">
             <span className={`w-2 h-2 rounded-full ${available ? "bg-signal animate-pulse" : "bg-paper-mute"}`} />

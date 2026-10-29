@@ -24,7 +24,7 @@ export default async function AdminContentPage() {
           Personnalisation des Contenus du Site
         </h1>
         <p className="text-sm text-zinc-400">
-          Modifiez vos textes, métriques chiffrées, piliers de méthode, tarifs du simulateur et coordonnées en direct.
+          Modifiez les textes de l&apos;accueil, le savoir-faire, la présentation, la FAQ et vos coordonnées.
         </p>
       </div>
 

@@ -4,27 +4,32 @@ import React, { useEffect, useState } from "react";
 
 type Line = { kind: "cmd" | "out" | "ok" | "metric"; text: string; pause?: number };
 
-const SCRIPT: Line[] = [
-  { kind: "cmd", text: "npx create-next-app@latest client-site" },
-  { kind: "ok", text: "Projet créé — Next.js · TypeScript · Tailwind", pause: 500 },
-  { kind: "cmd", text: "git commit -m \"feat: maquette intégrée au pixel\"" },
-  { kind: "out", text: "[main 4f2c9a1] 38 files changed", pause: 400 },
-  { kind: "cmd", text: "git push origin main" },
-  { kind: "out", text: "Build en cours…", pause: 900 },
-  { kind: "ok", text: "Build terminé en 4.2s", pause: 300 },
-  { kind: "ok", text: "Déployé en production", pause: 600 },
-  { kind: "cmd", text: "npx lighthouse https://client-site.be" },
-  { kind: "metric", text: "Performance 100 · Accessibilité 100 · SEO 100", pause: 3500 },
-];
+const PAUSES: Record<Line["kind"], number> = { cmd: 200, out: 400, ok: 450, metric: 3500 };
+
+/** "$ cmd", "✓ ok", "★ highlighted result", anything else is plain output. */
+function parseScript(lines: string[]): Line[] {
+  return lines
+    .map((raw) => raw.trimEnd())
+    .filter(Boolean)
+    .map((raw) => {
+      if (raw.startsWith("$ ")) return { kind: "cmd" as const, text: raw.slice(2) };
+      if (raw.startsWith("✓ ")) return { kind: "ok" as const, text: raw.slice(2) };
+      if (raw.startsWith("★ ")) return { kind: "metric" as const, text: raw.slice(2) };
+      return { kind: "out" as const, text: raw };
+    })
+    .map((line) => ({ ...line, pause: PAUSES[line.kind] }));
+}
 
 const TYPE_SPEED = 32;
 
 /** Fake shell that types a deploy session, then loops. */
-export function LiveTerminal() {
+export function LiveTerminal({ script: rawScript }: { script: string[] }) {
   const [done, setDone] = useState<Line[]>([]);
   const [typing, setTyping] = useState("");
+  const key = rawScript.join("\n");
 
   useEffect(() => {
+    const SCRIPT = parseScript(key.split("\n"));
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       const t = setTimeout(() => setDone(SCRIPT), 0);
       return () => clearTimeout(t);
@@ -59,7 +64,7 @@ export function LiveTerminal() {
       cancelled = true;
       timers.forEach(clearTimeout);
     };
-  }, []);
+  }, [key]);
 
   return (
     <div
