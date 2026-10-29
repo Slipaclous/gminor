@@ -28,14 +28,14 @@ export async function CtaBanner() {
         </div>
 
         <div className="lg:col-span-5">
-          <Link href="/questionnaire" className="group block">
-            <CtaRowInner index="01" title="Démarrer un projet" note="2 min" />
-          </Link>
           {canBook && (
             <Link href="/rendez-vous" className="group block">
-              <CtaRowInner index="02" title="Réserver un appel" note="Visio" />
+              <CtaRowInner index="01" title="Réserver un appel" note="Visio gratuite" />
             </Link>
           )}
+          <Link href="/questionnaire" className="group block">
+            <CtaRowInner index={canBook ? "02" : "01"} title="Démarrer un projet" note="2 min" />
+          </Link>
           <Link href="/contact" className="group block">
             <CtaRowInner index={canBook ? "03" : "02"} title="Poser une question" note="Contact" />
           </Link>

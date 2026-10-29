@@ -13,7 +13,7 @@
   /* Support accent: metadata, success and availability states */
   --moss: #b3d99f;
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
-  /* Fixed light tone for mix-blend-difference layers (header, cursor), readable on both themes */
+  /* Fixed light tone for mix-blend-difference layers (custom cursor), readable on both themes */
   --blend: #efebe3;
 }
 
@@ -227,12 +227,6 @@ body {
   top: var(--fy);
   translate: -50% -50%;
   background: color-mix(in oklab, var(--signal) 22%, transparent);
-}
-
-/* Light theme: difference blending would turn the signal accent yellow, so the header uses plain tokens */
-html[data-theme="light"] header.mix-blend-difference {
-  mix-blend-mode: normal;
-  color: var(--paper);
 }
 
 html[data-theme="light"] .living-blob {

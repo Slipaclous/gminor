@@ -10,12 +10,13 @@ import { useWeightFollow } from "../motion/use-weight-follow";
 
 interface HeroProps {
   available: boolean;
+  canBook: boolean;
   intro: string;
 }
 
 const NAME = "Gauthier Minor";
 
-export function Hero({ available, intro }: HeroProps) {
+export function Hero({ available, intro, canBook }: HeroProps) {
   const ref = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const reduceMotion = useReducedMotion();
@@ -63,7 +64,14 @@ export function Hero({ available, intro }: HeroProps) {
                 <span className={`w-2 h-2 rounded-full ${available ? "bg-moss animate-pulse" : "bg-paper-mute"}`} />
                 {available ? "Disponible pour nouveaux projets" : "Agenda complet"}
               </span>
-              <Link href="/contact" className="inline-flex items-center gap-2 border-b border-paper pb-0.5 text-sm hover:text-signal hover:border-signal transition-colors">
+            </div>
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-4">
+              {canBook && (
+                <Link href="/rendez-vous" className="inline-flex items-center gap-2 rounded-full bg-signal text-ink px-6 py-3 font-medium hover:bg-paper transition-colors">
+                  Réserver un appel gratuit →
+                </Link>
+              )}
+              <Link href="/questionnaire" className="inline-flex items-center gap-2 border-b border-paper pb-0.5 text-sm hover:text-signal hover:border-signal transition-colors">
                 Démarrer un projet →
               </Link>
             </div>

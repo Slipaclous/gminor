@@ -21,7 +21,7 @@ const NAV_LINKS = [
 
 const ease = [0.76, 0, 0.24, 1] as const;
 
-export function Header() {
+export function Header({ canBook }: { canBook: boolean }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [prevPathname, setPrevPathname] = useState(pathname);
@@ -57,7 +57,7 @@ export function Header() {
             ? "text-ink border-transparent"
             : scrolled
               ? "text-paper bg-ink/70 backdrop-blur-xl border-line"
-              : "mix-blend-difference text-blend border-transparent"
+              : "text-paper border-transparent"
         }`}
       >
         <div className={`flex items-center justify-between px-5 sm:px-10 transition-[padding] duration-500 ${scrolled && !open ? "py-4" : "py-6"}`}>
@@ -78,6 +78,16 @@ export function Header() {
             ))}
           </nav>
           <div className="flex items-center gap-3">
+          {canBook && !open && (
+            <Link
+              href="/rendez-vous"
+              className="flex items-center gap-2 h-8 rounded-full bg-signal text-ink px-3.5 text-sm font-medium hover:bg-paper transition-colors"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-ink/70" aria-hidden />
+              <span className="sm:hidden">Réserver</span>
+              <span className="hidden sm:inline">Réserver un appel</span>
+            </Link>
+          )}
           <ThemeToggle />
           <button
             type="button"
@@ -119,7 +129,7 @@ export function Header() {
             transition={{ duration: 0.8, ease }}
           >
             <nav className="flex flex-col" aria-label="Menu">
-              {NAV_LINKS.map((link, i) => (
+              {(canBook ? [{ href: "/rendez-vous", label: "Réserver un appel", note: "Visio gratuite" }, ...NAV_LINKS] : NAV_LINKS).map((link, i) => (
                 <div key={link.href} className="overflow-hidden border-b border-ink/15">
                   <motion.div
                     initial={{ y: "100%" }}
