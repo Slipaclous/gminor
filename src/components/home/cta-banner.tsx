@@ -8,6 +8,7 @@ export async function CtaBanner() {
   const settings = await getSiteSettings();
   const { email } = settings.contactInfo;
   const available = settings.hero.available;
+  const canBook = !!settings.contactInfo.calcomUrl?.startsWith("https://");
 
   return (
     <section className="px-5 sm:px-10 py-20 sm:py-36 border-t border-line">
@@ -30,10 +31,15 @@ export async function CtaBanner() {
           <Link href="/questionnaire" className="group block">
             <CtaRowInner index="01" title="Démarrer un projet" note="2 min" />
           </Link>
+          {canBook && (
+            <Link href="/rendez-vous" className="group block">
+              <CtaRowInner index="02" title="Réserver un appel" note="Visio" />
+            </Link>
+          )}
           <Link href="/contact" className="group block">
-            <CtaRowInner index="02" title="Poser une question" note="Contact" />
+            <CtaRowInner index={canBook ? "03" : "02"} title="Poser une question" note="Contact" />
           </Link>
-          <CopyEmailRow email={email} index="03" />
+          <CopyEmailRow email={email} index={canBook ? "04" : "03"} />
           <div className="border-t border-line" />
         </div>
       </div>

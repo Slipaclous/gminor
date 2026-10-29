@@ -29,7 +29,7 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
     info.phone && { label: "Téléphone", value: info.phone, href: `tel:${info.phone.replace(/\s/g, "")}` },
     { label: "Basé à", value: info.location },
     info.workingHours && { label: "Horaires", value: info.workingHours },
-    info.calcomUrl && { label: "Visio", value: "Réserver un créneau ↗", href: info.calcomUrl },
+    info.calcomUrl && { label: "Visio", value: "Réserver un créneau →", href: "/rendez-vous" },
   ].filter(Boolean) as { label: string; value: string; href?: string }[];
 
   return (

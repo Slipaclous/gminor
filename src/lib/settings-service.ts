@@ -209,6 +209,7 @@ export async function updateSiteSettings(
   };
 
   // 1. Sauvegarder dans Neon PostgreSQL
+  let savedToDb = false;
   try {
     if (process.env.DATABASE_URL && !process.env.DATABASE_URL.includes("localhost:5432")) {
       await prisma.siteSetting.upsert({
@@ -216,12 +217,15 @@ export async function updateSiteSettings(
         update: { data: merged as unknown as Prisma.InputJsonValue },
         create: { id: "default", data: merged as unknown as Prisma.InputJsonValue },
       });
+      savedToDb = true;
     }
   } catch (err) {
     console.error("Neon DB SiteSetting write error:", err);
   }
 
-  // 2. Sauvegarder dans le fichier local
+  // 2. Fichier local uniquement en secours : il vit dans src/, donc l'écrire à chaque
+  // sauvegarde relance `next dev` en pleine réponse et le bouton reste bloqué.
+  if (savedToDb) return merged;
   try {
     const dir = path.dirname(SETTINGS_FILE_PATH);
     if (!fs.existsSync(dir)) {
