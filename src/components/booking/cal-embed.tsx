@@ -18,7 +18,7 @@ export function CalEmbed({ url }: { url: string }) {
   src.searchParams.set("brandColor", theme === "dark" ? "#8ea6ff" : "#3550d4");
 
   return (
-    <div className="relative min-h-[720px] border border-line bg-ink-2 overflow-hidden">
+    <div className="relative min-h-[1150px] sm:min-h-[720px] border border-line bg-ink-2 overflow-hidden">
       {!loaded && (
         <p className="absolute inset-0 flex items-center justify-center font-mono text-xs text-paper-mute">
           Chargement du calendrier…
@@ -30,7 +30,7 @@ export function CalEmbed({ url }: { url: string }) {
         title="Réserver un rendez-vous"
         loading="lazy"
         onLoad={() => setLoaded(true)}
-        className={`relative w-full h-[720px] transition-opacity duration-500 ${loaded ? "opacity-100" : "opacity-0"}`}
+        className={`relative w-full h-[1150px] sm:h-[720px] transition-opacity duration-500 ${loaded ? "opacity-100" : "opacity-0"}`}
       />
     </div>
   );
