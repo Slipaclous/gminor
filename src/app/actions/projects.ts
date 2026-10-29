@@ -7,7 +7,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { verifyAdminSession } from "@/lib/auth";
 import { getDbProjects, updateMemoryProjects, getCategoryLabel } from "@/lib/projects-service";
-import { ProjectItem } from "@/data/projects";
+import { ProjectItem, type ProjectModule } from "@/data/projects";
 
 function slugify(text: string): string {
   return text
@@ -75,6 +75,25 @@ export async function createProjectAction(
   if (metric2Label && metric2Val) metrics.push({ label: metric2Label, value: metric2Val });
   if (metric3Label && metric3Val) metrics.push({ label: metric3Label, value: metric3Val });
 
+  // Gallery (one URL per line) & case study modules (JSON from the form editor)
+  const gallery = ((formData.get("gallery") as string) || "")
+    .split("\n")
+    .map((s) => s.trim())
+    .filter(Boolean);
+  let modules: ProjectModule[] = [];
+  try {
+    modules = (JSON.parse((formData.get("modulesJson") as string) || "[]") as ProjectModule[])
+      .map((m) => ({
+        title: m.title.trim(),
+        subtitle: m.subtitle.trim(),
+        description: m.description.trim(),
+        highlights: m.highlights.map((h) => h.trim()).filter(Boolean),
+      }))
+      .filter((m) => m.title);
+  } catch {
+    return { error: "Format des modules invalide." };
+  }
+
   if (!title || title.length < 2) {
     return { error: "Veuillez renseigner un titre valide." };
   }
@@ -110,6 +129,8 @@ export async function createProjectAction(
           solution,
           results,
           metrics: metrics as unknown as Prisma.InputJsonValue,
+          gallery,
+          modules: modules as unknown as Prisma.InputJsonValue,
         },
       });
     }
@@ -136,10 +157,12 @@ export async function createProjectAction(
       solution,
       results,
       metrics,
+      gallery,
+      modules,
     };
     updateMemoryProjects([...all, newProject]);
 
-    revalidatePath("/");
+    revalidatePath("/", "layout");
     revalidatePath("/projets");
     revalidatePath("/admin/projets");
   } catch (error) {
@@ -202,6 +225,25 @@ export async function updateProjectAction(
   if (metric2Label && metric2Val) metrics.push({ label: metric2Label, value: metric2Val });
   if (metric3Label && metric3Val) metrics.push({ label: metric3Label, value: metric3Val });
 
+  // Gallery (one URL per line) & case study modules (JSON from the form editor)
+  const gallery = ((formData.get("gallery") as string) || "")
+    .split("\n")
+    .map((s) => s.trim())
+    .filter(Boolean);
+  let modules: ProjectModule[] = [];
+  try {
+    modules = (JSON.parse((formData.get("modulesJson") as string) || "[]") as ProjectModule[])
+      .map((m) => ({
+        title: m.title.trim(),
+        subtitle: m.subtitle.trim(),
+        description: m.description.trim(),
+        highlights: m.highlights.map((h) => h.trim()).filter(Boolean),
+      }))
+      .filter((m) => m.title);
+  } catch {
+    return { error: "Format des modules invalide." };
+  }
+
   if (!title) {
     return { error: "Veuillez renseigner un titre." };
   }
@@ -233,6 +275,8 @@ export async function updateProjectAction(
           solution,
           results,
           metrics: metrics as unknown as Prisma.InputJsonValue,
+          gallery,
+          modules: modules as unknown as Prisma.InputJsonValue,
         },
       });
     }
@@ -260,12 +304,14 @@ export async function updateProjectAction(
             solution,
             results,
             metrics: metrics.length > 0 ? metrics : p.metrics,
+            gallery,
+            modules: modules.length > 0 ? modules : p.modules,
           }
         : p
     );
     updateMemoryProjects(updated);
 
-    revalidatePath("/");
+    revalidatePath("/", "layout");
     revalidatePath("/projets");
     revalidatePath(`/projets/${slug}`);
     revalidatePath("/admin/projets");
@@ -290,7 +336,7 @@ export async function deleteProjectAction(id: string) {
     const all = await getDbProjects();
     updateMemoryProjects(all.filter((p) => p.id !== id));
 
-    revalidatePath("/");
+    revalidatePath("/", "layout");
     revalidatePath("/projets");
     revalidatePath("/admin/projets");
   } catch (error) {
@@ -316,7 +362,7 @@ export async function toggleFeaturedAction(id: string, currentFeatured: boolean)
       all.map((p) => (p.id === id ? { ...p, featured: !currentFeatured } : p))
     );
 
-    revalidatePath("/");
+    revalidatePath("/", "layout");
     revalidatePath("/projets");
     revalidatePath("/admin/projets");
   } catch (error) {
@@ -369,7 +415,7 @@ export async function reorderProjectAction(id: string, direction: "up" | "down")
 
     updateMemoryProjects(sorted);
 
-    revalidatePath("/");
+    revalidatePath("/", "layout");
     revalidatePath("/projets");
     revalidatePath("/admin/projets");
     revalidatePath("/admin");

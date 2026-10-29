@@ -3,17 +3,35 @@
 import { revalidatePath } from "next/cache";
 import { verifyAdminSession } from "@/lib/auth";
 import {
-  getSiteSettings,
   updateSiteSettings,
-  PillarItem,
-  ServiceItem,
+  ExpertiseItem,
   FaqItem,
-  EstimatorOption,
+  HeroMetric,
 } from "@/lib/settings-service";
 
 export interface SettingsFormState {
   error?: string;
   success?: boolean;
+}
+
+/** Settings feed the layout (footer, global search), so refresh every page. */
+function revalidateSite() {
+  revalidatePath("/", "layout");
+}
+
+function lines(value: FormDataEntryValue | null): string[] {
+  return String(value ?? "")
+    .split("\n")
+    .map((s) => s.trim())
+    .filter(Boolean);
+}
+
+function parseJson<T>(value: FormDataEntryValue | null): T | null {
+  try {
+    return JSON.parse(String(value ?? "")) as T;
+  } catch {
+    return null;
+  }
 }
 
 export async function saveHeroSettingsAction(
@@ -25,37 +43,28 @@ export async function saveHeroSettingsAction(
     return { error: "Non autorisé" };
   }
 
-  const badge = (formData.get("badge") as string)?.trim();
-  const title = (formData.get("title") as string)?.trim();
-  const subtitle = (formData.get("subtitle") as string)?.trim();
-  const available = formData.get("available") === "on" || formData.get("available") === "true";
+  const intro = (formData.get("intro") as string)?.trim();
+  const terminal = lines(formData.get("terminal"));
+  const metrics = parseJson<HeroMetric[]>(formData.get("metricsJson"));
 
-  const metric1Val = (formData.get("metric1Val") as string)?.trim();
-  const metric1Label = (formData.get("metric1Label") as string)?.trim();
-  const metric2Val = (formData.get("metric2Val") as string)?.trim();
-  const metric2Label = (formData.get("metric2Label") as string)?.trim();
-  const metric3Val = (formData.get("metric3Val") as string)?.trim();
-  const metric3Label = (formData.get("metric3Label") as string)?.trim();
+  if (!intro) return { error: "Le texte d'introduction est obligatoire." };
+  if (terminal.length === 0) return { error: "Le terminal doit contenir au moins une ligne." };
+  if (!metrics) return { error: "Format des chiffres invalide." };
 
   await updateSiteSettings({
     hero: {
-      badge: badge || "Gauthier Minor • Ingénieur Full-Stack & UI Architect",
-      title: title || "Ingénierie logicielle & design web d'exception.",
-      subtitle: subtitle || "",
-      available,
-      metrics: [
-        { value: metric1Val || "< 0.4s", label: metric1Label || "Temps de chargement moyen" },
-        { value: metric2Val || "100%", label: metric2Label || "Score de performance Google" },
-        { value: metric3Val || "5+ ans", label: metric3Label || "Expérience Full-Stack" },
-      ],
+      available: formData.get("available") === "on",
+      intro,
+      terminal,
+      metrics: metrics.filter((m) => m.value.trim() && m.label.trim()).slice(0, 4),
     },
   });
 
-  revalidatePath("/");
+  revalidateSite();
   return { success: true };
 }
 
-export async function savePillarsSettingsAction(
+export async function saveExpertiseSettingsAction(
   _prevState: SettingsFormState | null,
   formData: FormData
 ): Promise<SettingsFormState> {
@@ -64,34 +73,25 @@ export async function savePillarsSettingsAction(
     return { error: "Non autorisé" };
   }
 
-  const pillars: PillarItem[] = [];
+  const items = parseJson<ExpertiseItem[]>(formData.get("expertiseJson"));
+  if (!items) return { error: "Format invalide pour le savoir-faire." };
 
-  for (let i = 1; i <= 4; i++) {
-    const title = (formData.get(`pillar_${i}_title`) as string)?.trim();
-    const tagline = (formData.get(`pillar_${i}_tagline`) as string)?.trim();
-    const description = (formData.get(`pillar_${i}_description`) as string)?.trim();
-    const pointsRaw = (formData.get(`pillar_${i}_points`) as string) || "";
-    const points = pointsRaw
-      .split("\n")
-      .map((s: string) => s.trim())
-      .filter(Boolean);
+  const expertise = items
+    .map((item) => ({
+      title: item.title.trim(),
+      text: item.text.trim(),
+      tags: item.tags.map((t) => t.trim()).filter(Boolean),
+    }))
+    .filter((item) => item.title);
+  if (expertise.length === 0) return { error: "Gardez au moins un savoir-faire." };
 
-    pillars.push({
-      id: i,
-      title: title || `Pilier ${i}`,
-      tagline: tagline || "",
-      description: description || "",
-      points: points.length > 0 ? points : ["Point standard 1", "Point standard 2"],
-    });
-  }
+  await updateSiteSettings({ expertise });
 
-  await updateSiteSettings({ pillars });
-
-  revalidatePath("/");
+  revalidateSite();
   return { success: true };
 }
 
-export async function saveServicesSettingsAction(
+export async function saveAboutSettingsAction(
   _prevState: SettingsFormState | null,
   formData: FormData
 ): Promise<SettingsFormState> {
@@ -100,93 +100,22 @@ export async function saveServicesSettingsAction(
     return { error: "Non autorisé" };
   }
 
-  const services: ServiceItem[] = [
-    {
-      id: "entreprises",
-      badge: (formData.get("srv_1_badge") as string)?.trim() || "Sites Vitrines & PME",
-      title: (formData.get("srv_1_title") as string)?.trim() || "Site Web Haute Performance",
-      tagline: (formData.get("srv_1_tagline") as string)?.trim() || "",
-      idealFor: (formData.get("srv_1_idealFor") as string)?.trim() || "",
-      deliveryTime: (formData.get("srv_1_deliveryTime") as string)?.trim() || "2 à 4 semaines",
-      features: ((formData.get("srv_1_features") as string) || "")
-        .split("\n")
-        .map((s: string) => s.trim())
-        .filter(Boolean),
-    },
-    {
-      id: "tech",
-      badge: (formData.get("srv_2_badge") as string)?.trim() || "Startups & SaaS",
-      title: (formData.get("srv_2_title") as string)?.trim() || "Développement Application Web",
-      tagline: (formData.get("srv_2_tagline") as string)?.trim() || "",
-      idealFor: (formData.get("srv_2_idealFor") as string)?.trim() || "",
-      deliveryTime: (formData.get("srv_2_deliveryTime") as string)?.trim() || "3 à 8 semaines",
-      features: ((formData.get("srv_2_features") as string) || "")
-        .split("\n")
-        .map((s: string) => s.trim())
-        .filter(Boolean),
-    },
-    {
-      id: "audit",
-      badge: (formData.get("srv_3_badge") as string)?.trim() || "Modernisation & Vitesse",
-      title: (formData.get("srv_3_title") as string)?.trim() || "Audit & Optimisation Technique",
-      tagline: (formData.get("srv_3_tagline") as string)?.trim() || "",
-      idealFor: (formData.get("srv_3_idealFor") as string)?.trim() || "",
-      deliveryTime: (formData.get("srv_3_deliveryTime") as string)?.trim() || "3 à 7 jours ouvrés",
-      features: ((formData.get("srv_3_features") as string) || "")
-        .split("\n")
-        .map((s: string) => s.trim())
-        .filter(Boolean),
-    },
-  ];
+  const title = (formData.get("title") as string)?.trim();
+  const titleAccent = (formData.get("titleAccent") as string)?.trim() ?? "";
+  const paragraphs = String(formData.get("paragraphs") ?? "")
+    .split(/\n\s*\n/)
+    .map((p) => p.replace(/\s*\n\s*/g, " ").trim())
+    .filter(Boolean);
+  const stack = String(formData.get("stack") ?? "")
+    .split(",")
+    .map((s) => s.trim())
+    .filter(Boolean);
 
-  await updateSiteSettings({ services });
+  if (!title) return { error: "Le titre est obligatoire." };
 
-  return { success: true };
-}
+  await updateSiteSettings({ about: { title, titleAccent, paragraphs, stack } });
 
-export async function saveEstimatorSettingsAction(
-  _prevState: SettingsFormState | null,
-  formData: FormData
-): Promise<SettingsFormState> {
-  const isAuth = await verifyAdminSession();
-  if (!isAuth) {
-    return { error: "Non autorisé" };
-  }
-
-  const projectTypesJson = (formData.get("projectTypesJson") as string)?.trim();
-  const addonsJson = (formData.get("addonsJson") as string)?.trim();
-
-  let projectTypes: EstimatorOption[] = [];
-  let addons: EstimatorOption[] = [];
-
-  try {
-    if (projectTypesJson) {
-      projectTypes = JSON.parse(projectTypesJson);
-    }
-  } catch (err) {
-    console.error("Erreur parsing projectTypesJson:", err);
-  }
-
-  try {
-    if (addonsJson) {
-      addons = JSON.parse(addonsJson);
-    }
-  } catch (err) {
-    console.error("Erreur parsing addonsJson:", err);
-  }
-
-  if (projectTypes.length === 0) {
-    return { error: "Vous devez conserver au moins un type de projet principal." };
-  }
-
-  await updateSiteSettings({
-    estimator: {
-      projectTypes,
-      addons,
-    },
-  });
-
-  revalidatePath("/admin/contenu");
+  revalidateSite();
   return { success: true };
 }
 
@@ -212,7 +141,7 @@ export async function saveFaqSettingsAction(
 
   await updateSiteSettings({ faqs });
 
-  revalidatePath("/faq");
+  revalidateSite();
   return { success: true };
 }
 
@@ -251,9 +180,6 @@ export async function saveContactInfoSettingsAction(
     },
   });
 
-  revalidatePath("/");
-  revalidatePath("/contact");
-  revalidatePath("/faq");
-  revalidatePath("/admin/contenu");
+  revalidateSite();
   return { success: true };
 }

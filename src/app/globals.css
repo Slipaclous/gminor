@@ -10,7 +10,25 @@
   --paper-mute: #6d6a63;
   --line: rgba(239, 235, 227, 0.12);
   --signal: #8ea6ff;
+  /* Support accent: metadata, success and availability states */
+  --moss: #b3d99f;
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  /* Fixed light tone for mix-blend-difference layers (header, cursor), readable on both themes */
+  --blend: #efebe3;
+}
+
+/* Light theme: same token names, so every component follows without changes */
+html[data-theme="light"] {
+  --ink: #f4f1ea;
+  --ink-2: #ebe7de;
+  --ink-3: #e0dbd0;
+  --paper: #141412;
+  --paper-dim: #55524b;
+  --paper-mute: #8a867d;
+  --line: rgba(20, 20, 18, 0.12);
+  --signal: #3550d4;
+  --moss: #3f6b2c;
+  color-scheme: light;
 }
 
 @theme inline {
@@ -22,6 +40,8 @@
   --color-paper-mute: var(--paper-mute);
   --color-line: var(--line);
   --color-signal: var(--signal);
+  --color-moss: var(--moss);
+  --color-blend: var(--blend);
   --font-sans: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
   --font-mono: var(--font-geist-mono), monospace;
   --font-serif: var(--font-instrument-serif), Georgia, serif;
@@ -30,6 +50,13 @@
 
 html {
   color-scheme: dark;
+}
+
+/* Theme switch: let the circular reveal replace the default cross-fade */
+.theme-switching::view-transition-old(root),
+.theme-switching::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
 }
 
 html.lenis,
@@ -125,6 +152,7 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .marquee-track,
   .caret-blink,
+  .living-blob,
   .grain::after {
     animation: none;
   }
@@ -140,3 +168,57 @@ body {
   visibility: hidden !important;
 }
 
+
+/* Living field: drifting blurred blobs, the third one follows the pointer */
+.living-field {
+  --fx: 70%;
+  --fy: 35%;
+}
+
+.living-blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
+  will-change: transform;
+}
+
+.living-blob--signal {
+  width: 55vw;
+  height: 55vw;
+  right: -10vw;
+  top: -20vw;
+  background: color-mix(in oklab, var(--signal) 28%, transparent);
+  animation: blob-drift 22s ease-in-out infinite alternate;
+}
+
+.living-blob--moss {
+  width: 38vw;
+  height: 38vw;
+  left: 20vw;
+  top: 10vw;
+  background: color-mix(in oklab, var(--moss) 16%, transparent);
+  animation: blob-drift 28s ease-in-out infinite alternate-reverse;
+}
+
+.living-blob--pointer {
+  width: 28vw;
+  height: 28vw;
+  left: var(--fx);
+  top: var(--fy);
+  translate: -50% -50%;
+  background: color-mix(in oklab, var(--signal) 22%, transparent);
+}
+
+html[data-theme="light"] .living-blob {
+  filter: blur(110px);
+}
+
+@keyframes blob-drift {
+  from { transform: translate(0, 0) scale(1); }
+  to { transform: translate(-8vw, 6vw) scale(1.15); }
+}
+
+/* Living interface: smooth the variable-weight proximity effect */
+[data-char] {
+  transition: font-variation-settings 0.35s var(--ease-out-expo);
+}

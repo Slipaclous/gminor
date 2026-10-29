@@ -47,7 +47,7 @@ export function Cursor() {
       <motion.div
         animate={{ width: size, height: size }}
         transition={{ type: "spring", stiffness: 400, damping: 30 }}
-        className="-translate-x-1/2 -translate-y-1/2 rounded-full bg-paper flex items-center justify-center"
+        className="-translate-x-1/2 -translate-y-1/2 rounded-full bg-blend flex items-center justify-center"
       >
         {label && (
           <span className="text-[11px] font-medium tracking-wide text-ink">{label}</span>

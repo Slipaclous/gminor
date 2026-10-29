@@ -3,27 +3,19 @@
 import React, { useState, useActionState } from "react";
 import {
   saveHeroSettingsAction,
-  savePillarsSettingsAction,
-  saveServicesSettingsAction,
-  saveEstimatorSettingsAction,
+  saveExpertiseSettingsAction,
+  saveAboutSettingsAction,
   saveFaqSettingsAction,
   saveContactInfoSettingsAction,
   SettingsFormState,
 } from "@/app/actions/settings";
-import {
-  SiteSettings,
-  FaqItem,
-  PillarItem,
-  ServiceItem,
-  EstimatorOption,
-} from "@/lib/settings-service";
+import { SiteSettings, FaqItem, ExpertiseItem, HeroMetric } from "@/lib/settings-service";
 import {
   Save,
   Loader2,
   Sparkles,
   Layers,
-  Globe,
-  Calculator,
+  User,
   HelpCircle,
   Mail,
   Plus,
@@ -35,34 +27,73 @@ interface SettingsTabsProps {
   initialSettings: SiteSettings;
 }
 
+const inputClass =
+  "w-full px-4 py-3 rounded-xl bg-black border border-white/[0.1] text-sm text-white focus:outline-none focus:border-white";
+const labelClass = "block text-xs font-mono uppercase tracking-wider text-zinc-300";
+
+function Panel({
+  title,
+  description,
+  state,
+  children,
+}: {
+  title: string;
+  description: string;
+  state: SettingsFormState | null;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="rounded-3xl bg-[#0d0d10] border border-white/[0.08] p-6 sm:p-8 space-y-6 shadow-xl">
+      <div className="flex items-center justify-between pb-4 border-b border-white/[0.08]">
+        <div className="space-y-1">
+          <h2 className="text-xl font-bold text-white">{title}</h2>
+          <p className="text-xs text-zinc-400">{description}</p>
+        </div>
+        {state?.success && (
+          <span className="text-xs text-emerald-400 font-mono flex items-center gap-1">
+            <CheckCircle2 className="w-4 h-4" />
+            <span>Enregistré</span>
+          </span>
+        )}
+      </div>
+      {state?.error && (
+        <p className="p-3 rounded-xl bg-red-500/10 border border-red-500/30 text-sm text-red-300">{state.error}</p>
+      )}
+      {children}
+    </div>
+  );
+}
+
+function SubmitButton({ pending }: { pending: boolean }) {
+  return (
+    <div className="pt-4 flex justify-end">
+      <button
+        type="submit"
+        disabled={pending}
+        className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-xs font-bold uppercase tracking-wider bg-white hover:bg-zinc-200 text-black transition-colors cursor-pointer shadow-md disabled:opacity-50"
+      >
+        {pending ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
+        <span>Enregistrer les modifications</span>
+      </button>
+    </div>
+  );
+}
+
 export function SettingsTabs({ initialSettings }: SettingsTabsProps) {
-  const [activeTab, setActiveTab] = useState<
-    "hero" | "pillars" | "services" | "estimator" | "faq" | "contact"
-  >("hero");
+  const [activeTab, setActiveTab] = useState<"hero" | "expertise" | "about" | "faq" | "contact">("hero");
 
-  // Hero form state
-  const [heroState, heroFormAction, isHeroPending] = useActionState<
-    SettingsFormState | null,
-    FormData
-  >(saveHeroSettingsAction, null);
-
-  // Pillars form state
-  const [pillarsState, pillarsFormAction, isPillarsPending] = useActionState<
-    SettingsFormState | null,
-    FormData
-  >(savePillarsSettingsAction, null);
-
-  // Services form state
-  const [servicesState, servicesFormAction, isServicesPending] = useActionState<
-    SettingsFormState | null,
-    FormData
-  >(saveServicesSettingsAction, null);
-
-  // Estimator form state
-  const [estimatorState, estimatorFormAction, isEstimatorPending] = useActionState<
-    SettingsFormState | null,
-    FormData
-  >(saveEstimatorSettingsAction, null);
+  const [heroState, heroFormAction, isHeroPending] = useActionState<SettingsFormState | null, FormData>(
+    saveHeroSettingsAction,
+    null
+  );
+  const [expertiseState, expertiseFormAction, isExpertisePending] = useActionState<SettingsFormState | null, FormData>(
+    saveExpertiseSettingsAction,
+    null
+  );
+  const [aboutState, aboutFormAction, isAboutPending] = useActionState<SettingsFormState | null, FormData>(
+    saveAboutSettingsAction,
+    null
+  );
 
   // FAQ form state
   const [faqState, faqFormAction, isFaqPending] = useActionState<
@@ -75,6 +106,24 @@ export function SettingsTabs({ initialSettings }: SettingsTabsProps) {
     SettingsFormState | null,
     FormData
   >(saveContactInfoSettingsAction, null);
+
+  // Hero metrics (up to 4, shown in the "À propos" section)
+  const [metrics, setMetrics] = useState<HeroMetric[]>(initialSettings.hero.metrics);
+  const updateMetric = (index: number, field: keyof HeroMetric, value: string) =>
+    setMetrics((prev) => prev.map((m, i) => (i === index ? { ...m, [field]: value } : m)));
+
+  // Expertise list
+  const [expertise, setExpertise] = useState<ExpertiseItem[]>(initialSettings.expertise);
+  const updateExpertise = (index: number, patch: Partial<ExpertiseItem>) =>
+    setExpertise((prev) => prev.map((item, i) => (i === index ? { ...item, ...patch } : item)));
+  const moveExpertise = (index: number, delta: number) =>
+    setExpertise((prev) => {
+      const next = [...prev];
+      const target = index + delta;
+      if (target < 0 || target >= next.length) return prev;
+      [next[index], next[target]] = [next[target], next[index]];
+      return next;
+    });
 
   // Dynamic FAQ list state
   const [faqsList, setFaqsList] = useState<FaqItem[]>(initialSettings.faqs);
@@ -103,84 +152,13 @@ export function SettingsTabs({ initialSettings }: SettingsTabsProps) {
     );
   };
 
-  // Dynamic Estimator state
-  const [projectTypesList, setProjectTypesList] = useState<EstimatorOption[]>(
-    initialSettings.estimator?.projectTypes || []
-  );
-  const [addonsList, setAddonsList] = useState<EstimatorOption[]>(
-    initialSettings.estimator?.addons || []
-  );
-
-  const addProjectTypeItem = () => {
-    setProjectTypesList((prev) => [
-      ...prev,
-      {
-        id: `type_${Date.now()}`,
-        name: "Nouveau type de projet",
-        price: 3000,
-        days: 14,
-      },
-    ]);
-  };
-
-  const removeProjectTypeItem = (index: number) => {
-    if (projectTypesList.length <= 1) {
-      alert("Vous devez conserver au moins un type de projet.");
-      return;
-    }
-    setProjectTypesList((prev) => prev.filter((_, i) => i !== index));
-  };
-
-  const updateProjectTypeItem = (
-    index: number,
-    field: "name" | "price" | "days",
-    value: string | number
-  ) => {
-    setProjectTypesList((prev) =>
-      prev.map((item, i) =>
-        i === index ? { ...item, [field]: value } : item
-      )
-    );
-  };
-
-  const addAddonItem = () => {
-    setAddonsList((prev) => [
-      ...prev,
-      {
-        id: `addon_${Date.now()}`,
-        name: "Nouvelle option / fonctionnalité",
-        price: 500,
-        days: 3,
-      },
-    ]);
-  };
-
-  const removeAddonItem = (index: number) => {
-    setAddonsList((prev) => prev.filter((_, i) => i !== index));
-  };
-
-  const updateAddonItem = (
-    index: number,
-    field: "name" | "price" | "days",
-    value: string | number
-  ) => {
-    setAddonsList((prev) =>
-      prev.map((item, i) =>
-        i === index ? { ...item, [field]: value } : item
-      )
-    );
-  };
-
   const TABS = [
-    { id: "hero", label: "Hero & Accueil", icon: Sparkles },
-    { id: "pillars", label: "Piliers d'Ingénierie", icon: Layers },
-    { id: "services", label: "Services & Livrables", icon: Globe },
-    { id: "estimator", label: "Simulateur de Devis", icon: Calculator },
+    { id: "hero", label: "Accueil & Hero", icon: Sparkles },
+    { id: "expertise", label: "Savoir-faire", icon: Layers },
+    { id: "about", label: "À propos", icon: User },
     { id: "faq", label: "FAQ & Questions", icon: HelpCircle },
     { id: "contact", label: "Coordonnées & Réseaux", icon: Mail },
   ] as const;
-
-  type TabId = (typeof TABS)[number]["id"];
 
   return (
     <div className="space-y-8">
@@ -207,560 +185,177 @@ export function SettingsTabs({ initialSettings }: SettingsTabsProps) {
         })}
       </div>
 
-      {/* Tab 1: Hero Settings */}
+      {/* Tab: Hero */}
       {activeTab === "hero" && (
         <form action={heroFormAction} className="space-y-8 max-w-4xl">
-          <div className="rounded-3xl bg-[#0d0d10] border border-white/[0.08] p-6 sm:p-8 space-y-6 shadow-xl">
-            <div className="flex items-center justify-between pb-4 border-b border-white/[0.08]">
-              <div className="space-y-1">
-                <h2 className="text-xl font-bold text-white">Hero &amp; En-tête</h2>
-                <p className="text-xs text-zinc-400">
-                  Personnalisez le titre principal, l&apos;accroche et vos métriques de confiance
-                </p>
-              </div>
-              {heroState?.success && (
-                <span className="text-xs text-emerald-400 font-mono flex items-center gap-1">
-                  <CheckCircle2 className="w-4 h-4" />
-                  <span>Enregistré</span>
-                </span>
-              )}
+          <input type="hidden" name="metricsJson" value={JSON.stringify(metrics)} />
+          <Panel title="Accueil & Hero" description="Disponibilité, texte d'introduction, terminal animé et chiffres clés" state={heroState}>
+            <label className="flex items-center gap-3 text-sm text-white cursor-pointer">
+              <input type="checkbox" name="available" defaultChecked={initialSettings.hero.available} className="w-4 h-4 accent-white" />
+              Afficher « Disponible pour nouveaux projets »
+            </label>
+
+            <div className="space-y-2">
+              <label htmlFor="intro" className={labelClass}>Texte d&apos;introduction *</label>
+              <textarea id="intro" name="intro" rows={3} required defaultValue={initialSettings.hero.intro} className={inputClass} />
+              <p className="text-[11px] text-zinc-500">« Gauthier Minor » est automatiquement mis en évidence.</p>
             </div>
 
             <div className="space-y-2">
-              <label className="block text-xs font-mono uppercase tracking-wider text-zinc-300">
-                Badge du haut de page
-              </label>
-              <input
-                name="badge"
-                type="text"
-                defaultValue={initialSettings.hero.badge}
-                className="w-full px-4 py-3 rounded-xl bg-black border border-white/[0.1] text-sm text-white focus:outline-none focus:border-white font-mono"
-              />
-            </div>
-
-            <div className="space-y-2">
-              <label className="block text-xs font-mono uppercase tracking-wider text-zinc-300">
-                Titre principal (H1) *
-              </label>
-              <input
-                name="title"
-                type="text"
-                required
-                defaultValue={initialSettings.hero.title}
-                className="w-full px-4 py-3 rounded-xl bg-black border border-white/[0.1] text-sm text-white focus:outline-none focus:border-white font-sans"
-              />
-            </div>
-
-            <div className="space-y-2">
-              <label className="block text-xs font-mono uppercase tracking-wider text-zinc-300">
-                Sous-titre / Description d&apos;impact *
-              </label>
+              <label htmlFor="terminal" className={labelClass}>Script du terminal *</label>
               <textarea
-                name="subtitle"
-                rows={3}
+                id="terminal"
+                name="terminal"
+                rows={11}
                 required
-                defaultValue={initialSettings.hero.subtitle}
-                className="w-full px-4 py-3 rounded-xl bg-black border border-white/[0.1] text-sm text-white focus:outline-none focus:border-white font-sans"
+                defaultValue={initialSettings.hero.terminal.join("\n")}
+                className={`${inputClass} font-mono text-xs leading-relaxed`}
               />
+              <p className="text-[11px] text-zinc-500 font-mono">
+                Une ligne par entrée · « $ » commande tapée · « ✓ » succès · « ★ » résultat mis en avant · sinon sortie simple
+              </p>
             </div>
 
             <div className="space-y-4 pt-4 border-t border-white/[0.08]">
-              <span className="text-xs font-mono uppercase tracking-wider text-zinc-400 font-semibold block">
-                3 Métriques Chiffrées du Hero
-              </span>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                <div className="p-4 rounded-xl bg-black border border-white/[0.08] space-y-2">
-                  <label className="text-[11px] font-mono text-zinc-400 block">
-                    Métrique 1 (Vitesse)
-                  </label>
-                  <input
-                    name="metric1Val"
-                    type="text"
-                    defaultValue={initialSettings.hero.metrics[0]?.value || "< 0.4s"}
-                    className="w-full px-3 py-2 rounded-lg bg-zinc-900 border border-white/[0.1] text-sm text-white font-mono"
-                  />
-                  <input
-                    name="metric1Label"
-                    type="text"
-                    defaultValue={initialSettings.hero.metrics[0]?.label || "Temps de chargement moyen"}
-                    className="w-full px-3 py-1.5 rounded-lg bg-zinc-900 border border-white/[0.1] text-xs text-zinc-300"
-                  />
-                </div>
-
-                <div className="p-4 rounded-xl bg-black border border-white/[0.08] space-y-2">
-                  <label className="text-[11px] font-mono text-zinc-400 block">
-                    Métrique 2 (Score Google)
-                  </label>
-                  <input
-                    name="metric2Val"
-                    type="text"
-                    defaultValue={initialSettings.hero.metrics[1]?.value || "100%"}
-                    className="w-full px-3 py-2 rounded-lg bg-zinc-900 border border-white/[0.1] text-sm text-white font-mono"
-                  />
-                  <input
-                    name="metric2Label"
-                    type="text"
-                    defaultValue={initialSettings.hero.metrics[1]?.label || "Score de performance Google"}
-                    className="w-full px-3 py-1.5 rounded-lg bg-zinc-900 border border-white/[0.1] text-xs text-zinc-300"
-                  />
-                </div>
-
-                <div className="p-4 rounded-xl bg-black border border-white/[0.08] space-y-2">
-                  <label className="text-[11px] font-mono text-zinc-400 block">
-                    Métrique 3 (Expérience)
-                  </label>
-                  <input
-                    name="metric3Val"
-                    type="text"
-                    defaultValue={initialSettings.hero.metrics[2]?.value || "5+ ans"}
-                    className="w-full px-3 py-2 rounded-lg bg-zinc-900 border border-white/[0.1] text-sm text-white font-mono"
-                  />
-                  <input
-                    name="metric3Label"
-                    type="text"
-                    defaultValue={initialSettings.hero.metrics[2]?.label || "Expérience Full-Stack"}
-                    className="w-full px-3 py-1.5 rounded-lg bg-zinc-900 border border-white/[0.1] text-xs text-zinc-300"
-                  />
-                </div>
-              </div>
-            </div>
-
-            <div className="pt-4 flex justify-end">
-              <button
-                type="submit"
-                disabled={isHeroPending}
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-xs font-bold uppercase tracking-wider bg-white hover:bg-zinc-200 text-black transition-colors cursor-pointer shadow-md disabled:opacity-50"
-              >
-                {isHeroPending ? (
-                  <Loader2 className="w-4 h-4 animate-spin" />
-                ) : (
-                  <Save className="w-4 h-4" />
+              <div className="flex items-center justify-between">
+                <span className={labelClass}>Chiffres clés (section À propos, 4 max)</span>
+                {metrics.length < 4 && (
+                  <button
+                    type="button"
+                    onClick={() => setMetrics((prev) => [...prev, { value: "", label: "" }])}
+                    className="inline-flex items-center gap-1 text-xs text-zinc-300 hover:text-white"
+                  >
+                    <Plus className="w-3.5 h-3.5" /> Ajouter
+                  </button>
                 )}
-                <span>Enregistrer les modifications</span>
-              </button>
-            </div>
-          </div>
-        </form>
-      )}
-
-      {/* Tab 2: Pillars Settings */}
-      {activeTab === "pillars" && (
-        <form action={pillarsFormAction} className="space-y-8 max-w-4xl">
-          <div className="rounded-3xl bg-[#0d0d10] border border-white/[0.08] p-6 sm:p-8 space-y-6 shadow-xl">
-            <div className="flex items-center justify-between pb-4 border-b border-white/[0.08]">
-              <div className="space-y-1">
-                <h2 className="text-xl font-bold text-white">4 Piliers d&apos;Ingénierie</h2>
-                <p className="text-xs text-zinc-400">
-                  Modifiez les 4 blocs de méthode et de valeur affichés sur la page d&apos;accueil
-                </p>
               </div>
-              {pillarsState?.success && (
-                <span className="text-xs text-emerald-400 font-mono flex items-center gap-1">
-                  <CheckCircle2 className="w-4 h-4" />
-                  <span>Enregistré</span>
-                </span>
-              )}
-            </div>
-
-            <div className="space-y-8">
-              {initialSettings.pillars.map((pillar: PillarItem) => (
-                <div
-                  key={pillar.id}
-                  className="p-6 rounded-2xl bg-black border border-white/[0.08] space-y-4"
-                >
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-mono font-bold text-white uppercase">
-                      Pilier 0{pillar.id}
-                    </span>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="space-y-1.5">
-                      <label className="text-[11px] font-mono text-zinc-400 block">
-                        Titre du pilier
-                      </label>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {metrics.map((m, i) => (
+                  <div key={i} className="p-4 rounded-xl bg-black border border-white/[0.08] space-y-2">
+                    <div className="flex gap-2">
                       <input
-                        name={`pillar_${pillar.id}_title`}
-                        type="text"
-                        defaultValue={pillar.title}
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900 border border-white/[0.1] text-sm text-white"
+                        value={m.value}
+                        onChange={(e) => updateMetric(i, "value", e.target.value)}
+                        placeholder="< 0.4s"
+                        aria-label={`Valeur ${i + 1}`}
+                        className="flex-1 px-3 py-2 rounded-lg bg-zinc-900 border border-white/[0.1] text-sm text-white font-mono"
                       />
+                      <button
+                        type="button"
+                        onClick={() => setMetrics((prev) => prev.filter((_, j) => j !== i))}
+                        className="p-2 text-zinc-500 hover:text-red-400"
+                        aria-label="Supprimer ce chiffre"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
                     </div>
-                    <div className="space-y-1.5">
-                      <label className="text-[11px] font-mono text-zinc-400 block">
-                        Sous-titre / Accroche
-                      </label>
-                      <input
-                        name={`pillar_${pillar.id}_tagline`}
-                        type="text"
-                        defaultValue={pillar.tagline}
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900 border border-white/[0.1] text-sm text-white"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="space-y-1.5">
-                    <label className="text-[11px] font-mono text-zinc-400 block">
-                      Description détaillée
-                    </label>
-                    <textarea
-                      name={`pillar_${pillar.id}_description`}
-                      rows={2}
-                      defaultValue={pillar.description}
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900 border border-white/[0.1] text-sm text-white"
-                    />
-                  </div>
-
-                  <div className="space-y-1.5">
-                    <label className="text-[11px] font-mono text-zinc-400 block">
-                      Points de contrôle (1 par ligne)
-                    </label>
-                    <textarea
-                      name={`pillar_${pillar.id}_points`}
-                      rows={3}
-                      defaultValue={pillar.points.join("\n")}
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900 border border-white/[0.1] text-xs text-white font-mono"
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className="pt-4 flex justify-end">
-              <button
-                type="submit"
-                disabled={isPillarsPending}
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-xs font-bold uppercase tracking-wider bg-white hover:bg-zinc-200 text-black transition-colors cursor-pointer shadow-md disabled:opacity-50"
-              >
-                {isPillarsPending ? (
-                  <Loader2 className="w-4 h-4 animate-spin" />
-                ) : (
-                  <Save className="w-4 h-4" />
-                )}
-                <span>Enregistrer les piliers</span>
-              </button>
-            </div>
-          </div>
-        </form>
-      )}
-
-      {/* Tab 3: Services Settings */}
-      {activeTab === "services" && (
-        <form action={servicesFormAction} className="space-y-8 max-w-4xl">
-          <div className="rounded-3xl bg-[#0d0d10] border border-white/[0.08] p-6 sm:p-8 space-y-6 shadow-xl">
-            <div className="flex items-center justify-between pb-4 border-b border-white/[0.08]">
-              <div className="space-y-1">
-                <h2 className="text-xl font-bold text-white">Offres &amp; Forfaits</h2>
-                <p className="text-xs text-zinc-400">
-                  Modifiez les 3 forfaits de la page Services ainsi que leurs livrables et délais
-                </p>
-              </div>
-              {servicesState?.success && (
-                <span className="text-xs text-emerald-400 font-mono flex items-center gap-1">
-                  <CheckCircle2 className="w-4 h-4" />
-                  <span>Enregistré</span>
-                </span>
-              )}
-            </div>
-
-            <div className="space-y-8">
-              {initialSettings.services.map((service: ServiceItem, idx: number) => (
-                <div
-                  key={service.id}
-                  className="p-6 rounded-2xl bg-black border border-white/[0.08] space-y-4"
-                >
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-mono font-bold text-white uppercase">
-                      Offre {idx + 1} : {service.badge}
-                    </span>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                    <div className="space-y-1.5">
-                      <label className="text-[11px] font-mono text-zinc-400 block">
-                        Badge / Catégorie
-                      </label>
-                      <input
-                        name={`srv_${idx + 1}_badge`}
-                        type="text"
-                        defaultValue={service.badge}
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900 border border-white/[0.1] text-sm text-white"
-                      />
-                    </div>
-                    <div className="space-y-1.5">
-                      <label className="text-[11px] font-mono text-zinc-400 block">
-                        Titre de l&apos;offre
-                      </label>
-                      <input
-                        name={`srv_${idx + 1}_title`}
-                        type="text"
-                        defaultValue={service.title}
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900 border border-white/[0.1] text-sm text-white"
-                      />
-                    </div>
-                    <div className="space-y-1.5">
-                      <label className="text-[11px] font-mono text-zinc-400 block">
-                        Délai moyen
-                      </label>
-                      <input
-                        name={`srv_${idx + 1}_deliveryTime`}
-                        type="text"
-                        defaultValue={service.deliveryTime}
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900 border border-white/[0.1] text-sm text-white font-mono"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="space-y-1.5">
-                    <label className="text-[11px] font-mono text-zinc-400 block">
-                      Accroche / Description
-                    </label>
                     <input
-                      name={`srv_${idx + 1}_tagline`}
-                      type="text"
-                      defaultValue={service.tagline}
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900 border border-white/[0.1] text-sm text-white"
+                      value={m.label}
+                      onChange={(e) => updateMetric(i, "label", e.target.value)}
+                      placeholder="Temps de chargement moyen"
+                      aria-label={`Libellé ${i + 1}`}
+                      className="w-full px-3 py-1.5 rounded-lg bg-zinc-900 border border-white/[0.1] text-xs text-zinc-300"
                     />
                   </div>
-
-                  <div className="space-y-1.5">
-                    <label className="text-[11px] font-mono text-zinc-400 block">
-                      Livrables inclus (1 par ligne)
-                    </label>
-                    <textarea
-                      name={`srv_${idx + 1}_features`}
-                      rows={5}
-                      defaultValue={service.features.join("\n")}
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900 border border-white/[0.1] text-xs text-white font-mono"
-                    />
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
 
-            <div className="pt-4 flex justify-end">
-              <button
-                type="submit"
-                disabled={isServicesPending}
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-xs font-bold uppercase tracking-wider bg-white hover:bg-zinc-200 text-black transition-colors cursor-pointer shadow-md disabled:opacity-50"
-              >
-                {isServicesPending ? (
-                  <Loader2 className="w-4 h-4 animate-spin" />
-                ) : (
-                  <Save className="w-4 h-4" />
-                )}
-                <span>Enregistrer les services</span>
-              </button>
-            </div>
-          </div>
+            <SubmitButton pending={isHeroPending} />
+          </Panel>
         </form>
       )}
 
-      {/* Tab 4: Estimator Settings */}
-      {activeTab === "estimator" && (
-        <form action={estimatorFormAction} className="space-y-8 max-w-4xl">
-          <input
-            type="hidden"
-            name="projectTypesJson"
-            value={JSON.stringify(projectTypesList)}
-          />
-          <input
-            type="hidden"
-            name="addonsJson"
-            value={JSON.stringify(addonsList)}
-          />
-
-          <div className="rounded-3xl bg-[#0d0d10] border border-white/[0.08] p-6 sm:p-8 space-y-8 shadow-xl">
-            <div className="flex items-center justify-between pb-4 border-b border-white/[0.08]">
-              <div className="space-y-1">
-                <h2 className="text-xl font-bold text-white">Tarifs du Simulateur de Devis</h2>
-                <p className="text-xs text-zinc-400">
-                  Ajoutez, modifiez ou supprimez les types de projets principaux et les options additionnelles calculées en direct.
-                </p>
-              </div>
-              {estimatorState?.success && (
-                <span className="text-xs text-emerald-400 font-mono flex items-center gap-1">
-                  <CheckCircle2 className="w-4 h-4" />
-                  <span>Enregistré</span>
-                </span>
-              )}
-            </div>
-
-            {/* Section 1: Types de projets */}
+      {/* Tab: Expertise */}
+      {activeTab === "expertise" && (
+        <form action={expertiseFormAction} className="space-y-8 max-w-4xl">
+          <input type="hidden" name="expertiseJson" value={JSON.stringify(expertise)} />
+          <Panel title="Savoir-faire" description="Les lignes de la section savoir-faire de l'accueil, dans l'ordre d'affichage" state={expertiseState}>
             <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-mono uppercase tracking-wider text-zinc-300 font-semibold block">
-                  Types de projets principaux ({projectTypesList.length})
-                </span>
-                <button
-                  type="button"
-                  onClick={addProjectTypeItem}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 border border-white/[0.1] text-xs font-semibold text-white transition-colors cursor-pointer"
-                >
-                  <Plus className="w-3.5 h-3.5 text-emerald-400" />
-                  <span>Ajouter un type de projet</span>
-                </button>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {projectTypesList.map((type, idx) => (
-                  <div
-                    key={type.id || idx}
-                    className="p-5 rounded-2xl bg-black border border-white/[0.08] space-y-3 relative group hover:border-white/[0.2] transition-colors"
-                  >
-                    <div className="flex items-center justify-between">
-                      <span className="text-[11px] font-mono font-bold text-emerald-400 uppercase">
-                        Projet 0{idx + 1}
-                      </span>
-                      <button
-                        type="button"
-                        onClick={() => removeProjectTypeItem(idx)}
-                        className="p-1 rounded-lg text-zinc-500 hover:text-red-400 hover:bg-red-950/40 transition-colors cursor-pointer"
-                        title="Supprimer ce type de projet"
-                      >
-                        <Trash2 className="w-4 h-4" />
-                      </button>
-                    </div>
-
-                    <div className="space-y-1">
-                      <label className="text-[10px] font-mono text-zinc-400 block">
-                        Nom affiché au client
-                      </label>
-                      <input
-                        type="text"
-                        value={type.name}
-                        onChange={(e) => updateProjectTypeItem(idx, "name", e.target.value)}
-                        placeholder="ex: Site Vitrine & Entreprise"
-                        className="w-full px-3 py-2 rounded-lg bg-zinc-900 border border-white/[0.1] text-xs text-white focus:outline-none focus:border-emerald-400"
-                      />
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-2 pt-1">
-                      <div className="space-y-1">
-                        <label className="text-[10px] font-mono text-zinc-400 block">
-                          Prix de base (€)
-                        </label>
-                        <input
-                          type="number"
-                          value={type.price}
-                          onChange={(e) => updateProjectTypeItem(idx, "price", Number(e.target.value))}
-                          placeholder="2500"
-                          className="w-full px-3 py-1.5 rounded-lg bg-zinc-900 border border-white/[0.1] text-xs text-white font-mono focus:outline-none focus:border-emerald-400"
-                        />
-                      </div>
-                      <div className="space-y-1">
-                        <label className="text-[10px] font-mono text-zinc-400 block">
-                          Délai moyen (jours)
-                        </label>
-                        <input
-                          type="number"
-                          value={type.days}
-                          onChange={(e) => updateProjectTypeItem(idx, "days", Number(e.target.value))}
-                          placeholder="14"
-                          className="w-full px-3 py-1.5 rounded-lg bg-zinc-900 border border-white/[0.1] text-xs text-white font-mono focus:outline-none focus:border-emerald-400"
-                        />
-                      </div>
-                    </div>
+              {expertise.map((item, i) => (
+                <div key={i} className="p-5 rounded-2xl bg-black border border-white/[0.08] space-y-3">
+                  <div className="flex items-center gap-2">
+                    <span className="font-mono text-xs text-zinc-500 w-6">0{i + 1}</span>
+                    <input
+                      value={item.title}
+                      onChange={(e) => updateExpertise(i, { title: e.target.value })}
+                      placeholder="Titre"
+                      aria-label={`Titre ${i + 1}`}
+                      className={`${inputClass} font-semibold`}
+                    />
+                    <button type="button" onClick={() => moveExpertise(i, -1)} disabled={i === 0} className="p-2 text-zinc-400 hover:text-white disabled:opacity-20" aria-label="Monter">↑</button>
+                    <button type="button" onClick={() => moveExpertise(i, 1)} disabled={i === expertise.length - 1} className="p-2 text-zinc-400 hover:text-white disabled:opacity-20" aria-label="Descendre">↓</button>
+                    <button
+                      type="button"
+                      onClick={() => setExpertise((prev) => prev.filter((_, j) => j !== i))}
+                      className="p-2 text-zinc-500 hover:text-red-400"
+                      aria-label="Supprimer"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </button>
                   </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Section 2: Options additionnelles */}
-            <div className="space-y-4 pt-6 border-t border-white/[0.08]">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-mono uppercase tracking-wider text-zinc-300 font-semibold block">
-                  Options &amp; Fonctionnalités au choix ({addonsList.length})
-                </span>
-                <button
-                  type="button"
-                  onClick={addAddonItem}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 border border-white/[0.1] text-xs font-semibold text-white transition-colors cursor-pointer"
-                >
-                  <Plus className="w-3.5 h-3.5 text-emerald-400" />
-                  <span>Ajouter une option</span>
-                </button>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {addonsList.map((addon, idx) => (
-                  <div
-                    key={addon.id || idx}
-                    className="p-5 rounded-2xl bg-black border border-white/[0.08] space-y-3 relative group hover:border-white/[0.2] transition-colors"
-                  >
-                    <div className="flex items-center justify-between">
-                      <span className="text-[11px] font-mono font-bold text-zinc-400 uppercase">
-                        Option 0{idx + 1}
-                      </span>
-                      <button
-                        type="button"
-                        onClick={() => removeAddonItem(idx)}
-                        className="p-1 rounded-lg text-zinc-500 hover:text-red-400 hover:bg-red-950/40 transition-colors cursor-pointer"
-                        title="Supprimer cette option"
-                      >
-                        <Trash2 className="w-4 h-4" />
-                      </button>
-                    </div>
-
-                    <div className="space-y-1">
-                      <label className="text-[10px] font-mono text-zinc-400 block">
-                        Nom de l&apos;option
-                      </label>
-                      <input
-                        type="text"
-                        value={addon.name}
-                        onChange={(e) => updateAddonItem(idx, "name", e.target.value)}
-                        placeholder="ex: Espace Admin & Back-office sur-mesure"
-                        className="w-full px-3 py-2 rounded-lg bg-zinc-900 border border-white/[0.1] text-xs text-white focus:outline-none focus:border-emerald-400"
-                      />
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-2 pt-1">
-                      <div className="space-y-1">
-                        <label className="text-[10px] font-mono text-zinc-400 block">
-                          Prix additionnel (€)
-                        </label>
-                        <input
-                          type="number"
-                          value={addon.price}
-                          onChange={(e) => updateAddonItem(idx, "price", Number(e.target.value))}
-                          placeholder="800"
-                          className="w-full px-3 py-1.5 rounded-lg bg-zinc-900 border border-white/[0.1] text-xs text-white font-mono focus:outline-none focus:border-emerald-400"
-                        />
-                      </div>
-                      <div className="space-y-1">
-                        <label className="text-[10px] font-mono text-zinc-400 block">
-                          Délai ajouté (jours)
-                        </label>
-                        <input
-                          type="number"
-                          value={addon.days}
-                          onChange={(e) => updateAddonItem(idx, "days", Number(e.target.value))}
-                          placeholder="5"
-                          className="w-full px-3 py-1.5 rounded-lg bg-zinc-900 border border-white/[0.1] text-xs text-white font-mono focus:outline-none focus:border-emerald-400"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="pt-4 flex justify-end">
+                  <textarea
+                    value={item.text}
+                    onChange={(e) => updateExpertise(i, { text: e.target.value })}
+                    rows={2}
+                    placeholder="Description"
+                    aria-label={`Description ${i + 1}`}
+                    className={inputClass}
+                  />
+                  <input
+                    value={item.tags.join(", ")}
+                    onChange={(e) => updateExpertise(i, { tags: e.target.value.split(",") })}
+                    placeholder="Tags séparés par des virgules"
+                    aria-label={`Tags ${i + 1}`}
+                    className={`${inputClass} font-mono text-xs`}
+                  />
+                </div>
+              ))}
               <button
-                type="submit"
-                disabled={isEstimatorPending}
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-xs font-bold uppercase tracking-wider bg-white hover:bg-zinc-200 text-black transition-colors cursor-pointer shadow-md disabled:opacity-50"
+                type="button"
+                onClick={() => setExpertise((prev) => [...prev, { title: "", text: "", tags: [] }])}
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-dashed border-white/20 text-sm text-zinc-300 hover:text-white hover:border-white/40"
               >
-                {isEstimatorPending ? (
-                  <Loader2 className="w-4 h-4 animate-spin" />
-                ) : (
-                  <Save className="w-4 h-4" />
-                )}
-                <span>Enregistrer le simulateur</span>
+                <Plus className="w-4 h-4" /> Ajouter un savoir-faire
               </button>
             </div>
-          </div>
+            <SubmitButton pending={isExpertisePending} />
+          </Panel>
+        </form>
+      )}
+
+      {/* Tab: About */}
+      {activeTab === "about" && (
+        <form action={aboutFormAction} className="space-y-8 max-w-4xl">
+          <Panel title="À propos" description="Titre, présentation et stack affichés sur l'accueil" state={aboutState}>
+            <div className="grid sm:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <label htmlFor="about-title" className={labelClass}>Titre *</label>
+                <input id="about-title" name="title" required defaultValue={initialSettings.about.title} className={inputClass} />
+              </div>
+              <div className="space-y-2">
+                <label htmlFor="about-accent" className={labelClass}>Suite du titre (italique)</label>
+                <input id="about-accent" name="titleAccent" defaultValue={initialSettings.about.titleAccent} className={inputClass} />
+              </div>
+            </div>
+            <div className="space-y-2">
+              <label htmlFor="about-paragraphs" className={labelClass}>Présentation</label>
+              <textarea
+                id="about-paragraphs"
+                name="paragraphs"
+                rows={8}
+                defaultValue={initialSettings.about.paragraphs.join("\n\n")}
+                className={inputClass}
+              />
+              <p className="text-[11px] text-zinc-500">Séparez les paragraphes par une ligne vide.</p>
+            </div>
+            <div className="space-y-2">
+              <label htmlFor="about-stack" className={labelClass}>Stack quotidienne</label>
+              <input id="about-stack" name="stack" defaultValue={initialSettings.about.stack.join(", ")} className={`${inputClass} font-mono text-xs`} />
+              <p className="text-[11px] text-zinc-500">Technologies séparées par des virgules.</p>
+            </div>
+            <SubmitButton pending={isAboutPending} />
+          </Panel>
         </form>
       )}
 

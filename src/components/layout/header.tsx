@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { Logo } from "./logo";
+import { ThemeToggle } from "./theme-toggle";
 import { getLenis } from "../motion/smooth-scroll";
 import { openSearch } from "../search/spotlight";
 
@@ -41,7 +42,7 @@ export function Header() {
 
   return (
     <>
-      <header className={`fixed inset-x-0 top-0 z-50 transition-colors duration-500 ${open ? "text-ink" : "mix-blend-difference text-paper"}`}>
+      <header className={`fixed inset-x-0 top-0 z-50 transition-colors duration-500 ${open ? "text-ink" : "mix-blend-difference text-blend"}`}>
         <div className="flex items-center justify-between px-5 sm:px-10 py-6">
           <Logo />
           <nav className="hidden lg:flex items-center gap-8 xl:gap-10 text-sm" aria-label="Navigation principale">
@@ -50,7 +51,7 @@ export function Header() {
                 key={link.href}
                 href={link.href}
                 aria-current={pathname === link.href || (link.href.length > 1 && !link.href.includes("#") && pathname.startsWith(link.href)) ? "page" : undefined}
-                className="group relative overflow-hidden after:absolute after:left-0 after:bottom-0 after:h-px after:w-full after:bg-paper after:origin-left after:scale-x-0 aria-[current=page]:after:scale-x-100 after:transition-transform after:duration-500"
+                className="group relative overflow-hidden after:absolute after:left-0 after:bottom-0 after:h-px after:w-full after:bg-current after:origin-left after:scale-x-0 aria-[current=page]:after:scale-x-100 after:transition-transform after:duration-500"
               >
                 <span className="block transition-transform duration-500 ease-expo group-hover:-translate-y-full">{link.label}</span>
                 <span className="absolute inset-0 translate-y-full font-serif italic text-base transition-transform duration-500 ease-expo group-hover:translate-y-0">
@@ -60,6 +61,7 @@ export function Header() {
             ))}
           </nav>
           <div className="flex items-center gap-3">
+          <ThemeToggle />
           <button
             type="button"
             onClick={openSearch}

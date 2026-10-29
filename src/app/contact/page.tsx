@@ -4,6 +4,7 @@ import Link from "next/link";
 import { getSiteSettings } from "@/lib/settings-service";
 import { ContactForm } from "@/components/contact/contact-form";
 import { SplitText } from "@/components/motion/split-text";
+import { PageHeader } from "@/components/layout/page-header";
 
 export const metadata: Metadata = {
   title: "Contact & Devis Gratuit — Gauthier Minor",
@@ -33,22 +34,24 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
 
   return (
     <main className="flex-1 px-5 sm:px-10 pt-40 pb-32">
-      <h1 className="text-[17vw] sm:text-[12vw] leading-[0.85] tracking-[-0.06em] font-medium">
-        <SplitText text="Bonjour" immediate />
-        <span className="font-serif italic font-normal text-signal">
-          <SplitText text="." immediate delay={0.3} />
-        </span>
-      </h1>
+      <PageHeader
+        title={
+          <>
+            <SplitText text="Bonjour" immediate />
+            <span className="font-serif italic font-normal text-signal">
+              <SplitText text="." immediate delay={0.3} />
+            </span>
+          </>
+        }
+        aside={<p>Une idée, une question, un projet à cadrer ? Je réponds personnellement sous 24h.</p>}
+      />
 
       <div className="mt-20 grid lg:grid-cols-12 gap-16">
         <aside className="lg:col-span-4 space-y-8">
-          <p className="text-xl text-paper-dim leading-snug">
-            Une idée, une question, un projet à cadrer ? Je réponds personnellement sous 24h.
-          </p>
           <dl className="space-y-5">
             {details.map((d) => (
               <div key={d.label} className="border-t border-line pt-3">
-                <dt className="font-mono text-xs text-paper-mute">{d.label}</dt>
+                <dt className="font-mono text-xs text-moss/80">{d.label}</dt>
                 <dd className="mt-1 text-lg">
                   {d.href ? (
                     <a href={d.href} target={d.href.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer" className="hover:text-signal transition-colors">
