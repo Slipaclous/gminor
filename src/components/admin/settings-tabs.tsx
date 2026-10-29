@@ -598,13 +598,13 @@ export function SettingsTabs({ initialSettings }: SettingsTabsProps) {
 
               <div className="space-y-2">
                 <label className="block text-xs font-mono uppercase tracking-wider text-zinc-300">
-                  Lien de prise de RDV direct (Cal.com / Google Meet / Calendly)
+                  Lien de prise de RDV (Cal.com recommandé : intégré au site sur /rendez-vous)
                 </label>
                 <input
                   name="calcomUrl"
                   type="url"
                   defaultValue={initialSettings.contactInfo.calcomUrl || ""}
-                  placeholder="https://cal.com/gauthier-minor ou https://meet.google.com/..."
+                  placeholder="https://cal.com/votre-nom/30min"
                   className="w-full px-4 py-3 rounded-xl bg-black border border-white/[0.1] text-sm text-white font-mono focus:outline-none focus:border-emerald-400"
                 />
               </div>

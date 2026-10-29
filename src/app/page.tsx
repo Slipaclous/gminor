@@ -18,7 +18,11 @@ export default async function HomePage() {
 
   return (
     <main className="flex flex-col flex-1">
-      <Hero available={settings.hero.available} intro={settings.hero.intro} />
+      <Hero
+        available={settings.hero.available}
+        intro={settings.hero.intro}
+        canBook={!!settings.contactInfo.calcomUrl?.startsWith("https://")}
+      />
       <WorksScroll projects={displayProjects} total={allProjects.length} />
       <ServicesList items={settings.expertise} />
       <About metrics={settings.hero.metrics.slice(0, 4)} about={settings.about} />

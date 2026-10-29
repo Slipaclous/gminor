@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useMemo, useState } from "react";
+import { frenchSpacing } from "@/lib/utils";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { FaqItem } from "@/lib/settings-service";
@@ -41,7 +42,7 @@ export function FaqAccordion({ faqs }: FaqAccordionProps) {
 
   return (
     <div className="grid lg:grid-cols-12 gap-12 lg:gap-16">
-      <aside className="lg:col-span-4 lg:sticky lg:top-28 self-start space-y-10">
+      <aside className="max-lg:contents lg:col-span-4 lg:sticky lg:top-28 self-start space-y-10">
         <div className="relative">
           <input
             type="search"
@@ -57,8 +58,8 @@ export function FaqAccordion({ faqs }: FaqAccordionProps) {
           </svg>
         </div>
 
-        <div className="rounded-2xl border border-line p-6 space-y-3">
-          <p className="text-xl font-medium tracking-tight">Votre question n&apos;y est pas ?</p>
+        <div className="max-lg:order-last rounded-2xl border border-line p-6 space-y-3">
+          <p className="text-xl font-medium tracking-tight">Votre question n&apos;y est pas&nbsp;?</p>
           <p className="text-paper-dim">Écrivez-moi, je réponds personnellement sous 24h.</p>
           <Link href="/contact" className="inline-block pt-2 border-b border-paper pb-0.5 hover:text-signal hover:border-signal transition-colors">
             Poser ma question →
@@ -86,7 +87,7 @@ export function FaqAccordion({ faqs }: FaqAccordionProps) {
                 className="w-full flex items-start gap-6 p-6 sm:p-8 text-left"
               >
                 <span className="font-mono text-xs text-moss/80 pt-2 w-6 shrink-0">{String(idx + 1).padStart(2, "0")}</span>
-                <span className="flex-1 text-xl sm:text-2xl tracking-[-0.02em] font-medium leading-snug">{faq.question}</span>
+                <span className="flex-1 text-xl sm:text-2xl tracking-[-0.02em] font-medium leading-snug">{frenchSpacing(faq.question)}</span>
                 <span
                   className={`shrink-0 w-9 h-9 rounded-full border flex items-center justify-center transition-all duration-500 ${
                     isOpen ? "rotate-45 bg-signal border-signal text-ink" : "border-line"
@@ -104,7 +105,7 @@ export function FaqAccordion({ faqs }: FaqAccordionProps) {
                     transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                     className="overflow-hidden"
                   >
-                    <p className="px-6 sm:px-8 pb-8 sm:pl-[5.5rem] text-lg text-paper-dim leading-relaxed max-w-3xl">{faq.answer}</p>
+                    <p className="px-6 sm:px-8 pb-8 sm:pl-[5.5rem] text-lg text-paper-dim leading-relaxed max-w-3xl">{frenchSpacing(faq.answer)}</p>
                   </motion.div>
                 )}
               </AnimatePresence>

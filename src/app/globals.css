@@ -13,7 +13,7 @@
   /* Support accent: metadata, success and availability states */
   --moss: #b3d99f;
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
-  /* Fixed light tone for mix-blend-difference layers (header, cursor), readable on both themes */
+  /* Fixed light tone for mix-blend-difference layers (custom cursor), readable on both themes */
   --blend: #efebe3;
 }
 
@@ -50,6 +50,13 @@ html[data-theme="light"] {
 
 html {
   color-scheme: dark;
+}
+
+/* Nothing may scroll the page sideways on touch. `clip` (unlike `hidden`) keeps sticky sections working. */
+html,
+body {
+  overflow-x: clip;
+  overscroll-behavior-x: none;
 }
 
 /* Theme switch: let the circular reveal replace the default cross-fade */
@@ -93,10 +100,19 @@ body {
   }
 }
 
-/* Grain overlay */
+/* Grain overlay. The oversized layer lives inside a viewport-sized clipping box:
+   a fixed element wider than the screen lets iOS Safari pan the page sideways. */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  overflow: hidden;
+  pointer-events: none;
+}
+
 .grain::after {
   content: "";
-  position: fixed;
+  position: absolute;
   inset: -50%;
   z-index: 60;
   pointer-events: none;
@@ -166,6 +182,10 @@ body {
 /* Masquage officiel du badge flottant Google reCAPTCHA v3 */
 .grecaptcha-badge {
   visibility: hidden !important;
+  /* Google parks it 186px off-screen to the right, which lets iOS pan the page: keep it inside */
+  right: 0 !important;
+  width: 0 !important;
+  overflow: hidden !important;
 }
 
 

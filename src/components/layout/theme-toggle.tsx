@@ -22,8 +22,13 @@ function applyTheme(next: Theme) {
   listeners.forEach((cb) => cb());
 }
 
+/** Current site theme, kept in sync with the toggle. */
+export function useTheme(): Theme {
+  return useSyncExternalStore(subscribe, getTheme, () => "dark" as Theme);
+}
+
 export function ThemeToggle() {
-  const theme = useSyncExternalStore(subscribe, getTheme, () => "dark" as Theme);
+  const theme = useTheme();
   const next: Theme = theme === "dark" ? "light" : "dark";
 
   const toggle = (e: React.MouseEvent<HTMLButtonElement>) => {

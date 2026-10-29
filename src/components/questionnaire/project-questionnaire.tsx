@@ -186,7 +186,7 @@ export function ProjectQuestionnaire() {
             {step === 3 && (
               <>
                 <h2 className="text-4xl sm:text-6xl tracking-[-0.04em] font-medium mb-10">
-                  Quel <span className="font-serif italic">calendrier</span> et quel budget ?
+                  Quel <span className="font-serif italic">calendrier</span> et quel budget&nbsp;?
                 </h2>
                 <p className="font-mono text-xs text-paper-mute mb-3">Délai</p>
                 <div className="grid sm:grid-cols-4 gap-3 mb-10">
@@ -214,7 +214,7 @@ export function ProjectQuestionnaire() {
                   <textarea
                     className={`${inputClass} sm:col-span-2 resize-none`}
                     rows={3}
-                    placeholder="Quelque chose à ajouter ? Inspirations, contraintes…"
+                    placeholder="Quelque chose à ajouter\u00a0? Inspirations, contraintes…"
                     value={a.details}
                     onChange={(e) => set("details", e.target.value)}
                   />

@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
 import "./globals.css";
 import { SiteShell } from "@/components/layout/site-shell";
+import { getSiteSettings } from "@/lib/settings-service";
 import { themeInitScript } from "@/components/layout/theme-toggle";
 import { Footer } from "@/components/layout/footer";
 import { GlobalSearch } from "@/components/search/global-search";
@@ -213,11 +214,14 @@ const jsonLd = {
   ],
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const { contactInfo } = await getSiteSettings();
+  const canBook = !!contactInfo.calcomUrl?.startsWith("https://");
+
   return (
     <html
       lang="fr"
@@ -239,7 +243,7 @@ export default function RootLayout({
       </head>
       <body className="min-h-screen flex flex-col bg-ink text-paper relative">
         <RecaptchaScript />
-        <SiteShell footer={<Footer />} search={<GlobalSearch />}>
+        <SiteShell footer={<Footer />} search={<GlobalSearch />} canBook={canBook}>
           {children}
         </SiteShell>
         <Analytics />

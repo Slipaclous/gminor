@@ -12,9 +12,11 @@ interface SiteShellProps {
   children: React.ReactNode;
   footer: React.ReactNode;
   search: React.ReactNode;
+  /** A booking link is configured: show the main "Réserver un appel" CTA. */
+  canBook: boolean;
 }
 
-export function SiteShell({ children, footer, search }: SiteShellProps) {
+export function SiteShell({ children, footer, search, canBook }: SiteShellProps) {
   const pathname = usePathname();
   const isAdmin = pathname.startsWith("/admin");
 
@@ -33,7 +35,7 @@ export function SiteShell({ children, footer, search }: SiteShellProps) {
         <Cursor />
         <div className="grain" aria-hidden />
         {search}
-        <Header />
+        <Header canBook={canBook} />
         <div className="flex-1 flex flex-col">{children}</div>
         {footer}
       </ToastProvider>

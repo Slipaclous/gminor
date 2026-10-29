@@ -38,7 +38,7 @@ export function CopyEmailButton({
       {copied ? (
         <>
           <Check className="w-3.5 h-3.5 text-emerald-400 stroke-[3]" />
-          <span className="text-emerald-400 font-semibold">Email copié !</span>
+          <span className="text-emerald-400 font-semibold">Email copié&nbsp;!</span>
         </>
       ) : (
         <>

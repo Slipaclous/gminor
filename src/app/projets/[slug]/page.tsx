@@ -9,6 +9,7 @@ import { SplitText } from "@/components/motion/split-text";
 import { Reveal } from "@/components/motion/reveal";
 import { Marquee } from "@/components/motion/marquee";
 import { projectShot } from "@/lib/project-shots";
+import { frenchSpacing } from "@/lib/utils";
 import { CaseStudyNav, type CaseStudySection } from "@/components/projects/case-study-nav";
 
 interface ProjectDetailProps {
@@ -81,7 +82,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailProps) 
           <SplitText text={project.title} immediate />
         </h1>
         <div className="mt-10 grid md:grid-cols-12 gap-8">
-          <p className="md:col-span-6 text-xl sm:text-2xl leading-snug text-paper-dim">{project.tagline}</p>
+          <p className="md:col-span-6 text-xl sm:text-2xl leading-snug text-paper-dim">{frenchSpacing(project.tagline)}</p>
           <dl className="md:col-span-5 md:col-start-8 grid grid-cols-2 gap-6 text-sm">
             {[
               ["Client", project.client ?? project.title],
@@ -109,7 +110,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailProps) 
       </section>
 
       <div className="px-5 sm:px-10">
-        <div className="relative aspect-[16/9] overflow-hidden bg-ink-3">
+        <div className="relative aspect-[4/3] sm:aspect-[16/9] overflow-hidden bg-ink-3">
           <ViewTransition name={`project-${project.slug}`}>
             <Image src={projectShot(project)} alt={project.title} fill priority sizes="100vw" className="object-cover object-top" />
           </ViewTransition>
@@ -117,34 +118,44 @@ export default async function ProjectDetailPage({ params }: ProjectDetailProps) 
       </div>
 
       {project.metrics.length > 0 && (
-        <section className="px-5 sm:px-10 mt-px grid grid-cols-2 md:grid-cols-4 gap-px bg-line">
-          {project.metrics.map((m, i) => (
-            <Reveal key={m.label} delay={i * 0.06} className="bg-ink py-10 pr-6">
-              <p className="font-serif italic text-4xl sm:text-5xl text-signal">{m.value}</p>
-              <p className="mt-2 text-sm text-paper-dim">{m.label}</p>
-            </Reveal>
-          ))}
+        <section className="px-5 sm:px-10">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-line border-b border-line">
+            {project.metrics.map((m, i) => (
+              <Reveal key={m.label} delay={i * 0.06} className="bg-ink py-8 sm:py-10 px-4 sm:px-6 odd:pl-0 lg:odd:pl-6 lg:first:pl-0">
+                <p className="font-serif italic text-3xl sm:text-4xl xl:text-5xl leading-none text-signal">{m.value}</p>
+                <p className="mt-3 text-sm text-paper-dim">{m.label}</p>
+              </Reveal>
+            ))}
+          </div>
         </section>
       )}
 
       <div className="px-5 sm:px-10 mt-16">
         <Chapter id="contexte" title="Le contexte">
           <Reveal>
-            <p className="text-xl sm:text-2xl leading-relaxed">{project.challenge}</p>
+            <p className="text-xl sm:text-2xl leading-relaxed">{frenchSpacing(project.challenge)}</p>
           </Reveal>
         </Chapter>
 
         <Chapter id="approche" title="L'approche">
           <Reveal>
-            <p className="text-lg leading-relaxed text-paper-dim">{project.solution}</p>
+            <p className="text-lg leading-relaxed text-paper-dim">{frenchSpacing(project.solution)}</p>
           </Reveal>
           {project.modules && project.modules.length > 0 && (
-            <div className="mt-12 space-y-px bg-line">
+            <div className="mt-12 border-t border-line">
               {project.modules.map((mod) => (
-                <Reveal key={mod.title} className="bg-ink py-6">
-                  <p className="font-mono text-xs text-moss/80">{mod.subtitle}</p>
-                  <h3 className="mt-1 text-2xl font-medium tracking-tight">{mod.title}</h3>
-                  <p className="mt-2 text-paper-dim">{mod.description}</p>
+                <Reveal key={mod.title}>
+                  {/* Details stay one click away: the scan shows titles only */}
+                  <details className="group border-b border-line">
+                    <summary className="flex cursor-pointer list-none items-baseline justify-between gap-6 py-5 [&::-webkit-details-marker]:hidden">
+                      <span>
+                        <span className="block text-xl sm:text-2xl font-medium tracking-tight">{mod.title}</span>
+                        <span className="mt-1 block font-mono text-xs text-moss/80">{mod.subtitle}</span>
+                      </span>
+                      <span aria-hidden className="shrink-0 text-2xl text-paper-mute transition-transform duration-500 ease-expo group-open:rotate-45">+</span>
+                    </summary>
+                    <p className="pb-6 -mt-1 text-paper-dim leading-relaxed">{mod.description}</p>
+                  </details>
                 </Reveal>
               ))}
             </div>
@@ -170,7 +181,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailProps) 
                 <Reveal key={r} delay={i * 0.05}>
                   <li className="flex gap-6 text-lg leading-relaxed">
                     <span className="font-mono text-xs text-moss pt-2">✓</span>
-                    <span>{r}</span>
+                    <span>{frenchSpacing(r)}</span>
                   </li>
                 </Reveal>
               ))}

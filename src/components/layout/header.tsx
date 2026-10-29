@@ -21,10 +21,19 @@ const NAV_LINKS = [
 
 const ease = [0.76, 0, 0.24, 1] as const;
 
-export function Header() {
+export function Header({ canBook }: { canBook: boolean }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [prevPathname, setPrevPathname] = useState(pathname);
+  const [scrolled, setScrolled] = useState(false);
+
+  // Once the page moves, the header gets a frosted backdrop so it never collides with content.
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   if (prevPathname !== pathname) {
     setPrevPathname(pathname);
@@ -42,8 +51,16 @@ export function Header() {
 
   return (
     <>
-      <header className={`fixed inset-x-0 top-0 z-50 transition-colors duration-500 ${open ? "text-ink" : "mix-blend-difference text-blend"}`}>
-        <div className="flex items-center justify-between px-5 sm:px-10 py-6">
+      <header
+        className={`fixed inset-x-0 top-0 z-50 transition-[background-color,backdrop-filter,border-color] duration-500 border-b ${
+          open
+            ? "text-ink border-transparent"
+            : scrolled
+              ? "text-paper bg-ink/70 backdrop-blur-xl border-line"
+              : "text-paper border-transparent"
+        }`}
+      >
+        <div className={`flex items-center justify-between px-5 sm:px-10 transition-[padding] duration-500 ${scrolled && !open ? "py-4" : "py-6"}`}>
           <Logo />
           <nav className="hidden lg:flex items-center gap-8 xl:gap-10 text-sm" aria-label="Navigation principale">
             {NAV_LINKS.slice(1).map((link) => (
@@ -61,6 +78,16 @@ export function Header() {
             ))}
           </nav>
           <div className="flex items-center gap-3">
+          {canBook && !open && (
+            <Link
+              href="/rendez-vous"
+              className="flex items-center gap-2 h-8 rounded-full bg-signal text-ink px-3.5 text-sm font-medium hover:bg-paper transition-colors"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-ink/70" aria-hidden />
+              <span className="sm:hidden">Réserver</span>
+              <span className="hidden sm:inline">Réserver un appel</span>
+            </Link>
+          )}
           <ThemeToggle />
           <button
             type="button"
@@ -102,7 +129,7 @@ export function Header() {
             transition={{ duration: 0.8, ease }}
           >
             <nav className="flex flex-col" aria-label="Menu">
-              {NAV_LINKS.map((link, i) => (
+              {(canBook ? [{ href: "/rendez-vous", label: "Réserver un appel", note: "Visio gratuite" }, ...NAV_LINKS] : NAV_LINKS).map((link, i) => (
                 <div key={link.href} className="overflow-hidden border-b border-ink/15">
                   <motion.div
                     initial={{ y: "100%" }}

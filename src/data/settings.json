@@ -1,209 +1,130 @@
 {
-  "faqs": [
-    {
-      "answer": "Pas du tout. Je prends en charge l'ensemble des aspects techniques (hébergement, nom de domaine, base de données, code) et je vous explique chaque étape avec des termes simples.",
-      "question": "Je n'ai pas de compétences techniques, est-ce un frein ?"
-    },
-    {
-      "answer": "Oui, tout à fait. J'ai une solide expérience sur l'écosystème PHP (Symfony, PrestaShop avec des migrations de v1.6 à v9, création de modules et intégrations MySQL) ainsi que sur les stacks modernes (Next.js, React, Node.js). Je m'adapte à votre existant technique.",
-      "question": "Travaillez-vous aussi sur des technologies comme PHP, Symfony ou PrestaShop ?"
-    },
-    {
-      "answer": "En totale transparence : dès le lancement, vous disposez d'un lien privé de prévisualisation en ligne (environnement de staging sécurisé). Vous pouvez ainsi tester en direct chaque nouvelle version, valider les fonctionnalités au fur et à mesure et me partager vos retours en continu jusqu'à la livraison finale.",
-      "question": "Comment puis-je suivre l'avancement et tester le projet pendant le développement ?"
-    },
-    {
-      "answer": "Oui. Chaque projet intègre un espace d'administration épuré et sécurisé vous permettant de mettre à jour vos coordonnées, réalisations et textes en toute autonomie.",
-      "question": "Puis-je modifier mes textes et photos moi-même après livraison ?"
-    },
-    {
-      "answer": "Le tarif varie selon le périmètre fonctionnel. Vous pouvez utiliser le simulateur interactif ci-dessous pour obtenir une estimation immédiate et transparente.",
-      "question": "Combien coûte la création ou la refonte d'un projet ?"
-    },
-    {
-      "answer": "Vous bénéficiez d'une période de garantie et de support de 30 jours pour tout ajustement. Je propose également des contrats de maintenance pour assurer la sécurité et les évolutions futures.",
-      "question": "Que se passe-t-il après la mise en production ?"
-    }
-  ],
   "hero": {
-    "badge": "Gauthier Minor • Créateur de Sites & Solutions Web pour PME",
-    "title": "Un site web moderne, ultra-rapide et conçu pour attirer vos clients.",
+    "available": true,
+    "intro": "Je suis Gauthier Minor. Je conçois et développe des sites rapides, beaux et solides.",
+    "terminal": [
+      "$ npx create-next-app@latest client-site",
+      "✓ Projet créé — Next.js · TypeScript · Tailwind",
+      "$ git commit -m \"feat: maquette intégrée au pixel\"",
+      "[main 4f2c9a1] 38 files changed",
+      "$ git push origin main",
+      "Build en cours…",
+      "✓ Build terminé en 4.2s",
+      "✓ Déployé en production",
+      "$ npx lighthouse https://client-site.be",
+      "★ Performance 100 · Accessibilité 100 · SEO 100"
+    ],
     "metrics": [
       {
-        "label": "Affichage instantané",
+        "label": "Temps de chargement moyen",
         "value": "< 0.4s"
       },
       {
-        "label": "Visibilité & SEO Google",
+        "label": "Score de performance Google",
         "value": "100%"
       },
       {
-        "label": "Expertise technique",
+        "label": "Pratique Full-Stack",
         "value": "5+ ans"
       }
     ],
-    "subtitle": "Artisans, commerçants, PME et structures locales : je conçois votre présence en ligne sur-mesure, performante sur Google et simple à gérer, sans abonnement ni frais cachés.",
-    "available": true
+    "badge": "Gauthier Minor • Développeur Web Full-Stack",
+    "title": "Ingénierie logicielle & solutions web sur-mesure.",
+    "subtitle": "Je développe des applications SaaS, des sites d'entreprises et des plateformes e-commerce à fort trafic. Solide maîtrise de l'écosystème web moderne (React/Next.js, PHP/Symfony, PrestaShop, PostgreSQL & MySQL)."
   },
-  "pillars": [
+  "expertise": [
     {
-      "id": 1,
-      "title": "Vitesse d'Affichage & Conversion",
-      "points": [
-        "Score Google PageSpeed 100/100 garanti",
-        "Expérience fluide sur mobile, tablette et PC",
-        "Zéro perte de prospects due aux lenteurs"
+      "tags": [
+        "Next.js",
+        "CMS",
+        "SEO"
       ],
-      "tagline": "Un site qui s'ouvre en un éclair sur smartphone",
-      "description": "Vos clients n'attendent pas. Un chargement sous 0.4s garantit un meilleur positionnement sur Google et maximise vos demandes de contact et devis."
+      "text": "Sites Next.js rapides, animés et faciles à gérer.",
+      "title": "Développement sur mesure"
     },
     {
-      "id": 2,
-      "title": "Fiabilité & Zéro Panne",
-      "points": [
-        "Code soigné sans bricolage ni dépendances superflues",
-        "Sécurisation maximale contre le piratage et les spams",
-        "Continuité de service et sauvegardes automatiques"
+      "tags": [
+        "PrestaShop",
+        "PostgreSQL",
+        "Stripe"
       ],
-      "tagline": "Un développement robuste conçu pour durer",
-      "description": "Fini les usines à gaz et les plugins fragiles qui cassent à la moindre mise à jour. Votre site est bâti sur des technologies modernes, stables et sécurisées."
+      "text": "Boutiques et outils métier qui tiennent la charge.",
+      "title": "E-commerce & SaaS"
     },
     {
-      "id": 3,
-      "title": "Design Sur-Mesure & Image Pro",
-      "points": [
-        "Conception graphique soignée et personnalisée",
-        "Mise en valeur de vos avis clients et coordonnées",
-        "Parcours clair pour transformer les visiteurs en clients"
+      "tags": [
+        "Wireframes",
+        "Prototypes",
+        "Responsive"
       ],
-      "tagline": "Une identité visuelle qui inspire confiance",
-      "description": "Zéro template générique vu partout. Votre site reflète fidèlement la qualité de votre travail et met en valeur vos prestations et réalisations."
+      "text": "Maquettes testées sur mobile avant de coder.",
+      "title": "UI / UX design"
     },
     {
-      "id": 4,
-      "title": "Autonomie Totale & Zéro Frais Cachés",
-      "points": [
-        "Panneau d'administration épuré et facile à prendre en main",
-        "Aucun abonnement mensuel obligatoire imposé",
-        "Accompagnement et support technique inclus 30 jours"
+      "tags": [
+        "Logo & identité",
+        "Moodboard",
+        "Design system"
       ],
-      "tagline": "Modifiez vos textes et photos sans payer un prestataire",
-      "description": "Vous restez 100% propriétaire de votre site et disposez d'un espace d'administration simple pour actualiser vos tarifs, horaires et photos en quelques clics."
+      "text": "Une identité visuelle qui vous ressemble.",
+      "title": "Direction artistique"
     }
   ],
-  "services": [
-    {
-      "id": "entreprises",
-      "badge": "Indépendants, Artisans & PME",
-      "title": "Site Web Vitrine Haute Performance",
-      "tagline": "Présentez votre activité, valorisez votre savoir-faire et recevez des demandes de devis qualifiées.",
-      "features": [
-        "Design 100% sur-mesure adapté à votre image de marque (zéro template)",
-        "Affichage ultra-rapide sur smartphones, tablettes et ordinateurs (< 0.4s)",
-        "Optimisation technique complète pour le référencement Google local (SEO)",
-        "Espace d'administration simple pour modifier vos textes, photos et tarifs",
-        "Formulaire de devis / contact sécurisé avec notification email instantanée",
-        "Hébergement rapide, nom de domaine & certificat de sécurité SSL inclus",
-        "Accompagnement, formation à l'utilisation et support 30 jours offerts"
-      ],
-      "idealFor": "Artisans, commerces de proximité, cabinets libéraux, PME et prestataires.",
-      "deliveryTime": "2 à 4 semaines"
-    },
-    {
-      "id": "audit",
-      "badge": "Commerce & Vente en Ligne",
-      "title": "Boutique E-Commerce & PrestaShop",
-      "tagline": "Vendez vos produits en ligne avec un parcours d'achat fluide, sécurisé et pensé pour maximiser les ventes.",
-      "features": [
-        "Spécialiste PrestaShop reconnu (création, refonte ou migration v1.6 à v9)",
-        "Paiements sécurisés (cartes bancaires, Bancontact, Apple Pay, Stripe, PayPal)",
-        "Gestion simple du catalogue, des stocks, des transporteurs et des factures",
-        "Optimisation de la vitesse pour réduire les abandons de panier",
-        "Possibilité de développement de modules personnalisés selon vos besoins métier"
-      ],
-      "idealFor": "Boutiques physiques se lançant en ligne, marques et e-commerçants établis.",
-      "deliveryTime": "3 à 6 semaines"
-    },
-    {
-      "id": "tech",
-      "badge": "Gestion & Digitalisation",
-      "title": "Outils Métier & Espaces Clients Sur-Mesure",
-      "tagline": "Automatisez vos processus chronophages : réservations, inscriptions, devis en ligne et gestion interne.",
-      "features": [
-        "Remplacement des formulaires papier et fichiers Excel complexes",
-        "Espaces membres sécurisés pour vos clients ou collaborateurs",
-        "Génération automatique de devis, factures ou attestations au format PDF",
-        "Connexion avec vos outils existants (agenda, logiciel de caisse, CRM, webhooks)",
-        "Interface intuitive développée sur-mesure selon votre métier"
-      ],
-      "idealFor": "PME souhaitant gagner du temps, clubs, hôtels, centres de formation et services.",
-      "deliveryTime": "3 à 8 semaines"
-    }
-  ],
-  "estimator": {
-    "addons": [
-      {
-        "id": "admin",
-        "days": 4,
-        "name": "Espace Admin & Back-office sur-mesure",
-        "price": 500
-      },
-      {
-        "id": "seo",
-        "days": 2,
-        "name": "Optimisation SEO & Vitesse Google (Score 98+)",
-        "price": 400
-      },
-      {
-        "id": "stripe",
-        "days": 3,
-        "name": "Paiement en ligne / Abonnements (Stripe)",
-        "price": 600
-      },
-      {
-        "id": "cms",
-        "days": 2,
-        "name": "Gestionnaire de contenus dynamique",
-        "price": 450
-      }
+  "about": {
+    "title": "Développeur d'abord,",
+    "titleAccent": "exigeant sur le design.",
+    "paragraphs": [
+      "Je code tout moi-même, du serveur à l'interface. Et je dessine chaque écran avec le même soin."
     ],
-    "projectTypes": [
-      {
-        "id": "vitrine",
-        "days": 10,
-        "name": "Site Vitrine & Entreprise",
-        "price": 1000
-      },
-      {
-        "id": "refonte",
-        "days": 7,
-        "name": "Refonte, Migration & Optimisation",
-        "price": 1200
-      },
-      {
-        "id": "ecommerce",
-        "days": 18,
-        "name": "Boutique E-Commerce (PrestaShop / Custom)",
-        "price": 3200
-      },
-      {
-        "id": "saas",
-        "days": 25,
-        "name": "Application Web / SaaS",
-        "price": 4800
-      }
+    "stack": [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Node",
+      "PHP / Symfony",
+      "PrestaShop",
+      "PostgreSQL",
+      "MySQL",
+      "Prisma",
+      "Figma"
     ]
   },
+  "faqs": [
+    {
+      "answer": "Pas du tout. Je gère toute la technique (hébergement, domaine, code) et je vous explique chaque étape simplement.",
+      "question": "Je n'ai pas de compétences techniques, est-ce un frein ?"
+    },
+    {
+      "answer": "Oui : Symfony, PrestaShop (migrations de v1.6 à v9, modules sur mesure) et MySQL, en plus de Next.js et React. Je m'adapte à votre existant.",
+      "question": "Travaillez-vous aussi sur des technologies comme PHP, Symfony ou PrestaShop ?"
+    },
+    {
+      "answer": "Dès le départ, vous avez un lien privé de prévisualisation. Vous testez chaque version et me faites vos retours jusqu'à la livraison.",
+      "question": "Comment puis-je suivre l'avancement et tester le projet pendant le développement ?"
+    },
+    {
+      "answer": "Oui. Chaque projet inclut un espace d'administration simple pour modifier vos textes, photos et réalisations.",
+      "question": "Puis-je modifier mes textes et photos moi-même après livraison ?"
+    },
+    {
+      "answer": "Cela dépend du périmètre. Le simulateur ci-dessous vous donne une estimation immédiate.",
+      "question": "Combien coûte la création ou la refonte d'un projet ?"
+    },
+    {
+      "answer": "30 jours de garantie pour tout ajustement. Ensuite, un contrat de maintenance est possible pour la sécurité et les évolutions.",
+      "question": "Que se passe-t-il après la mise en production ?"
+    }
+  ],
   "contactInfo": {
     "email": "gauthier.minor@gmail.com",
+    "phone": "+32 473 25 66 33",
     "location": "Belgique (Enghien) & Remote partout",
     "githubUrl": "https://github.com/Slipaclous",
     "linkedinUrl": "https://be.linkedin.com/in/gauthier-minor-a0a4a229b",
-    "availabilityText": "Ouvert aux nouveaux projets",
-    "phone": "+32 473 25 66 33",
     "twitterUrl": "",
     "instagramUrl": "https://www.instagram.com/gauthierminor/",
-    "calcomUrl": "",
+    "calcomUrl": "https://cal.com/gauthier-minor-dqze0k/30min",
+    "availabilityText": "Ouvert aux nouveaux projets",
     "workingHours": ""
   }
 }
