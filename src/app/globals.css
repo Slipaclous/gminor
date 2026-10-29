@@ -52,6 +52,13 @@ html {
   color-scheme: dark;
 }
 
+/* Nothing may scroll the page sideways on touch. `clip` (unlike `hidden`) keeps sticky sections working. */
+html,
+body {
+  overflow-x: clip;
+  overscroll-behavior-x: none;
+}
+
 /* Theme switch: let the circular reveal replace the default cross-fade */
 .theme-switching::view-transition-old(root),
 .theme-switching::view-transition-new(root) {
@@ -207,6 +214,12 @@ body {
   top: var(--fy);
   translate: -50% -50%;
   background: color-mix(in oklab, var(--signal) 22%, transparent);
+}
+
+/* Light theme: difference blending would turn the signal accent yellow, so the header uses plain tokens */
+html[data-theme="light"] header.mix-blend-difference {
+  mix-blend-mode: normal;
+  color: var(--paper);
 }
 
 html[data-theme="light"] .living-blob {
