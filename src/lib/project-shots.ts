@@ -2,6 +2,7 @@ import { ProjectItem } from "@/data/projects";
 
 // Captures récentes des sites en ligne, rangées dans public/images/projects/<slug>.jpg
 const LIVE_SHOTS = new Set([
+  "gto-orthopedie",
   "solera-platform",
   "rent-a-book",
   "vb-enghien",

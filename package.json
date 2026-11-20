@@ -8,7 +8,8 @@
     "postinstall": "prisma generate",
     "start": "next start",
     "lint": "eslint",
-    "prisma:seed": "prisma db seed"
+    "prisma:seed": "prisma db seed",
+    "project:upsert": "npx tsx prisma/upsert-project.ts"
   },
   "prisma": {
     "seed": "npx tsx prisma/seed.ts"

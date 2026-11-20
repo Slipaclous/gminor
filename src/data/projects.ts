@@ -32,6 +32,98 @@ export interface ProjectItem {
 
 export const PROJECTS_DATA: ProjectItem[] = [
   {
+    id: "proj_gto",
+    slug: "gto-orthopedie",
+    title: "GTO Orthopédie",
+    tagline:
+      "Site trilingue & back-office Payload CMS pour un orthopédiste aux 5 centres de consultation en Wallonie",
+    description:
+      "Refonte complète du site de GTO Orthopédie, spécialiste belge des semelles 3D, orthèses et prothèses sur mesure. Un site rapide et accessible en français, anglais et néerlandais, entièrement administrable par l'équipe : solutions, centres, horaires, articles, photos et textes de chaque page.",
+    category: "WEBSITE",
+    categoryLabel: "Site Entreprise & PME",
+    client: "GTO Orthopédie",
+    role: "Direction Technique & Développement Full-Stack",
+    year: "2026",
+    imageUrl: "/images/projects/gto-orthopedie.jpg",
+    techStack: [
+      "Next.js 16",
+      "React 19",
+      "TypeScript",
+      "Payload CMS 3",
+      "PostgreSQL",
+      "next-intl",
+      "Tailwind CSS 4",
+      "Vercel Blob",
+      "Resend",
+    ],
+    liveUrl: "https://www.gto-orthopedie.be",
+    featured: true,
+    order: 0,
+    challenge:
+      "Remplacer un ancien site éclaté (WordPress, Wix) par une vitrine unique, claire pour un public souvent âgé ou en situation de handicap, disponible en trois langues, sans perdre le référencement acquis et que l'équipe puisse faire vivre seule au quotidien.",
+    solution:
+      "Site Next.js 16 adossé à Payload CMS 3 et PostgreSQL : chaque contenu (solutions, centres, horaires, articles, photos, textes de page) se modifie dans un back-office en FR, EN et NL. Pages générées statiquement et régénérées à chaque publication, réglages d'accessibilité (taille du texte, contraste renforcé), SEO local complet et redirections 301 de toutes les anciennes adresses.",
+    results: [
+      "Contenus 100 % administrables par l'équipe GTO, en français, anglais et néerlandais",
+      "5 centres de consultation avec horaires structurés, itinéraires et données JSON-LD MedicalClinic",
+      "Référencement préservé : 47 règles de redirection 301 depuis les anciennes adresses du site",
+      "Accessibilité renforcée : texte agrandi jusqu'à 150 %, mode contraste élevé et navigation au clavier",
+      "Formulaire de contact avec notification e-mail via Resend et protection anti-spam",
+    ],
+    metrics: [
+      { label: "Langues", value: "FR · EN · NL" },
+      { label: "Centres de consultation", value: "5" },
+      { label: "Redirections SEO", value: "47 règles 301" },
+      { label: "Contenus administrables", value: "100 %" },
+    ],
+    modules: [
+      {
+        title: "Back-office Payload CMS sur mesure",
+        subtitle: "Payload CMS 3 • PostgreSQL • Migrations",
+        description:
+          "Un back-office intégré au site, pensé pour une équipe non technique : chaque page a son écran à onglets, et les solutions, centres, articles et photos se gèrent comme des fiches.",
+        highlights: [
+          "Contenu de chaque page regroupé dans un seul écran à onglets",
+          "Bibliothèque d'icônes et photos de bandeau modifiables depuis l'admin",
+          "Activation ou désactivation de pages entières (Atelier, Solutions) en un clic",
+        ],
+      },
+      {
+        title: "Site trilingue FR · EN · NL",
+        subtitle: "next-intl • hreflang • Contenus localisés",
+        description:
+          "Interface et contenus traduits en français, anglais et néerlandais. Une page n'est publiée dans une langue que lorsqu'elle y est réellement traduite.",
+        highlights: [
+          "URL sans préfixe pour le français, /en et /nl pour les autres langues",
+          "Balises canonical et hreflang générées automatiquement",
+          "Position de lecture conservée lors du changement de langue",
+        ],
+      },
+      {
+        title: "SEO local & migration de l'ancien site",
+        subtitle: "JSON-LD • Sitemap • llms.txt • Redirections 301",
+        description:
+          "Chaque centre est décrit en données structurées (adresse, coordonnées GPS, horaires), et les anciennes adresses connues de Google redirigent vers la page équivalente.",
+        highlights: [
+          "Données structurées Organization et MedicalClinic avec horaires d'ouverture",
+          "Sitemap, robots, images de partage et fichier llms.txt générés depuis l'admin",
+          "47 règles de redirection 301 relevées dans les archives de l'ancien site",
+        ],
+      },
+      {
+        title: "Accessibilité & performance",
+        subtitle: "Rendu statique • Vercel Blob • Aperçus flous",
+        description:
+          "Un site pensé pour des patients de tous âges : lecture confortable, navigation simple et affichage rapide, y compris sur mobile.",
+        highlights: [
+          "Texte agrandi à 125 % ou 150 % et mode contraste renforcé, mémorisés dans le navigateur",
+          "Photos servies depuis le CDN Vercel Blob avec aperçu flou pendant le chargement",
+          "Barre d'actions mobile pour appeler ou trouver un centre en un geste",
+        ],
+      },
+    ],
+  },
+  {
     id: "proj_solera",
     slug: "solera-platform",
     title: "Solera Platform",
