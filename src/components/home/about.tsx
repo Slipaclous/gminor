@@ -16,7 +16,7 @@ export function About({ metrics, about }: AboutProps) {
         <div className="lg:col-span-7 flex flex-col justify-between gap-16">
           <h2 className="text-[11vw] sm:text-[6vw] leading-[0.92] tracking-[-0.05em] font-medium">
             <SplitText text={about.title} by="word" />{" "}
-            <span className="font-serif italic font-normal text-paper-dim">
+            <span className="text-paper-dim">
               <SplitText text={about.titleAccent} by="word" delay={0.2} />
             </span>
           </h2>

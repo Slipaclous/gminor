@@ -39,7 +39,7 @@ export function Hero({ available, intro, canBook }: HeroProps) {
               <SplitText text="Code" immediate delay={0.2} />
             </span>
             <span className="flex items-baseline gap-[2vw]">
-              <span className="font-serif italic font-normal tracking-[-0.03em] text-signal">
+              <span className="tracking-[-0.03em] text-signal">
                 <SplitText text="&" immediate delay={0.45} />
               </span>
               <SplitText text="design." immediate delay={0.5} />
@@ -80,7 +80,7 @@ export function Hero({ available, intro, canBook }: HeroProps) {
       </motion.div>
 
       <Marquee
-        className="relative z-20 bg-ink border-y border-line py-4 text-2xl sm:text-3xl font-serif italic"
+        className="relative z-20 bg-ink border-y border-line py-4 text-2xl sm:text-3xl"
         items={["Next.js", "Sites sur mesure", "Applications SaaS", "E-commerce", "UI / UX design", "Motion & interactions"]}
         duration={40}
       />

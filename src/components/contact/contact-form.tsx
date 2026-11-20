@@ -48,7 +48,7 @@ export function ContactForm({ initialService, initialBudget }: ContactFormProps)
   if (state?.success) {
     return (
       <div className="py-10">
-        <p className="font-serif italic text-6xl text-signal">Message reçu.</p>
+        <p className="text-6xl text-signal">Message reçu.</p>
         <p className="mt-6 text-lg text-paper-dim max-w-lg">{state.message}</p>
         <button
           type="button"

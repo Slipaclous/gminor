@@ -44,7 +44,6 @@ html[data-theme="light"] {
   --color-blend: var(--blend);
   --font-sans: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
   --font-mono: var(--font-geist-mono), monospace;
-  --font-serif: var(--font-instrument-serif), Georgia, serif;
   --ease-expo: var(--ease-out-expo);
 }
 

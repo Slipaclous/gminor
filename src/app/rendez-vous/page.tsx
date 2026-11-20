@@ -26,7 +26,7 @@ export default async function BookingPage() {
         title={
           <>
             <SplitText text="Parlons-en" immediate />{" "}
-            <span className="font-serif italic font-normal text-signal">
+            <span className="text-signal">
               <SplitText text="de vive voix." immediate delay={0.3} />
             </span>
           </>

@@ -26,7 +26,7 @@ export default async function FaqPage() {
             <>
               <SplitText text="Les réponses" immediate />
               <br />
-              <span className="font-serif italic font-normal text-paper-dim">
+              <span className="text-paper-dim">
                 <SplitText text="avant de se lancer." immediate delay={0.2} />
               </span>
             </>

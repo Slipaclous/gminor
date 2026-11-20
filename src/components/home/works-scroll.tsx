@@ -51,7 +51,7 @@ function Heading({ total }: { total: number }) {
       <h2 className="text-[13vw] sm:text-[7vw] leading-[0.9] tracking-[-0.05em] font-medium">
         <SplitText text="Travaux" />
         <br />
-        <span className="font-serif italic font-normal text-signal">
+        <span className="text-signal">
           <SplitText text="récents" delay={0.2} />
         </span>
       </h2>
@@ -140,7 +140,7 @@ function PinnedWorks({ projects, total }: WorksScrollProps) {
             >
               <Shot project={project} index={i} sizes="44vw" />
               <div className="mt-5 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
-                <h3 className="text-4xl tracking-tight font-medium transition-all duration-500 group-hover:font-serif group-hover:italic">
+                <h3 className="text-4xl tracking-tight font-medium transition-all duration-500">
                   {project.title}
                 </h3>
                 <span className="shrink-0 font-mono text-xs text-moss/80">

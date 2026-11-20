@@ -83,7 +83,7 @@ export function ProjectsGallery({ initialProjects }: ProjectsGalleryProps) {
                 <span className="col-span-2 sm:col-span-1 font-mono text-xs text-paper-mute">
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <span className="col-span-10 sm:col-span-6 text-3xl sm:text-5xl lg:text-6xl tracking-[-0.04em] font-medium transition-transform duration-700 ease-expo group-hover:translate-x-3 group-hover:font-serif group-hover:italic">
+                <span className="col-span-10 sm:col-span-6 text-3xl sm:text-5xl lg:text-6xl tracking-[-0.04em] font-medium transition-transform duration-700 ease-expo group-hover:translate-x-3">
                   {project.title}
                 </span>
                 <span className="hidden sm:block col-span-3 text-sm text-paper-dim">{project.categoryLabel}</span>

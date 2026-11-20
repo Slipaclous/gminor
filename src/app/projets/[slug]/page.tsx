@@ -45,7 +45,7 @@ function Chapter({ id, title, children }: { id: string; title: string; children:
   return (
     <section id={id} className="scroll-mt-24 grid md:grid-cols-12 gap-6 py-16 sm:py-24 border-t border-line">
       <div className="md:col-span-4">
-        <h2 className="font-serif italic text-4xl sm:text-5xl">{title}</h2>
+        <h2 className="text-4xl sm:text-5xl">{title}</h2>
       </div>
       <div className="md:col-span-7 md:col-start-6">{children}</div>
     </section>
@@ -122,7 +122,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailProps) 
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-line border-b border-line">
             {project.metrics.map((m, i) => (
               <Reveal key={m.label} delay={i * 0.06} className="bg-ink py-8 sm:py-10 px-4 sm:px-6 odd:pl-0 lg:odd:pl-6 lg:first:pl-0">
-                <p className="font-serif italic text-3xl sm:text-4xl xl:text-5xl leading-none text-signal">{m.value}</p>
+                <p className="text-3xl sm:text-4xl xl:text-5xl leading-none text-signal">{m.value}</p>
                 <p className="mt-3 text-sm text-paper-dim">{m.label}</p>
               </Reveal>
             ))}
@@ -212,7 +212,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailProps) 
             className="object-cover object-top opacity-0 scale-110 transition-all duration-1000 ease-expo group-hover:opacity-30 group-hover:scale-100"
           />
           <p className="relative font-mono text-xs text-paper-mute">Projet suivant</p>
-          <p className="relative mt-4 text-[12vw] sm:text-[8vw] leading-[0.9] tracking-[-0.05em] font-medium transition-all duration-700 group-hover:font-serif group-hover:italic">
+          <p className="relative mt-4 text-[12vw] sm:text-[8vw] leading-[0.9] tracking-[-0.05em] font-medium transition-all duration-700">
             {next.title} →
           </p>
         </Link>

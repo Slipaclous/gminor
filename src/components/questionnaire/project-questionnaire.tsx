@@ -109,7 +109,7 @@ export function ProjectQuestionnaire() {
   if (state?.success) {
     return (
       <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} className="py-20">
-        <p className="font-serif italic text-6xl sm:text-8xl text-signal">Merci {a.name.split(" ")[0]}.</p>
+        <p className="text-6xl sm:text-8xl text-signal">Merci {a.name.split(" ")[0]}.</p>
         <p className="mt-6 text-xl text-paper-dim max-w-xl">{state.message}</p>
       </motion.div>
     );
@@ -143,7 +143,7 @@ export function ProjectQuestionnaire() {
             {step === 0 && (
               <>
                 <h2 className="text-4xl sm:text-6xl tracking-[-0.04em] font-medium mb-10">
-                  Quel type de <span className="font-serif italic">projet</span> ?
+                  Quel type de projet ?
                 </h2>
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
                   {TYPES.map((t) => (
@@ -155,7 +155,7 @@ export function ProjectQuestionnaire() {
             {step === 1 && (
               <>
                 <h2 className="text-4xl sm:text-6xl tracking-[-0.04em] font-medium mb-3">
-                  Qu&apos;attendez-vous de ce <span className="font-serif italic">site</span> ?
+                  Qu&apos;attendez-vous de ce site ?
                 </h2>
                 <p className="text-paper-dim mb-10">Plusieurs choix possibles.</p>
                 <div className="grid sm:grid-cols-2 gap-3">
@@ -168,7 +168,7 @@ export function ProjectQuestionnaire() {
             {step === 2 && (
               <>
                 <h2 className="text-4xl sm:text-6xl tracking-[-0.04em] font-medium mb-10">
-                  D&apos;où <span className="font-serif italic">partons-nous</span> ?
+                  D&apos;où partons-nous ?
                 </h2>
                 <div className="grid sm:grid-cols-2 gap-3">
                   {EXISTING.map((e) => (
@@ -186,7 +186,7 @@ export function ProjectQuestionnaire() {
             {step === 3 && (
               <>
                 <h2 className="text-4xl sm:text-6xl tracking-[-0.04em] font-medium mb-10">
-                  Quel <span className="font-serif italic">calendrier</span> et quel budget&nbsp;?
+                  Quel calendrier et quel budget&nbsp;?
                 </h2>
                 <p className="font-mono text-xs text-paper-mute mb-3">Délai</p>
                 <div className="grid sm:grid-cols-4 gap-3 mb-10">
@@ -205,7 +205,7 @@ export function ProjectQuestionnaire() {
             {step === 4 && (
               <>
                 <h2 className="text-4xl sm:text-6xl tracking-[-0.04em] font-medium mb-10">
-                  Et <span className="font-serif italic">vous</span> ?
+                  Et vous ?
                 </h2>
                 <div className="grid sm:grid-cols-2 gap-x-10 gap-y-6">
                   <input className={inputClass} placeholder="Nom *" autoComplete="name" value={a.name} onChange={(e) => set("name", e.target.value)} />

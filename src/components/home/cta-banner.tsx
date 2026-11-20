@@ -17,7 +17,7 @@ export async function CtaBanner() {
           <h2 className="text-[16vw] sm:text-[12vw] lg:text-[8.5vw] leading-[0.86] tracking-[-0.06em] font-medium">
             <SplitText text="Parlons" />
             <br />
-            <span className="font-serif italic font-normal">
+            <span>
               <SplitText text="de vous." delay={0.15} />
             </span>
           </h2>

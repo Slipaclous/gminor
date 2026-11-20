@@ -38,7 +38,7 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
         title={
           <>
             <SplitText text="Bonjour" immediate />
-            <span className="font-serif italic font-normal text-signal">
+            <span className="text-signal">
               <SplitText text="." immediate delay={0.3} />
             </span>
           </>
@@ -66,7 +66,7 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
           </dl>
           <Link href="/questionnaire" className="block border border-line p-6 hover:border-signal transition-colors group">
             <p className="font-mono text-xs text-paper-mute">Projet complet&nbsp;?</p>
-            <p className="mt-2 text-2xl font-serif italic group-hover:text-signal transition-colors">Le questionnaire en 5 étapes →</p>
+            <p className="mt-2 text-2xl group-hover:text-signal transition-colors">Le questionnaire en 5 étapes →</p>
           </Link>
         </aside>
         <div className="lg:col-span-7 lg:col-start-6">

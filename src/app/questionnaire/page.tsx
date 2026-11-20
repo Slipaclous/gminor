@@ -19,7 +19,7 @@ export default function QuestionnairePage() {
           <>
             <SplitText text="Votre projet," immediate />
             <br />
-            <span className="font-serif italic font-normal text-signal">
+            <span className="text-signal">
               <SplitText text="en cinq questions." immediate delay={0.2} />
             </span>
           </>

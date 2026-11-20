@@ -71,7 +71,7 @@ export function Header({ canBook }: { canBook: boolean }) {
                 className="group relative overflow-hidden after:absolute after:left-0 after:bottom-0 after:h-px after:w-full after:bg-current after:origin-left after:scale-x-0 aria-[current=page]:after:scale-x-100 after:transition-transform after:duration-500"
               >
                 <span className="block transition-transform duration-500 ease-expo group-hover:-translate-y-full">{link.label}</span>
-                <span className="absolute inset-0 translate-y-full font-serif italic text-base transition-transform duration-500 ease-expo group-hover:translate-y-0">
+                <span className="absolute inset-0 translate-y-full text-base transition-transform duration-500 ease-expo group-hover:translate-y-0">
                   {link.label}
                 </span>
               </Link>
@@ -142,7 +142,7 @@ export function Header({ canBook }: { canBook: boolean }) {
                       onClick={() => setOpen(false)}
                       className="group flex items-baseline justify-between py-2 sm:py-3"
                     >
-                      <span className="text-[11vw] sm:text-[7.5vw] lg:text-[5.2vw] leading-[0.95] font-medium tracking-[-0.04em] transition-all duration-500 ease-expo group-hover:font-serif group-hover:italic group-hover:translate-x-4">
+                      <span className="text-[11vw] sm:text-[7.5vw] lg:text-[5.2vw] leading-[0.95] font-medium tracking-[-0.04em] transition-all duration-500 ease-expo group-hover:translate-x-4">
                         {link.label}
                       </span>
                       <span className="hidden sm:inline text-sm font-mono">
